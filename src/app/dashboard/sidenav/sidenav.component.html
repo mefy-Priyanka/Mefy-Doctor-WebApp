@@ -1,0 +1,235 @@
+<!-- *******************************Navigation ******************************** -->
+
+
+<div class="col-md-3" >
+  <div class="navbar navbar-fixed-left navdoctor">
+    <div class="row nomargin0row">
+      <div id="set2btn" class="panel-collapse collapse targetbtns">
+        <ul class="list-inline sett2p">
+          <li>
+              <div class="upload-btn-wrapper">
+                  <button class="fileup">
+            <span class="icons">
+              <svg version="1.1" id="camera" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                width="510px" height="510px" viewBox="0 0 510 510" style="enable-background:new 0 0 510 510;" xml:space="preserve">
+                <g>
+                  <g id="camera-alt">
+                    <circle cx="255" cy="280.5" r="81.6" />
+                    <path d="M178.5,25.5l-45.9,51H51c-28.05,0-51,22.95-51,51v306c0,28.05,22.95,51,51,51h408c28.05,0,51-22.95,51-51v-306
+                                c0-28.05-22.95-51-51-51h-81.6l-45.9-51H178.5z M255,408c-71.4,0-127.5-56.1-127.5-127.5c0-71.4,56.1-127.5,127.5-127.5
+                                c71.4,0,127.5,56.1,127.5,127.5C382.5,351.9,326.4,408,255,408z" />
+                  </g>
+                </g>
+              </svg>
+            </span>
+          </button>
+          <input type="file" name="myfile"  (change)="preveiwProfile($event)" /><span class="add"> Add new photo</span>
+        </div>
+          </li>
+        </ul>
+
+        <ul class="list-inline sett2p">
+          <li [routerLink]="['/dashboard/profile']">
+          
+                  <button class="fileup">
+            <span class="icons">
+              <svg version="1.1" id="camera" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 299.997 299.997" style="enable-background:new 0 0 299.997 299.997;" xml:space="preserve">
+                <g>
+                  <g>
+                    <path d="M149.996,0C67.157,0,0.001,67.158,0.001,149.997c0,82.837,67.156,150,149.995,150s150-67.163,150-150
+                                    C299.996,67.156,232.835,0,149.996,0z M150.453,220.763v-0.002h-0.916H85.465c0-46.856,41.152-46.845,50.284-59.097l1.045-5.587
+                                    c-12.83-6.502-21.887-22.178-21.887-40.512c0-24.154,15.712-43.738,35.089-43.738c19.377,0,35.089,19.584,35.089,43.738
+                                    c0,18.178-8.896,33.756-21.555,40.361l1.19,6.349c10.019,11.658,49.802,12.418,49.802,58.488H150.453z"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </span>
+               
+                  <span class="add" > Update profile info</span>
+         
+                </button>
+          </li>
+        </ul>
+        <ul class="list-inline sett2p">
+          <li>
+                  <button class="fileup">
+            <span class="icons">
+                <svg version="1.1" id="camera" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                  viewBox="0 0 268.765 268.765" style="enable-background:new 0 0 268.765 268.765;" xml:space="preserve">
+                              <g id="Settings">
+                                <g>
+                                  <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M267.92,119.461c-0.425-3.778-4.83-6.617-8.639-6.617
+                                    c-12.315,0-23.243-7.231-27.826-18.414c-4.682-11.454-1.663-24.812,7.515-33.231c2.889-2.641,3.24-7.062,0.817-10.133
+                                    c-6.303-8.004-13.467-15.234-21.289-21.5c-3.063-2.458-7.557-2.116-10.213,0.825c-8.01,8.871-22.398,12.168-33.516,7.529
+                                    c-11.57-4.867-18.866-16.591-18.152-29.176c0.235-3.953-2.654-7.39-6.595-7.849c-10.038-1.161-20.164-1.197-30.232-0.08
+                                    c-3.896,0.43-6.785,3.786-6.654,7.689c0.438,12.461-6.946,23.98-18.401,28.672c-10.985,4.487-25.272,1.218-33.266-7.574
+                                    c-2.642-2.896-7.063-3.252-10.141-0.853c-8.054,6.319-15.379,13.555-21.74,21.493c-2.481,3.086-2.116,7.559,0.802,10.214
+                                    c9.353,8.47,12.373,21.944,7.514,33.53c-4.639,11.046-16.109,18.165-29.24,18.165c-4.261-0.137-7.296,2.723-7.762,6.597
+                                    c-1.182,10.096-1.196,20.383-0.058,30.561c0.422,3.794,4.961,6.608,8.812,6.608c11.702-0.299,22.937,6.946,27.65,18.415
+                                    c4.698,11.454,1.678,24.804-7.514,33.23c-2.875,2.641-3.24,7.055-0.817,10.126c6.244,7.953,13.409,15.19,21.259,21.508
+                                    c3.079,2.481,7.559,2.131,10.228-0.81c8.04-8.893,22.427-12.184,33.501-7.536c11.599,4.852,18.895,16.575,18.181,29.167
+                                    c-0.233,3.955,2.67,7.398,6.595,7.85c5.135,0.599,10.301,0.898,15.481,0.898c4.917,0,9.835-0.27,14.752-0.817
+                                    c3.897-0.43,6.784-3.786,6.653-7.696c-0.451-12.454,6.946-23.973,18.386-28.657c11.059-4.517,25.286-1.211,33.281,7.572
+                                    c2.657,2.89,7.047,3.239,10.142,0.848c8.039-6.304,15.349-13.534,21.74-21.494c2.48-3.079,2.13-7.559-0.803-10.213
+                                    c-9.353-8.47-12.388-21.946-7.529-33.524c4.568-10.899,15.612-18.217,27.491-18.217l1.662,0.043
+                                    c3.853,0.313,7.398-2.655,7.865-6.588C269.044,139.917,269.058,129.639,267.92,119.461z M134.595,179.491
+                                    c-24.718,0-44.824-20.106-44.824-44.824c0-24.717,20.106-44.824,44.824-44.824c24.717,0,44.823,20.107,44.823,44.824
+                                    C179.418,159.385,159.312,179.491,134.595,179.491z"/>
+                                </g>
+                              </g>
+                </svg>
+            </span>
+            <span class="add"[routerLink]="['/dashboard/account']">Manage account</span>
+                  </button>
+                 
+              
+          </li>
+         
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <a href="#">
+          <img src="../assets/images/logoo.png" class="logo_img2a">
+        </a>
+        <button data-toggle="collapse" href="#set2btn" class="sett2btn">
+          <svg version="1.1" id="sett2ng" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 480.3 480.3" style="enable-background:new 0 0 480.3 480.3;" xml:space="preserve">
+            <g>
+              <g>
+                <path d="M254.15,234.1V13.5c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5v220.6c-31.3,6.3-55,34-55,67.2s23.7,60.9,55,67.2v98.2
+                                                  c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5v-98.2c31.3-6.3,55-34,55-67.2C309.15,268.2,285.55,240.4,254.15,234.1z M240.65,342.8
+                                                  c-22.9,0-41.5-18.6-41.5-41.5s18.6-41.5,41.5-41.5s41.5,18.6,41.5,41.5S263.55,342.8,240.65,342.8z"
+                />
+                <path d="M88.85,120.9V13.5c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5v107.4c-31.3,6.3-55,34-55,67.2s23.7,60.9,55,67.2v211.4
+                                                  c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5V255.2c31.3-6.3,55-34,55-67.2S120.15,127.2,88.85,120.9z M75.35,229.6
+                                                  c-22.9,0-41.5-18.6-41.5-41.5s18.6-41.5,41.5-41.5s41.5,18.6,41.5,41.5S98.15,229.6,75.35,229.6z"
+                />
+                <path d="M418.45,120.9V13.5c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5v107.4c-31.3,6.3-55,34-55,67.2s23.7,60.9,55,67.2v211.5
+                                                  c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5V255.2c31.3-6.3,55-34,55-67.2S449.85,127.2,418.45,120.9z M404.95,229.6
+                                                  c-22.9,0-41.5-18.6-41.5-41.5s18.6-41.5,41.5-41.5s41.5,18.6,41.5,41.5S427.85,229.6,404.95,229.6z"
+                />
+              </g>
+            </g>
+          </svg>
+        </button>
+      </div>
+    </div>
+     <div class="sideimg">
+        <!-- <img src="https://pbs.twimg.com/media/BuL42fDCEAAHqZ5.jpg" class="logo_img2aa" [hidden]="logInfo?.profileImage"> -->
+        <img src="../assets/images/userimageupdated.png" class="logo_img2aa2" [hidden]="logInfo?.profileImage">
+        <img [src]="imgUrlPrefix" class="logo_img2aa" [hidden]="!logInfo?.profileImage" >
+      </div>
+    <div class="text_nav">
+      <p class="nameloc2">Dr. {{logInfo?.name}}
+        <span class="loc2">{{((logInfo?.speciality[0]).length<20)?(logInfo?.speciality[0]):(logInfo?.speciality[0]).slice(0,20)}}</span>
+      </p>
+      <p class="nameloc4">{{logInfo?.gender}} {{age}}
+        <span class="loc4">{{logInfo?.city}}</span>
+      </p>
+    </div>
+    <div class="notifications">
+      <ul class="list-inline">
+        <!-- <li class="on_line" [hidden]="loginStatus">{{logInfo?.availability}}</li> -->
+        <li class="on_line" [hidden]="!loginStatus">{{status}}</li>
+        <li>
+          <!-- <div class="Switch Off">
+              <div class="Toggle"></div>
+            </div> -->
+            <label class="switch">
+                <input type="checkbox"  (change)="availabilityDoctor($event)" [checked]="status=='Online'">
+                <span class="slider round" [ngStyle]=   "{'color': status =='Online' ? '#23e29c' : '#fff'}"></span>
+              </label>
+          </li>
+          <!-- "{'color': proportion === '100' ? 'green' : 'red'}" -->
+        </ul>
+        <button  class="log_out" (click)="logOut()">Log Out</button>
+      </div>
+  
+      <div class="spacealign">
+        <!-- <hr class="headhr">
+        <div class="rank">
+          <div class="col-md-6">
+            <p class="points2">121</p>
+            <p class="earned2">Recommendation</p>
+          </div>                                                       
+          <div class="col-md-6">
+            <p class="points2">#12</p>
+            <p class="earned2">Ranked</p>
+          </div>
+        </div> -->
+      <hr class="headhr">
+      <div class="rank">
+        <div class="col-md-6">
+          <p class="points2">{{logInfo?.eConsultFee}}</p>
+          <p class="earned2">eConsult Fee</p>
+        </div>
+        <div class="col-md-6 text-center" >
+          <button class="nav_btn" (click)="sidenavNavigation('Credit')">Change</button>
+        </div>
+      </div>
+      <hr class="headhr">
+      <div class="rank">
+        <div class="col-md-6">
+          <p class="points2">{{logInfo?.credit}}</p>
+          <p class="earned2">Credit Balance</p>
+        </div>
+        <div class="col-md-6 text-center" >
+          <button class="nav_btn" (click)="sidenavNavigation('Credit')">Withdraw</button>
+        </div>
+      </div>
+      <hr class="headhr">
+      <div class="rank" *ngIf="doctorAccount?.accountNumber">
+        <div class="col-md-6">
+          <p class="points4">{{doctorAccount.accountNumber}}</p>
+        </div>
+        <div class="col-md-6 text-center" >
+          <button class="nav_btn" (click)="sidenavNavigation('Account')">View account</button>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <ul >
+        <li class="hidden-lg hidden-sm" (click)="sidenavNavigation('Dashboard')">
+          <a >Dashboard</a>
+        </li>
+        <li class="hidden-lg hidden-sm" (click)="sidenavNavigation('My Clinics')">
+          <a>My Clinics</a>
+        </li>
+        <li class="hidden-lg hidden-sm" (click)="sidenavNavigation('Schedule')">
+          <a >Appointment</a>
+        </li>
+        <!-- <li class="hidden-lg hidden-sm" (click)="sidenavNavigation('eConsult')">
+          <a >eConsult</a>
+        </li> -->
+        <li class="hidden-lg hidden-sm" (click)="sidenavNavigation('Credit')">
+          <a >Transaction</a>
+        </li>
+        <li>
+          <a href="http://meme.care/support.html">Support</a>
+        </li>
+        <li>
+          <a href="http://meme.care/faq.html">F.A.Q</a>
+        </li>
+        <li>
+          <a href="http://meme.care/Terms.html">Terms and Condition</a>
+        </li>
+        <li>
+          <a href="#">Privacy policy</a>
+        </li>
+
+      </ul>
+    </footer>
+
+  </div>
+</div>
+
+
+<!-- <div class="col-md-9" id="padding-o">
+      <app-navtabs></app-navtabs>
+  </div> -->
+
+<!-- *******************************Navigation ******************************** -->

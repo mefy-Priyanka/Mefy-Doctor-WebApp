@@ -1,0 +1,158 @@
+<!-- ************************ManageAccount****************************** -->
+<section class="manage_account">
+  <div class="row">
+    <div class="col-md-12" id="padding-o">
+      <div class="row">
+        <!-- *******************Forms****************************** -->
+        <div class="col-md-7" id="padding_left">
+          <div class="row">
+            <div class="manage_heading">
+              <h1 >Please Add Account To Transfer Balance</h1>
+              <!-- <h1 *ngIf="(accountDetail.length != 0) && !showEdit">Account Details</h1>
+              <h1 *ngIf="(accountDetail.length != 0) && showEdit"> Edit Account Details</h1>               -->
+            </div>
+            <!-- *************************Form1******************************** -->
+            <div class="form1" *ngIf="hideAccountForm">
+              <div class="card">
+                <div class="row">
+                  <div class="card_content">
+                    <div class="form_entire">
+                      <form [formGroup]="accountForm" novalidate (keydown)="keyDownFunction($event)">
+                          <!-- <span class="error_account">{{errorMsg}}</span> -->
+                        <input type="text" name="fname" formControlName="accountHolderName" placeholder="Account's holder name">
+                        <span class="error_account" *ngIf="accountFormErrors.accountHolderName.required || (accountForm.controls.accountHolderName.pristine && submitted)" [ngStyle]="{'font-size':'13px'}">Please Provide Account Holder Name </span>
+                        <input type="text" name="fname" [ngStyle]="{'text-transform': 'uppercase'}" formControlName="ifscCode" placeholder="IFSC Code">                        
+                        <span class="error_account"  *ngIf="accountFormErrors.ifscCode.required || (accountForm.controls.ifscCode.pristine && submitted)" [ngStyle]="{'font-size':'13px'}">Please Provide IFSC Code</span>
+                        <input type="text" name="fname"  [textMask]="{mask: mask, guide: false}" onCopy="return false;" onpaste="return false;" formControlName="accountNumber" placeholder="Account Number">
+                        <span class="error_account"   *ngIf="accountFormErrors.accountNumber.required || (accountForm.controls.accountNumber.pristine && submitted)" [ngStyle]="{'font-size':'13px'}">Please Provide Account Number</span>
+                        <input type="text" name="fname" [textMask]="{mask: mask, guide: false}"  onCopy="return false;" onpaste="return false;" formControlName="confirmAccountNumber" placeholder="Confirm account number">
+                        <span class="error_account"  *ngIf="accountFormErrors.confirmAccountNumber.required || (accountForm.controls.confirmAccountNumber.pristine && accountSubmitted)" [ngStyle]="{'font-size':'13px'}">Please Confirm Your Account Number</span>
+                        <span class="error_account" *ngIf="accountFormErrors.confirmAccountNumber.match" [ngStyle]="{'font-size':'13px'}">Account Number Do Not Match</span>
+
+
+                        <div class="radio_btn2">
+                          <select class="browser-default" formControlName="accountType">
+                            <option value="" disabled selected>Account Type</option>
+                            <option value="1"> Current</option>
+                            <option value="2">Saving</option>
+                          </select>
+                          <span class="error_account" *ngIf="accountFormErrors.accountType.required || (accountForm.controls.accountType.pristine && submitted)" [ngStyle]="{'font-size':'13px'}">Please Provide Account Type </span>                          
+                        </div>
+                      </form>
+                    </div>
+                    <div class="text-center">
+                      <button class="save_btn" (click)=" saveAccountForm()">Save Account</button>
+                      <!-- <button class="save_btn"  *ngIf="hideDeleteButton"  (click)=" deleteClinicInfo(detail._id)">Delete Account</button> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- *************************Form1******************************** -->
+            <!-- *************************Form2******************************** -->
+            <div class="form2">
+              <div class="row">
+                <div class="col-md-12" id="padding-o">
+                  <div id="padding_l" *ngIf="displayData">
+                    <div class="card">
+                      <div class="row">
+                        <div class="card_texte">
+                          <div class="col-md-12" id="padding-o">
+                            <div class="col-md-10 col-xs-10">
+                              <div class="consult_text2">
+                                <p class="serenity22">Holder Name :
+                                  <span>{{detail?.accountHolderName}}</span>
+                                </p>
+                                <p class="serenity22">Account No :
+                                  <span>{{detail?.accountNumber}}</span>
+                                </p>
+                                <p class="serenity22">IFSC Code :
+                                  <span>{{detail?.ifscCode}}</span>
+                                </p>
+                              </div>
+                            </div>
+                            <div class="col-md-2 col-xs-2" id="padding-o">
+                              <div class="edit_icon">
+                                <!-- <span>{{detail.accountHolderName}}</span> -->
+                                <button class="edit" (click)="editAccountForm(detail._id)">
+                                  <svg version="1.1" id="pencil" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                    viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;" xml:space="preserve">
+                                    <g>
+                                      <path d="M438.931,30.403c-40.4-40.5-106.1-40.5-146.5,0l-268.6,268.5c-2.1,2.1-3.4,4.8-3.8,7.7l-19.9,147.4
+                                   c-0.6,4.2,0.9,8.4,3.8,11.3c2.5,2.5,6,4,9.5,4c0.6,0,1.2,0,1.8-0.1l88.8-12c7.4-1,12.6-7.8,11.6-15.2c-1-7.4-7.8-12.6-15.2-11.6
+                                   l-71.2,9.6l13.9-102.8l108.2,108.2c2.5,2.5,6,4,9.5,4s7-1.4,9.5-4l268.6-268.5c19.6-19.6,30.4-45.6,30.4-73.3
+                                   S458.531,49.903,438.931,30.403z M297.631,63.403l45.1,45.1l-245.1,245.1l-45.1-45.1L297.631,63.403z M160.931,416.803l-44.1-44.1
+                                   l245.1-245.1l44.1,44.1L160.931,416.803z M424.831,152.403l-107.9-107.9c13.7-11.3,30.8-17.5,48.8-17.5c20.5,0,39.7,8,54.2,22.4
+                                   s22.4,33.7,22.4,54.2C442.331,121.703,436.131,138.703,424.831,152.403z" />
+                                    </g>
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-6" id="padding_r">
+                    <div class="card">
+                      <div class="row">
+                        <div class="card_texte">
+                          <div class="col-md-12" id="padding-o">
+                            <div class="col-md-10 col-xs-10">
+                              <div class="consult_text2">
+                                <p class="serenity22">Holder Name :
+                                  <span>Name</span>
+                                </p>
+                                <p class="serenity22">Account No :
+                                  <span>1234</span>
+                                </p>
+                                <p class="serenity22">IFSC Code :
+                                  <span>1234</span>
+                                </p>
+                              </div>
+                            </div>
+                            <div class="col-md-2 col-xs-2" id="padding-o">
+                              <div class="edit_icon">
+                                <button class="edit">
+                                  <svg version="1.1" id="pencil" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                    viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;" xml:space="preserve">
+                                    <g>
+                                      <path d="M438.931,30.403c-40.4-40.5-106.1-40.5-146.5,0l-268.6,268.5c-2.1,2.1-3.4,4.8-3.8,7.7l-19.9,147.4
+                                     c-0.6,4.2,0.9,8.4,3.8,11.3c2.5,2.5,6,4,9.5,4c0.6,0,1.2,0,1.8-0.1l88.8-12c7.4-1,12.6-7.8,11.6-15.2c-1-7.4-7.8-12.6-15.2-11.6
+                                     l-71.2,9.6l13.9-102.8l108.2,108.2c2.5,2.5,6,4,9.5,4s7-1.4,9.5-4l268.6-268.5c19.6-19.6,30.4-45.6,30.4-73.3
+                                     S458.531,49.903,438.931,30.403z M297.631,63.403l45.1,45.1l-245.1,245.1l-45.1-45.1L297.631,63.403z M160.931,416.803l-44.1-44.1
+                                     l245.1-245.1l44.1,44.1L160.931,416.803z M424.831,152.403l-107.9-107.9c13.7-11.3,30.8-17.5,48.8-17.5c20.5,0,39.7,8,54.2,22.4
+                                     s22.4,33.7,22.4,54.2C442.331,121.703,436.131,138.703,424.831,152.403z" />
+                                    </g>
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="text-center" *ngIf="showAddAccount">
+                  <button class="save_btn2" (click)="addAccount()">Add Account</button>
+                </div>
+              </div>
+            </div>
+            <!-- *************************Form2******************************** -->
+          </div>
+        </div>
+        <!-- *******************Forms****************************** -->
+        <!-- *******************Video****************************** -->
+        <div class="col-md-5" id="padding-o">
+          <app-rightsidenav></app-rightsidenav>
+        </div>
+        <!-- *******************Video****************************** -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ************************ManageAccount****************************** -->

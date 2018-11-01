@@ -1,0 +1,57 @@
+<p class="provisionalc21">Prescribe Medicine</p>
+<div class="card-body">
+  <p class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red','text-align':'center'}">{{messageMedicine}}</p>
+  <span class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{saveMedicine}}</span>
+  <form [formGroup]="medicineForm" novalidate>
+    <ng2-completer class="referdoc" placeholder="Medicine Name" formControlName="medicineName"  [datasource]="medicineService" [minSearchLength]="0"  (keyup)="getMedicineList($event.target.value)"></ng2-completer>
+
+    <span class="errormessage" *ngIf="medicineFormErrors.medicineName.required">Please Provide Medicine Name</span>
+    <input type="text" name="fname" [textMask]="{mask: mask, guide: false}" placeholder="Dosage" formControlName="dosage" class="referdoc">
+    <span class="errormessage" *ngIf="medicineFormErrors.dosage.required">Please Provide Medicine Dosage</span>
+    <div class="f_range">
+      <span class="provisionalc21frequency">Frequency</span>
+      <div class="day_tab">
+
+        <p> {{frequency}}
+          <span>X</span>
+        </p>
+        <p class="range-field ">
+          <input  #myInput type="range" id="test5" startValue="0" min="0" max="5"(change)="setFrequency($event)" data-show-value="true" data-popup-enabled="true" [(ngModel)]="frequencyTest" [ngModelOptions]="{standalone: true}" />
+        </p>
+
+      </div>
+    </div>
+    <span class="provisionalc21frequency">Days</span>
+
+    <div class="day_tab">
+      <p>{{days}}
+        <span>days</span>
+      </p>
+
+      <p class="range-field ">
+        <input #myOutput type="range" id="test5" min="0" max="30" (change)="setDay($event)" data-show-value="true" data-popup-enabled="true" [(ngModel)]="daysTest" [ngModelOptions]="{standalone: true}"/>
+      </p>
+
+    </div>
+    <p class="provisionalc21frequency">Instructions</p>
+    <textarea class="text2area" placeholder="Enter your instruction here" formControlName="instructions"></textarea>
+    <!-- <span class="errormessage" *ngIf="medicineFormErrors.instructions.required">Please Provide Instructions </span> -->
+  </form>
+
+
+</div>
+<div class="text-center high" [hidden]="!closeMedicine">
+  <button class="prescribebtn" (click)="createMedicine()">Save</button>
+  <button class="prescribebtn" *ngIf="update" (click)="saveMedicineArray()">Save +</button>
+  <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteMedicineForm()">Delete</button>
+  <!-- (click)="createMedicine()" -->
+  <button class="cancelbtn" (click)="closeForm()">Cancel</button>
+  <!-- (click)="closeForm('Prescribe Medicine')" -->
+</div>
+<!-- <div class="row">
+          <div class="plus_btn pull-right" >
+            
+            <button class="plus" (click)="addButton()">+</button>
+          
+          </div>
+        </div> -->

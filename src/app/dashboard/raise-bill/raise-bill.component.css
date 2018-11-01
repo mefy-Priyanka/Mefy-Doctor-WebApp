@@ -1,0 +1,182 @@
+/* ************************RaiseBill****************************** */
+
+div#padding-o {
+  padding: 0;
+}
+
+div#padding_left {
+  padding-left: 0;
+}
+.bill_input {
+  margin-top: 20px;
+}
+button.raise_bill2 {
+  border: 2px solid #fff;
+  background: transparent;
+  border-radius: 50px;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  width: 94px;
+  height: 37px;
+  margin: 10px 0;
+}
+
+section.Raise_Bill .card {
+  border-radius: 5px;
+  padding: 0;
+  box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.08);
+}
+
+.card.card_red {
+  margin-top: 24px;
+  background: #3ad87b;
+}
+
+button.raise_bill2:hover {
+  background: #fff;
+  color: #3ad87b;
+}
+
+.bill_content {
+  color: #fff;
+  margin-top: 10px;
+  font-size: 24px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+}
+
+p.raise_rupees {
+  margin-top: 8px;
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+}
+
+.bill_input input[type="text"] {
+  font-size: 13px;
+  color: rgb(132, 134, 157);
+  border-bottom: 1px solid rgba(132, 134, 157, 0.58);
+  font-family: 'Lato', sans-serif;
+}
+
+.bill_input input[type="text"]::placeholder {
+  font-size: 13px;
+  color: rgb(132, 134, 157);
+  font-family: 'Lato', sans-serif;
+}
+
+div#margin_bottom {
+  margin-bottom: 0;
+}
+
+.bill_heading {
+  background: linear-gradient(to right, rgba(86, 127, 251, 1), rgba(182, 108, 245, 1));
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  border-radius: 5px 5px 0 0;
+  padding: 16px 0 0px 0;
+}
+
+.bill_heading p {
+  margin-bottom: 16px;
+}
+p.total {
+  margin-top: 8px;
+  font-size: 17px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  color: #000;
+  text-align: center;
+}
+
+p.grand {
+  margin-top: 8px;
+  font-size: 17px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  color: #000;
+  padding-bottom: 1em;
+}
+.plus_btn2.pull-right {
+  position: relative;
+}
+button.plus2 {
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  font-size: 20px;
+  height: 40px;
+  position: absolute;
+  bottom: 23px;
+  right: 23px;
+  width: 40px;
+  color: #fff;
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.2);
+  background: linear-gradient(to bottom, #20de9e, #08b9b1);
+}
+button.plus2:hover {
+  background: #08b9b1;
+}
+svg#cance_lbtn {
+  height: 11px;
+  width: 11px;
+  margin-top: 14px;
+}
+button.cross_btn {
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+button.invoice {
+  border-radius: 50px;
+  outline: none;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  height: 37px;
+  width: 99px;
+  background: transparent;
+  color: #09bab1;
+  border: 1px solid #09bab1;
+  padding: 0;
+}
+
+.invoice_btn {
+  text-align: center;
+}
+
+button.invoice:hover {
+  color:#fff;
+  background: #09bab1;
+}
+
+
+/* ************************RaiseBill****************************** */
+/* ************************Responsive****************************** */
+@media only screen and (min-width: 320px) and (max-width:767px){
+  div#padding_left {
+      padding-left: 15px;
+  }
+  p.raise_rupees{
+    display: none;
+}
+}
+@media only screen and (min-width: 767px) and (max-width:1024px) and (orientation:portrait){
+  div#padding_left {
+      padding-left: 15px;
+  }
+}
+@media only screen and (min-width: 767px) and (max-width:1024px) and (orientation:landscape){
+  p.raise_rupees{
+    display: none;
+}
+}
+/* ************************Responsive****************************** */

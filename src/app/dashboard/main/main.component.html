@@ -1,0 +1,406 @@
+<div class="row nomargin0row">
+  <div class="col-md-8 nopadding0col">
+    <div class="row ">
+      <div class="col-md-6 pleft6">
+        <div class="card topmr">
+          <div class="row nomargin0row">
+            <!-- <div class="col-md-3 col-xs-3 nopadding0rt">
+                <h1 class="clinics7">{{dashboardList.clinics}}</h1>
+              </div>
+              <div class="col-md-4 col-xs-4 nopadding0col">
+                <div class="cardspan2">
+
+                  <span class="clinics1">Clinics</span>
+                  <span class="clinics1">You Have</span>
+                </div>
+              </div>
+              <div class="col-md-5 col-xs-5">
+                <button type="button" class="managebutton" [routerLink]="['/dashboard/clinic']">Manage</button>
+              </div> -->
+            <div class="col-md-12">
+              <!-- <h1 class="clinics7">{{dashboardList.clinics}}
+                  <p class="clinics1">Clinics</p>
+                  <p class="clinics1">You Have</p>
+                  <button type="button" class="managebutton" [routerLink]="['/dashboard/clinic']">Manage</button>
+                </h1> -->
+              <ul class="list-inline clinics_have">
+                <li><p class="clinics7">{{dashboardList.clinics}}</p></li>
+                <li>
+                  <p class="clinics1">Clinics</p>
+                  <p class="clinics1">You Have</p>
+                </li>
+                <li class="manage_button">
+                  <button type="button" class="managebutton" [routerLink]="['/dashboard/clinic']">Manage</button></li>
+              </ul>
+
+            </div>
+          </div>
+          <hr class="linehr">
+          <div class="row nomargin0row">
+            <div class="respcss">
+              <ul class="list-inline clinicsmayhave">
+                <li class="postminus" *ngFor="let clinic of clinicList?.slice(0,5)">
+                  <span class="cinicsuvisit">
+
+                    <span>{{(clinic?.clinicName).split(' ')[0].split('')[0] + ((clinic?.clinicName).split(' ')[1] ? (clinic?.clinicName).split(' ')[1].split('')[0] : '') | uppercase}}</span>
+                  </span>
+                </li>
+
+                <li class="postminus" *ngIf="(clinicList?.length) > 5">
+                  <button type="btn" class="libtn">
+                    <span class="cinicsuvisit6">
+                      +{{(clinicList).slice(6,(clinicList).length).length + 1}}
+                    </span>
+                  </button>
+                </li>
+              </ul>
+              <p class="clinics1 spbottom">{{message}}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6 nopadding0col6 ">
+        <div class="card topmr">
+
+          <div class="row nomargin0row">
+            <!-- <div class="col-md-3 col-xs-3 nopadding0rt">
+              <h1 class="clinics7">{{dashboardList.eConsults}}</h1>
+            </div>
+            <div class="col-md-5 col-xs-5 nopadding0col">
+              <div class="cardspan2">
+
+                <span class="clinics1">Today's</span>
+                <span class="clinics1">eConsult</span>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-4">
+              <button type="button" class="managebutton" (click)="getConsultType('eConsult')">Manage</button>
+            </div> -->
+            <div class="col-md-12">
+                <ul class="list-inline clinics_have">
+                  <li><p class="clinics7">{{dashboardList.eConsults}}</p></li>
+                  <li>
+                      <p class="clinics1">Today's</p>
+                      <p class="clinics1">eConsult</p>
+                  </li>
+                  <li class="manage_button">
+                      <button type="button" class="managebutton" (click)="getConsultType('eConsult')">Manage</button>
+                  </li>
+                </ul>
+              </div>
+          </div>
+          <hr class="linehr">
+          <div class="respcss4">
+            <div class="row">
+              <ul class="list-inline clinicsmayhave">
+                <li class="postminus" *ngFor="let econsult of eConsultArray.slice(0,5)">
+                  <span class="cinicsuvisit">
+                    <!-- <img src="assets/images/p4.png" class="img-responsive pfimg"> -->
+                    {{(econsult?.individualId.name).split(' ')[0].split('')[0] + ((econsult?.individualId.name).split(' ')[1] ? (econsult?.individualId.name).split(' ')[1].split('')[0] : '') | uppercase}}
+                  </span>
+                </li>
+
+
+                <li class="postminus" *ngIf="(eConsultArray?.length) > 5">
+                  <button type="btn" class="libtn">
+                    <span class="cinicsuvisit6">
+                      +{{eConsultArray.slice(6,eConsultArray.length).length + 1}}
+                    </span>
+                  </button>
+
+                </li>
+              </ul>
+              <span class="clinics1 spbottom" *ngIf="(eConsultArray?.length)== 0">No appointments for today</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 pleft6">
+        <div class="card minheight">
+
+
+
+
+          <div class="row nomargin0row">
+
+            <!-- <div class="col-md-3 col-xs-3 nopadding0rt pleft0">
+              <h1 class="clinics7">{{dashboardList.patients }}</h1>
+            </div>
+            <div class="col-md-5 col-xs-5 nopadding0col">
+              <div class="cardspan2">
+                <span class="clinics1">Today's</span>
+                <span class="clinics1">Clinic visits</span>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-4">
+              <button type="button" class="managebutton" (click)="getConsultType('visit')">Manage</button>
+            </div> -->
+            <div class="col-md-12">
+                <ul class="list-inline clinics_have">
+                  <li><p class="clinics7">{{dashboardList.patients }}</p></li>
+                  <li>
+                      <p class="clinics1">Today's</p>
+                      <p class="clinics1">Clinic visits</p>
+                  </li>
+                  <li class="manage_button">
+                      <button type="button" class="managebutton" (click)="getConsultType('visit')">Manage</button>
+                  </li>
+                </ul>
+              </div>
+          </div>
+          <hr class="linehr">
+          <div class="respcss4">
+            <div class="row">
+              <ul class="list-inline clinicsmayhave">
+                <li class="postminus" *ngFor="let visits of visitArray.slice(0,5)">
+                  <span class="cinicsuvisit">
+                    {{(visits?.individualId.name).split(' ')[0].split('')[0] + ((visits?.individualId.name).split(' ')[1] ? (visits?.individualId.name).split(' ')[1].split('')[0] : '') | uppercase}}
+                    <!-- <img src="assets/images/p4.png" class="img-responsive pfimg"> -->
+                  </span>
+                </li>
+
+
+                <li class="postminus2" *ngIf="(visitArray?.length) > 5">
+                  <button type="btn" class="libtn">
+                    <span class="cinicsuvisit6">
+                      +{{visitArray.slice(6,visitArray.length).length + 1}}
+                    </span>
+
+                  </button>
+                </li>
+              </ul>
+              <span class="clinics1 spbottom" *ngIf="(visitArray?.length)== 0">No appointments for today</span>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6 nopadding0col6">
+        <div class="card minheight">
+          <div class="row nomargin0row">
+
+            <!-- <div class="col-md-3 col-xs-3 nopadding0rt pleft0">
+              <h1 class="clinics7">{{dashboardList.credit}}</h1>
+            </div>
+            <div class="col-md-5 col-xs-5 nopadding0col">
+              <div class="cardspan2">
+                <span class="clinics1">Today's</span>
+                <span class="clinics1">Transactions</span>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-4">
+              <button type="button" class="managebutton" [routerLink]="['/dashboard/credit']">View all</button>
+            </div> -->
+            <div class="col-md-12">
+                <ul class="list-inline clinics_have view_right">
+                  <li>
+                    <p class="clinics74" >{{dashboardList.credit}}</p>
+                    <p class="digit_estimate">(approx)</p>
+                  </li>
+                  <!-- <span [ngStyle]="{'font-size':'12px'}" *ngIf="digit?.length > 3">(appx)</span> -->
+                  <li>
+                      <p class="clinics1">Today's</p>
+                      <p class="clinics1">Transactions</p>
+                  </li>
+                  <li class="manage_button view_button">
+                      <button type="button" class="managebutton" [routerLink]="['/dashboard/credit']">View all</button>
+                  </li>
+                </ul>
+              </div>
+          </div>
+          <p class="spbottomsdg" [ngStyle]="{'text-align':'center'}" *ngIf= "billArray?.length == 0">No Transaction For Today</p>
+          <div class="cardbot" *ngIf= "billArray?.length > 0">
+            <div class="row nomargin0row">
+
+              <div class="col-md-3 col-xs-3 nopadding0col">
+                <div class="profileimg topalignimg">
+                    <img src="assets/images/user2.jpg" class="img-responsive"  [hidden]="individualDetails?.profileImage">
+                    <img [src]="imgUrlPrefix" class="img-responsive" [hidden]="!individualDetails?.profileImage">
+                </div>
+              </div>
+              <div class="col-md-9 col-xs-9 nopadding0col">
+                <div class="nameofuser1">
+                  <!-- <p class="transactn_holder">John Doe</p> -->
+                  <ul class="list-inline succes">
+                    <!-- <li>
+                        <span type="btn" class="done_payment"> -->
+                    <!-- <i class="fa fa-arrow-down" aria-hidden="true"></i> -->
+                    <!-- <svg version="1.1" id="Capa_dwnarrow" x="0px" y="0px" viewBox="0 0 21.825 21.825" style="enable-background:new 0 0 21.825 21.825;"
+                            xml:space="preserve">
+                            <path d="M16.791,13.254c0.444-0.444,1.143-0.444,1.587,0c0.429,0.444,0.429,1.143,0,1.587l-6.65,6.651  c-0.206,0.206-0.492,0.333-0.809,0.333c-0.317,0-0.603-0.127-0.81-0.333l-6.65-6.651c-0.444-0.444-0.444-1.143,0-1.587  s1.143-0.444,1.587,0l4.746,4.762V1.111C9.791,0.492,10.299,0,10.918,0c0.619,0,1.111,0.492,1.111,1.111v16.904L16.791,13.254z"
+                              fill="#FFFFFF" />
+
+                          </svg>
+
+                          Successful</span>
+                      </li> -->
+                    <li>
+                      <!-- <p>
+                          <span class="rupees">
+                            <svg version="1.1" id="rupees" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                              width="401.998px" height="401.998px" viewBox="0 0 401.998 401.998" style="enable-background:new 0 0 401.998 401.998;"
+                              xml:space="preserve">
+                              <g>
+                                <path d="M326.62,91.076c-1.711-1.713-3.901-2.568-6.563-2.568h-48.82c-3.238-15.793-9.329-29.502-18.274-41.112h66.52
+                                  c2.669,0,4.853-0.856,6.57-2.565c1.704-1.712,2.56-3.903,2.56-6.567V9.136c0-2.666-0.855-4.853-2.56-6.567
+                                  C324.334,0.859,322.15,0,319.481,0H81.941c-2.666,0-4.853,0.859-6.567,2.568c-1.709,1.714-2.568,3.901-2.568,6.567v37.972
+                                  c0,2.474,0.904,4.615,2.712,6.423s3.949,2.712,6.423,2.712h41.399c40.159,0,65.665,10.751,76.513,32.261H81.941
+                                  c-2.666,0-4.856,0.855-6.567,2.568c-1.709,1.715-2.568,3.901-2.568,6.567v29.124c0,2.664,0.855,4.854,2.568,6.563
+                                  c1.714,1.715,3.905,2.568,6.567,2.568h121.915c-4.188,15.612-13.944,27.506-29.268,35.691
+                                  c-15.325,8.186-35.544,12.279-60.67,12.279H81.941c-2.474,0-4.615,0.905-6.423,2.712c-1.809,1.809-2.712,3.951-2.712,6.423v36.263
+                                  c0,2.478,0.855,4.571,2.568,6.282c36.543,38.828,83.939,93.165,142.182,163.025c1.715,2.286,4.093,3.426,7.139,3.426h55.672
+                                  c4.001,0,6.763-1.708,8.281-5.141c1.903-3.426,1.53-6.662-1.143-9.708c-55.572-68.143-99.258-119.153-131.045-153.032
+                                  c32.358-3.806,58.625-14.277,78.802-31.404c20.174-17.129,32.449-39.403,36.83-66.811h47.965c2.662,0,4.853-0.854,6.563-2.568
+                                  c1.715-1.709,2.573-3.899,2.573-6.563V97.646C329.193,94.977,328.335,92.79,326.62,91.076z"
+                                />
+                              </g>
+                            </svg>
+                          </span>500
+                        </p> -->
+                      <span class="rssign">₹</span>
+                      <span class="amnt">{{mainFee}}</span>
+                    </li>
+                  </ul>
+                  <ul class="list-inline succes">
+                    <li class="bdrafter">
+                      <span class="rupees1">{{date | date}}</span>
+                    </li>
+                    <li>
+                      <!-- <span class="rupees">TXN ID 42589675895</span> -->
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- </div> -->
+    <!-- </section> -->
+    <!-- <section class="search8">
+        <div class="row">
+          <div class="col-md-10 col-xs-9">
+            <div class="input_patient">
+              <input type="text" placeholder="Search for  health record of your patient" name="search">
+            </div>
+          </div>
+          <div class="col-md-2 col-xs-3 nopadding0col resview">
+            <ul class="list-inline searchicon">
+              <li>
+                <button class="search_nav">
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="seaicon" x="0px" y="0px"
+                    viewBox="0 0 463.001 463.001" style="enable-background:new 0 0 463.001 463.001;" xml:space="preserve"
+                    width="512px" height="512px" class="">
+                    <g transform="matrix(-1.83697e-16 -1 1 -1.83697e-16 -5 463.001)">
+                      <g>
+                        <path d="M303.501,0c-87.948,0-159.5,71.551-159.5,159.5c0,36.188,12.122,69.593,32.507,96.386l-32.311,32.311   c-0.205,0.205-0.392,0.421-0.569,0.643c-2.645-0.551-5.363-0.84-8.127-0.84c-10.55,0-20.47,4.109-27.933,11.572l-95.999,95.999   C4.108,403.03,0,412.949,0,423.5s4.108,20.471,11.568,27.928C19.031,458.891,28.951,463,39.501,463s20.47-4.109,27.933-11.572   l95.999-95.999c7.461-7.458,11.569-17.377,11.569-27.929c0-2.765-0.289-5.484-0.84-8.129c0.222-0.176,0.437-0.363,0.642-0.568   l32.31-32.31C233.908,306.879,267.313,319,303.501,319c87.948,0,159.5-71.551,159.5-159.5S391.449,0,303.501,0z M56.826,440.822   C52.197,445.451,46.045,448,39.501,448s-12.696-2.549-17.326-7.179C17.548,436.196,15,430.045,15,423.5s2.548-12.696,7.176-17.322   l86.698-86.698l34.647,34.647L56.826,440.822z M154.075,343.468l-34.528-34.528c4.575-3.936,10.258-5.926,15.954-5.926   c6.274,0,12.55,2.389,17.326,7.166c4.627,4.625,7.175,10.776,7.175,17.321C160.002,333.427,157.906,339.027,154.075,343.468z    M167.73,304.665c-1.278-1.796-2.706-3.503-4.296-5.092c-1.592-1.591-3.301-3.02-5.098-4.299l27.841-27.841   c3,3.259,6.134,6.393,9.393,9.393L167.73,304.665z M303.501,304c-79.678,0-144.5-64.822-144.5-144.5S223.823,15,303.501,15   s144.5,64.822,144.5,144.5S383.179,304,303.501,304z"
+                          data-original="#000000" class="active-path" data-old_color=" rgb(0, 0, 0)" />
+                        <path d="M303.501,32c-70.304,0-127.5,57.196-127.5,127.5S233.197,287,303.501,287s127.5-57.196,127.5-127.5S373.805,32,303.501,32z    M303.501,272c-62.032,0-112.5-50.467-112.5-112.5S241.469,47,303.501,47s112.5,50.467,112.5,112.5S365.533,272,303.501,272z"
+                          data-original="#000000" class="active-path" data-old_color=" rgb(0, 0, 0)" />
+                        <path d="M355.58,79.438c-3.47-2.262-8.116-1.283-10.378,2.188c-2.262,3.47-1.282,8.117,2.188,10.378   c22.924,14.94,36.61,40.172,36.61,67.496c0,18.667-6.534,36.86-18.399,51.226c-2.638,3.193-2.187,7.921,1.007,10.559   c1.398,1.155,3.09,1.717,4.772,1.717c2.16,0,4.304-0.929,5.787-2.724c14.079-17.047,21.833-38.632,21.833-60.777   C399.001,127.087,382.769,97.158,355.58,79.438z"
+                          data-original="#000000" class="active-path" data-old_color=" rgb(0, 0, 0)" />
+                        <path d="M320.856,65.575C315.168,64.53,309.329,64,303.501,64c-4.143,0-7.5,3.358-7.5,7.5s3.357,7.5,7.5,7.5   c4.922,0,9.849,0.447,14.645,1.328c0.459,0.084,0.914,0.125,1.364,0.125c3.549,0,6.703-2.531,7.368-6.146   C327.626,70.233,324.93,66.324,320.856,65.575z"
+                          data-original="#000000" class="active-path" data-old_color=" rgb(0, 0, 0)" />
+                      </g>
+                    </g>
+                  </svg>
+                </button>
+              </li>
+              <li>
+                <button class="morebutton">
+                  <span> -->
+    <!-- <svg version="1.1" id="moresvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" -->
+    <!-- <svg version="1.1" id="moresvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                          viewBox="0 0 384 384" style="enable-background:new 0 0 384 384;" xml:space="preserve">
+                      <g>
+                        <g>
+                          <circle cx="192" cy="42.667" r="42.667"/>
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <circle cx="192" cy="192" r="42.667"/>
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <circle cx="192" cy="341.333" r="42.667"/>
+                        </g>
+                      </g>
+                    </svg>
+                  </span>
+                </button>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+        <hr class="linehr">
+        <div class="row nomargin0row">
+          <div class="col-md-2">
+            <div class="profileimg">
+              <img src="assets/images/pawan.jpg" class="img-responsive">
+            </div>
+          </div>
+          <div class="col-md-3 nopadding0col">
+            <div class="nameofuser2">
+              <p class="nameofp">Pawan Singh</p>
+              <p class="locgender">
+                <span class="gender">Male 21</span>
+                <span class="locationp">Durgapur, India</span>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <span class="problemsf">14 Health Records found</span>
+          </div>
+          <div class="col-md-2 col-xs-12">
+            <div class="respcss1">
+              <button type="btn" class="viewbtn">view</button>
+            </div>
+          </div>
+        </div>
+
+        <hr class="linehr">
+        <div class="row nomargin0row">
+          <div class="col-md-2">
+            <div class="profileimg">
+              <img src="assets/images/pawan.jpg" class="img-responsive">
+            </div>
+          </div>
+          <div class="col-md-3 nopadding0col">
+            <div class="nameofuser2">
+              <p class="nameofp">Pawan Singh</p>
+              <p class="locgender">
+                <span class="gender">Male 21</span>
+                <span class="locationp">Durgapur, India</span>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <span class="problemsf">14 Health Records found</span>
+          </div>
+          <div class="col-md-2">
+            <div class="respcss1">
+              <button type="btn" class="viewbtn">view</button>
+            </div>
+          </div>
+        </div>
+      </section> -->
+  </div>
+
+  <div class="col-md-4 nopadding0col">
+    <app-rightsidenav></app-rightsidenav>
+  </div>
+</div>

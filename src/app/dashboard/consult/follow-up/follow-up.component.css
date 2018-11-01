@@ -1,0 +1,193 @@
+button.prescribebtn {
+    margin-right: 10px;
+    border-radius: 50px;
+    background: transparent;
+    border: 1px solid #09bab1;
+    line-height: 25px;
+    font-size: 13px;
+    height:34px;
+    padding: 0 8px 0px 8px;
+    color: #09bab1;
+    font-family: Lato;
+    font-weight: 500!important;
+    width: 85px;
+}
+.prescribebtn:focus{
+outline:none;
+}
+.prescribebtn:hover{
+background: #09bab1;
+color: #fff;
+font-family: lato;
+font-weight: 600;
+}
+.cancelbtn{
+    border-radius: 50px;
+    background: transparent;
+    border: 1px solid #909090;
+    line-height: 25px;
+    font-size: 13px;
+    height: 34px;
+    padding: 0 8px 0px 8px;
+    color:#909090;
+    font-family: Lato;
+    font-weight: 500;
+    width: 85px;
+}
+input.referdoc:focus {
+    box-shadow: none;
+}
+.cancelbtn:focus{
+    outline:none;
+}
+.cancelbtn:hover{
+   background: #909090;
+   color:white;
+   border:none;
+}
+.card.cardabc{
+    border: none;
+    box-shadow: 1px 1px 20px 4px #edf0fd;
+    border-radius: 6px;
+    padding: 20px;
+    margin: -1.5rem 0 1rem 0;
+    padding-top:0 !important;
+}
+.card.cardabc.custom-card {
+    width: 98%;
+    margin: 0px auto;
+    margin-bottom: 25px;
+}
+.card.cardabc1.custom-card {
+    width: 98%;
+    margin: 0px auto;
+    margin-bottom: 25px;
+}
+p.provisionalc21 {
+    font-size: 18px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    margin-top:1em;
+    margin-left: 8px;
+    color: #8c8db8;
+}
+input.referdoc {
+    color: #84869d;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin-left: 30px;
+    width: 89%;
+    margin-bottom: 4px;
+}
+input.referdoc::-webkit-input-placeholder {
+    color:#84869d ;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+.high {
+    padding-bottom: 20px;
+    padding-top: 1em;
+}
+
+
+        .vert-padding{
+            padding: 15px 0px 20px 0px !important; 
+           
+           }
+           .revisit_tabs .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+               color: #8a8ab7;
+               cursor: default;
+               background: #fafbff;
+               border-radius: 0;
+               font-family: 'Lato', sans-serif;
+               border: none;
+               border-bottom-color: linear-gradient(to right, #aa6ff8 , #7c78fa);
+               border-bottom: 3px solid #8475f9;
+           }
+           .revisit_tabs ul.nav.nav-tabs{
+               background: #fafbff;
+            border:none;
+               color:#8a8ab7;
+               width: 80%;
+               left: 0;
+               right: 0;
+               margin: 0 auto;
+           }
+           .revisit_tabs .nav-tabs>li>a:hover {
+               /* border-color:linear-gradient(to right, red , yellow); */
+               background-color: #fafbff;
+               border:none;       
+           }
+           .nav-tabs>li {
+            
+               margin: 0 1.2em;
+           }
+           .headcard{
+            padding-left: 30px;
+            color: rgba(85, 85, 85, .6);
+            line-height: 24px;
+            font-family: 'Lato', sans-serif;
+            padding-top: 14px;
+            margin-top: -21px;
+            padding-bottom: 3px;
+
+
+               
+           }
+           .revisit_tabs .nav-tabs>li.active>a:hover {
+               /* border-color:linear-gradient(to right, red , yellow); */
+               border-bottom-color: linear-gradient(to right, #aa6ff8 , #7c78fa);
+               border-bottom: 3px solid #8475f9;
+           
+           }
+           .revisit_tabs .tab-pane.active p{
+               text-align: center;
+               padding: 15px 30px 0 30px;
+               font-size: 30px;
+               font-family: 'Lato', sans-serif;
+               font-weight: 500;
+               color: rgba(85, 85, 85, .8);
+           }
+           .revisit_tabs .tab-pane.active span{
+               font-size: 18px;
+               vertical-align: text-top;
+               font-weight: 500;
+               margin-left: -5px;
+           }
+           .revisit_tabs ul.nav.nav-tabs li a {
+               color: #8a8ab7;
+               font-family: 'Lato', sans-serif;
+           }
+           .tabli{
+               border-bottom: 1px solid #eee;
+               border-top: 1px solid #eee;
+               width:100%;
+               background:#fafbff;
+           }
+           
+           p.range-field {
+               padding-top: 0px !important;
+           }
+           .referdoc{
+               padding: 0 30px;
+           }
+.error_message2{
+    margin-left: 30px;
+}
+
+span.reffereddoc {
+    color: red;
+    padding-left: 2em;
+    font-size:13px;
+}
+@media only screen and (min-width: 320px) and (max-width:1024px){
+.revisit_tabs ul.nav.nav-tabs
+
+
+{
+    width:100%
+}
+
+}

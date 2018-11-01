@@ -1,0 +1,218 @@
+button.prescribebtn {
+    margin-right: 10px;
+    border-radius: 50px;
+    background: transparent;
+    border: 1px solid #09bab1;
+    line-height: 25px;
+    font-size: 13px;
+    height:34px;
+    padding: 0 8px 0px 8px;
+    color: #09bab1;
+    font-family: Lato;
+    font-weight: 500!important;
+    width: 85px;
+}
+.prescribebtn:focus{
+outline:none;
+}
+.prescribebtn:hover{
+background: #09bab1;
+color: #fff;
+font-family: lato;
+font-weight: 600;
+}
+.provisionalc21frequency {
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    margin-top: 1em;
+    color: #8c8db8;
+}
+.day_tab p{
+    text-align: center;
+    /* padding: 15px 30px 0 30px; */
+    font-size: 27px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    color: rgba(85, 85, 85, .8);
+}
+ .day_tab span{
+    font-size: 15px;
+    vertical-align: text-top;
+    font-weight: 500;
+    margin-left: -5px;
+}
+p.range-field {
+    padding-top: 0px !important;
+}
+.cancelbtn{
+    border-radius: 50px;
+    background: transparent;
+    border: 1px solid #909090;
+    line-height: 25px;
+    font-size: 13px;
+    height: 34px;
+    padding: 0 8px 0px 8px;
+    color:#909090;
+    font-family: Lato;
+    font-weight: 500;
+    width: 85px;
+}
+.cancelbtn:focus{
+    outline:none;
+}
+.cancelbtn:hover{
+   background: #909090;
+   color:white;
+   border:none;
+}
+input.referdoc:focus {
+    box-shadow: none;
+}
+.card.cardabc{
+    border: none;
+    box-shadow: 1px 1px 20px 4px #edf0fd;
+    border-radius: 6px;
+    padding: 20px;
+    margin: -1.5rem 0 1rem 0;
+    padding-top:0 !important;
+}
+.card.cardabc.custom-card {
+    width: 98%;
+    margin: 0px auto;
+    margin-bottom: 25px;
+}
+.card.cardabc1.custom-card {
+    width: 98%;
+    margin: 0px auto;
+    margin-bottom: 25px;
+}
+p.provisionalc21 {
+    font-size: 18px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    margin-top:1em;
+    margin-left: 8px;
+    color: #8c8db8;
+}
+input.referdoc {
+    color:#84869d ;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+input.referdoc::-webkit-input-placeholder {
+    color:#84869d ;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+button.crossbtnmed {
+    background: transparent;
+    outline: none;
+    border: none;
+    float: right;
+    padding: 0;
+    margin: 10px -14px 0 0;
+}
+svg#cancelbtn {
+    height: 8px;
+    width: 11px;
+    fill: #989090;
+}
+.plus_btn {
+    margin: 2em 1.5em 0 0;
+}
+textarea.text2area {
+    resize: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(169, 169, 169, 0.62);
+    color: #84869d;
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    height:4em;
+}
+p.range-field {
+    padding-top: 0px !important;
+}
+input[type="text"]{
+    text-indent:4px;
+    border-image: linear-gradient(rgb(87, 107, 235), #cccccc);
+    border-width: 1px;
+    border-image-slice: 1;
+}
+p.provisionalc21frequency {
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    margin-top: 1em;
+    color: #8c8db8;
+}
+button.plus:hover{
+    background: linear-gradient(to bottom, #5451e8, rgba(56, 145, 239, 0.82));
+}
+.plus_btn {
+    margin: 2em 1.5em 0 0;
+}
+button.plus {
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    color: #fff;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.2);
+    background: linear-gradient(to bottom, #20de9e, #08b9b1);
+}
+.high {
+    padding-bottom: 20px;
+    padding-top: 3em;
+}
+:host >>> .completer-dropdown {
+    overflow-y: auto;
+    overflow-x:hidden;
+    font-family: 'Lato', sans-serif;
+    font-weight:400;
+    max-height: 200px;
+    background:#fff!important;
+    color:#000!important;
+    width:92% !important;
+    padding:0 !important;
+    margin-top:0px!important;
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
+  
+  }
+  :host /deep/ .completer-input {
+    color: rgb(132, 132, 132);
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    height: 2.4rem !important;
+    margin-bottom: 10px !important;
+    border-bottom: 1px solid rgba(238, 238, 238, 1) !important;
+    }
+    :host >>> .completer-selected-row{
+      background: #37cdb6!important;
+  
+    }
+    :host /deep/ input.completer-input::placeholder {
+        color: #8c8db8 ;
+        font-size: 13px;
+    }
+    .card-body {
+        background: white;
+        padding: 12px 20px 21px 20px;
+        box-shadow: 1px 1px 20px 4px #edf0fd;
+        border-radius: 6px;
+    }
+    input.referdoc::placeholder {
+        color: #7b87b3 !important;
+        font-size: 13px;
+    }
+    span.errormessage {
+        color: red;
+    }

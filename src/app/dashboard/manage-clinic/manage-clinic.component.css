@@ -1,0 +1,763 @@
+/* ************************************Schedule*********************************  */
+div#padding_left {
+    padding-right: 18px;
+    padding-left: 0;
+    height: 600px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.new_clinic {
+    text-align: center;
+    margin-top: 22px;
+    margin-bottom: 11px;
+   
+    padding: 1em;
+    border-radius: 5px;
+    font-weight: 400;
+    color:#fff;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    background: linear-gradient(to right,#3c84fd,#a76ff8);
+}
+span.error_message {
+    color: red;
+}
+p.errormessage1 {
+    color: red;
+    position: absolute;
+}
+div#left_side {
+    padding-left: 0;
+}
+section.schedule {
+    background: #f8f8ff;
+    height: 100vh;
+    overflow:hidden;
+}
+.sp_to {
+    margin-top: 1em;
+}
+.nomargin0row{
+    margin: 0;
+}
+div#padding-o {
+    padding: 0;
+}
+.card_text {
+   
+    padding: 7px 0;
+
+}
+.card_text1 {
+    padding-bottom: 18px;
+}
+.card_text1 label {
+    color: rgb(132, 132, 132);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+label.sche_dule {
+    margin-top: -1em;
+}
+.card_text1 input::placeholder {
+    color: rgb(132, 132, 132);
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+.card_text1 input{
+    margin-bottom: 0px!important;
+    border-bottom: 1px solid rgba(90, 146, 240, 0.39);
+    color: rgb(132, 132, 132);
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+.simo_txt p {
+    color: rgba(132, 132, 132, 0.83);
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+}
+p.simo {
+    margin-bottom: 0px;
+    color: rgba(0, 0, 0, 0.59)!important;
+    font-size: 15px;
+}
+p.theodore {
+    font-size: 9px;
+}
+p.phno {
+    margin-bottom: 7px;
+    font-size: 11px;
+}
+li.digit {
+    font-size: 34px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #4f4695;
+    padding-right:0;
+}
+li.visitor {
+    padding-left: 0;
+}
+ul.timings {
+    text-align: center;
+    margin-top: 5px;
+}
+li.fr {
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    color: #4f4695 !important;
+    font-size: 11px;
+}
+li.time:before {
+    border-left: 1px solid rgba(132, 132, 132, 0.68);
+    height: 19px;
+    width: 29px;
+    position: absolute;
+    content: "";
+    top: 19px;
+    left: 20px;
+    transform: rotate(-90deg);
+}
+
+li.time:after {
+    border-left: 1px solid rgba(132, 132, 132, 0.68);
+    height: 19px;
+    width: 29px;
+    position: absolute;
+    content: "";
+    top: 19px;
+    right:20px;
+    transform: rotate(-90deg);
+}
+li.time {
+    font-size: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+li.morng_tme {
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    color: rgba(132, 132, 132, 0.71);
+    font-size: 11px;
+}
+li.visitor p {
+    margin-bottom: -2px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(158, 158, 158, 0.92)!important;
+    font-weight: 400;
+    font-size: 11px;
+}
+.edditsp_up li {
+    padding: 0;
+}
+ul#visitor-allign {
+    margin-top: 11px;
+}
+.card_text1 .row {
+    margin-bottom: 0px;
+}
+hr.light_schedule {
+    margin-top: 3em;
+    margin-bottom:6px;
+}
+hr.light_schedule1 {
+    margin-top: 1em;
+}
+.plus_btn {
+    margin-top: 2em;
+}
+.calender.text-center h4 {
+    margin: 0;
+}
+.set_upbtn {
+    padding-bottom: 6px;
+    text-align: center;
+}
+p.time_pick {
+    margin-top: 3em;
+    color: rgb(132, 132, 132);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    text-align: center;
+}
+button.saveinputd {
+    background: #ffffff;
+    line-height: 30px;
+    width: 77px;
+    color: #09bab1;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: Lato;
+    border: 1px solid #09bab1;
+    border-radius: 20px;
+    margin: 4px 10px 0px 0;
+
+}
+.cancelbtn{
+    border-radius: 50px;
+    background: transparent;
+    border: 1px solid #909090;
+    line-height: 30px;
+    font-size: 13px;
+    padding: 0 8px 0px 8px;
+    color: #909090;
+    font-family: Lato;
+    font-weight: 500;
+    width: 85px;
+}
+button.cancelbtn:hover {
+    background: #909090;
+    color: white;
+}
+button.saveinputd:hover {
+    background: #09bab1;
+    color: white;
+    
+}
+button.plus:hover{
+    background: #08b9b1;
+}
+p.errormessage_ui {
+    color: red;
+    position: absolute;
+    bottom: -34px;
+}
+ul#calender_days li {
+    color: rgb(121, 120, 120);
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 29px;
+    margin-top: 8px;
+}
+button.selectd_day.active {
+    background: linear-gradient(to right, rgb(121, 120, 250),rgba(178, 109, 247, 1));
+    border-radius: 50%;
+    height: 30px;
+    color: #fff!important;
+    width: 30px;
+    border: none;
+    box-shadow: 0px 1px 16px 3px rgba(137, 99, 206, 0.31);
+}
+.selectd_day{
+    background: #ffffff;
+    border-radius: 50%;
+    border: none;
+    box-shadow: none;
+    color: #7b7979;
+}
+/* li.date_choose {
+    background: linear-gradient(to right, rgb(121, 120, 250),rgba(178, 109, 247, 1));
+    border-radius: 50%;
+    box-shadow: 0px 1px 16px 3px rgba(164, 112, 248, 0.61);
+    height: 30px;
+    color: #fff!important;
+    width: 30px;
+} */
+div#padding_left {
+    padding-right:18px;
+    padding-left: 0;
+}
+.mtop2 .card {
+    margin-top:1em;
+    box-shadow:none;
+    border-radius: 6px;
+    box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.08);
+}
+.mtop .card {
+    margin-top: 1em;
+    border-radius: 6px;
+    box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.08);
+}
+div#padding_r {
+    padding-right: 0;
+}
+svg#dot {
+    fill: rgba(149, 149, 149, 0.5);
+    height: 18px;
+    width: 34px;
+}
+div#marbtm-0 {
+ margin-bottom:0px;
+}
+.card_text1 .input-field {
+    margin-top: 14px;
+}
+button.plus {
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    margin-right: 8px;
+    color: #fff;
+    background: linear-gradient(to bottom, #20de9e, #08b9b1);
+    box-shadow: 0px 1px 16px 3px rgba(109, 117, 113, 0.18);
+}
+button.btn_circ {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+}
+p.to_time {
+    position: relative;
+    margin-bottom: 0px;
+}
+
+
+/* ************************************Schedule*********************************  */
+/* ****Notifications icons2**** */
+.switch1 {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch1 input {display:none;}
+  
+  .slider1 {
+    position: absolute;
+    cursor: pointer;
+    top: 22px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    color:#ccc;
+    transition: .4s;
+    height: 21px;
+    width: 79%;
+  }
+  
+  .slider1:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 4px;
+    bottom: 2px;
+    background-color: #fff;
+    transition: .4s;
+  }
+  
+  input:checked + .slider1 {
+    background-color: #23e29c;
+    color:#fff;
+  }
+  
+  input:focus + .slider1 {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider1:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  p.open_2 {
+    /* color: #fff; */
+    font-size: 8px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 22px;
+    margin: 0 14px 0 0px;
+}
+  .slider1.round1 {
+    border-radius: 34px;
+  }
+  
+  .slider1:before {
+    border-radius: 50%;
+  }
+/* ****Notifications icons2**** */
+/* *****Dropdown button ****** */
+.webdropdown {
+    position: relative;
+    display: inline-block;
+    float: right;
+}
+.webdropdown-content{
+    display: block;
+    margin-left: -55px;
+    position: absolute;
+    background: #f7f7f7;
+    z-index: 999999;
+    opacity: initial;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    height: auto;
+}
+svg#edit_schedule {
+    fill: #000000;
+    height: 14px;
+    width: 14px;
+}
+span.triangle {
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 10px solid #f7f7f7;;
+    margin-top: 2px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    margin-right: 14px;
+}
+.webdropdown-content a {
+    color:#000000;
+    padding: 8px 0 8px 9px;
+    text-decoration: none;
+    display: block;
+}
+ul.list-inline.edditsp li:hover {
+    color: #3ad87b!important;
+}
+ul.list-inline.edditsp.bor_der {
+    margin-bottom: -2px;
+}
+ul.list-inline.edditsp.edditsp_up {
+    margin-top: -2px;
+}
+li:hover svg#edit_schedule {
+    fill: #3ad87b!important;
+}
+hr.bor_derhr {
+    margin: 0;
+}
+ul.list-inline.edditsp {
+    margin-bottom: 0;
+}
+.webdropdown:hover .webdropdown-content {
+    display: block;
+}
+button.eddtn {
+    background: transparent;
+    border: none;
+}
+.webdropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+/* *****Dropdown button ****** */
+/* ********Responsive******** */
+@media only screen and (min-width: 320px) and (max-width:767px){
+    div#left_side{
+        padding-left: 15px;
+    }
+section.schedule{
+    overflow: auto;
+}
+.resleft{
+    padding-left: 40px;
+}
+.simo_txt {
+    text-align: center;
+}
+ul#visitor-allign{
+    text-align: center;
+}
+.webdropdown {
+    float: right;
+}
+div#padding_left {
+    padding-right: 14px!important;
+    padding-left: 14px!important;
+}
+.webdropdown-content{
+    margin-top:3em;
+    width: auto;
+}
+span.triangle {
+    top: -12px;
+    right: 2px;
+}
+li.time:after {
+    top: 14px;
+    right: 40%;
+}
+li.time:before {
+    top: 14px;
+    left: 40%;
+}
+/* div#padding_left{
+    padding-left: 15px;
+} */
+.card_text {
+    padding-bottom: 16px;
+}
+p.time_pick{
+    margin-top: 1em;
+    margin-left: 0;
+}
+div#top_p {
+    margin-top: -1em;
+}
+.time_pickinput {
+    margin-left: 1em;
+}
+.sp_to {
+    margin-top: 2em;
+    padding-right: 1em;
+}
+.div_btn {
+    text-align: center;
+    margin-top: 1em;
+}
+button.btn_circ{
+    float: right;
+}
+svg#dot{
+    height: 30px;
+    width: 22px;
+    float: right;
+}
+}
+@media only screen and (min-width: 767px) and (max-width:1024px) and (orientation:portrait){
+    section.schedule{
+        overflow: auto;
+    }
+    .simo_txt {
+        text-align: center;
+    }
+    ul#visitor-allign{
+        text-align: center;
+    }
+    li.time:after {
+        top: 14px;
+        right: 40%;
+    }
+    li.time:before {
+        top: 14px;
+        left: 40%;
+    }
+    div#padding_left{
+        padding-left: 15px;
+    }
+    .card_text {
+        padding-bottom: 16px;
+    }
+    p.time_pick{
+        margin-top: 1em;
+        margin-left: 0;
+    }
+    div#top_p {
+        margin-top: -1em;
+    }
+    .time_pickinput {
+        margin-left: 1em;
+    }
+    .sp_to {
+        margin-top: 2em;
+        padding-right: 1em;
+    }
+    .div_btn {
+        text-align: center;
+        margin-top: 1em;
+    }
+}
+@media only screen and (min-width: 767px) and (max-width:1024px) and (orientation:landscape){
+    svg#dot {
+        width: 34px;
+    }
+    div#padding_left {
+        padding-left:0;
+        padding-right: 0;
+    }
+}
+@media only screen and (min-width: 1024px) and (max-width:1366px) and (orientation:portrait){
+    svg#dot {
+        width: 34px;
+    }
+    div#padding_left {
+        padding-left:0;
+        padding-right: 0;
+    }
+}
+::-webkit-scrollbar { 
+  display: none;
+}
+.scroll {
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 73vh;
+}
+.card.clinic {
+    border-radius: 10px;
+    box-shadow: 0 0px 0px 0 rgba(0,0,0,0.14), 0 1px 2px 0 rgba(0,0,0,0.12), 0 3px 0px -4px rgba(0,0,0,0.2);
+}
+
+ /* ********Responsive******** */
+ .nopadding0col1{
+    padding: 0;
+}
+.nopadding0col{
+    padding: 0;
+}
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+}
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    padding: 0;
+    max-height: 70%;
+    width: 55%;
+    margin: auto;
+    overflow-y: auto;
+    border-radius: 5px;
+    will-change: top, opacity;
+    box-shadow: none;
+}
+div#mydelModal .modal-header {
+    border: none;
+    padding:0;
+    /* background: linear-gradient(to right,rgba(86, 127, 251, 1), rgba(182, 108, 245, 1)); */
+    border-radius: 5px 5px 0 0;
+    font-family: 'Lato', sans-serif;
+    color: #fff;
+}
+button.dele_te {
+    outline: none;
+    border: 1px solid#e02748;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 50px;
+    color: #e02748;
+    background: transparent;
+    height: 30px;
+    width: 69px;
+}
+button.btn_delde {
+    margin: 10em 0;
+    height: 42px;
+    width: 120px;
+    background: #4f5ae8;
+    border: none;
+    color: #fff;
+}
+button.cance_l {
+    border: 1px solid rgb(123, 122, 122);
+    cursor: pointer;
+    color: #676464;
+    font-family: 'Lato', sans-serif;
+    height: 30px;
+    font-weight: 500;
+    background: transparent;
+    margin-right: 14px;
+    width: 69px;
+    border-radius: 50px;
+}
+section.del_modal {
+    height: 100vh;
+    text-align: center;
+}
+button.cance_l:hover {
+    background: rgba(158, 158, 158, 0.32);
+}
+button.dele_te:hover {
+    background: rgba(216, 30, 46, 0.28);
+}
+p.dele_test2 {
+    padding-left: 6px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.71);
+    font-weight: 500;
+    font-size: 17px;
+    font-family: 'lato',sans-serif;
+    margin: 0;
+    /* margin-bottom: 1em; */
+    /* line-height: 8px; */
+}
+p.dele_test {
+    padding-left: 6px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.78);
+    font-weight: 500;
+    line-height: 8px;
+    font-size: 14px;
+}
+svg#del_svg {
+    height: 45px;
+    width: 40px;
+    vertical-align: middle;
+    fill: #d80027;
+}
+div#mydelModal .modal-body {
+    padding:0em 1em;
+
+}
+div#mydelModal .modal-content {
+    padding: 0;
+    box-shadow: none;
+    border: none;
+}
+div#mydelModal button.close {
+    margin: 8px 8px 0 0;
+    color: rgba(0, 0, 0, 0.4); 
+    opacity: 1;
+}
+div#mydelModal .modal-content h4 {
+    font-family: 'Lato', sans-serif;
+    font-size: 23px;
+    text-align: center;
+}
+div#mydelModal .modal-footer {
+    border:none;
+    border-radius:5px;
+    padding-bottom: 4em;
+    /* margin-bottom: 10px; */
+    background-color: #ffffff;
+    text-align:center;
+}
+.text_modal {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 26px;
+}
+
+textarea.addrsarea {
+    border-bottom: 1px solid #bfd5f9 !important;
+    border: none;
+    height: auto;
+    outline: none;
+    color: rgb(132, 132, 132);
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+.adrsclinic {
+    margin: 2em 1em 0 1em;
+}
+
+textarea.addrsarea::placeholder {
+    color: rgb(132, 132, 132);
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+

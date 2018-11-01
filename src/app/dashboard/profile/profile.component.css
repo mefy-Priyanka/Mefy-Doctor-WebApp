@@ -1,0 +1,325 @@
+.nopadding0col1{
+    padding: 0;
+}
+.nomarginrow0{
+    margin: 0;
+}
+.nopaddingleft{
+    padding-left: 0;
+}
+.nopaddingright{
+    padding-right: 0;
+}
+.maincontent{
+    border-radius: 7px;
+    padding: 20px 10px 16px 20px;
+    box-shadow: 0 2px 20px 9px #edeffe;
+    margin-top: 17px;
+    overflow-y: scroll;
+    height: 88vh;
+    margin-bottom: 0;
+}
+::-webkit-scrollbar { 
+    display: none;
+  }
+  .input-field.col-md-12.speciaity.authority input {
+    border: none;
+    cursor: auto;
+}
+.maincontent input::placeholder{
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.53);
+    font-weight: 600;
+    font-size: 15px;
+}
+.maincontent input{
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.53);
+    font-weight: 600;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(238, 238, 238, 1);  
+    height: 2.5rem;
+    margin-bottom: 15px;
+}
+div#radiobtn {
+    margin-top: 0;
+}
+p.gen_m {
+    padding-left: 10px;
+}
+.input-field.col-md-12.speciaity.locatn {
+    margin-top: 1em;
+}
+label.location {
+    margin-left: 13px;
+    margin-top: 14px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.53);
+    font-weight: 600;
+    font-size: 15px;
+
+}
+label.locationphone {
+    margin-left: 15px;
+    margin-top: 5px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.53);
+    font-weight: 600;
+    font-size: 15px;
+
+}
+p.reg_no {
+    font-family: 'Lato', sans-serif;
+    color: rgb(88, 88, 88);
+    font-weight: 600;
+    font-size: 15px;
+}
+button.addreg{
+    background: transparent;
+    border: 1px solid #23e29c;
+    color: #23e29c;
+    outline: none;
+    font-size: 13px;
+    border-radius: 50px;
+}
+
+label.location1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.5);
+}
+.mainview{
+    border-bottom: 1px solid rgba(238, 238, 238, .7);
+    width:100%;
+    padding: 1.8em 20px 15px 3em;
+}
+.mainview:first-child{
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
+}
+.passwordsec{
+    width:100%;
+    padding: 1.8em 20px 15px 3em; 
+}
+.mainview p{
+    margin:0px;
+    font-family: 'Lato', sans-serif;
+}
+.npl{
+    padding-left:0;
+}
+span.error_message {
+    color: red; 
+}
+.lastbtn .btn.btn-default{
+    border-radius: 50px;
+    font-size: 14px;
+    background: white; 
+    color: #09bab1;
+    border: 1px solid #09bab1;
+    height: 34px;
+    font-family: 'Lato', sans-serif;
+    width: 101px;
+    line-height: 0px;
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
+    box-shadow: none;
+    font-weight: 500;
+}
+.lastbtn .btn.btn-default:hover{
+    background:#09bab1;
+    color:white;
+    border:none;
+}
+.lastbtn .btn.btn-default:focus{
+    outline:none;
+}
+.lastbtn{
+    text-align: center;
+    margin-bottom: 0;
+}
+input#usr {
+    border-bottom: 1px solid #eee;  
+}
+.passwordsec input {
+    border-bottom: 1px solid #ccc;
+font-size: 15px;
+margin:0 0 5px 0;
+}
+input#pwd::placeholder {
+    color:#9c9494;
+  }
+
+  button.fileup{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    line-height: 22px;
+}
+p.labelpf{
+font-family: 'Lato', sans-serif;
+color:rgb(88, 88, 88);
+font-weight: 600;
+font-size: 15px;
+margin-top: 10px;
+margin-bottom: 0;
+}
+input.reginput {
+    margin-bottom: 0 !important;
+}
+.cancelbtn{
+    border-radius: 50px;
+    background: transparent;
+    border: 1px solid #909090;
+    line-height: 25px;
+    font-size: 13px;
+    height: 35px;
+    padding: 0;
+    color: #909090;
+    font-family: Lato;
+    font-weight: 500;
+    width: 101px;
+    margin-left: 10px;
+}
+.cancelbtn:hover{
+    background: #909090;
+    color: #fff;
+}
+
+
+:host >>> .completer-dropdown {
+    overflow-y: auto;
+    overflow-x:hidden;
+    font-family: 'Lato', sans-serif;
+    font-weight:400;
+    max-height: 200px;
+    background:#fff!important;
+    color:#000!important;
+    width:100% !important;
+    padding:0 !important;
+    margin-top:0px!important;
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
+  
+  }
+  :host /deep/ .completer-input {
+    color: rgb(132, 132, 132);
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    height: 2.4rem !important;
+    margin-bottom: 10px !important;
+    border-bottom: 1px solid rgba(238, 238, 238, 1) !important;
+    }
+    :host >>> .completer-selected-row{
+      background: #37cdb6!important;
+  
+    }
+
+    /* chipsdata */
+p.chipsdata {
+    color: #ffffff;
+    margin: 0 2px;
+    padding: 0 15px;
+    height: 30px;
+    font-size: 14px;
+    line-height: 28px;
+    border-radius: 26px;
+    background-color: rgba(79, 90, 232, 0.84);
+    text-align: center;
+    margin-bottom: 4px;
+    /* border: 1px solid #544e4e; */
+  }
+
+  .closebtn {
+    padding-left: 10px;
+    color: #fff;
+    font-weight: 400;
+    float: right;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .closebtn:hover {
+    color: #000;
+  }
+  .chipsdata{
+    margin: 0;
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
+    margin-top: 10px;
+  }
+  .chipsdata li{
+    padding: 0;
+  
+  }
+  .chipdatain{
+    text-align: left;
+  }
+  .speciaity{
+      margin-top: 0;
+      position: relative;
+
+  }
+  .speciaity p{
+    margin-top: 0;
+
+}
+.speciaity.authority {
+    margin-top: 1em !important;
+}
+button.addprofile {
+    /* border: none;
+    font-size: 23px;
+    color: #587ced;
+    background: transparent; */
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 20px;
+    height: 30px;
+    width: 30px;
+    margin-right: 8px;
+    color: #fff;
+    background: linear-gradient(to bottom, #20de9e, #08b9b1);
+    box-shadow: 0px 1px 16px 3px rgba(109, 117, 113, 0.18);
+}
+  button.addprof {
+    border: none;
+    font-size: 13px;
+    background: rgba(87, 118, 236, 1);
+    color: #fff;
+    padding: 5px 14px;
+    border-radius: 4px;
+}
+.abellable {
+    padding-bottom: 15px;
+}
+.addchips {
+    padding: 5px;
+    /* border-bottom: 1px solid rgba(238, 238, 238, 1); */
+    text-align: right;
+}
+.addchips2 {
+    padding: 5px;
+    /* border-bottom: 1px solid rgba(238, 238, 238, 1); */
+    text-align: right;
+}
+.addchip {
+    width: 100%;
+    padding-top: 8px;
+    text-align: right;
+
+}
+@media screen and (min-width: 320px) and (max-width: 1024px) 
+{
+    .card.maincontent {
+        margin: 20px 15px 20px 15px;
+        box-shadow: 0 12px 20px 9px #edeffe;
+    }
+    .pdng0
+    {
+      padding: 0px 0px 0px 0px;
+  
+    }
+}

@@ -1,0 +1,382 @@
+<!-- ************************************Schedule********************************* -->
+<!-- <section class="schedule">
+  <div class="col-md-12" id="padding-o">
+    <div class="row"> -->
+<!-- <div class="col-md-3">
+        <app-navigation></app-navigation>
+      </div> -->
+<!-- <div class="col-md-9" id="padding-o">
+        <div class="schedule_backgrnd"> -->
+<!-- <div class="row"> -->
+<!-- <app-navtabs></app-navtabs> -->
+<div class="row nomargin0row">
+  <div class="col-md-8" id="left_side">
+    <div class="new_clinic" *ngIf="clinicList.length ==0 || formHide">Add New Clinic</div>
+    <div class="new_clinic" *ngIf="clinicList.length !=0 && !formHide">Clinic List</div>
+    <!-- <div class="new_clinic" *ngIf="show || clinicList.length !=0 && formHide"> Edit Clinic</div> -->
+    <!-- <ng2-toasty  [position]="'center-center'"></ng2-toasty> -->
+
+    <div class="row" id="marbtm-0">
+      <div class="scroll">
+        <div class="mtop2">
+          <div class="card" *ngFor="let details of clinicList; let i=index">
+            <!-- <span>{{details.clinicName(_id,i)}}</span> -->
+            <div class="card_text" *ngIf="dataDisplay">
+              <div class="webdropdown">
+                <!-- <button class="btn_circ" (click)= "editSchedule(details._id)"> -->
+                <button class="btn_circ" (click)="clinicEdit(details._id,i)">
+                  <svg version="1.1" id="dot" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
+                    <g>
+                      <path d="M30,16c4.411,0,8-3.589,8-8s-3.589-8-8-8s-8,3.589-8,8S25.589,16,30,16z" />
+                      <path d="M30,44c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S34.411,44,30,44z" />
+                      <path d="M30,22c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S34.411,22,30,22z" />
+                    </g>
+                  </svg>
+                </button>
+
+                <div class="webdropdown-content" *ngIf="showEdit && i==selected">
+                  <span class="triangle"></span>
+                  <a>
+                    <ul class="list-inline edditsp bor_der">
+                      <li>
+                        <button class="eddtn" (click)="editSchedule(details._id)">
+                          <svg version="1.1" id="edit_schedule" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                            y="0px" viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;" xml:space="preserve">
+                            <g>
+                              <path d="M438.931,30.403c-40.4-40.5-106.1-40.5-146.5,0l-268.6,268.5c-2.1,2.1-3.4,4.8-3.8,7.7l-19.9,147.4
+                                           c-0.6,4.2,0.9,8.4,3.8,11.3c2.5,2.5,6,4,9.5,4c0.6,0,1.2,0,1.8-0.1l88.8-12c7.4-1,12.6-7.8,11.6-15.2c-1-7.4-7.8-12.6-15.2-11.6
+                                           l-71.2,9.6l13.9-102.8l108.2,108.2c2.5,2.5,6,4,9.5,4s7-1.4,9.5-4l268.6-268.5c19.6-19.6,30.4-45.6,30.4-73.3
+                                           S458.531,49.903,438.931,30.403z M297.631,63.403l45.1,45.1l-245.1,245.1l-45.1-45.1L297.631,63.403z M160.931,416.803l-44.1-44.1
+                                           l245.1-245.1l44.1,44.1L160.931,416.803z M424.831,152.403l-107.9-107.9c13.7-11.3,30.8-17.5,48.8-17.5c20.5,0,39.7,8,54.2,22.4
+                                           s22.4,33.7,22.4,54.2C442.331,121.703,436.131,138.703,424.831,152.403z" />
+                            </g>
+                          </svg>
+                          Edit
+                        </button>
+                      </li>
+                    </ul>
+                  </a>
+                  <hr class="bor_derhr">
+                  <a class="dele_a">
+
+                    <ul class="list-inline edditsp edditsp_up">
+                      <li>
+                        <button class="eddtn" (click)="deleteClinicInfo(details._id)" data-toggle="modal" data-target="#mydelModal">
+                          <svg version="1.1" id="edit_schedule" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                            y="0px" viewBox="0 0 486.4 486.4" style="enable-background:new 0 0 486.4 486.4;" xml:space="preserve">
+                            <g>
+                              <g>
+                                <path d="M446,70H344.8V53.5c0-29.5-24-53.5-53.5-53.5h-96.2c-29.5,0-53.5,24-53.5,53.5V70H40.4c-7.5,0-13.5,6-13.5,13.5
+                                             S32.9,97,40.4,97h24.4v317.2c0,39.8,32.4,72.2,72.2,72.2h212.4c39.8,0,72.2-32.4,72.2-72.2V97H446c7.5,0,13.5-6,13.5-13.5
+                                             S453.5,70,446,70z M168.6,53.5c0-14.6,11.9-26.5,26.5-26.5h96.2c14.6,0,26.5,11.9,26.5,26.5V70H168.6V53.5z M394.6,414.2
+                                             c0,24.9-20.3,45.2-45.2,45.2H137c-24.9,0-45.2-20.3-45.2-45.2V97h302.9v317.2H394.6z"
+                                />
+                                <path d="M243.2,411c7.5,0,13.5-6,13.5-13.5V158.9c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5v238.5
+                                             C229.7,404.9,235.7,411,243.2,411z" />
+                                <path d="M155.1,396.1c7.5,0,13.5-6,13.5-13.5V173.7c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5v208.9
+                                             C141.6,390.1,147.7,396.1,155.1,396.1z" />
+                                <path d="M331.3,396.1c7.5,0,13.5-6,13.5-13.5V173.7c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5v208.9
+                                             C317.8,390.1,323.8,396.1,331.3,396.1z" />
+                              </g>
+                            </g>
+                          </svg>
+                          Delete
+                        </button>
+                      </li>
+                    </ul>
+                  </a>
+                </div>
+              </div>
+
+              <div class="row nomargin0row">
+
+                <div class="col-md-4 col-xs-11 resleft">
+                  <div class="simo_txt">
+                    <p class="simo">{{details.clinicName}}</p>
+                    <p class="phno">{{details.phoneNumber}}</p>
+                    <p class="theodore">{{details.city}}.
+                      <!-- <br> {{details.pin}}</p> -->
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <!-- <ul class="list-inline" id="visitor-allign">
+                              <li class="digit">34</li>
+                              <li class="visitor">
+                                <p>Visitor</p>
+                                <p>Booking</p>
+                              </li>
+                            </ul> -->
+                </div>
+                <div class="col-md-3 col-xs-12 nopadding0col1">
+                  <ul class="timings">
+                    <li class="fr">
+                      <span *ngFor="let day of details.weekDays; let isLast=last">{{day.slice(0,2)}}{{isLast ? '' : ', '}}</span>
+                    </li>
+                    <li class="morng_tme">{{details.startTime|date:'hh:mm a'}}</li>
+                    <li class="time">
+                      <p class="to_time">To</p>
+                    </li>
+                    <li class="morng_tme">{{details.endTime|date:'hh:mm a'}}</li>
+                  </ul>
+                </div>
+                <div class="col-md-2 col-xs-12 text-center" id="padding_r">
+                  <label class="switch1">
+                    <input type="checkbox" (change)="availabilityClinic($event,details._id)" [checked]="details.availability=='Open'">
+                    <span class="slider1 round1" [ngStyle]="{'color': details.availability=='Open' ? '#23e29c' : '#fff'}">
+                      <p class="open_2" [hidden]="details.availability=='Close'" [ngStyle]="{'-webkit-text-fill-color':details.availability=='Open'?'#fff':'grey'}">OPEN</p>
+                    </span>
+                  </label>
+                  <!-- <p  [hidden]="details.availability=='Open'" [ngStyle]="{'-webkit-text-fill-color':details.availability=='Close'?'#fff':'grey'}" class="open_2">Close</p> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" id="marbtm-0">
+          <div class="mtop">
+            <div class="card ">
+              <div class="row">
+                <div class="card_text1" [hidden]="!formHide">
+                  <form [formGroup]="scheduleForm" novalidate (keydown)="keyDownFunction($event)">
+                    <div class="row text-center">
+                      <span class="error_message" [ngStyle]="{'font-size':'14px'}">{{errMessage}}</span>
+                      <div class="col-md-12">
+
+                        <div class="col-md-6">
+                          <div class="input-field">
+                            <input type="text" class="validate" formControlName="clinicName" placeholder="Clinic Name">
+                            <p class="errormessage1" [ngStyle]="{'font-size':'13px'}" *ngIf="scheduleFormErrors.clinicName.required">Please Provide Clinic Detail</p>
+
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="input-field">
+                            <input type="text" class="validate" id="pac-input" formControlName="city" placeholder="City" />
+                            <p class="errormessage1" [ngStyle]="{'font-size':'13px'}" *ngIf="scheduleFormErrors.city.required">Please Provide City Detail</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="col-md-6">
+                          <div class="input-field">
+                            <input type="text" placeholder="Address" formControlName="address">
+                            <p class="errormessage1" [ngStyle]="{'font-size':'13px'}" *ngIf="scheduleFormErrors.address.required">Please Provide Address Detail</p>
+
+
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+
+                          <div class="input-field">
+                            <input type="text" class="validate" [textMask]="{mask: mask, guide: false}" formControlName="phoneNumber" placeholder="Contact Number"
+                              minlength="8">
+                            <p class="errormessage1" [ngStyle]="{'font-size':'13px'}" *ngIf="scheduleFormErrors.phoneNumber.required">Please Provide Contact Number</p>
+                            <p class="errormessage1" [ngStyle]="{'font-size':'13px'}" *ngIf="scheduleFormErrors.phoneNumber.minlength">Please Enter Valid Phone Number</p>
+
+
+                          </div>
+                        </div>
+
+                      </div>
+                      <!-- <div class="row">
+                      <div class="col-md-12">
+                     <div class="adrsclinic"><textarea rows="4" cols="50" class="addrsarea" placeholder="Address"></textarea></div> 
+                      </div>
+                      </div> -->
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                   
+                        <div class="col-md-12">
+                          <div class="input-field">
+                            <input type="text" class="validate" [textMask]="{mask: fee, guide: false}" formControlName="fee" placeholder="Fee(₹)">
+                            <p class="errormessage1" [ngStyle]="{'font-size':'13px'}" *ngIf="scheduleFormErrors.fee.required">Please Provide Fee</p>
+
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div class="row">
+                      <div class="col-md-12">
+                     <div class="adrsclinic"><textarea rows="4" cols="50" class="addrsarea" placeholder="Address"></textarea></div> 
+                      </div>
+                      </div> -->
+                    </div>
+                 
+                    <div class="row">
+                      <div class="col-md-12">
+
+                        <div class="col-md-12" id="padding-o">
+                          <div class="row">
+                            <div class="sp_to">
+                              <p class="errormessage_ui" [ngStyle]="{'font-size':'13px'}">{{error.errorMessage}}
+                              </p>
+                              <p class="errormessage_ui" [ngStyle]="{'font-size':'13px'}">{{timeError}}
+                              </p>
+                              <div class="col-md-5" id="padding_r">
+                                <div class="input-field">
+                                  <label class="sche_dule">Schedule</label>
+                                  <timepicker formControlName="startTime" [showSpinners]="false"></timepicker>
+                                  <!-- <input type="time" class="timepicker" formControlName="startTime" placeholder="Schedule"> -->
+                                  <!-- <p class="errormessage1" [ngStyle]="{'font-size':'13px'}" *ngIf="scheduleFormErrors.startTime.required">StartTime Cannot Be Empty</p> -->
+
+                                </div>
+                              </div>
+                              <div class="col-md-1 nopadding0col1 text-right">
+                                <p class="time_pick">To</p>
+                              </div>
+                              <div class="col-md-5" id="padding-o">
+                                <div class="input-field" id="top_p">
+                                  <div class="time_pickinput">
+                                    <timepicker formControlName="endTime" [showSpinners]="false" (ngModelChange)="compareTime($event)"></timepicker>
+                                    <!-- <input type="time" class="timepicker" formControlName="endTime" (blur)="compareTime()"> -->
+                                    <!-- <p class="errormessage1" [ngStyle]="{'font-size':'13px'}" *ngIf="scheduleFormErrors.endTime.required">EndTime Cannot Be Empty</p> -->
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <hr class="light_schedule">
+                  <div class="calender text-center">
+                    <ul class="list-inline" id="calender_days">
+                      <li *ngFor="let day of weekSchedule">
+                        <button (click)="daySelect(day)" [ngClass]="{'selectd_day':true,'active':days.indexOf(day)>-1}">
+                          <!-- {{day}} -->
+                          {{(day).slice(0,2) | uppercase}}
+                        </button>
+                      </li>
+                      <!-- <li class="date_choose">
+                              <button class="selectd_day active">MO</button>
+                            </li>
+                            <li>
+                              <button class="selectd_day active">TU</button>
+                            </li>
+                            <li>
+                              <button class="selectd_day">WE</button>
+                            </li>
+                            <li class="date_choose">
+
+                              <button class="selectd_day active"> TH</button>
+                            </li>
+                            <li>
+                              <button class="selectd_day"> FR</button>
+                            </li>
+                            <li>
+                              <button class="selectd_day"> SA</button> -->
+                      <!-- </li> -->
+                    </ul>
+                  </div>
+                  <hr class="light_schedule1">
+                  <div class="set_upbtn">
+
+                    <button class="saveinputd" (click)="saveScheduleForm()">Setup</button>
+                    <button class="cancelbtn" [hidden]="cancel" (click)="cancelSave()">Cancel</button>
+                    <!-- <button class="set_up" *ngIf="createSchedule" (click)="deleteClinicInfo()">Delete</button> -->
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="plus_btn pull-right" *ngIf="createSchedule">
+            <button class="plus" (click)="createClinic()">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-4 nopadding0col">
+    <!-- called from econsult -->
+    <app-rightsidenav></app-rightsidenav>
+    <!-- <app-econsultrightbar></app-econsultrightbar> -->
+
+    <!-- called from econsult -->
+  </div>
+</div>
+<!-- </div> -->
+<!-- </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<!-- ************************************Schedule********************************* -->
+<!-- modal  -->
+<section class="del_modal" *ngIf="showModal">
+  <!-- <button class="btn_delde" data-toggle="modal" data-target="#mydelModal">Delete</button> -->
+  <div class="modal fade" id="mydelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+      <div class="modal-dialog vertical-align-center modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+
+            </button>
+            <!-- <h4 class="modal-title" id="myModalLabel">Confirmation</h4> -->
+          </div>
+          <div class="modal-body">
+            <!-- <div class="col-md-12" id="padding-o">
+                          <div class="row">
+                              <div class="col-md-2" id="padding-o">
+                                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="del_svg" x="0px" y="0px"
+                                       viewBox="0 0 438.533 438.533" style="enable-background:new 0 0 438.533 438.533;"
+                                      xml:space="preserve">
+                                      <g>
+                                          <path d="M409.133,109.203c-19.608-33.592-46.205-60.189-79.798-79.796C295.736,9.801,259.058,0,219.273,0   c-39.781,0-76.466,9.801-110.063,29.407c-33.595,19.604-60.192,46.201-79.8,79.796C9.801,142.8,0,179.489,0,219.267   s9.804,76.463,29.407,110.062c19.607,33.585,46.204,60.189,79.799,79.798c33.597,19.605,70.283,29.407,110.063,29.407   s76.47-9.802,110.065-29.407c33.593-19.602,60.189-46.206,79.795-79.798c19.603-33.599,29.403-70.287,29.403-110.062   C438.533,179.489,428.732,142.795,409.133,109.203z M255.82,356.021c0,2.669-0.862,4.9-2.573,6.707s-3.806,2.711-6.283,2.711   h-54.818c-2.472,0-4.663-0.952-6.565-2.854c-1.904-1.903-2.854-4.093-2.854-6.563V301.78c0-2.478,0.95-4.668,2.854-6.571   c1.903-1.902,4.093-2.851,6.565-2.851h54.818c2.478,0,4.579,0.907,6.283,2.707c1.711,1.817,2.573,4.045,2.573,6.715V356.021z    M255.246,257.812c-0.192,1.902-1.188,3.568-2.991,4.996c-1.813,1.424-4.045,2.135-6.708,2.135h-52.822   c-2.666,0-4.95-0.711-6.853-2.135c-1.904-1.428-2.857-3.094-2.857-4.996L178.162,80.51c0-2.288,0.95-3.997,2.852-5.14   c1.906-1.521,4.19-2.284,6.854-2.284h62.819c2.666,0,4.948,0.76,6.851,2.284c1.903,1.143,2.848,2.856,2.848,5.14L255.246,257.812z"
+                                              fill="#D80027" />
+                                      </g>
+                                  </svg>
+                              </div>
+                              <div class="col-md-10" id="padding-o">
+                                <p class="dele_test"> Do you want to delete this?</p> 
+
+                              </div>
+                          </div>
+                      </div> -->
+
+            <div class="row">
+              <svg version="1.1" id="del_svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 612 612" style="enable-background:new 0 0 612 612;" xml:space="preserve">
+                <g>
+                  <g>
+                    <polygon points="424.032,443.7 443.7,424.032 325.667,306 443.7,187.967 424.032,168.3 306,286.333 187.967,168.3 168.3,187.967 
+                   286.333,306 168.3,424.032 187.967,443.7 306,325.667 		" />
+                    <path d="M612,306C612,137.004,474.995,0,306,0C137.004,0,0,137.004,0,306c0,168.995,137.004,306,306,306
+                   C474.995,612,612,474.995,612,306z M27.818,306C27.818,152.36,152.36,27.818,306,27.818S584.182,152.36,584.182,306
+                   S459.64,584.182,306,584.182S27.818,459.64,27.818,306z" />
+                  </g>
+                </g>
+
+              </svg>
+            </div>
+            <div class="text_modal">
+              <p class="dele_test2">There are appointments associated with this clinic</p>
+              <p class="dele_test"> Do you really want to delete this clinic ?</p>
+            </div>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="cance_l" data-dismiss="modal">Cancel</button>
+            <button type="button" class="dele_te" data-dismiss="modal" (click)="deleteClinic()">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- modal  -->

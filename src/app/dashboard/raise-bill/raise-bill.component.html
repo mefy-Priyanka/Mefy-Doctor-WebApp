@@ -1,0 +1,165 @@
+<!-- ************************RaiseBill****************************** -->
+<section class="Raise_Bill">
+  <!-- <div class="row">
+    <div class="col-md-12" id="padding-o">
+      <div class="row"> -->
+        <!-- *******************RaiseBill****************************** -->
+        <div class="col-md-7" id="padding_left" >
+          <!-- <div class="row" id="margin_bottom">
+            <div class="card card_red">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="col-md-6 col-xs-6">
+                    <div class="bill_content">{{eConsultfee}}
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xs-6 text-right">
+                    <button class="raise_bill2" (click)="openRaiseBill()">Raise Bill</button>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div> -->
+          <div class="row"  >
+            <div class="bill_input">
+              <div class="card">
+                <div class="bill_heading">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="col-md-6 col-xs-6">
+                        <p>Particular</p>
+                      </div>
+                      <div class="col-md-6 col-xs-6">
+                        <p class="amnt">Amount</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <form>
+                  <div class="row" id="margin_bottom">
+                    <div class="col-md-12">
+                      <div class="col-md-6 col-xs-6">
+                        <input type="text" placeholder="Particular"  [(ngModel)]="particular" [ngModelOptions]="{standalone: true}">
+                      </div>
+                     
+                      <div class="col-md-6 col-xs-6">
+                        <div class="col-md-2 col-xs-2">
+                          <p class="raise_rupees">₹</p>
+                        </div>
+                       
+                        <div class="col-md-8 col-xs-6" id="padding-o">
+                          <input type="text" placeholder="Amount" [textMask]="{mask: mask, guide: false}" [(ngModel)]="EConsultfee" (blur)="reflectFee(EConsultfee)" [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <!-- <div class="col-md-2 col-xs-2">
+                          <button class="cross_btn">
+                          <svg version="1.1" id="cance_lbtn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                            y="0px" viewBox="0 0 212.982 212.982" style="enable-background:new 0 0 212.982 212.982;" xml:space="preserve">
+                            <g id="Close">
+                              <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M131.804,106.491l75.936-75.936c6.99-6.99,6.99-18.323,0-25.312
+                           c-6.99-6.99-18.322-6.99-25.312,0l-75.937,75.937L30.554,5.242c-6.99-6.99-18.322-6.99-25.312,0c-6.989,6.99-6.989,18.323,0,25.312
+                           l75.937,75.936L5.242,182.427c-6.989,6.99-6.989,18.323,0,25.312c6.99,6.99,18.322,6.99,25.312,0l75.937-75.937l75.937,75.937
+                           c6.989,6.99,18.322,6.99,25.312,0c6.99-6.99,6.99-18.322,0-25.312L131.804,106.491z" />
+                            </g>
+                          </svg>
+                          </button>
+                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" id="margin_bottom"  *ngIf="newbillArray?.length != 0">
+                      <div class="col-md-12"*ngFor="let bill of newbillArray; let i = index">
+  
+                        <div class="col-md-6 col-xs-6">
+                          <input type="text" placeholder="Particular" [(ngModel)]="bill.particular" [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                          <div class="col-md-2 col-xs-2">
+                            <p class="raise_rupees">₹</p>
+                          </div>
+                          <div class="col-md-8 col-xs-6" id="padding-o">
+                            <input type="text" placeholder="Amount" [textMask]="{mask: mask, guide: false}" [(ngModel)]="bill.amount" (blur)="findsum(bill,i)" [ngModelOptions]="{standalone: true}">
+                          </div>
+                          <div class="col-md-2 col-xs-2">
+                            <button class="cross_btn" (click)="removeBill(bill,i)">
+                            <svg version="1.1" id="cance_lbtn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                              y="0px" viewBox="0 0 212.982 212.982" style="enable-background:new 0 0 212.982 212.982;" xml:space="preserve">
+                              <g id="Close">
+                                <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M131.804,106.491l75.936-75.936c6.99-6.99,6.99-18.323,0-25.312
+                             c-6.99-6.99-18.322-6.99-25.312,0l-75.937,75.937L30.554,5.242c-6.99-6.99-18.322-6.99-25.312,0c-6.989,6.99-6.989,18.323,0,25.312
+                             l75.937,75.936L5.242,182.427c-6.989,6.99-6.989,18.323,0,25.312c6.99,6.99,18.322,6.99,25.312,0l75.937-75.937l75.937,75.937
+                             c6.989,6.99,18.322,6.99,25.312,0c6.99-6.99,6.99-18.322,0-25.312L131.804,106.491z" />
+                              </g>
+                            </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                      <!-- <div class="row" id="margin_bottom" *ngFor="let bill of newbillArray; let i = index" >
+                        <div class="col-md-12">
+    
+                          <div class="col-md-6 col-xs-6">
+                            <input type="text" placeholder="Particular"  [(ngModel)]="bill.particular">
+                          </div>
+                          <div class="col-md-6 col-xs-6">
+                            <div class="col-md-2 col-xs-2">
+                              <p class="raise_rupees">₹</p>
+                            </div>
+                            <div class="col-md-8 col-xs-6" id="padding-o">
+                              <input type="text" placeholder="Amount"  [(ngModel)]="bill.amount" (blur)="findsum(bill)">
+                            </div>
+                            <div class="col-md-2 col-xs-2">
+                              <button class="cross_btn">
+                              <svg version="1.1" id="cance_lbtn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 212.982 212.982" style="enable-background:new 0 0 212.982 212.982;" xml:space="preserve">
+                                <g id="Close">
+                                  <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M131.804,106.491l75.936-75.936c6.99-6.99,6.99-18.323,0-25.312
+                               c-6.99-6.99-18.322-6.99-25.312,0l-75.937,75.937L30.554,5.242c-6.99-6.99-18.322-6.99-25.312,0c-6.989,6.99-6.989,18.323,0,25.312
+                               l75.937,75.936L5.242,182.427c-6.989,6.99-6.989,18.323,0,25.312c6.99,6.99,18.322,6.99,25.312,0l75.937-75.937l75.937,75.937
+                               c6.989,6.99,18.322,6.99,25.312,0c6.99-6.99,6.99-18.322,0-25.312L131.804,106.491z" />
+                                </g>
+                              </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>   -->
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="col-md-6 col-xs-6">
+                        <p class="grand">Grand Total</p>
+                      </div>
+                      <div class="col-md-6 col-xs-6">
+                        <p class="total">{{grandTotal}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="row" >
+            <div class="plus_btn2 pull-right">
+              <button class="plus2" (click)="addNewbill()" >+</button>
+            </div>
+          </div>
+          <div class="row" >
+            <div class="invoice_btn">
+              <button class="invoice" (click)="billCreate()">Make Invoice</button>
+            </div>
+          </div>
+        </div>
+        <!-- *******************RaiseBill****************************** -->
+        <!-- *******************Video****************************** -->
+        <!-- <div class="col-md-5" id="padding-o"> -->
+          <!-- <app-rightsidenav></app-rightsidenav> -->
+        <!-- </div> -->
+        <!-- *******************Video****************************** -->
+      <!-- </div>
+    </div>
+  </div> -->
+</section>
+<!-- ************************RaiseBill****************************** -->

@@ -1,0 +1,630 @@
+.nomargin0row{
+    margin: 0;
+    margin-bottom: 0;
+}
+section.creditscroll {
+    overflow-y: scroll;
+    height: 90vh;
+}
+::-webkit-scrollbar { 
+    display: none;
+  }
+section.greyback {
+    background: #f7f7ff;
+}
+.nopadding0col{
+    padding: 0;
+}
+.rupeesbg{
+
+  
+    border-radius: 10px 0 0 10px;
+    background: linear-gradient(to right, rgba(86, 127, 251, 0.81),rgba(182, 108, 245, 0.81)),
+    url('/assets/images/rupee.png');
+
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+.card.creditv {
+    margin: 20px 20px 20px 10px;
+    border-radius: 10px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 0px 0px 0 rgba(0,0,0,0.12), 0 0px 0px 0px rgba(0,0,0,0.2);
+}
+p.creditmoney{
+    font-size: 42px;
+    color: #fff;
+    text-align: center;
+    padding: 55px 0px 30px 0;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 0;
+    font-family: 'lato',sans-serif;
+}
+p.addbank {
+    margin: 0;
+    padding: 0px 0 24px 24px;
+    font-size: 11px;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 400;
+    color: #96a8b8;
+    text-align: center;
+}
+p.credit {
+    margin: 0;
+    padding: 33px 0 0px 22px;
+    font-size: 15px;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 400;
+    color: #96a8b8;
+    text-align: center;
+}
+hr.currentcr {
+    width: 150px;
+    border-color: #f1f1f1;
+    margin: 12px auto 20px auto;
+    text-align: center;
+}
+.addaccount {
+    text-align: center;
+    margin-top: 32px;
+}
+button.addacc{
+    background: linear-gradient(to right, rgba(182, 108, 245, 1),rgba(86, 127, 251, 1));
+    border: none;
+    height: 40px;
+    width: 123px;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 14px;
+   box-shadow: 0px 1px 16px 3px rgba(92, 125, 250, 0.26);
+}
+p.history{
+    color: #5d5d5d;
+    text-align: center;
+    font-size: 17px;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 400;
+    margin-right: 8px;
+}
+.menuhis {
+    text-align: right;
+    margin-right: 10px;
+}
+span.menucredit {
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 5px;
+    text-align: center;
+    background: #fff;
+    box-shadow: 0 3px 5px rgba(169, 169, 169, 0.19), 0 0px 20px rgba(247, 247, 247, 0.23);
+}
+svg#filterrt{
+    height: 44px;
+    width: 21px;
+    margin-left: 4px;
+    fill: #5255e8;
+    padding: 3px
+}
+button.menu_view {
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    text-align: center;
+}
+hr.hrbtwcredit {
+    margin: 23px 0 0 -28px;
+    border-color: #e0e0e0;
+}
+.historyhead{
+    margin-top:10px; 
+}
+.risedispute{
+    text-align: center;
+    margin-top: 25px;
+}
+button.dispute {
+    color: #b7b5b5;
+    background: transparent;
+    border: 1px solid #b1b1b1;
+    border-radius: 50px;
+    height: 28px;
+    width: 85px;
+    padding: 0;
+    text-align: center;
+    font-size: 11px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+button.dispute:hover{
+    background: #828282;
+    color: #fff;
+    
+}
+svg#arrowup{
+    height: 11px;
+    width: 17px;
+    vertical-align: top;
+    margin-top: 7px;
+
+}
+svg#arrowdown{
+    height: 11px;
+    width: 17px;
+    vertical-align: top;
+    margin-top: 7px;
+}
+span.succesmsg {
+    background: #d8ae09;
+    display: block;
+    border-radius: 50px;
+    color: #fff;
+    line-height: 25px;
+    text-align: center;
+    font-size: 12px;
+    font-family: Lato;
+    padding-right: 10px;
+    padding-left: 4px;
+    position: relative;
+}
+span.leftulyellow::before {
+    width: 12px;
+    height: 12px;
+    content: no-open-quote;
+    counter-increment: inherit;
+    line-height: 30px;
+    display: block;
+    text-align: center;
+    border-radius: 50%;
+    background: #d8ae09;
+    position: relative;
+    z-index: 9;
+}
+
+/* span.declined {
+    background: #ef2d4f;
+    display: block;
+    border-radius: 50px;
+    color: #fff;
+    line-height: 25px;
+    text-align: center;
+    font-size: 12px;
+    font-family: Lato;
+    padding-right: 18px;
+    padding-left: 4px;
+}
+span.succesful {
+    background: #3ad87b;
+    background: #3ad87b;
+    display: block;
+    border-radius: 50px;
+    color: #fff;
+    line-height: 25px;
+    text-align: center;
+    font-size: 12px;
+    font-family: Lato;
+    padding-right: 12px;
+    padding-left: 3px;
+} */
+span.amount5 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 21px;
+    color: #5d5d5d;
+}
+svg#amount5{
+    height: 16px;
+    width: 15px;
+    fill: #5d5d5d;
+}
+.processpay li {
+    vertical-align: middle;
+}
+span.dateoft {
+    font-size: 12px;
+    border-right: 1px solid gray;
+    padding-right: 7px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #828282;
+}
+span.transactionid {
+    font-size: 12px;
+    padding-right: 7px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #828282;
+}
+ul.list-inline.processpay {
+    margin-top: 10px;
+}
+h4.typetr {
+    margin: 0;
+    font-size: 16px;
+    padding-left: 20px;
+    color: #828282;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+h4.trfrom {
+    margin: 0;
+    font-size: 16px;
+    color: #828282;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+h4.feetype {
+    margin: 3px 0px 16px 25px;
+    color: rgba(0, 0, 0, 0.78);
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+h4.nameoftr {
+    color: rgba(0, 0, 0, 0.78);
+    margin: 3px 0 10px 0;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+span.imgtr {
+    height: 50px;
+    width: 50px;
+    display: block;
+    border-radius: 50%;
+}
+.imgtr img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.usertr li {
+    vertical-align: middle;
+}
+span.leftulyellow {
+    display: block;
+    position: absolute;
+    left: -40%;
+    top: 30%;
+}
+
+span.leftulyellow::after {
+    width: 1px;
+    height: 100px;
+    content: '';
+    position: absolute;
+    background-color: #a9a3a3;
+    top: 0px;
+    z-index: 0;
+    left: 50%;
+}
+/* span.leftulred {
+    background: #ef2d4f;
+    display: block;
+    border-radius: 50px;
+    color: #fff;
+    height: 12px;
+    width: 12px;
+    position: absolute;
+    left: -6%;
+    top: 28%;
+}
+span.leftulgreen {
+    background: #3ad87b;
+    display: block;
+    border-radius: 50px;
+    color: #fff;
+    height: 12px;
+    width: 12px;
+    position: absolute;
+    left: -6%;
+    top: 28%;
+} */
+section.credithistory {
+    margin-left: 30px;
+    position: relative;
+}
+@media only screen and (min-width: 600px) and (max-width:1024px){
+    p.creditmoney {
+        font-size: 29px !important;
+        padding: 55px 0px 72px 0 !important;
+    }
+    }
+@media only screen and (min-width:320px) and (max-width: 767px) {
+    section.credithistory::before {
+     display:none;
+    }
+    span.leftulyellow{
+        display: none;
+    }
+    span.leftulred {
+        display: none;
+    }
+    hr.hrbtwcredit {
+        display: none;
+    }
+    p.history {
+        text-align: left;
+        margin-right: 13px;
+        padding-left: 1em;
+        line-height: 46px;
+    }
+    span.leftulgreen {
+        display: none;
+    }
+}
+@media only screen and (min-width: 767px) and (max-width:1024px) and (orientation:portrait){
+    section.credithistory::before {
+     display:none;
+    }
+    span.leftulyellow{
+        display: none;
+    }
+    span.leftulred {
+        display: none;
+    }
+    span.leftulgreen {
+        display: none;
+    }
+}
+@media only screen and (max-width: 1024px) and (min-width:320px){
+    .addaccount {
+        text-align: center;
+        margin-top: 10px;
+        padding-bottom: 10px;
+
+    }
+    span.menucredit{
+    float: none;
+    margin: 0 auto;
+    margin-top: 13px;
+}
+.card.creditv{
+    margin: 20px;
+    text-align: center;
+}
+h4.feetype {
+
+    margin: 3px 0px 16px 10px;
+}
+h4.typetr {
+    padding-left: 0px;
+}
+.risedispute {
+    padding-bottom: 20px;
+}
+.rupeesbg{
+    border-radius: 0;
+}
+section.credithistory {
+    margin-left: 0px;
+}
+}
+/* @media only screen and (min-width: 800px) and (max-width:1280px){
+    .nopadding0col {
+        padding-left: 1em;
+    }
+}
+*/
+@media only screen and (min-width: 800px) and (max-width:1024px){
+    .nopadding0col {
+        padding-left: 0;
+    }
+    .card.creditv{
+        text-align: left;
+    }
+    p.creditmoney {
+        padding: 8px 0px 30px 0;
+    }
+    p.credit{
+        padding: 8px 0 0px 10px;
+    }
+    p.addbank{
+        padding: 0px 0 0px 6px;
+    }
+    .addaccount {
+        margin-top: 20px;
+    }
+    section.credithistory::before {
+
+        left: 8px;
+    }
+    /* span.leftulyellow{
+        left: -5%;
+    } */
+    span.leftulred{
+        left: -5%;
+    }
+    span.leftulgreen{
+        left: -5%;
+    }
+    section.credithistory{
+        margin-left: 12px;
+    }
+} 
+@media only screen and (min-width: 1920px) {
+    section.credithistory::before {
+        left: -25px;
+    }
+    }
+
+/* ****************************************************MODAL********************************************* */
+
+    .modal_consult a {
+        color: #697cfa;
+        outline:none;
+        text-decoration: none;
+        cursor:pointer;
+    }
+    .modal_consult {
+        margin-bottom: 15px;
+    }
+  .modal {
+        display: none;
+        position: fixed;
+        left: 0;
+        right: 0;
+        background-color: transparent;
+        padding: 0;
+        max-height: 70%;
+        width: 55%;
+        margin: auto;
+        overflow-y: auto;
+        border-radius: 5px;
+        will-change: top, opacity;
+        box-shadow: none;
+    }
+    button.save_modal {
+        background: linear-gradient(to right, rgba(182, 108, 245, 1),rgba(86, 127, 251, 1));
+        border: none;
+        height: 37px;
+        width: 100px;
+        margin-top: 3px;
+        border-radius: 50px;
+        color: #fff;
+        font-size: 14px;
+        font-family: 'Lato', sans-serif;
+        cursor:pointer;
+        outline:none;
+        box-shadow: 0px 1px 16px 3px rgba(92, 125, 250, 0.26);
+    }
+    button.save_btnmodal {
+        border: none;
+        height: 37px;
+        width: 100px;
+        margin-top: 3px;
+        border-radius: 50px;
+        color: #fff;
+        background: #ccc;
+        font-size: 14px;
+        font-family: 'Lato', sans-serif;
+        cursor:pointer;
+        outline:none;
+        box-shadow: 0px 1px 16px 3px rgba(204, 204, 204, 0.45);
+    }
+    div#myModalweb input::placeholder {
+        font-size: 13px;
+        color: rgb(132, 134, 157);
+        font-family: 'Lato', sans-serif;
+    }
+    div#myModalweb .modal-content {
+        border:none;
+        padding: 0;
+    }
+    div#myModalweb input {
+        font-size: 13px;
+        color: rgb(132, 134, 157);
+        font-family: 'Lato', sans-serif;
+    }
+    div#myModalweb .modal-header {
+        border: none;
+        background: linear-gradient(to right,rgba(86, 127, 251, 1), rgba(182, 108, 245, 1));
+        border-radius: 5px 5px 0 0;
+        font-family: 'Lato', sans-serif;
+        color: #fff;
+    }
+    div#myModalweb .modal-body {
+        padding:2em 2em 0em 2em;
+
+    }
+    div#myModalweb button.close {
+        color: #fff;
+        opacity: 1;
+    }
+  
+    div#myModalweb .modal-footer {
+        border:none;
+        border-radius:5px;
+        padding-bottom: 5em;
+        /* margin-bottom: 10px; */
+        background-color: #ffffff;
+        text-align:center;
+    }
+    div#myModalweb  h4.modal-title {
+        font-size: 17px;
+        font-family: 'Lato', sans-serif;
+        text-align: center;
+        font-weight: 500;
+    }
+    /* newClass{
+        background: #808080;
+    } */
+/* ****************************************************MODAL********************************************* */
+
+
+
+
+.dropdowna {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content_videoa {
+    background: linear-gradient(to bottom, #ffffff, #ffffff);
+    display: block;
+    margin-left: 0;
+    position: absolute;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13), 0 3px 6px rgba(0, 0, 0, 0.11);
+    margin-top: 1em;
+    z-index: 1;
+    width: 150px;
+    height: auto;
+    text-align: center;
+    right: -8px;
+    top: 41px;
+    padding: 10px 0;
+}
+span.triangle24 {
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 10px solid #ffffff;
+    margin-top: 1px;
+    position: absolute;
+    top: -11px;
+    right: 10px;
+}
+.dropdown-content_videoa a {
+    padding: 6px 0px;
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    color: #5e7efb;
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
+    font-weight: 400;
+}
+
+svg#Layer_billcredit {
+    width: 15px;
+    height: 15px;
+    vertical-align: sub;
+    margin-right: 7px;
+    fill:#5e7efb;
+}
+svg#Layer_billcreditprocess {
+    width: 17px;
+    height: 16px;
+    vertical-align: sub;
+    margin-right: 7px;
+    margin-left: -4px;
+    fill:#5e7efb;
+}
+
+.dropdowna a:hover {
+    color: #23e29c;
+}
+
+a:hover svg#Layer_billcreditprocess {
+    fill: #23e29c;
+  
+}
+
+a:hover svg#Layer_billcredit {
+    fill: #23e29c;
+    
+}
+

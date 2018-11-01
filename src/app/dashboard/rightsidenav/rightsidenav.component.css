@@ -1,0 +1,546 @@
+
+.calendar h1{
+    font-size: 25px;
+    text-align: center;
+    margin: 0;
+}
+section.modeforct {
+    background: #fff;
+    padding-bottom: 20px;
+    height: 37vh;
+    overflow-y: scroll;
+}
+input.form-control.appoinmentdate2 {
+    background: white;
+    color: #000;
+    font-size: 22px;
+    font-weight: 500;
+    font-family: 'Lato',sans-serif;
+    border-radius: 20px;
+    text-align: center;
+    margin: 0 auto;
+    outline: none;
+    box-shadow: none !important;
+    border-bottom: none;
+    height: 28px;
+    /* width: 120px; */
+}
+.calendar {
+    padding-top: 25px !important;
+    padding-bottom: 2px !important;
+}
+.nopadding0col{
+    padding: 0;
+}
+a.up_arrow {
+    border-bottom: 1px solid rgba(86, 94, 234, 0.14) !important;
+}
+input.form-control.appoinmentdate2:focus {
+    border-bottom: none;
+}
+input.form-control.appoinmentdate2::placeholder{
+    color: #000;
+    font-size: 22px;
+    font-weight: 500;
+    font-family: 'Lato',sans-serif;
+}
+svg#Capa_dateappntmnt {
+    height: 26px;
+    width: 34px;
+    fill: #848484;
+    vertical-align: middle;
+    margin-top:2px;
+}
+ul.list-inline.calender_health {
+    margin-bottom: 0;
+    text-align: center;
+}
+ul.list-inline.calender_health li {
+    padding: 0;
+}
+.hrmenu {
+    margin-top: 20px;
+    position: relative;
+}
+svg#r_close {
+    height: 8px;
+    width: 8px;
+    fill: #fe1c5e;
+}
+li.float_right {
+    float: right;
+}
+button.cross_btn {
+    background: transparent;
+    border: 1px solid #fe1c5e;
+    border-radius: 50%;
+    line-height: 15px;
+    margin-right: 7px;
+    width: 18px;
+    padding-left: 4px;
+}
+button.cnslt_btn:hover {
+    background: #31bd6b;
+    transition: all 0.3s ease;
+}
+button.cnslt_btn {
+    border: none;
+    background: #3ad87b;
+    color: #ffffff;
+    border-radius: 12px;
+    font-family: Lato;
+    font-size: 11px;
+    line-height: 22px;
+    padding: 0 9px
+}
+svg#filterrt{
+    height: 44px;
+    width: 21px;
+  
+    fill: #fff;
+    padding: 3px
+}
+hr.clvt {
+    margin: 0;
+}
+a.up_arrow {
+    padding-top: 1em !important;
+}
+span.menu {
+    display: block;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background: #3ad87b;
+    position: absolute;
+    right: 30px;
+    top: -21px;
+    box-shadow: 0px 1px 16px 3px rgba(58, 216, 123, 0.31);
+}
+span.date {
+    display: block;
+    margin-left: 15px;
+    padding: 4px 10px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+    color: #fff;
+    font-weight: 400;
+    font-family: Lato;
+    line-height: 20px;
+    background: rgb(121, 120, 250);
+    background: linear-gradient(to right, rgb(121, 120, 250),rgba(178, 109, 247, 1));
+    font-size: 11px;
+}
+span.time {
+    display: block;
+    font-size: 11px;
+    color: #6fbff4;
+    font-weight: 400;
+    font-family: 'Roboto',sans-serif;
+    margin-left: -6px;
+}
+section.spacesofrw {
+    padding-top: 25px;
+}
+.consultime {
+    margin-top: 20px;
+}
+p.modeofconsult {
+    font-size: 13px;
+    color: #9aabbe;
+    font-weight: 300;
+    font-family: 'Roboto',sans-serif;
+    margin: 0;
+}
+p.doctorname {
+    font-size: 12px;
+    font-family: 'Roboto',sans-serif;
+    color: #8398ac;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 0px;
+}
+.whomwith {
+    margin-top: 7px;
+    margin-left: 20px;
+    margin-bottom: -11px;
+}
+ul.list-inline.timings {
+    margin-bottom: 0;
+}
+.nomargin0row{
+    margin: 0;
+    margin-bottom: 0;
+}
+.nopadding0col{
+    padding: 0;
+}
+.profileimg img {
+    height: 50px;
+    width: 50px;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+.profileimg {
+    height: 60px;
+    width: 100%;
+}
+span.gender2 {
+    margin-right: 3px;
+}
+span.gender2::after{
+    content: '';
+    border-right: 1px solid grey;
+    margin-left: 5px;
+}
+p.nameofp {
+    font-size: 14px;
+    color: #525a75;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 500;
+    margin: 0;
+}
+p.locgender2 {
+    font-size: 11px;
+    color: #525a75;
+    font-family: lato;
+    font-weight: 600;
+}
+.nameofuser {
+    margin-left: 8px;
+    margin-top: 7px;
+}
+p.requestheading {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #525a75;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 400;
+}
+span.newheading {
+    color: #3ad87b;
+    margin-right: 9px;
+    font-size: 14px;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 500;
+    margin-left: 22px;
+    text-transform: uppercase;
+}
+section.newrequest {
+    background: #fff;
+}
+.accrej {
+    margin-top: 10px;
+}
+button.accept {
+    height: 25px;
+    width: 25px;
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    padding: 0;
+}
+svg#accept{
+    height: 25px;
+    width: 25px;
+    fill:rgb(58, 216, 123);
+}
+svg#reject{
+    height: 25px;
+    width: 25px;
+    fill: rgb(240, 45, 80);
+}
+.buttonli li{
+    padding: 0 3px;
+}
+.buttonli {
+    margin-bottom: 0;
+    margin-top: 14px;
+    margin-left: 6px;
+}
+section.greyback {
+    background: #f7f7ff;
+}
+.calendar {
+    padding-top: 25px;
+}
+span.noappointment {
+    display: block;
+    text-align: center;
+    padding-top: 1em;
+    font-size: 16px;
+    color: #333333;
+    font-weight: 400;
+    font-family: 'Roboto',sans-serif;
+}
+
+
+/* responsive css */
+@media only screen and (max-width: 1024px) and (min-width:320px){
+    button.cnslt_btn {
+        padding: inherit !important;
+    }
+   section.modeforct{
+       
+       height:auto;
+    }
+    section.newrequest{
+        margin: 0 20px;
+        margin-bottom: 30px;
+    }
+    p.requestheading{
+        margin-left: 20px;
+    }
+    section.modeforct{
+        background: #fff;
+        margin: 0 20px;
+    }
+
+}
+@media only screen and (min-width: 1024px) and (max-width:1360px) and (orientation:portrait){
+    .buttonli {
+        margin-left: -8px;
+    }
+    .buttonli li {
+        padding: 0 2px;
+    }
+
+    
+}
+section.newrequest{
+    background: #fff;
+    height: 48vh;
+    overflow-y: scroll;
+}
+
+span.consltreqtxt {
+    display: block;
+    padding-left: 57px;
+    margin-top: -19px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: lato;
+
+
+}
+button.funeralbtn {
+    background: transparent;
+    border: none;
+    text-align: center;
+    /* float: left; */
+    padding: 0px;
+    width: 40px;
+    line-height: 0px;
+}
+::-webkit-scrollbar { 
+    display: none;
+  }
+  .dropdowna {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content_videoa {
+    background: linear-gradient(to bottom, #ffffff, #ffffff);
+    display: block;
+    margin-left: -1em;
+    position: absolute;
+    /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13), 0 3px 6px rgba(0, 0, 0, 0.11); */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08), 0px -1px 16px 0px rgba(0, 0, 0, 0.05);
+    margin-top:1em;
+    z-index: 1;
+    /* opacity: initial; */
+    width: 125px;
+    height: auto;
+    right: 4px;
+    top: 41px;
+    text-align: left;
+}
+span.triangle24 {
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 10px solid #ffffff;
+    margin-top: 2px;
+    position: absolute;
+    top: -11px;
+    right: 9px;
+}
+.dropdown-content_videoa a {
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 12px;
+    cursor:pointer;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    color:#5a7ffb;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dropdowna a:hover {
+    color: #3ad87b;
+}
+.dropdowna a:hover .clinicsvg svg#clinic {
+    fill: #3ad87b;
+}
+span.clinicsvg {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    fill:#5a7ffb;
+}
+
+.show {display:block;}
+  @media only screen and (min-width: 800px) and (max-width:1024px){
+    .nopadding0col {
+        padding-left: 0;
+    }
+    section.modeforct {
+        margin: 0;
+    }
+    section.newrequest {
+        margin: 0;
+    }
+    p.requestheading{
+        margin-left: 0px;
+    }
+    .buttonli li {
+        padding: 0 1px;
+    }
+    .buttonli{
+        margin-left: 0px;
+    }
+}
+svg#clinic{
+    height: 20px;
+    width: 20px;
+    fill: #5a7ffb;
+}
+
+/************************************** modal css ***************************/
+section.del_modal {
+    height: 100vh;
+    text-align: center;
+}
+button.cance_l:hover {
+    background: rgba(158, 158, 158, 0.32);
+}
+button.dele_te:hover {
+    background: rgba(216, 30, 46, 0.28);
+}
+p.dele_test2 {
+    padding-left: 6px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.71);
+    font-weight: 500;
+    font-size: 24px;
+    /* margin-bottom: 1em; */
+    /* line-height: 8px; */
+}
+p.dele_test {
+    padding-left: 6px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.78);
+    font-weight: 500;
+    font-size: 14px;
+}
+svg#del_svg {
+    height: 45px;
+    width: 40px;
+    vertical-align: middle;
+    fill: #d80027;
+}
+div#sidenavdel .modal-body {
+    padding:0em 1em;
+
+}
+div#sidenavdel .modal-content {
+    padding: 0;
+    box-shadow: none;
+    border: none;
+}
+div#sidenavdel button.close {
+    margin: 8px 8px 0 0;
+    color: rgba(0, 0, 0, 0.4); 
+    opacity: 1;
+}
+div#sidenavdel .modal-content h4 {
+    font-family: 'Lato', sans-serif;
+    font-size: 23px;
+    text-align: center;
+}
+div#sidenavdel .modal-footer {
+    border:none;
+    border-radius:5px;
+    padding-bottom: 4em;
+    /* margin-bottom: 10px; */
+    background-color: #ffffff;
+    text-align:center;
+}
+.text_modal {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 26px;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+}
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    padding: 0;
+    max-height: 70%;
+    width: 55%;
+    margin: auto;
+    overflow-y: auto;
+    border-radius: 5px;
+    will-change: top, opacity;
+    box-shadow: none;
+}
+div#sidenavdel .modal-header {
+    border: none;
+    padding:0;
+    /* background: linear-gradient(to right,rgba(86, 127, 251, 1), rgba(182, 108, 245, 1)); */
+    border-radius: 5px 5px 0 0;
+    font-family: 'Lato', sans-serif;
+    color: #fff;
+}
+button.dele_te {
+    outline: none;
+    border: 1px solid#e02748;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 50px;
+    color: #e02748;
+    background: transparent;
+    height: 30px;
+    width: 69px;
+}
+button.btn_delde {
+    margin: 10em 0;
+    height: 42px;
+    width: 120px;
+    background: #4f5ae8;
+    border: none;
+    color: #fff;
+}
+button.cance_l {
+    border: 1px solid rgb(123, 122, 122);
+    cursor: pointer;
+    color: #676464;
+    font-family: 'Lato', sans-serif;
+    height: 30px;
+    font-weight: 500;
+    background: transparent;
+    margin-right: 14px;
+    width: 69px;
+    border-radius: 50px;
+}

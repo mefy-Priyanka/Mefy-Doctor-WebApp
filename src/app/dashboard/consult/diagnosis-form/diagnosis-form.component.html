@@ -1,0 +1,22 @@
+<p class="provisionalc21">Provisional Diagnosis</p>
+<div class="card cardabc custom-card" >
+  <div class="card-body">
+     <!-- <span [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{messageDiagnosis}}</span> -->
+     <p [ngStyle]="{'-webkit-text-fill-color':'	red', 'text-align':'center'}">{{message}}</p>
+      <form [formGroup]="diagnosisFormNew" novalidate>
+
+      <input type="text" name="fname" placeholder="Diagnosis for" class="referdoc"  formControlName="diagnosisFor">
+      <span [ngStyle]="{'-webkit-text-fill-color':'	red'}" *ngIf="diagnosisFormErrors.diagnosisFor.required">Please Provide Diagnosis Type</span>
+      <input type="text" name="fname" placeholder="Diagnosis brief" class="referdoc" formControlName="diagnosisBrief">
+
+    </form>
+
+    
+  </div>
+</div>
+<div class="text-center high" >
+    <button class="prescribebtn" (click)="saveDiagnosis()">Save</button>
+    <!-- <button class="prescribebtn" *ngIf="hideSaveplus" (click)="savePlus()">SAVE +</button> -->
+    <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteDiagnosisForm()" >Delete</button>
+    <button class="cancelbtn" (click)="closeForm()">Cancel</button>
+  </div>
