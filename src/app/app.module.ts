@@ -22,6 +22,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { BillService } from './meme-services/bill.service';
+import { NewloginComponent } from './newlogin/newlogin.component';
+import { QRCodeModule } from 'angularx-qrcode';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { ManageaccountComponent } from './dashboard/manageaccount/manageaccount.component';
 
@@ -44,12 +46,17 @@ const approutes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+  {
+    path: 'newlogin',
+    component: NewloginComponent
+  },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    NewloginComponent,
  
     // ManageaccountComponent
   ],
@@ -58,6 +65,7 @@ const approutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    QRCodeModule,
     // BrowserAnimationsModule,
     RouterModule.forRoot(approutes),   //,{useHash: true}
     TextMaskModule

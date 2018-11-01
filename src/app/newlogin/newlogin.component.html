@@ -1,0 +1,58 @@
+
+<!-- login ui -->
+<div class="loginform">
+  <!-- <div class="backCover"></div> -->
+  <!-- Login form -->
+  <div class="verticalform">
+    <div class="FormContent">
+      <div class="row nomargin">
+        <div class="col-md-12" id="noPadding">
+          <div class="col-md-6" id="noPadding">
+            <div class="leftContent">
+              <div class="leftData">
+                <div class="put">
+                  <h1>MeFy</h1>
+                  <qrcode [qrdata]="'Your QR code data string'" [colorlight]="'#fff'" [colordark]="'#683d90'" [size]="172"
+                    [level]="'M'"></qrcode>
+                  <p class="code">Scan your qr code</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6" id="noPadding">
+            <!-- login screen -->
+            <div class="loginContent">
+              <h1>Login</h1>
+              <p>Please login to your account</p>
+              <form  >
+                <div class="form-group phoneDiv">
+                  <label></label>
+                  <input type="text" class="form-control inputPhone" placeholder="Phone Number">
+                  <!-- <p class="errormessage" *ngIf="loginFormErrors.phoneNumber.required || (doctorloginForm.controls.phoneNumber.pristine && submitted)">Number can not be empty</p> -->
+                  <i class="fa fa-mobile right" aria-hidden="true"></i>
+                </div>
+                <div class="loginRegister">
+                  <button class="loginbutton" type="button" (click)="login()">Login</button>
+                </div>
+                <div class="noaccount">
+                  <p>Don't have an account ?</p>
+                  <a href="" class="createaccm" [routerLink]="['/register']">Create an account</a>
+                </div>
+              </form>
+            </div>
+            <!-- login screen -->
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Login form -->
+
+</div>
+<!-- login ui -->
+
