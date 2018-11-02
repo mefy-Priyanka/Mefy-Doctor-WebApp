@@ -70,7 +70,8 @@ hr.currentcr {
     margin-top: 32px;
 }
 button.addacc{
-    background: linear-gradient(to right, rgba(182, 108, 245, 1),rgba(86, 127, 251, 1));
+    /* background: linear-gradient(to right, rgba(182, 108, 245, 1),rgba(86, 127, 251, 1)); */
+    background:linear-gradient(to right, rgb(135, 81, 185),rgba(86, 127, 251, 1));
     border: none;
     height: 40px;
     width: 123px;

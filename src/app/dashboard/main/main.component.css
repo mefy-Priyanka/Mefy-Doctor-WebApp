@@ -201,7 +201,7 @@ h1.clinics6 {
 .clinics7 {
     font-size: 36px;
     margin: 21px 0;
-    color: #80a0e4;
+    color: #6160c7;
     font-family: 'Lato',sans-serif;
     font-weight: 600;
     margin-left:5px;
@@ -429,7 +429,8 @@ button.search_nav {
     background: transparent;
 }
 .search2icon {
-    background: #3ad87b;
+    /* background: #3ad87b; */
+    background: #16b759;
     padding: 18px 0 15px 0;
 }
 .input_patient input[type="text"] {
@@ -448,7 +449,7 @@ button.search_nav {
     font-size: 29px;
     margin: 29px 0 0 0;
     line-height: 21px;
-    color: #80a0e4;
+    color: #6160c7;
     font-family: 'Lato',sans-serif;
     font-weight: 600;
     margin-left: 5px;

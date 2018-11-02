@@ -6,7 +6,8 @@
     left:0;
     top:0;
     z-index:9999;
-    background: linear-gradient(to bottom, #5451e8, rgba(56, 145, 239, 0.82));
+    /* background: linear-gradient(to bottom, #5451e8, rgba(56, 145, 239, 0.82)); */
+    background:linear-gradient(to bottom, #8e51b7, rgb(81, 108, 208));
     /* height: 100vh; */
     /* display:none; */
     overflow-y: auto;
@@ -220,7 +221,8 @@ button.nav_btn:hover {
 }
 footer {
     padding-top: 1em;
-    background: #3d88ee;
+    /* background: #3d88ee; */
+    background:#6160c8;
     margin-top: 9em;
     color: rgba(255, 255, 255, 0.75);
     padding-left: 3em;

@@ -7,7 +7,9 @@ svg#hand {
 }
 .topnavbar {
     margin-left:-2em;
-    background: #4f5ae8;
+    /* background: #4f5ae8; */
+    background: #8e51b7;
+    
 }
 span.doc_2text {
     font-weight: 500;
@@ -70,7 +72,8 @@ li.bell {
 /* *****navtabs css***** */
 /* ****search box**** */
 .search2icon {
-    background: #3ad87b;
+    /* background: #3ad87b; */
+    background: #16b759;
     height: 61px;
 }
 button.search_nav {
@@ -95,7 +98,8 @@ li.w100s {
     padding-left: 2em;
 }
 .input_background {
-    background: #4475ec;
+    /* background: #4475ec; */
+    background:#743d98;
 }
   .input_background button {
     float: inherit;
@@ -106,9 +110,9 @@ li.w100s {
     border: none;
     cursor: pointer;
   }
-  .input_background {
+  /* .input_background {
     background: #4475ec;
-}
+} */
   .input_background input[type="text"] {
     font-size:11px;
     color: rgba(255, 255, 255, 0.97);

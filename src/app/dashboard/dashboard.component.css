@@ -89,7 +89,7 @@ ul.list-inline.timings {
     width: 50px;
     margin: 0 auto;
     border-radius: 50%;
-}
+}menu
 .profileimg {
     height: 60px;
     width: 100%;
@@ -178,6 +178,8 @@ svg#reject{
 }
 section.greyback {
     background: #f7f7ff;
+    overflow: hidden;
+    height: 100vh;
 }
 /* card view started */
 h1.clinics6 {
@@ -192,7 +194,7 @@ h1.clinics6 {
 h1.clinics7 {
     font-size: 36px;
     margin: 21px 0;
-    color: #80a0e4;
+    color: #6160c7;
     font-family: 'Lato',sans-serif;
     font-weight: 600;
     text-align: right;
@@ -428,7 +430,8 @@ button.search_nav {
     background: transparent;
 }
 .search2icon {
-    background: #3ad87b;
+    /* background: #3ad87b; */
+    background: #16b759;
     padding: 18px 0 15px 0;
 }
 .input_patient input[type="text"] {
