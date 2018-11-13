@@ -9,16 +9,12 @@ import { ConsultModule } from "./consult/consult.module";
 import { TextMaskModule } from "angular2-text-mask";
 import { BsDatepickerModule } from "ngx-bootstrap";
 import { ToastyModule } from "ng2-toasty";
-
-// import { NavigationComponent } from '../navigation/navigation.component';
 import { DashboardComponent } from "./dashboard.component";
 import { MainComponent } from "./main/main.component";
-// import { EConsultComponent } from './e-consult/e-consult.component';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { SidenavComponent } from "./sidenav/sidenav.component";
 import { RightsidenavComponent } from "./rightsidenav/rightsidenav.component";
 import { ManageClinicComponent } from "./manage-clinic/manage-clinic.component";
-import { CreditComponent } from "./credit/credit.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { ManageaccountComponent } from "./manageaccount/manageaccount.component";
 import { RaiseBillComponent } from "./raise-bill/raise-bill.component";
@@ -34,7 +30,6 @@ const routes: Routes = [
       { path: "", redirectTo: "main", pathMatch: "full" },
       { path: "main", component: MainComponent },
       { path: "clinic", component: ManageClinicComponent },
-      { path: "credit", component: CreditComponent },
       { path: "profile", component: ProfileComponent },
       { path: "account", component: ManageaccountComponent },
       { path: "raisebill", component: RaiseBillComponent },
@@ -65,19 +60,14 @@ const routes: Routes = [
     SearchHealthRecordPipe,
     DashboardComponent,
     MainComponent,
-
     RightsidenavComponent,
     NavbarComponent,
     SidenavComponent,
-
-    CreditComponent,
     ManageClinicComponent,
     ProfileComponent,
-
     ManageaccountComponent,
     RaiseBillComponent,
     AppointmentnewComponent,
-
     NotificationComponent
   ]
 })
