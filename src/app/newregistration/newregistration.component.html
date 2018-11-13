@@ -91,7 +91,7 @@
                   <input type= "text" name= "city"  formControlName= "city" placeholder="CITY" />
     <p *ngIf="step3FormErrors.city.required || (step3Form.controls.city.pristine && submitted)">City Cannot Be Empty</p>
                   <input type="text" name="language" formControlName="language"  placeholder="Language" />
-                  <!-- <tag-input formControlName="language" (onAdd)="onSubstistueAdd($event)" onlyFromAutocomplete="true" blinkIfDupe="true">
+                  <!-- <tag-input formControlName="language" (onAdd)="onAddLanguage($event)" onlyFromAutocomplete="true" blinkIfDupe="true">
                       <tag-input-dropdown [appendToBody]="false"  [displayBy]="'language'" [showDropdownIfEmpty]="true"
                         placeholder="Choose language" [autocompleteItems]="arrayOfObjects">
                       </tag-input-dropdown>

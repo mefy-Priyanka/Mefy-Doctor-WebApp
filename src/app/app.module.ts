@@ -1,11 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
 import { TagInputModule } from 'ngx-chips';
+/********************NEW SERVICES************************** */
+import { DocregistrationService } from './mefyservice/docregistration.service';
 
+/******************END OF NEW SERVICES************************************ */
 
 // import { RegistrationModule } from './registration/registration.module';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -71,7 +74,7 @@ const approutes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     QRCodeModule,
     // BrowserAnimationsModule,
     RouterModule.forRoot(approutes),   //,{useHash: true}
@@ -91,6 +94,7 @@ const approutes: Routes = [
     AppointmentService,
     AccountService,
     BillService,
+    DocregistrationService
     // ManageaccountComponent,
     // AuthGuard
   ],

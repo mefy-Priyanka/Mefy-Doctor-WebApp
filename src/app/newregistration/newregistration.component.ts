@@ -227,4 +227,8 @@ export class NewregistrationComponent implements OnInit {
     this.thirdreg=true; 
     this.fourthreg=false;
    }
+   /********************ON SELECTED LANGUAGe  STEP 3 FORM *****************/
+   onAddLanguage(evt){
+     
+   }
 }
