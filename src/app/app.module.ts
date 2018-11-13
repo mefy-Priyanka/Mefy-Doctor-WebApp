@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
+import { TagInputModule } from 'ngx-chips';
 
 
 // import { RegistrationModule } from './registration/registration.module';
@@ -74,7 +75,8 @@ const approutes: Routes = [
     QRCodeModule,
     // BrowserAnimationsModule,
     RouterModule.forRoot(approutes),   //,{useHash: true}
-    TextMaskModule
+    TextMaskModule,
+    TagInputModule
    
   ],
   exports: [],

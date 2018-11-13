@@ -39,15 +39,14 @@ export class NewregistrationComponent implements OnInit {
   };
    /***********STEP 3*************/
    this.step3FormErrors = {
-    phoneNumber: {},
-    name: {},
-    email:{}
+    city: {},
+    language: {},
+    dob:{}
   };
    /***********STEP 4*************/
    this.step4FormErrors = {
-    phoneNumber: {},
-    name: {},
-    email:{}
+    education: {},
+    speciality: {},
   };
  }
 
@@ -171,19 +170,16 @@ export class NewregistrationComponent implements OnInit {
   }
   createStep3Form() {
     return this.formBuilder.group({
-      phoneNumber: ['', Validators.required],
-      name: ['', Validators.required],
-      email:['',[Validators.required,Validators.email]]
+      dob: ['', Validators.required],
+      language: ['', Validators.required],
+      city:['',Validators.required]
     });
   }
   createStep4Form() {
     return this.formBuilder.group({
-      phoneNumber: ['', Validators.required],
-      name: ['', Validators.required],
-      email:['',[Validators.required,Validators.email]]
+      speciality: ['', Validators.required],
+      education: ['', Validators.required]
     });
-  }
-  saveStep1Form(){
   }
   secondstep(){
     if(this.step2Form.valid){
@@ -199,8 +195,6 @@ export class NewregistrationComponent implements OnInit {
       this.thirdreg=false;
        }
  }
-   saveStep2Form(){
-  }
    previousfirst(){
     this.firstreg=true;
     this.secondreg=false;
