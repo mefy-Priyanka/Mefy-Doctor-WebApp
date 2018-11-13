@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
 
 
-import { RegistrationModule } from './registration/registration.module';
+// import { RegistrationModule } from './registration/registration.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 
 import { MemeLoginService } from './meme-services/meme-login.service';
@@ -19,7 +19,7 @@ import { DoctorPrescriptionService } from './meme-services/doctor-prescription.s
 import { AppointmentService } from './meme-services/appointment.service';
 import { AccountService } from './meme-services/account.service';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+// import { LoginComponent } from './login/login.component';
 // import { AuthGuard } from './auth.guard';
 import { BillService } from './meme-services/bill.service';
 import { NewloginComponent } from './newlogin/newlogin.component';
@@ -30,29 +30,29 @@ import { NewregistrationComponent } from './newregistration/newregistration.comp
 
 
 const approutes: Routes = [
-  {
-    path: 'register',
-    loadChildren: './registration/registration.module#RegistrationModule'
-  },
+  // {
+  //   path: 'register',
+  //   loadChildren: './registration/registration.module#RegistrationModule'
+  // },
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/newlogin',
     pathMatch: 'full'
   },
   {
     path: 'dashboard',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
+  // {
+  //   path: 'login',
+  //   component: LoginComponent
+  // },
   {
     path: 'newlogin',
     component: NewloginComponent
   },
   {
-    path: 'newregister',
+    path: 'register',
     component: NewregistrationComponent
   },
 ];
@@ -60,7 +60,7 @@ const approutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    // LoginComponent,
     NewloginComponent,
     NewregistrationComponent,
  
