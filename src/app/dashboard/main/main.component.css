@@ -407,7 +407,10 @@ button.succesfull{
 }
 .cardbot{
     /* padding-bottom: 23px; */
-    margin-top: 3px;
+    margin-top: 2em;
+}
+hr.linehra {
+    margin-bottom: 4px;
 }
 .succes li {
     padding: 0;

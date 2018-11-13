@@ -20,10 +20,11 @@ import { AppointmentService } from './meme-services/appointment.service';
 import { AccountService } from './meme-services/account.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { AuthGuard } from './auth.guard';
+// import { AuthGuard } from './auth.guard';
 import { BillService } from './meme-services/bill.service';
 import { NewloginComponent } from './newlogin/newlogin.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { NewregistrationComponent } from './newregistration/newregistration.component';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { ManageaccountComponent } from './dashboard/manageaccount/manageaccount.component';
 
@@ -40,7 +41,7 @@ const approutes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: './dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard]
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
   {
     path: 'login',
@@ -50,6 +51,10 @@ const approutes: Routes = [
     path: 'newlogin',
     component: NewloginComponent
   },
+  {
+    path: 'newregister',
+    component: NewregistrationComponent
+  },
 ];
 
 @NgModule({
@@ -57,6 +62,7 @@ const approutes: Routes = [
     AppComponent,
     LoginComponent,
     NewloginComponent,
+    NewregistrationComponent,
  
     // ManageaccountComponent
   ],
@@ -84,7 +90,7 @@ const approutes: Routes = [
     AccountService,
     BillService,
     // ManageaccountComponent,
-    AuthGuard
+    // AuthGuard
   ],
   bootstrap: [AppComponent]
 })

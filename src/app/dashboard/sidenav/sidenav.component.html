@@ -119,66 +119,49 @@
       </div>
     </div>
      <div class="sideimg">
-        <!-- <img src="https://pbs.twimg.com/media/BuL42fDCEAAHqZ5.jpg" class="logo_img2aa" [hidden]="logInfo?.profileImage"> -->
-        <img src="../assets/images/userimageupdated.png" class="logo_img2aa2" [hidden]="logInfo?.profileImage">
+        <img src="../assets/images/userimageupdated.png" class="logo_img2aa2">
         <img [src]="imgUrlPrefix" class="logo_img2aa" [hidden]="!logInfo?.profileImage" >
       </div>
     <div class="text_nav">
-      <p class="nameloc2">Dr. {{logInfo?.name}}
-        <span class="loc2">{{((logInfo?.speciality[0]).length<20)?(logInfo?.speciality[0]):(logInfo?.speciality[0]).slice(0,20)}}</span>
+      <p class="nameloc2">Dr. John Doe
+        <span class="loc2">General Physician</span>
       </p>
-      <p class="nameloc4">{{logInfo?.gender}} {{age}}
-        <span class="loc4">{{logInfo?.city}}</span>
+      <p class="nameloc4">Female23
+        <span class="loc4">Durgapur</span>
       </p>
     </div>
     <div class="notifications">
       <ul class="list-inline">
-        <!-- <li class="on_line" [hidden]="loginStatus">{{logInfo?.availability}}</li> -->
         <li class="on_line" [hidden]="!loginStatus">{{status}}</li>
         <li>
-          <!-- <div class="Switch Off">
-              <div class="Toggle"></div>
-            </div> -->
             <label class="switch">
                 <input type="checkbox"  (change)="availabilityDoctor($event)" [checked]="status=='Online'">
                 <span class="slider round" [ngStyle]=   "{'color': status =='Online' ? '#23e29c' : '#fff'}"></span>
               </label>
           </li>
-          <!-- "{'color': proportion === '100' ? 'green' : 'red'}" -->
         </ul>
         <button  class="log_out" (click)="logOut()">Log Out</button>
       </div>
   
       <div class="spacealign">
-        <!-- <hr class="headhr">
-        <div class="rank">
-          <div class="col-md-6">
-            <p class="points2">121</p>
-            <p class="earned2">Recommendation</p>
-          </div>                                                       
-          <div class="col-md-6">
-            <p class="points2">#12</p>
-            <p class="earned2">Ranked</p>
-          </div>
-        </div> -->
       <hr class="headhr">
       <div class="rank">
         <div class="col-md-6">
-          <p class="points2">{{logInfo?.eConsultFee}}</p>
+          <p class="points2">400</p>
           <p class="earned2">eConsult Fee</p>
         </div>
         <div class="col-md-6 text-center" >
-          <button class="nav_btn" (click)="sidenavNavigation('Credit')">Change</button>
+          <button class="nav_btn">Change</button>
         </div>
       </div>
       <hr class="headhr">
       <div class="rank">
         <div class="col-md-6">
-          <p class="points2">{{logInfo?.credit}}</p>
+          <p class="points2">100</p>
           <p class="earned2">Credit Balance</p>
         </div>
         <div class="col-md-6 text-center" >
-          <button class="nav_btn" (click)="sidenavNavigation('Credit')">Withdraw</button>
+          <button class="nav_btn">Withdraw</button>
         </div>
       </div>
       <hr class="headhr">
@@ -209,16 +192,17 @@
           <a >Transaction</a>
         </li>
         <li>
-          <a href="http://meme.care/support.html">Support</a>
+          <a>Support</a>
+          <!-- http://meme.care/support.html -->
         </li>
         <li>
-          <a href="http://meme.care/faq.html">F.A.Q</a>
+          <a>F.A.Q</a>
         </li>
         <li>
-          <a href="http://meme.care/Terms.html">Terms and Condition</a>
+          <a>Terms and Condition</a>
         </li>
         <li>
-          <a href="#">Privacy policy</a>
+          <a>Privacy policy</a>
         </li>
 
       </ul>

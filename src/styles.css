@@ -696,7 +696,9 @@ input.file-path.validate.up_image {
                     .theme-green .bs-datepicker-body table td span.selected {
                         background: linear-gradient(to right, #7b74ff, #b16cfd);
                     }
-
+                    input[type="radio"]{
+                        -webkit-appearance: radio;
+                    }
 
 
                     input.form-control.text-center.bs-timepicker-field {

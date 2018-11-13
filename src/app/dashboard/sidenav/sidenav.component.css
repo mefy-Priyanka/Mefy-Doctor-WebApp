@@ -111,11 +111,12 @@ img.logo_img2a {
 }
 img.logo_img2aa2 {
     border-radius: 50%;
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     background:#fff;
-    border: 1px solid #5771eb;
+    /* border: 1px solid #5771eb; */
     border-radius:1px solid #b0b1c9;
+    border: 4px solid white;
 }
 img.logo_img2aa {
     border-radius: 50%;
