@@ -3,9 +3,6 @@
 
     <div class="scrollbar" id="scrlbar1">
       <section class="scrly">
-
-        <span class="error_message" [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{errMessage}}</span>
-
         <div class="row nomargin0row">
           <div class="col-md-8">
             <div class="select">
@@ -15,65 +12,44 @@
             <div class="col-md-4"></div>
           </div>
         </div>
-
-
         <div class="row nomargin0row">
           <div class="card search">
             <div class="err_msg">
-              <span class="no_member" *ngIf="!noResult">NO RESULTS FOUND ADD PATIENT</span>
+              <span class="no_member">NO RESULTS FOUND ADD PATIENT</span>
             </div>
             <div class="input_patient">
-              <input type="text" name="search" class="searchmain" [textMask]="{mask: mask, guide: false}" [(ngModel)]="individualNumber"
-                placeholder="Enter patient number" (keyup)="getPatientNumberList($event.target.value)">
-
-              <!-- <select class="browser-default"  *ngIf="noResult && individualList?.length!=0" (change)="individualDetail($event.target.value)">
-                <option *ngFor="let individual of individualList" [value]="individual.userId._id">{{individual.name}} </option>
-             
-              </select> -->
-
-
+              <input type="text" name="search" class="searchmain" placeholder="Enter patient number">
             </div>
           </div>
         </div>
 
-        <div class="row nomargin0row" *ngIf="noResult && cardShow">
+        <div class="row nomargin0row">
           <div class="card search2">
-
-            <!-- <input type="text" name="search" class="searchmain" [(ngModel)]="phoneNumber" placeholder="Enter patient" (change)="getPatientNumberList($event.target.value)"> -->
-            <div class="repeat_card" *ngFor="let list of individualList">
-              <div class="cinic_viewcard2" (click)="individualDetail(list)">
-                <p class="clinic_nm2">{{list?.name}}</p>
-                <!-- <p class="clinic_cntct2">kolkata</p> -->
-                <p class="address1_cinic2">{{list?.userId.phoneNumber}}</p>
-                <!-- <p class="address1_cinic">Orissa , India</p> -->
-
-              </div>
-              <hr class="line">
-            </div>
-            <!-- <div class="cinic_viewcard2">
+            <div class="repeat_card">
+              <div class="cinic_viewcard2">
                 <p class="clinic_nm2">Apurva Soni </p>
                 <p class="clinic_cntct2">kolkata</p>
-                <p class="address1_cinic2">9012345678</p> -->
-            <!-- <p class="address1_cinic">Orissa , India</p> -->
-            <!-- </div> -->
+                <p class="address1_cinic2">9012345678</p>
+            <p class="address1_cinic">Orissa , India</p>
+            </div>
+              <hr class="line">
+            </div>
+         
 
           </div>
         </div>
 
-        <div class="row nomargin0row" *ngIf="!noResult">
+        <div class="row nomargin0row">
           <div class="card search">
             <p>Your search for
-              <span class="numbersearch">{{individualNumber}}</span>not found, would you like to add</p>
+              <span class="numbersearch">1</span>not found, would you like to add</p>
             <div class="row nomargin0row">
               <div class="col-md-6">
-                <input type="text" name="name" placeholder="Name" [(ngModel)]="name" class="searchp">
+                <input type="text" name="name" placeholder="Name" class="searchp">
               </div>
-              <!-- <div class="col-md-6">
-                <input type="text" name="Email" placeholder="Email" [(ngModel)]="email" class="searchp">
-              </div> -->
             </div>
             <div class="btnaddc">
-              <button type="btn" class="addcontact" (click)="addPatient()">Add patient</button>
+              <button type="btn" class="addcontact">Add patient</button>
             </div>
           </div>
         </div>
@@ -82,8 +58,6 @@
             <div class="selectbh">
               <hr class="selecthr">
               <h4 class="patient">Select available date</h4>
-              <span class="error_message" [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{ error}}</span>
-              <span class="error_message" [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{ dateErr}}</span>
             </div>
             <div class="col-md-4"></div>
           </div>
@@ -91,8 +65,6 @@
         <div class="row nomargin0row">
           <div class="card search">
             <div class="row">
-              <!-- <h4 class="calendarsearch">Calendar</h4> -->
-              <!-- <ngx-datepicker class="datepic" [(ngModel)]="appointmentDate" (ngModelChange)="clinicListByDate($event)"></ngx-datepicker> -->
               <div class="col-xs-12 col-md-12 form-group mbtmappoinmnt">
                 <div class="row datechoose_area">
                   <div class="col-md-1 col-xs-1 col-sm-1">
@@ -118,9 +90,6 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="col-xs-12 col-12 col-md-3 form-group">
-                <button class="btn btn-success" (click)="dp.toggle()">Date Picker</button>
-              </div> -->
             </div>
           </div>
         </div>
@@ -141,20 +110,16 @@
             <form action="#">
               <div class="col-md-6">
                 <p>
-                  <input name="group1" type="radio" id="visittype" (click)="getType('visit')" />
+                  <input name="group1" type="radio" id="visittype"/>
                   <label for="visittype" class="typebtn" style="padding-left:3em !important">Visit</label>
                 </p>
               </div>
               <div class="col-md-6">
                 <p>
-                  <input name="group1" type="radio" id="econsulttype" (click)="getType('eConsult')" />
+                  <input name="group1" type="radio" id="econsulttype"/>
                   <label for="econsulttype" class="typebtn" style="padding-left:3em !important">Econsult</label>
                 </p>
               </div>
-
-
-
-
             </form>
           </div>
         </div>
@@ -168,15 +133,14 @@
           </div>
         </div>
 
-        <span class="error_messageno" *ngIf="clinicList?.length==0"> No Clinic available</span>
-        <div class="cardcustom col-md-12 pading0custom" *ngFor="let list of clinicList; let i=index;">
+        <span class="error_messageno"> No Clinic available</span>
+        <div class="cardcustom col-md-12 pading0custom">
           <div class="row">
             <div class="col-md-6 ">
               <div class="cinic_viewcard">
-                <p class="clinic_nm"> {{list.clinicName}}</p>
-                <p class="clinic_cntct">{{list.phoneNumber}}</p>
-                <p class="address1_cinic">{{list.city}}</p>
-                <!-- <p class="address1_cinic">Orissa , India</p> -->
+                <p class="clinic_nm">Dutta Pharmaceuticals</p>
+                <p class="clinic_cntct">1234456789</p>
+                <p class="address1_cinic">Orissa , India</p>
               </div>
 
             </div>
@@ -185,17 +149,17 @@
                 <div class="row">
                   <div class="col-md-8 col-xs-8 text-center pading0custom">
                     <div class="scheduletym_clinic">
-                      <span class="clinic_tymstart">{{list.startTime|date:'hh:mm a'}} &nbsp;&nbsp;</span>
+                      <span class="clinic_tymstart">10:00 AM &nbsp;&nbsp;</span>
                       <span class="duration_schedule">To</span>
-                      <span class="clinic_tymstart">&nbsp;&nbsp;{{list.endTime|date:'hh:mm a'}}</span>
+                      <span class="clinic_tymstart">&nbsp;&nbsp;11:00 AM</span>
                     </div>
                     <div class="manage_btn">
-                      <button class="btncustom" (click)="navigateClinic()">Manage Clinic</button>
+                      <button class="btncustom">Manage Clinic</button>
                     </div>
                   </div>
                   <div class="col-md-4 col-xs-4 pading0custom">
                     <div class="sloatview">
-                      <button class="sloatviewbtn" (click)="viewTimeSlots(list,i)">View Slots</button>
+                      <button class="sloatviewbtn">View Slots</button>
 
                     </div>
                   </div>
@@ -206,17 +170,16 @@
               </div>
 
             </div>
-            <section class="slotsbook" *ngIf="viewSlots && i==selected">
+            <section class="slotsbook">
               <hr>
               <div class="left_dist">
                 <div class="row">
-                  <div class="col-md-2 col-xs-4" *ngFor="let slot of slots">
-                    <button type="btn" class="multislotsdisable" [disabled]="slot.status=='Unavailable'" [ngClass]="{'multislots':slot.status=='Available','multislotsdisable':slot.status=='Unavailable'}"
-                      (click)="getSlotsDetails(slot)">
-                      <span class="clinic_slot">{{slot.startTime}}</span>
+                  <div class="col-md-2 col-xs-4">
+                    <button type="btn" class="multislotsdisable">
+                      <span class="clinic_slot">10:05 AM</span>
                       <!-- <span class="slot_schedule">To</span> -->
                       <hr class="slot_schedule" data-content="To"> 
-                      <span class="clinic_slot">{{slot.endTime}}</span>
+                      <span class="clinic_slot">11:05 AM</span>
                     </button>
                   </div>
                 </div>
@@ -225,8 +188,8 @@
 
           </div>
         </div>
-        <div class="bookappoint" [hidden]="!viewSlots">
-          <button class="bookapp" (click)="bookAppointment()">Book Appointment</button>
+        <div class="bookappoint">
+          <button class="bookapp">Book Appointment</button>
         </div>
       </section>
     </div>
