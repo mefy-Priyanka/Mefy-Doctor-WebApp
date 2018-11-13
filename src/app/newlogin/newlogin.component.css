@@ -126,6 +126,7 @@ input.form-control.inputPhone {
     /* border: 1px solid #00000052; */
     height: 34px;
     /* border-radius: 50px; */
+    margin:0px;
     position: relative;
 }
 i.fa.fa-mobile.right {

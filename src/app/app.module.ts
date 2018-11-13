@@ -18,13 +18,16 @@ import { DoctorregisterService } from './meme-services/doctorregister.service';
 import { DoctorPrescriptionService } from './meme-services/doctor-prescription.service';
 import { AppointmentService } from './meme-services/appointment.service';
 import { AccountService } from './meme-services/account.service';
+// import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 // import { LoginComponent } from './login/login.component';
 // import { AuthGuard } from './auth.guard';
 import { BillService } from './meme-services/bill.service';
+import { HttpClientModule } from '@angular/common/http';
 import { NewloginComponent } from './newlogin/newlogin.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NewregistrationComponent } from './newregistration/newregistration.component';
+import { LoginService } from './mefyservice/login.service';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { ManageaccountComponent } from './dashboard/manageaccount/manageaccount.component';
 
@@ -73,6 +76,7 @@ const approutes: Routes = [
     HttpModule,
     QRCodeModule,
     // BrowserAnimationsModule,
+    HttpClientModule,
     RouterModule.forRoot(approutes),   //,{useHash: true}
     TextMaskModule
    
@@ -89,6 +93,7 @@ const approutes: Routes = [
     AppointmentService,
     AccountService,
     BillService,
+    LoginService
     // ManageaccountComponent,
     // AuthGuard
   ],
