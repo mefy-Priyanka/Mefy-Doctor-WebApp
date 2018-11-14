@@ -14,6 +14,13 @@ export class NewregistrationComponent implements OnInit {
   public secondreg: boolean = true;
   public thirdreg: boolean = true;
   public fourthreg: boolean = true;
+  /******FOR HIGHLIGHTS THE STEP****** */
+  public activeStep1:boolean=true
+  public activeStep2:boolean=false
+  public activeStep3:boolean=false
+  public activeStep4:boolean=false
+  /*********** */
+
   step1Form: FormGroup;
   step1FormErrors: any;
  
@@ -27,6 +34,9 @@ export class NewregistrationComponent implements OnInit {
   step4FormErrors: any;
 
   public language:any;
+  public selectedLanguage:any=[];
+  public selectedEducatiom:any=[];
+  public selectedSpeciality:any=[];
   public languageList: any = [];
   public  educationList: any = [];
   public specialityList: any = [];
@@ -98,11 +108,24 @@ export class NewregistrationComponent implements OnInit {
       this.firstreg = false;
       this.secondreg = true;
       this.thirdreg = false;
+/******* FOR STYLING ******/
+      this.activeStep1=false;
+      this.activeStep2=true;
+      this.activeStep3=false;
+      this.activeStep4=false;
+      /****************** */
     } else {
       this.submitted = true
       this.firstreg = true;
       this.secondreg = false;
       this.thirdreg = false;
+/******* FOR STYLING ******/
+      this.activeStep1=true;
+      this.activeStep2=false;
+      this.activeStep3=false;
+      this.activeStep4=false
+      /****************** */
+
     }
 
 
@@ -202,22 +225,49 @@ export class NewregistrationComponent implements OnInit {
       this.firstreg = false;
       this.secondreg = false;
       this.thirdreg = true;
+      /******* FOR STYLING ******/
+      this.activeStep1=false;
+      this.activeStep2=false;
+      this.activeStep3=true;
+      this.activeStep4=false
+      /****************** */
+
     } else {
       this.submitted = true
       this.firstreg = false;
       this.secondreg = true;
       this.thirdreg = false;
+      /******* FOR STYLING ******/
+      this.activeStep1=false;
+      this.activeStep2=true;
+      this.activeStep3=false;
+      this.activeStep4= false
+      /****************** */
+
     }
   }
   previousfirst() {
+    console.log('dd')
     this.firstreg = true;
     this.secondreg = false;
     this.thirdreg = false;
+      /******* FOR STYLING ******/
+      this.activeStep1=true;
+      this.activeStep2=false;
+      this.activeStep3=false;
+      this.activeStep4=false
+      /****************** */
   }
   previouslast() {
     this.firstreg = false;
     this.secondreg = true;
     this.thirdreg = false;
+    /******* FOR STYLING ******/
+    this.activeStep1=false;
+    this.activeStep2=true;
+    this.activeStep3=false;
+    this.activeStep4=false
+    /****************** */
   }
   thirdstep() {
     if (this.step3Form.valid) {
@@ -226,12 +276,26 @@ export class NewregistrationComponent implements OnInit {
       this.secondreg = false;
       this.thirdreg = false;
       this.fourthreg = true
+      /******* FOR STYLING ******/
+      this.activeStep1=false;
+      this.activeStep2=false;
+      this.activeStep3=false;
+      this.activeStep4=true;
+      /****************** */
+
     } else {
       this.submitted = true
       this.firstreg = false;
       this.secondreg = false;
-      this.thirdreg = true;
-      this.fourthreg = false
+      this.thirdreg = false;
+      this.fourthreg = true
+      /******* FOR STYLING ******/
+      this.activeStep1=false;
+      this.activeStep2=false;
+      this.activeStep3=true;
+      this.activeStep4=false;
+      /****************** */
+
     }
   }
   previouspagelast() {
@@ -239,6 +303,12 @@ export class NewregistrationComponent implements OnInit {
     this.secondreg = false;
     this.thirdreg = true;
     this.fourthreg = false;
+    /******* FOR STYLING ******/
+    this.activeStep1=true;
+    this.activeStep2=false;
+    this.activeStep3=true;
+    this.activeStep4=false
+    /****************** */
   }
   /********************GET LIST OF LANGUAGE *****************/
   getLanguageList() {
@@ -267,14 +337,21 @@ export class NewregistrationComponent implements OnInit {
 
   onAddLanguage(evt) {
     console.log(evt);
+    console.log(evt.value)
+    this.selectedLanguage.push(evt.value)
+    console.log('selectedLanguage',this.selectedLanguage)
    
   }
   onAddEducation(evt) {
     console.log(evt);
-   
+    this.selectedEducatiom.push(evt.value)
+    console.log('selectedLanguage',this.selectedLanguage)
+
   }
   onAddSpeciality(evt) {
     console.log(evt);
+    this.selectedSpeciality.push(evt.value)
+    console.log('selectedSpeciality',this.selectedSpeciality)
    
   }
    
@@ -350,11 +427,11 @@ if(this.step4Form.valid){
     phoneNumber:this.step1Form.value.phoneNumber,
     otp:parseInt(this.step2Form.value.otp),
     email:this.step1Form.value.email,
-    language:this.step3Form.value.language,
+    language:this.selectedLanguage,
     city:this.step3Form.value.city,
     dob:this.step3Form.value.dob,
-    education:this.step4Form.value.education,
-    speciality:this.step4Form.value.speciality,
+    education:this.selectedEducatiom,
+    speciality:this.selectedSpeciality,
     role:'doctor'
   }
   console.log('registrationData',registrationData)

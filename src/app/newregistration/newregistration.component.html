@@ -21,12 +21,13 @@
             <div class="loginContent">
               <form id="msform">
                 <!-- progressbar -->
+                <!-- "{'border_active':whenDashboardClicked== true, 'changeColor':whenDashboardClicked== false}" -->
                 <ul id="progressbar" class="progressbar">
-                  <li [ngClass]="{stepactive:true}">Step1</li>
-                  <li [ngClass]="">OTP</li>
+                  <li [ngClass]="{'stepactive':activeStep1==true}">Step1</li>
+                  <li [ngClass]="{'stepactive':activeStep2==true}">OTP</li>
                   <!-- {stepactive:firststep()==true} -->
-                  <li>Personal Details</li>
-                  <li>More Details</li>
+                  <li [ngClass]="{'stepactive':activeStep3==true}">Personal Details</li>
+                  <li [ngClass]="{'stepactive':activeStep4==true}">More Details</li>
                 </ul>
  
           <!--  *******************FORM 1************ -->
