@@ -333,25 +333,23 @@ export class NewregistrationComponent implements OnInit {
       })
   }
   /*************************END************************************ */
-  /********************GET LIST OF LANGUAGE *****************/
-
+    /***********************LANGUAGE ON SELECT IN STEP 2*********/
   onAddLanguage(evt) {
-    console.log(evt);
-    console.log(evt.value)
+    // console.log(evt);
     this.selectedLanguage.push(evt.value)
-    console.log('selectedLanguage',this.selectedLanguage)
-   
+    // console.log('selectedLanguage',this.selectedLanguage)
   }
+    /***********************EDUCATION ON SELECT IN STEP 3*********/
   onAddEducation(evt) {
-    console.log(evt);
+    // console.log(evt);
     this.selectedEducatiom.push(evt.value)
-    console.log('selectedLanguage',this.selectedLanguage)
-
+    // console.log('selectedLanguage',this.selectedLanguage)
   }
+    /***********************SPECIALITY ON SELECT IN STEP 3*********/
   onAddSpeciality(evt) {
-    console.log(evt);
+    // console.log(evt);
     this.selectedSpeciality.push(evt.value)
-    console.log('selectedSpeciality',this.selectedSpeciality)
+    // console.log('selectedSpeciality',this.selectedSpeciality)
    
   }
    
