@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 /* registration modal starts */
+/* @import '~ngx-toastr/toastr.css';  */
+ /* regular style toast*/ 
 
 body {
     overflow-x: hidden;

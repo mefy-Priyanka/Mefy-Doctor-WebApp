@@ -4,10 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagInputModule } from 'ngx-chips';
+// import { ToastrModule } from 'ngx-toastr';
 /********************NEW SERVICES************************** */
 import { DocregistrationService } from './mefyservice/docregistration.service';
-
+import { LoginService } from './mefyservice/login.service';
 /******************END OF NEW SERVICES************************************ */
 
 // import { RegistrationModule } from './registration/registration.module';
@@ -22,6 +24,7 @@ import { DoctorregisterService } from './meme-services/doctorregister.service';
 import { DoctorPrescriptionService } from './meme-services/doctor-prescription.service';
 import { AppointmentService } from './meme-services/appointment.service';
 import { AccountService } from './meme-services/account.service';
+
 import { AppComponent } from './app.component';
 // import { LoginComponent } from './login/login.component';
 // import { AuthGuard } from './auth.guard';
@@ -29,7 +32,7 @@ import { BillService } from './meme-services/bill.service';
 import { NewloginComponent } from './newlogin/newlogin.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NewregistrationComponent } from './newregistration/newregistration.component';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 // import { ManageaccountComponent } from './dashboard/manageaccount/manageaccount.component';
 
 
@@ -76,10 +79,14 @@ const approutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     QRCodeModule,
-    // BrowserAnimationsModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(approutes),   //,{useHash: true}
     TextMaskModule,
-    TagInputModule
+    TagInputModule,
+    // ToastrModule.forRoot({   // ToastrModule added
+    //   timeOut: 999,
+    //   preventDuplicates: true,
+    // }) 
    
   ],
   exports: [],
@@ -94,7 +101,8 @@ const approutes: Routes = [
     AppointmentService,
     AccountService,
     BillService,
-    DocregistrationService
+    DocregistrationService,
+    LoginService
     // ManageaccountComponent,
     // AuthGuard
   ],
