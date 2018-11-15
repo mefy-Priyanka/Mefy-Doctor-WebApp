@@ -12,6 +12,7 @@ import io from 'socket.io-client';
 export class NewloginComponent implements OnInit {
   public myAngularxQrCode: string = null;
   public loginShow: boolean = true;
+  public loader:boolean=false;
   public otpShow: boolean = false;
   public doctorloginForm: FormGroup;
   public otploginForm: FormGroup;
@@ -22,8 +23,10 @@ export class NewloginComponent implements OnInit {
   userData: any;
   allUserList: any = []
   public scannerdata:string= 'ReadMe';
+  public mask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
+
   // public socket = io('http://ec2-13-232-207-92.ap-south-1.compute.amazonaws.com:5023');
-  constructor(private formBuilder: FormBuilder, public doctorService: LoginService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, public doctorService: LoginService,private router: Router) {
     this.myAngularxQrCode = this.scannerdata;
   
     this.loginFormErrors = {
@@ -90,6 +93,7 @@ export class NewloginComponent implements OnInit {
   login() {
     let result: any = {};
     this.submitted = true;
+    this.loader=false;
     if (this.doctorloginForm.valid) {
       let data = {
         phoneNumber: this.doctorloginForm.value.phoneNumber,
@@ -101,10 +105,12 @@ export class NewloginComponent implements OnInit {
         result = value;
           if (!result.result.error) {
             // this.toastr.success('User Loggedin Succesful!', 'Wow!');
-            this.router.navigate(['/dashboard'])
+            this.loader=true;
+            this.router.navigate(['/dashboard/main'])
           }
           else{
             // this.toastr.error('User Not exits!', 'Enter Otp!');
+            // this.loader=true;
             this.otpShow=true;
             this.loginShow=false;
             this.submitted = false;
@@ -135,6 +141,7 @@ export class NewloginComponent implements OnInit {
           if (!result.result.error) {
             console.log("success");
             // this.toastr.success('User Loggedin Succesful!', 'Wow!');
+            this.loader=true;
             this.router.navigate(['/dashboard/main'])
           }
           else{
