@@ -111,9 +111,9 @@
                     <!-- <input type="checkbox" (change)="availabilityClinic($event,details._id)" [checked]="details.availability=='Open'">
                     <span class="slider1 round1" [ngStyle]="{'color': details.availability=='Open' ? '#23e29c' : '#fff'}">
                       <p class="open_2" [hidden]="details.availability=='Close'" [ngStyle]="{'-webkit-text-fill-color':details.availability=='Open'?'#fff':'grey'}">OPEN</p> -->
-                      <input type="checkbox" >
-                    <span class="slider1 round1" >
-                      <p class="open_2" >OPEN</p>
+                    <input type="checkbox">
+                    <span class="slider1 round1">
+                      <p class="open_2">OPEN</p>
                     </span>
                   </label>
                 </div>
@@ -139,7 +139,7 @@
                         </div>
                         <div class="col-md-6">
                           <div class="input-field">
-                            <input type="text" id="pac-input"  placeholder="City" />
+                            <input type="text" id="pac-input" placeholder="City" />
                             <!-- <p class="errormessage1" [ngStyle]="{'font-size':'13px'}">Please Provide City Detail</p> -->
                           </div>
                         </div>
@@ -174,85 +174,55 @@
                         </div>
                       </div>
                     </div>
-
-                    <div class="row">
-                      <div class="col-md-12">
-
-                        <div class="col-md-12" id="padding-o">
-                          <div class="row">
-                            <div class="sp_to">
-                              <p class="errormessage_ui" [ngStyle]="{'font-size':'13px'}">{{error.errorMessage}}
-                              </p>
-                              <p class="errormessage_ui" [ngStyle]="{'font-size':'13px'}">{{timeError}}
-                              </p>
-                              <div class="col-md-5" id="padding_r">
-                                <div class="input-field">
-                                  <label class="sche_dule">Schedule</label>
-                                  <!-- <timepicker formControlName="startTime" [showSpinners]="false"></timepicker> -->
-                                  <input type="time" class="timepicker" placeholder="Schedule">
-                                  <!-- <p class="errormessage1" [ngStyle]="{'font-size':'13px'}">StartTime Cannot Be Empty</p> -->
-
-                                </div>
-                              </div>
-                              <div class="col-md-1 nopadding0col1 text-right">
-                                <p class="time_pick">To</p>
-                              </div>
-                              <div class="col-md-5" id="padding-o">
-                                <div class="input-field" id="top_p">
-                                  <div class="time_pickinput">
-                                    <!-- <timepicker formControlName="endTime" [showSpinners]="false" (ngModelChange)="compareTime($event)"></timepicker> -->
-                                    <input type="time" class="timepicker">
-                                    <!-- <p class="errormessage1" [ngStyle]="{'font-size':'13px'}">EndTime Cannot Be Empty</p> -->
-
-                                  </div>
-                                </div>
+                  </form>
+                  <div>
+               
+                      <hr class="light_schedule">
+                    <div class="calender text-center">
+                      <ul class="list-inline" id="calender_days">
+                        <li *ngFor="let day of weekSchedule">
+                          <button (click)="daySelect(day)" [ngClass]="{'selectd_day':true,'active':days.indexOf(day)>-1}">
+                            {{day}}
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="sp_to">
+                          <p class="errormessage_ui" [ngStyle]="{'font-size':'13px'}">{{error.errorMessage}}
+                          </p>
+                          <p class="errormessage_ui" [ngStyle]="{'font-size':'13px'}">{{timeError}}
+                          </p>
+                          <div class="col-md-5" id="padding_r">
+                            <div class="input-field">
+                              <label class="sche_dule">Schedule</label>
+                              <input type="time" class="timepicker" placeholder="Schedule">
+                            </div>
+                          </div>
+                          <div class="col-md-1 nopadding0col1 text-right">
+                            <p class="time_pick">To</p>
+                          </div>
+                          <div class="col-md-5" id="padding-o">
+                            <div class="input-field" id="top_p">
+                              <div class="time_pickinput">
+                                <input type="time" class="timepicker">
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </form>
-                  <hr class="light_schedule">
-                  <div class="calender text-center">
-                    <ul class="list-inline" id="calender_days">
-                      <li *ngFor="let day of weekSchedule">
-                        <button (click)="daySelect(day)" [ngClass]="{'selectd_day':true,'active':days.indexOf(day)>-1}">
-                          {{day}}
-                          <!-- {{(day).slice(0,2) | uppercase}} -->
-                        </button>
-                      </li>
-                      <!-- <li class="date_choose">
-                              <button class="selectd_day active">MO</button>
-                            </li>
-                            <li>
-                              <button class="selectd_day active">TU</button>
-                            </li>
-                            <li>
-                              <button class="selectd_day">WE</button>
-                            </li>
-                            <li class="date_choose">
-
-                              <button class="selectd_day active"> TH</button>
-                            </li>
-                            <li>
-                              <button class="selectd_day"> FR</button>
-                            </li>
-                            <li>
-                              <button class="selectd_day"> SA</button> -->
-                      <!-- </li> -->
-                    </ul>
-                  </div>
-                  <hr class="light_schedule1">
-                  <div class="set_upbtn">
-
-                    <button class="saveinputd" (click)="saveclinicForm()">Setup</button>
-                    <button class="cancelbtn" [hidden]="cancel" (click)="cancelSave()">Cancel</button>
-                    <!-- <button class="set_up" *ngIf="createSchedule" (click)="deleteClinicInfo()">Delete</button> -->
-
-                  </div>
+                    </div>  
+                  </div>   
+                  <button class="addcal">+</button>  
                 </div>
+
               </div>
+            </div>
+
+            <div class="set_upbtn">
+              <button class="saveinputd" (click)="saveclinicForm()">Setup</button>
+              <button class="cancelbtn" (click)="cancelSave()">Cancel</button>
             </div>
           </div>
         </div>
