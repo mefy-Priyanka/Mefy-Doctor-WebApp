@@ -273,7 +273,7 @@ export class ManageClinicComponent implements OnInit {
   }
   //get clinic Details through Clinic id
   getsingleClinicDetails() {
-    this.scheduleService.getSingleClinicList(this.doctorprofileId).subscribe(data => {
+    this.ClinicService.getSingleClinicDetail(this.doctorprofileId).subscribe(data => {
       this.singleClinicList = data;
       console.log(this.singleClinicList);
     },

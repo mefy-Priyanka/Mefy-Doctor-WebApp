@@ -13,7 +13,7 @@ export class ClinicService {
   }
 
 // GET SPECIFIC CLINIC DETAIL
-getClinicDetail(clinicId){
+getSingleClinicDetail(clinicId){
   return this.httpClient.get(APIURL+'clinic/'+clinicId)
 }
 
