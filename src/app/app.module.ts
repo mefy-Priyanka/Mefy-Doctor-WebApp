@@ -7,6 +7,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagInputModule } from 'ngx-chips';
 // import { ToastrModule } from 'ngx-toastr';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 /********************NEW SERVICES************************** */
 import { DocregistrationService } from './mefyservice/docregistration.service';
 import { LoginService } from './mefyservice/login.service';
@@ -83,6 +84,7 @@ const approutes: Routes = [
     RouterModule.forRoot(approutes),   //,{useHash: true}
     TextMaskModule,
     TagInputModule,
+    BsDatepickerModule.forRoot()
     // ToastrModule.forRoot({   // ToastrModule added
     //   timeOut: 999,
     //   preventDuplicates: true,

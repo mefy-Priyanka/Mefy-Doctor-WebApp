@@ -160,11 +160,3 @@ svg#otp {
     height: 50px;
     width: 24vw;
 }
-p.errormessage {
-    color: red;
-    margin: 0;
-    font-weight: 500;
-    font-style: italic;
-    position: absolute;
-    left: 30px;
-}

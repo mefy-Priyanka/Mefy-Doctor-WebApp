@@ -724,7 +724,14 @@ input.file-path.validate.up_image {
                         box-shadow: none !important;
                         outline:none !important; 
                     }
-
+                    p.errormessage {
+                        color: red;
+                        margin: 0;
+                        font-weight: 500;
+                        font-style: italic;
+                        position: absolute;
+                        left: 30px;
+                    }
 
 
                 
