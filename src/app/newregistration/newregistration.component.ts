@@ -174,7 +174,7 @@ export class NewregistrationComponent implements OnInit {
     return this.formBuilder.group({
       phoneNumber: ['', Validators.required],
       name: ['', Validators.required],
-      // email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]]
     });
   }
   createStep2Form() {
@@ -197,7 +197,7 @@ export class NewregistrationComponent implements OnInit {
     });
   }
   firststep() {
-    // if (this.step1Form.valid) {
+    if (this.step1Form.valid) {
       console.log(this.step1Form.value)
       this.firstreg = false;
       this.secondreg = true;
@@ -208,21 +208,21 @@ export class NewregistrationComponent implements OnInit {
       this.activeStep3=false;
       this.activeStep4=false;
       /****************** */
-    // } else {
-      // this.submitted = true
-      // this.firstreg = true;
-      // this.secondreg = false;
-      // this.thirdreg = false;
+    } else {
+      this.submitted = true
+      this.firstreg = true;
+      this.secondreg = false;
+      this.thirdreg = false;
 /******* FOR STYLING ******/
-      // this.activeStep1=true;
-      // this.activeStep2=false;
-      // this.activeStep3=false;
-      // this.activeStep4=false
+      this.activeStep1=true;
+      this.activeStep2=false;
+      this.activeStep3=false;
+      this.activeStep4=false
       /****************** */
-    // }
+    }
   }
   secondstep() {
-    // if (this.step2Form.valid && this.error != 'Invalid DOB') {
+    if (this.step2Form.valid && this.error != 'Invalid DOB') {
       console.log(this.step2Form.value)
       this.submitted = false;
       this.firstreg = false;
@@ -235,19 +235,19 @@ export class NewregistrationComponent implements OnInit {
       this.activeStep4=false
       /****************** */
 
-    // } else {
-      // this.submitted = true
-      // this.firstreg = false;
-      // this.secondreg = true;
-      // this.thirdreg = false;
-      // /******* FOR STYLING ******/
-      // this.activeStep1=false;
-      // this.activeStep2=true;
-      // this.activeStep3=false;
-      // this.activeStep4= false
+    } else {
+      this.submitted = true
+      this.firstreg = false;
+      this.secondreg = true;
+      this.thirdreg = false;
+      /******* FOR STYLING ******/
+      this.activeStep1=false;
+      this.activeStep2=true;
+      this.activeStep3=false;
+      this.activeStep4= false
       /****************** */
 
-    // }
+    }
   }
   previousfirst() {
     this.firstreg = true;
@@ -272,7 +272,7 @@ export class NewregistrationComponent implements OnInit {
     /****************** */
   }
   thirdstep() {
-    // if (this.step3Form.valid) {
+    if (this.step3Form.valid) {
       console.log(this.step3Form.value)
       this.submitted = false;
       this.firstreg = false;
@@ -286,20 +286,20 @@ export class NewregistrationComponent implements OnInit {
       this.activeStep4=true;
       /****************** */
 
-    // } else {
-      // this.submitted = true
-      // this.firstreg = false;
-      // this.secondreg = false;
-      // this.thirdreg = false;
-      // this.fourthreg = true
-      // /******* FOR STYLING ******/
-      // this.activeStep1=false;
-      // this.activeStep2=false;
-      // this.activeStep3=true;
-      // this.activeStep4=false;
+    } else {
+      this.submitted = true
+      this.firstreg = false;
+      this.secondreg = false;
+      this.thirdreg = false;
+      this.fourthreg = true
+      /******* FOR STYLING ******/
+      this.activeStep1=false;
+      this.activeStep2=false;
+      this.activeStep3=true;
+      this.activeStep4=false;
       /****************** */
 
-    // }
+    }
   }
   previouspagelast() {
     this.firstreg = false;
@@ -458,7 +458,7 @@ compareDob(dob) {
 /********************************** FINAL DOCTOR"S REGISTRATION *********/
 saveRegistrationForm(){
   console.log(this.step4Form.value)
-  // if(this.step4Form.valid){
+  if(this.step4Form.valid){
     this.compareDob(event);
   let registrationData={
     name:this.step1Form.value.name,
@@ -480,8 +480,8 @@ saveRegistrationForm(){
   err=>{
     // this.toastr.error('Registration Failed!', 'Server Issue')
   })
-// }else{
-//   // this.toastr.error('Registration Failed!', 'Not Valid')
-// }
+}else{
+  // this.toastr.error('Registration Failed!', 'Not Valid')
+}
       }
 }
