@@ -78,6 +78,10 @@ const approutes: Routes = [
     QRCodeModule,
     // BrowserAnimationsModule,
     HttpClientModule,
+    // ToastrModule.forRoot({  
+    //   timeOut: 3000,
+    //   preventDuplicates: true,
+    // }) ,
     RouterModule.forRoot(approutes),   //,{useHash: true}
     TextMaskModule,
     TagInputModule

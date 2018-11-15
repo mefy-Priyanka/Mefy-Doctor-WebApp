@@ -38,6 +38,7 @@
     "ngx-date-picker": "0.0.24",
     "ngx-filter-pipe": "^1.0.1",
     "ngx-loading": "^1.0.14",
+    "ngx-toastr": "^9.1.1",
     "rxjs": "^5.4.1",
     "socket.io-client": "^2.0.4",
     "zone.js": "^0.8.14"
