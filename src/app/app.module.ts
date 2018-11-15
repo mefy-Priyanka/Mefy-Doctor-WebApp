@@ -1,11 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagInputModule } from 'ngx-chips';
-
+// import { ToastrModule } from 'ngx-toastr';
+/********************NEW SERVICES************************** */
+import { DocregistrationService } from './mefyservice/docregistration.service';
+import { LoginService } from './mefyservice/login.service';
+/******************END OF NEW SERVICES************************************ */
 
 // import { RegistrationModule } from './registration/registration.module';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -19,17 +24,15 @@ import { DoctorregisterService } from './meme-services/doctorregister.service';
 import { DoctorPrescriptionService } from './meme-services/doctor-prescription.service';
 import { AppointmentService } from './meme-services/appointment.service';
 import { AccountService } from './meme-services/account.service';
-// import { ToastrModule } from 'ngx-toastr';
+
 import { AppComponent } from './app.component';
 // import { LoginComponent } from './login/login.component';
 // import { AuthGuard } from './auth.guard';
 import { BillService } from './meme-services/bill.service';
-import { HttpClientModule } from '@angular/common/http';
 import { NewloginComponent } from './newlogin/newlogin.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NewregistrationComponent } from './newregistration/newregistration.component';
-import { LoginService } from './mefyservice/login.service';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 // import { ManageaccountComponent } from './dashboard/manageaccount/manageaccount.component';
 
 
@@ -74,17 +77,20 @@ const approutes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
-    QRCodeModule,
-    // BrowserAnimationsModule,
     HttpClientModule,
     // ToastrModule.forRoot({  
     //   timeOut: 3000,
     //   preventDuplicates: true,
     // }) ,
+    QRCodeModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(approutes),   //,{useHash: true}
     TextMaskModule,
-    TagInputModule
+    TagInputModule,
+    // ToastrModule.forRoot({   // ToastrModule added
+    //   timeOut: 999,
+    //   preventDuplicates: true,
+    // }) 
    
   ],
   exports: [],
@@ -99,6 +105,7 @@ const approutes: Routes = [
     AppointmentService,
     AccountService,
     BillService,
+    DocregistrationService,
     LoginService
     // ManageaccountComponent,
     // AuthGuard
