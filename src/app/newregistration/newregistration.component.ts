@@ -434,7 +434,6 @@ compareDob(dob) {
     return false;
   }
   else{
-    this.error = 'valid DOB';
     return true;
   }
 }
