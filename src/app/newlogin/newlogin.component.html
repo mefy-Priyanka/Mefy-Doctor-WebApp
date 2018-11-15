@@ -44,7 +44,7 @@
               <form [formGroup]="doctorloginForm">
                 <div class="form-group phoneDiv">
                   <label></label>
-                  <input type="text" class="form-control inputPhone" placeholder="Phone Number" formControlName="phoneNumber">
+                  <input type="text" class="form-control inputPhone" [textMask]="{mask: mask, guide: false}" placeholder="Phone Number" formControlName="phoneNumber">
                   <p class="errormessage" *ngIf="loginFormErrors.phoneNumber.required || (doctorloginForm.controls.phoneNumber.pristine && submitted)">Number can not be empty</p>
                   <i class="fa fa-mobile right" aria-hidden="true"></i>
                 </div>

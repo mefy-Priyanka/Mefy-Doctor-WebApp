@@ -23,6 +23,8 @@ export class NewloginComponent implements OnInit {
   userData: any;
   allUserList: any = []
   public scannerdata:string= 'ReadMe';
+  public mask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
+
   // public socket = io('http://ec2-13-232-207-92.ap-south-1.compute.amazonaws.com:5023');
   constructor(private formBuilder: FormBuilder, public doctorService: LoginService,private router: Router) {
     this.myAngularxQrCode = this.scannerdata;
