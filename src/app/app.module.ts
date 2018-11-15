@@ -11,6 +11,7 @@ import { TagInputModule } from 'ngx-chips';
 /********************NEW SERVICES************************** */
 import { DocregistrationService } from './mefyservice/docregistration.service';
 import { LoginService } from './mefyservice/login.service';
+import {ClinicService} from './mefyservice/clinic.service';
 /******************END OF NEW SERVICES************************************ */
 
 // import { RegistrationModule } from './registration/registration.module';
@@ -103,8 +104,10 @@ const approutes: Routes = [
     AppointmentService,
     AccountService,
     BillService,
+    //new services
     DocregistrationService,
     LoginService,
+    ClinicService,
     HttpClientModule
     // ManageaccountComponent,
     // AuthGuard
