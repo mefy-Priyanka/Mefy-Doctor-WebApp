@@ -12,6 +12,11 @@ export class ClinicService {
     return this.httpClient.get(APIURL + 'clinic/clinicByDoctorId/' + doctorId)
   }
 
+// GET SPECIFIC CLINIC DETAIL
+getClinicDetail(clinicId){
+  return this.httpClient.get(APIURL+'clinic/'+clinicId)
+}
+
   // DOCTOR CREATE CLINIC  
   addClinic(data) {
     return this.httpClient.post(APIURL + 'clinic/addclinic', data);
