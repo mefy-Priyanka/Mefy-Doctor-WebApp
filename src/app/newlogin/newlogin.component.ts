@@ -22,13 +22,13 @@ export class NewloginComponent implements OnInit {
   phoneNumber: any = [];
   userData: any;
   allUserList: any = []
-  public scannerdata:string= 'ReadMe';
+  public scannerdata:any="socket.id";
   public mask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
 
-  // public socket = io('http://ec2-13-232-207-92.ap-south-1.compute.amazonaws.com:5023');
+  public socket = io('http://ec2-13-232-207-92.ap-south-1.compute.amazonaws.com:5023');
   constructor(private formBuilder: FormBuilder, public doctorService: LoginService,private router: Router) {
-    this.myAngularxQrCode = this.scannerdata;
-  
+    this.scanData();
+    // this.myAngularxQrCode = this.scannerdata;
     this.loginFormErrors = {
       phoneNumber: {},
     };
@@ -36,7 +36,22 @@ export class NewloginComponent implements OnInit {
       otp: {},
     };
    }
-
+   scanData(){
+    let _base=this;
+    _base.socket.on('connect', function(){
+      console.log("connect", _base.socket.id);
+      _base.scannerdata= _base.socket.id;
+      console.log( _base.scannerdata);
+    });
+  
+    _base.socket.on('loginByScanner', function(data){
+      console.log("data print",data);
+      _base.router.navigate(['/dashboard'])
+    });
+    _base.socket.on('disconnect', function(){
+      console.log("connection closed");
+    });
+  }
   ngOnInit() {
     this.doctorloginForm = this.createLoginForm()
     this.doctorloginForm.valueChanges.subscribe(() => {
@@ -117,7 +132,7 @@ export class NewloginComponent implements OnInit {
           }              
       },
         err => {
-          console.log(err);
+          console.log("Network Issue");
         }
       )
     }
@@ -151,7 +166,7 @@ export class NewloginComponent implements OnInit {
           }              
       },
         err => {
-          console.log(err);
+          console.log("Network Issue");
         }
       )
     }
