@@ -40,7 +40,7 @@ export class NewregistrationComponent implements OnInit {
   public languageList: any = [];
   public  educationList: any = [];
   public specialityList: any = [];
-  public arrayOfObjects:any=[];
+  public languageOfObjects:any=[];
   public specialityOfObjects:any=[];
   public educationOfObjects:any=[];
   public mask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
@@ -57,18 +57,18 @@ export class NewregistrationComponent implements OnInit {
     /***********STEP 2*************/
 
     this.step2FormErrors = {
-      otp: {},
-    };
-    /***********STEP 3*************/
-    this.step3FormErrors = {
       city: {},
       language: {},
       dob: {}
     };
+    /***********STEP 3*************/
+    this.step3FormErrors = {
+      education: {},
+      speciality: {}
+    };
     /***********STEP 4*************/
     this.step4FormErrors = {
-      education: {},
-      speciality: {},
+      otp: {}
     };
   }
 
@@ -203,20 +203,21 @@ export class NewregistrationComponent implements OnInit {
   }
   createStep2Form() {
     return this.formBuilder.group({
-      otp: ['', Validators.required]
-    });
-  }
-  createStep3Form() {
-    return this.formBuilder.group({
       dob: ['', Validators.required],
       language: ['', Validators.required],
       city: ['', Validators.required]
     });
   }
-  createStep4Form() {
+  createStep3Form() {
     return this.formBuilder.group({
       speciality: ['', Validators.required],
       education: ['', Validators.required]
+    });
+  }
+  createStep4Form() {
+    return this.formBuilder.group({
+      otp: ['', Validators.required]
+
     });
   }
   secondstep() {
@@ -247,7 +248,6 @@ export class NewregistrationComponent implements OnInit {
     }
   }
   previousfirst() {
-    console.log('dd')
     this.firstreg = true;
     this.secondreg = false;
     this.thirdreg = false;
@@ -325,7 +325,7 @@ export class NewregistrationComponent implements OnInit {
           langName: this.languageList[i].Language,
           
         }
-        this.arrayOfObjects.push(lang);
+        this.languageOfObjects.push(lang);
       }
     },
       err => {
@@ -408,6 +408,7 @@ let data={
    }
    this.docService.preRegistrationApi(preRegistrationData).subscribe(data=>{
      console.log('data',data)
+     this.saveRegistrationForm();
    },
    err=>{
      console.log(err)
@@ -416,14 +417,14 @@ let data={
       }
        
 
-/********************************** FINAL DOCTOR"S REGISTRATION  */
+/********************************** FINAL DOCTOR"S REGISTRATION *********/
 saveRegistrationForm(){
 if(this.step4Form.valid){
   console.log(this.step4Form.value)
   let registrationData={
     name:this.step1Form.value.name,
     phoneNumber:this.step1Form.value.phoneNumber,
-    otp:parseInt(this.step2Form.value.otp),
+    otp:parseInt(this.step4Form.value.otp),
     email:this.step1Form.value.email,
     language:this.selectedLanguage,
     city:this.step3Form.value.city,

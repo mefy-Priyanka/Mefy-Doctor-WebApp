@@ -21,13 +21,11 @@
             <div class="loginContent">
               <form id="msform">
                 <!-- progressbar -->
-                <!-- "{'border_active':whenDashboardClicked== true, 'changeColor':whenDashboardClicked== false}" -->
                 <ul id="progressbar" class="progressbar">
                   <li [ngClass]="{'stepactive':activeStep1==true}">Step1</li>
-                  <li [ngClass]="{'stepactive':activeStep2==true}">OTP</li>
-                  <!-- {stepactive:firststep()==true} -->
-                  <li [ngClass]="{'stepactive':activeStep3==true}">Personal Details</li>
-                  <li [ngClass]="{'stepactive':activeStep4==true}">More Details</li>
+                  <li [ngClass]="{'stepactive':activeStep2==true}">Personal Details</li>
+                  <li [ngClass]="{'stepactive':activeStep3==true}">More Details</li>
+                  <li [ngClass]="{'stepactive':activeStep4==true}">OTP</li>
                 </ul>
  
           <!--  *******************FORM 1************ -->
@@ -39,16 +37,68 @@
     <p *ngIf="step1FormErrors.phoneNumber.required || (step1Form.controls.phoneNumber.pristine && submitted)">PhoneNumber Cannot Be Empty</p>
             <p *ngIf="step1FormErrors.phoneNumber.minlength ">Please Enter Valid Phone Number</p>
                  <input type="text" name="email" formControlName="email" placeholder="Email" />
-    <p *ngIf="step1FormErrors.email.required ||step1FormErrors.email.email || (step1Form.controls.email.pristine && submitted)">email cannot be empty or email should be email type</p>
+    <p *ngIf="step1FormErrors.email.required ||step1FormErrors.email.email || (step1Form.controls.email.pristine && submitted)">email cannot be empty or email should be valid</p>
     <input type="button" name="next" class="next action-button" (click)="firststep()" value="Next"(click)="preRgistration()" />
 
                   </form>
 
                 </fieldset>
  <!-- ****************** END OF FORM 1************ -->
-          <!--  *******************FORM 2************ -->
-                <fieldset *ngIf="secondreg" class="secondFieldset">
-                    <form [formGroup]="step2Form">
+
+           <!--  *******************FORM 2************ -->
+           <fieldset *ngIf="secondreg">
+            <form [formGroup]="step2Form">
+              <input type= "text" name= "city"  formControlName= "city" placeholder="CITY" />
+<p *ngIf="step2FormErrors.city.required || (step2Form.controls.city.pristine && submitted)">City Cannot Be Empty</p>
+              <!-- <input type="text" name="language" formControlName="language"  placeholder="Language" /> -->
+              <label>Language:</label>
+              <tag-input formControlName="language" (onAdd)="onAddLanguage($event)" onlyFromAutocomplete="true" blinkIfDupe="true">
+                  <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'" [showDropdownIfEmpty]="true"
+                    placeholder="Choose language" [autocompleteItems]="languageOfObjects">
+                  </tag-input-dropdown>
+                </tag-input>
+<p *ngIf="step2FormErrors.language.required || (step2Form.controls.language.pristine && submitted)">Language Cannot Be Empty</p>
+              <input type="text" name="dob" formControlName="dob"  placeholder="Date Of Birth" />
+<p *ngIf="step2FormErrors.dob.required || (step2Form.controls.dob.pristine && submitted)">Date of Birth Cannot Be Empty</p>
+              <!-- <ul class="list-inline radiobtn">
+             <li>Gender:</li>
+             <li><input type="radio" name="gender" value="male" checked> Male<br></li>
+             <li><input type="radio" name="gender" value="female"> Female<br></li>
+            </ul> -->
+              <input type="button" name="previous" class="previous action-button" (click)="previousfirst()" value="Previous" />
+              <input type="button" name="next" class="next action-button" (click)="secondstep() " value="Next" />
+            </form>
+            </fieldset>
+     <!-- ****************** END OF FORM 2************ -->
+    <!--  *******************FORM 3************ -->
+
+    <fieldset *ngIf="thirdreg">
+      <form [formGroup]="step3Form">
+    <!-- <input type="text" name="education"  formControlName="education" placeholder="Qualifications" /> -->
+    <label>Education:</label>
+    <tag-input formControlName="education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true" blinkIfDupe="true">
+      <tag-input-dropdown [appendToBody]="false" [identifyBy]="'educationName'" [displayBy]="'educationName'" [showDropdownIfEmpty]="true"
+        placeholder="Choose education" [autocompleteItems]="educationOfObjects">
+      </tag-input-dropdown>
+    </tag-input>
+<p *ngIf="step3FormErrors.education.required || (step3Form.controls.education.pristine && submitted)">Education Cannot Be Empty</p>
+    <!-- <input type="text" name="speciality"  formControlName="speciality" placeholder="Speciality" /> -->
+    <label>Speciality:</label>
+    <tag-input formControlName="speciality" (onAdd)="onAddSpeciality($event)" onlyFromAutocomplete="true" blinkIfDupe="true">
+      <tag-input-dropdown [appendToBody]="false" [identifyBy]="'specialityName'" [displayBy]="'specialityName'" [showDropdownIfEmpty]="true"
+        placeholder="Choose speciality" [autocompleteItems]="specialityOfObjects">
+      </tag-input-dropdown>
+    </tag-input>
+<p *ngIf="step3FormErrors.speciality.required || (step3Form.controls.speciality.pristine && submitted)">Speciality Cannot Be Empty</p>
+    <!-- <input type="text" name="location" placeholder="Location" /> -->
+      <input type="button" name="previous" class="previous action-button" (click)="previouslast()" value="Previous" />
+    <input type="submit" name="submit" class="submit action-button" value="Next" (click)="thirdstep()"/>
+      </form>
+  </fieldset>
+<!-- ****************** END OF FORM 3************ -->
+          <!--  *******************FORM 4************ -->
+                <fieldset *ngIf="fourthreg" class="secondFieldset">
+                    <form [formGroup]="step4Form">
                   <svg version="1.1" id="otp" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px" viewBox="0 0 489.1 489.1" style="enable-background:new 0 0 489.1 489.1;" xml:space="preserve">
                     <g>
@@ -77,69 +127,18 @@
                   </svg>
                   <p>Please enter the OTP you received</p>
                   <input type="text" name="otp" placeholder="OTP" formControlName="otp" />
-    <p *ngIf="step2FormErrors.otp.required || (step2Form.controls.otp.pristine && submitted)">Otp Cannot Be Empty</p>
-
-                  <input type="button" name="previous" class="previous action-button" (click)="previousfirst()" value="Previous" />
-                  <input type="button" name="next" class="next action-button" (click)="secondstep()" value="Next" />
+    <p *ngIf="step4FormErrors.otp.required || (step4Form.controls.otp.pristine && submitted)">Otp Cannot Be Empty</p>
+    <input type="button" name="previous" class="previous action-button" (click)="previouspagelast()" value="Previous" />
+                  <input type="button" name="next" class="next action-button" (click)="preRgistration()" value="Next"/>
                     </form>
                 </fieldset>
-                  <!-- ****************** END OF FORM 2************ -->
+                  <!-- ****************** END OF FORM 4************ -->
 
-          <!--  *******************FORM 3************ -->
-                  <fieldset *ngIf="thirdreg">
 
-                <form [formGroup]="step3Form">
-                  <input type= "text" name= "city"  formControlName= "city" placeholder="CITY" />
-    <p *ngIf="step3FormErrors.city.required || (step3Form.controls.city.pristine && submitted)">City Cannot Be Empty</p>
-                  <!-- <input type="text" name="language" formControlName="language"  placeholder="Language" /> -->
-                  <label>Language:</label>
-                  <tag-input formControlName="language" (onAdd)="onAddLanguage($event)" onlyFromAutocomplete="true" blinkIfDupe="true">
-                      <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'" [showDropdownIfEmpty]="true"
-                        placeholder="Choose language" [autocompleteItems]="arrayOfObjects">
-                      </tag-input-dropdown>
-                    </tag-input>
-    <p *ngIf="step3FormErrors.language.required || (step3Form.controls.language.pristine && submitted)">Language Cannot Be Empty</p>
-                  <input type="text" name="dob" formControlName="dob"  placeholder="Date Of Birth" />
-    <p *ngIf="step3FormErrors.dob.required || (step3Form.controls.dob.pristine && submitted)">Date of Birth Cannot Be Empty</p>
-                  <!-- <ul class="list-inline radiobtn">
-                 <li>Gender:</li>
-                 <li><input type="radio" name="gender" value="male" checked> Male<br></li>
-                 <li><input type="radio" name="gender" value="female"> Female<br></li>
-                </ul> -->
-                  <input type="button" name="previous" class="previous action-button" (click)="previouslast()" value="Previous" />
-                  <input type="button" name="next" class="next action-button" (click)="thirdstep()" value="Next" />
-                </form>
-                </fieldset>
-         <!-- ****************** END OF FORM 3************ -->
          
-          <!--  *******************FORM 4************ -->
+       
 
-                <fieldset *ngIf="fourthreg">
-                    <form [formGroup]="step4Form">
-                  <!-- <input type="text" name="education"  formControlName="education" placeholder="Qualifications" /> -->
-                  <label>Education:</label>
-                  <tag-input formControlName="education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true" blinkIfDupe="true">
-                    <tag-input-dropdown [appendToBody]="false" [identifyBy]="'educationName'" [displayBy]="'educationName'" [showDropdownIfEmpty]="true"
-                      placeholder="Choose education" [autocompleteItems]="educationOfObjects">
-                    </tag-input-dropdown>
-                  </tag-input>
-    <p *ngIf="step4FormErrors.education.required || (step4Form.controls.education.pristine && submitted)">Education Cannot Be Empty</p>
-                  <!-- <input type="text" name="speciality"  formControlName="speciality" placeholder="Speciality" /> -->
-                  <label>Speciality:</label>
-                  <tag-input formControlName="speciality" (onAdd)="onAddSpeciality($event)" onlyFromAutocomplete="true" blinkIfDupe="true">
-                    <tag-input-dropdown [appendToBody]="false" [identifyBy]="'specialityName'" [displayBy]="'specialityName'" [showDropdownIfEmpty]="true"
-                      placeholder="Choose speciality" [autocompleteItems]="specialityOfObjects">
-                    </tag-input-dropdown>
-                  </tag-input>
-    <p *ngIf="step4FormErrors.speciality.required || (step4Form.controls.speciality.pristine && submitted)">Speciality Cannot Be Empty</p>
-                  <!-- <input type="text" name="location" placeholder="Location" /> -->
-                  <input type="button" name="previous" class="previous action-button" (click)="previouspagelast()"
-                    value="Previous" />
-                  <input type="submit" name="submit" class="submit action-button" value="Submit" (click)="saveRegistrationForm()"/>
-                    </form>
-                </fieldset>
                 </form>
-         <!-- ****************** END OF FORM 4************ -->
             
             </div>
             <!-- Registration screen -->
