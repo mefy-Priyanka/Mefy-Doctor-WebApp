@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -78,6 +79,7 @@ const approutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HttpModule,
     QRCodeModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(approutes),   //,{useHash: true}
@@ -102,7 +104,8 @@ const approutes: Routes = [
     AccountService,
     BillService,
     DocregistrationService,
-    LoginService
+    LoginService,
+    HttpClientModule
     // ManageaccountComponent,
     // AuthGuard
   ],
