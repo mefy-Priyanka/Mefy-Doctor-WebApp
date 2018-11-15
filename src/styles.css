@@ -733,8 +733,12 @@ input.file-path.validate.up_image {
                         left: 30px;
                     }
 
-
-                
+                    .ng2-tag-input {
+                        border-bottom: none !important;
+                    }
+                    input.ng2-tag-input__text-input.ng-untouched.ng-pristine.ng-valid {
+                        width: 327px;
+                    }
                
 
 
