@@ -44,7 +44,7 @@ export class ManageClinicComponent implements OnInit {
   // public formDisplay: Boolean = false;
   doctorprofileId: any;
   selected: any;
-  weekSchedule = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  weekSchedule = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
   error: any = { isError: false, errorMessage: '' };
   clinicStatus: any;
   errMessage: any;
