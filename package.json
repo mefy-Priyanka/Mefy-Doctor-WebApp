@@ -28,7 +28,7 @@
     "bootstrap": "^4.0.0",
     "core-js": "^2.4.1",
     "cors": "^2.8.4",
-    "moment": "^2.20.1",
+    "moment": "^2.22.2",
     "ng2-completer": "^1.6.3",
     "ng2-toasty": "^4.0.3",
     "ng4-loading-spinner": "^1.1.1",

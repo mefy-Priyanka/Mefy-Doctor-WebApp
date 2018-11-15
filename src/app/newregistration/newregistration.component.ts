@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocregistrationService } from '../mefyservice/docregistration.service';
+import * as moment from 'moment';
 // import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -44,6 +45,8 @@ export class NewregistrationComponent implements OnInit {
   public specialityOfObjects:any=[];
   public educationOfObjects:any=[];
   public mask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
+  x: any;
+  error: any;
 
   constructor(private formBuilder: FormBuilder, private docService: DocregistrationService) {
     // private toastr: ToastrService
@@ -102,34 +105,7 @@ export class NewregistrationComponent implements OnInit {
     this.getEducationList()
     this.getSpecialityList()
   }
-  firststep() {
-    if (this.step1Form.valid) {
-      console.log(this.step1Form.value)
-      this.firstreg = false;
-      this.secondreg = true;
-      this.thirdreg = false;
-/******* FOR STYLING ******/
-      this.activeStep1=false;
-      this.activeStep2=true;
-      this.activeStep3=false;
-      this.activeStep4=false;
-      /****************** */
-    } else {
-      this.submitted = true
-      this.firstreg = true;
-      this.secondreg = false;
-      this.thirdreg = false;
-/******* FOR STYLING ******/
-      this.activeStep1=true;
-      this.activeStep2=false;
-      this.activeStep3=false;
-      this.activeStep4=false
-      /****************** */
 
-    }
-
-
-  }
   /******************************IT CATCHES ALL CHANGES IN STEP FORM 1******************/
   onStep1FormValuesChanged() {
     for (const field in this.step1FormErrors) {
@@ -220,9 +196,35 @@ export class NewregistrationComponent implements OnInit {
 
     });
   }
+  firststep() {
+    if (this.step1Form.valid) {
+      console.log(this.step1Form.value)
+      this.firstreg = false;
+      this.secondreg = true;
+      this.thirdreg = false;
+/******* FOR STYLING ******/
+      this.activeStep1=false;
+      this.activeStep2=true;
+      this.activeStep3=false;
+      this.activeStep4=false;
+      /****************** */
+    } else {
+      this.submitted = true
+      this.firstreg = true;
+      this.secondreg = false;
+      this.thirdreg = false;
+/******* FOR STYLING ******/
+      this.activeStep1=true;
+      this.activeStep2=false;
+      this.activeStep3=false;
+      this.activeStep4=false
+      /****************** */
+    }
+  }
   secondstep() {
-    if (this.step2Form.valid) {
+    if (this.step2Form.valid && this.error != 'Invalid DOB') {
       console.log(this.step2Form.value)
+      this.submitted = false;
       this.firstreg = false;
       this.secondreg = false;
       this.thirdreg = true;
@@ -272,6 +274,7 @@ export class NewregistrationComponent implements OnInit {
   thirdstep() {
     if (this.step3Form.valid) {
       console.log(this.step3Form.value)
+      this.submitted = false;
       this.firstreg = false;
       this.secondreg = false;
       this.thirdreg = false;
@@ -399,7 +402,42 @@ let data={
     err => {
       console.log(err)
     })
+  }//compare dob
+compareDob(dob) {
+  console.log('dob',dob)
+  this.error='';
+  var startdat = moment();
+  var startdate = moment().subtract(25, "year");
+  // console.log(startdat);
+  let presentDat: any;
+  presentDat = moment(startdate).utcOffset(0);
+  // console.log('presentDat',presentDat);
+  presentDat.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
+  presentDat.toISOString()
+  presentDat.format("DD-MM-YYYY")
+  // console.log('presentDat......',presentDat);
+  var enddat = moment();
+  var enddat = moment().subtract(100, "year");
+  // console.log('enddat....',enddat);
+  let Dat: any;
+  Dat = moment(enddat).utcOffset(0);
+  Dat.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
+  Dat.toISOString()
+  Dat.format("DD-MM-YYYY")
+  // console.log('Dat..',Dat);
+  if ((moment(dob)).isAfter(presentDat._d)) {
+    this.error = 'Invalid DOB';
+    return false;
   }
+  else if ((moment(dob)).isBefore(Dat._d)) {
+    this.error = 'Invalid DOB';
+    return false;
+  }
+  else{
+    return true;
+  }
+}
+
 /**********************************DOCTOR"S REGISTRATION PART 1 */
  preRgistration(){
    let preRegistrationData={
@@ -419,16 +457,17 @@ let data={
 
 /********************************** FINAL DOCTOR"S REGISTRATION *********/
 saveRegistrationForm(){
-if(this.step4Form.valid){
   console.log(this.step4Form.value)
+  if(this.step4Form.valid){
+    this.compareDob(event);
   let registrationData={
     name:this.step1Form.value.name,
     phoneNumber:this.step1Form.value.phoneNumber,
     otp:parseInt(this.step4Form.value.otp),
     email:this.step1Form.value.email,
     language:this.selectedLanguage,
-    city:this.step3Form.value.city,
-    dob:this.step3Form.value.dob,
+    city:this.step2Form.value.city,
+    dob:(moment(this.step2Form.value.dob).format('DD-MM-YYYY')),
     education:this.selectedEducatiom,
     speciality:this.selectedSpeciality,
     role:'doctor'

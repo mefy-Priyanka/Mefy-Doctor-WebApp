@@ -253,8 +253,10 @@ export class ManageClinicComponent implements OnInit {
   }
   //get clinic Details through Doctor id
   getClinicList() {
-    this.scheduleService.getClinicList(this.doctorprofileId).subscribe(data => {
-      this.clinicList = data.result;
+    this.ClinicService.getCliniclist(this.doctorprofileId).subscribe(data => {
+      let response: any = {};
+      response=data;
+      this.clinicList = response.result;
       console.log(this.clinicList);
       if(this.clinicList.length == 0){
         this.formHide = true;
