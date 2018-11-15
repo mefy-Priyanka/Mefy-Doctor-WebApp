@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocregistrationService } from '../mefyservice/docregistration.service';
 import * as moment from 'moment';
-import { Router } from '@angular/router';
-
 // import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -23,7 +21,6 @@ export class NewregistrationComponent implements OnInit {
   public activeStep3:boolean=false
   public activeStep4:boolean=false
   /*********** */
-  public loader:boolean=false;  /******LOADER********/
 
   step1Form: FormGroup;
   step1FormErrors: any;
@@ -51,7 +48,7 @@ export class NewregistrationComponent implements OnInit {
   x: any;
   error: any;
 
-  constructor(private formBuilder: FormBuilder, private docService: DocregistrationService,private route:Router) {
+  constructor(private formBuilder: FormBuilder, private docService: DocregistrationService) {
     // private toastr: ToastrService
     /***********STEP 1*************/
     this.step1FormErrors = {
@@ -443,14 +440,12 @@ compareDob(dob) {
 
 /**********************************DOCTOR"S REGISTRATION PART 1 */
  preRgistration(){
-   this.loader=true
    let preRegistrationData={
      phoneNumber:this.step1Form.value.phoneNumber,
      role:'doctor'
    }
    this.docService.preRegistrationApi(preRegistrationData).subscribe(data=>{
      console.log('data',data)
-     this.loader=false
      this.saveRegistrationForm();
    },
    err=>{
@@ -464,7 +459,6 @@ compareDob(dob) {
 saveRegistrationForm(){
   console.log(this.step4Form.value)
   if(this.step4Form.valid){
-    this.loader=true
     this.compareDob(event);
   let registrationData={
     name:this.step1Form.value.name,
@@ -482,8 +476,6 @@ saveRegistrationForm(){
   console.log('registrationData',registrationData)
   this.docService.doctorRegistrationApi(registrationData).subscribe(result=>{
     console.log('result',result)
-    this.route.navigate(['/dashboard/main'])
-    this.loader=false
     // this.toastr.success(' Sucessfully Register!', 'Toastr fun!');
   },
   err=>{
