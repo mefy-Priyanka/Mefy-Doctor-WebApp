@@ -476,7 +476,8 @@ saveRegistrationForm(){
     dob:(moment(this.step2Form.value.dob).format('DD-MM-YYYY')),
     education:this.selectedEducatiom,
     speciality:this.selectedSpeciality,
-    role:'doctor'
+    role:'doctor',
+    token:'12345'
   }
   console.log('registrationData',registrationData)
   this.docService.doctorRegistrationApi(registrationData).subscribe(result=>{

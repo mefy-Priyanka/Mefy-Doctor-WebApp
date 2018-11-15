@@ -111,11 +111,11 @@ export class NewloginComponent implements OnInit {
     this.loader=false;
     if (this.doctorloginForm.valid) {
       let data = {
-        phoneNumber: this.doctorloginForm.value.phoneNumber,
+        phoneNumber: this.doctorloginForm.value,
         role: 'doctor',
-        deviceId: '2345434'
+        token: '12345'
       }
-      this.doctorService.newdoctor(data).subscribe(value => {
+      this.doctorService.doctorWebLogin(data).subscribe(value => {
         console.log('result',value)
         result = value;
           if (!result.result.error) {
