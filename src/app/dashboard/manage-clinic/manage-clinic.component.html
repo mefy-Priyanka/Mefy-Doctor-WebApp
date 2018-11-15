@@ -108,9 +108,12 @@
                 </div>
                 <div class="col-md-2 col-xs-12 text-center" id="padding_r">
                   <label class="switch1">
-                    <input type="checkbox" (change)="availabilityClinic($event,details._id)" [checked]="details.availability=='Open'">
+                    <!-- <input type="checkbox" (change)="availabilityClinic($event,details._id)" [checked]="details.availability=='Open'">
                     <span class="slider1 round1" [ngStyle]="{'color': details.availability=='Open' ? '#23e29c' : '#fff'}">
-                      <p class="open_2" [hidden]="details.availability=='Close'" [ngStyle]="{'-webkit-text-fill-color':details.availability=='Open'?'#fff':'grey'}">OPEN</p>
+                      <p class="open_2" [hidden]="details.availability=='Close'" [ngStyle]="{'-webkit-text-fill-color':details.availability=='Open'?'#fff':'grey'}">OPEN</p> -->
+                      <input type="checkbox" >
+                    <span class="slider1 round1" >
+                      <p class="open_2" >OPEN</p>
                     </span>
                   </label>
                 </div>
@@ -243,7 +246,7 @@
                   <hr class="light_schedule1">
                   <div class="set_upbtn">
 
-                    <button class="saveinputd" (click)="saveScheduleForm()">Setup</button>
+                    <button class="saveinputd" (click)="saveclinicForm()">Setup</button>
                     <button class="cancelbtn" [hidden]="cancel" (click)="cancelSave()">Cancel</button>
                     <!-- <button class="set_up" *ngIf="createSchedule" (click)="deleteClinicInfo()">Delete</button> -->
 

@@ -4,6 +4,24 @@
 <img src="../../assets/images/mefylogo.png" class="mefyLogo">
   <div class="verticalform">
     <div class="FormContent">
+      <!-- /* loader */ -->
+<div class="loading"  *ngIf="loader">
+    <div class="sk-circle">
+      <div class="sk-circle1 sk-child"></div>
+      <div class="sk-circle2 sk-child"></div>
+      <div class="sk-circle3 sk-child"></div>
+      <div class="sk-circle4 sk-child"></div>
+      <div class="sk-circle5 sk-child"></div>
+      <div class="sk-circle6 sk-child"></div>
+      <div class="sk-circle7 sk-child"></div>
+      <div class="sk-circle8 sk-child"></div>
+      <div class="sk-circle9 sk-child"></div>
+      <div class="sk-circle10 sk-child"></div>
+      <div class="sk-circle11 sk-child"></div>
+      <div class="sk-circle12 sk-child"></div>
+    </div>
+    </div>
+    <!-- /* loader */ -->
       <div class="row nomargin">
         <div class="col-md-12" id="noPadding">
           <div class="col-md-6" id="noPadding">
@@ -11,7 +29,7 @@
               <div class="leftData">
                 <div class="put">
                   <h1>MeFy</h1>
-                  <qrcode [qrdata]="'Your QR code data string'" [colorlight]="'#fff'" [colordark]="'#683d90'" [size]="172"
+                  <qrcode [qrdata]="scannerdata" [colorlight]="'#fff'" [colordark]="'#683d90'" [size]="172"
                     [level]="'M'"></qrcode>
                   <p class="code">Scan your qr code</p>
                 </div>
@@ -26,7 +44,7 @@
               <form [formGroup]="doctorloginForm">
                 <div class="form-group phoneDiv">
                   <label></label>
-                  <input type="text" class="form-control inputPhone" placeholder="Phone Number" formControlName="phoneNumber">
+                  <input type="text" class="form-control inputPhone" [textMask]="{mask: mask, guide: false}" placeholder="Phone Number" formControlName="phoneNumber">
                   <p class="errormessage" *ngIf="loginFormErrors.phoneNumber.required || (doctorloginForm.controls.phoneNumber.pristine && submitted)">Number can not be empty</p>
                   <i class="fa fa-mobile right" aria-hidden="true"></i>
                 </div>

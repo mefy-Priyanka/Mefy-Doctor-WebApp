@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -11,6 +12,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 /********************NEW SERVICES************************** */
 import { DocregistrationService } from './mefyservice/docregistration.service';
 import { LoginService } from './mefyservice/login.service';
+import {ClinicService} from './mefyservice/clinic.service';
 /******************END OF NEW SERVICES************************************ */
 
 // import { RegistrationModule } from './registration/registration.module';
@@ -79,6 +81,7 @@ const approutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HttpModule,
     QRCodeModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(approutes),   //,{useHash: true}
@@ -103,8 +106,11 @@ const approutes: Routes = [
     AppointmentService,
     AccountService,
     BillService,
+    //new services
     DocregistrationService,
-    LoginService
+    LoginService,
+    ClinicService,
+    HttpClientModule
     // ManageaccountComponent,
     // AuthGuard
   ],
