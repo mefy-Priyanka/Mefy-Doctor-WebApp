@@ -41,11 +41,11 @@
             <div class="loginContent" *ngIf="loginShow">
               <h1>Login</h1>
               <p>Please login to your account</p>
-              <form [formGroup]="doctorloginForm">
+              <form [formGroup]="loginForm">
                 <div class="form-group phoneDiv">
                   <label></label>
                   <input type="text" class="form-control inputPhone" [textMask]="{mask: mask, guide: false}" placeholder="Phone Number" formControlName="phoneNumber">
-                  <p class="errormessage" *ngIf="loginFormErrors.phoneNumber.required || (doctorloginForm.controls.phoneNumber.pristine && submitted)">Number can not be empty</p>
+                  <p class="errormessage" *ngIf="loginFormErrors.phoneNumber.required || (loginForm.controls.phoneNumber.pristine && submitted)">Number can not be empty</p>
                   <i class="fa fa-mobile right" aria-hidden="true"></i>
                 </div>
                 <div class="loginRegister">
@@ -87,14 +87,14 @@ c1.7-1.7,2.7-4,2.7-6.4s-1-4.7-2.7-6.4C292.75,218.2,290.45,217.2,288.05,217.2z" /
                 </g>
               </svg>
               <p>Please enter the OTP you received</p>
-              <form [formGroup]="otploginForm">
+              <form [formGroup]="otpForm">
                 <div class="form-group phoneDiv">
                   <!-- <label>OTP</label> -->
                   <input type="text" class="form-control inputPhone" formControlName="otp">
-                  <p class="errormessage" *ngIf="otploginFormErrors.otp.required || (otploginForm.controls.otp.pristine && submitted)">Enter correct OTP</p>
+                  <p class="errormessage" *ngIf="otpFormErrors.otp.required || (otpForm.controls.otp.pristine && submitted)">Can't be empty</p>
                 </div>
                 <div class="loginRegister">
-                  <button class="loginbutton" (click)="submitOtp()">Submit</button>
+                  <button class="loginbutton" (click)="verifyOtp()">Submit</button>
                 </div>
                 <div class="noaccount">
                   <p>Don't have an account ?</p>

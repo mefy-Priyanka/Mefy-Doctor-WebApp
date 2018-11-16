@@ -12,60 +12,60 @@ import io from 'socket.io-client';
 export class NewloginComponent implements OnInit {
   public myAngularxQrCode: string = null;
   public loginShow: boolean = true;
-  public loader:boolean=false;
+  public loader: boolean = false;
   public otpShow: boolean = false;
-  public doctorloginForm: FormGroup;
-  public otploginForm: FormGroup;
+  public loginForm: FormGroup;
+  public otpForm: FormGroup;
   loginFormErrors: any;
-  otploginFormErrors: any;
+  otpFormErrors: any;
   submitted: boolean = false; //SHOW ERROR,IF INVALID FORM IS SUBMITTED
   phoneNumber: any = [];
   userData: any;
   allUserList: any = []
-  public scannerdata:any="socket.id";
+  public scannerdata: any = "socket.id";
   public mask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
 
   public socket = io('http://ec2-13-232-207-92.ap-south-1.compute.amazonaws.com:5023');
-  constructor(private formBuilder: FormBuilder, public doctorService: LoginService,private router: Router) {
+  constructor(private formBuilder: FormBuilder, public loginService: LoginService, private router: Router) {
     this.scanData();
     // this.myAngularxQrCode = this.scannerdata;
     this.loginFormErrors = {
       phoneNumber: {},
     };
-    this.otploginFormErrors = {
+    this.otpFormErrors = {
       otp: {},
     };
-   }
-   scanData(){
-    let _base=this;
-    _base.socket.on('connect', function(){
+  }
+  scanData() {
+    let _base = this;
+    _base.socket.on('connect', function () {
       console.log("connect", _base.socket.id);
-      _base.scannerdata= _base.socket.id;
-      console.log( _base.scannerdata);
+      _base.scannerdata = _base.socket.id;
+      console.log(_base.scannerdata);
     });
-  
-    _base.socket.on('loginByScanner', function(data){
-      console.log("data print",data);
+
+    _base.socket.on('loginByScanner', function (data) {
+      console.log("data print", data);
       _base.router.navigate(['/dashboard'])
     });
-    _base.socket.on('disconnect', function(){
+    _base.socket.on('disconnect', function () {
       console.log("connection closed");
     });
   }
   ngOnInit() {
-    this.doctorloginForm = this.createLoginForm()
-    this.doctorloginForm.valueChanges.subscribe(() => {
+    this.loginForm = this.createLoginForm()
+    this.loginForm.valueChanges.subscribe(() => {
       this.onLoginFormValuesChanged();
     });
-    this.otploginForm = this.createOtpForm()
-    this.otploginForm.valueChanges.subscribe(() => {
+    this.otpForm = this.createOtpForm()
+    this.otpForm.valueChanges.subscribe(() => {
       this.onOtpFormValuesChanged();
     });
     // this.hii();
     this.getAllUsers();
   }
   getAllUsers() {
-    this.doctorService.getAllUsers().subscribe(data => {
+    this.loginService.getAllUsers().subscribe(data => {
       // console.log(data)
       let result: any = {};
       result = data
@@ -82,93 +82,27 @@ export class NewloginComponent implements OnInit {
       // Clear previous errors
       this.loginFormErrors[field] = {};
       // Get the control
-      const control = this.doctorloginForm.get(field);
+      const control = this.loginForm.get(field);
 
       if (control && control.dirty && !control.valid) {
         this.loginFormErrors[field] = control.errors;
       }
     }
   }
-    /******************************IT CATCHES ALL CHANGES IN FORM******************/
-    onOtpFormValuesChanged() {
-      for (const field in this.otploginFormErrors) {
-        if (!this.otploginFormErrors.hasOwnProperty(field)) {
-          continue;
-        }
-        // Clear previous errors
-        this.otploginFormErrors[field] = {};
-        // Get the control
-        const control = this.otploginForm.get(field);
-  
-        if (control && control.dirty && !control.valid) {
-          this.otploginFormErrors[field] = control.errors;
-        }
+  /******************************IT CATCHES ALL CHANGES IN FORM******************/
+  onOtpFormValuesChanged() {
+    for (const field in this.otpFormErrors) {
+      if (!this.otpFormErrors.hasOwnProperty(field)) {
+        continue;
       }
-    }
-  login() {
-    let result: any = {};
-    this.submitted = true;
-    this.loader=false;
-    if (this.doctorloginForm.valid) {
-      let data = {
-        phoneNumber: this.doctorloginForm.value,
-        role: 'doctor',
-        token: '12345'
+      // Clear previous errors
+      this.otpFormErrors[field] = {};
+      // Get the control
+      const control = this.otpForm.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        this.otpFormErrors[field] = control.errors;
       }
-      this.doctorService.doctorWebLogin(data).subscribe(value => {
-        console.log('result',value)
-        result = value;
-          if (!result.result.error) {
-            // this.toastr.success('User Loggedin Succesful!', 'Wow!');
-            this.loader=true;
-            this.router.navigate(['/dashboard/main'])
-          }
-          else{
-            // this.toastr.error('User Not exits!', 'Enter Otp!');
-            // this.loader=true;
-            this.otpShow=true;
-            this.loginShow=false;
-            this.submitted = false;
-          }              
-      },
-        err => {
-          console.log("Network Issue");
-        }
-      )
-    }
-  }
-  submitOtp() {
-    let result: any = {};
-    this.submitted=true;
-    if(this.otploginForm.valid){
-      let data = {
-        otp: this.otploginForm.value.otp,
-        phoneNumber: this.doctorloginForm.value.phoneNumber,
-        role: "doctor",
-        name: "priyanka",
-        gender: "Female",
-        dob: "21-23-2013",
-        city: "Durgapur",
-        deviceId: '2345434',
-      }
-      this.doctorService.otpData(data).subscribe(value => {
-        result = value;
-          if (!result.result.error) {
-            console.log("success");
-            // this.toastr.success('User Loggedin Succesful!', 'Wow!');
-            this.loader=true;
-            this.router.navigate(['/dashboard/main'])
-          }
-          else{
-            // this.toastr.error('Wrong Otp!');
-            console.log("error");
-            this.submitted=false;
-          }              
-      },
-        err => {
-          console.log("Network Issue");
-        }
-      )
     }
   }
   createLoginForm() {
@@ -181,5 +115,66 @@ export class NewloginComponent implements OnInit {
       otp: ['', Validators.required],
     });
   }
+
+
+  /*******************DOCTOR'S LOGIN********************/
+  login() {
+    let result: any = {};
+    this.loader = false;
+    if (this.loginForm.valid) {
+      let logindata = {
+        phoneNumber: this.loginForm.value.phoneNumber,
+        role: 'doctor',
+        token: '12345'
+      }
+      this.loginService.doctorWebLogin(logindata).subscribe(value => {
+        console.log('result', value)
+        result = value;
+        if (result.result.message == 'OTP sent to registered number') {
+          this.loginShow = false;
+          this.otpShow = true
+          // this.toastr.success('User Loggedin Succesful!', 'Wow!');
+        }
+        else if (result.result.message == 'Doctor loggedIn successfully') {
+          this.router.navigate(['/dashboard/main'])
+        }
+        else {
+          this.router.navigate(['/register'])
+        }
+      },
+        err => {
+          console.log("Network Issue");
+        }
+      )
+    }
+    else {
+      this.submitted = true
+    }
+  }
+  /************************VERIFY OTP**************************/
+  verifyOtp() {
+    this.loader = true;
+    if (this.otpForm.valid) {
+      // this.loader=true;          
+      let verficationData = {
+        otp: parseInt(this.otpForm.value.otp),
+        phoneNumber: this.loginForm.value.phoneNumber,
+        role: 'doctor'
+      }
+      this.loginService.verifyOtp(verficationData).subscribe(result => {
+        console.log('result', result)
+        this.loader = false;
+        this.router.navigate(['/dashboard/main'])
+      },
+        err => {
+          console.log(err)
+        })
+    }
+    else {
+      this.loader = false;
+      this.submitted = true;
+    }
+  }
+
 
 }
