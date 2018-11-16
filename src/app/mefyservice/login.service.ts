@@ -25,4 +25,9 @@ export class LoginService {
   //   console.log("Data",data)
   //   return this.http.post(APIURL + 'User/loginByScanner', data)
   // }
+  /*******************DOCOTOR WEB LOGIN*****************/
+  doctorWebLogin(data){
+    console.log('dada',data)
+    return this.http.post(APIURL+'User/doctorWebLogin',data)
+  }
 }

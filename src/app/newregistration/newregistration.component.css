@@ -291,6 +291,18 @@ fieldset.secondFieldset {
     padding: 0 !important;
 }
 /* multistepform */
-
+/* input#test2 {
+    opacity: 1;
+}
+input#test4 {
+    opacity: 1;
+} */
+p.genderm {
+    font-family: 'Roboto',sans-serif;
+    color: rgba(101, 99, 99, 0.79);
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 500;
+  }
 
 
