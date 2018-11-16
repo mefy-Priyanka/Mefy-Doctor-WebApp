@@ -29,25 +29,25 @@
                 </ul>
 
                 <!--  *******************FORM 1************ -->
-                    <!-- /* loader */ -->
-<div class="loading"  *ngIf="loader">
-    <div class="sk-circle">
-      <div class="sk-circle1 sk-child"></div>
-      <div class="sk-circle2 sk-child"></div>
-      <div class="sk-circle3 sk-child"></div>
-      <div class="sk-circle4 sk-child"></div>
-      <div class="sk-circle5 sk-child"></div>
-      <div class="sk-circle6 sk-child"></div>
-      <div class="sk-circle7 sk-child"></div>
-      <div class="sk-circle8 sk-child"></div>
-      <div class="sk-circle9 sk-child"></div>
-      <div class="sk-circle10 sk-child"></div>
-      <div class="sk-circle11 sk-child"></div>
-      <div class="sk-circle12 sk-child"></div>
-    </div>
-  </div>
+                <!-- /* loader */ -->
+                <div class="loading" *ngIf="loader">
+                  <div class="sk-circle">
+                    <div class="sk-circle1 sk-child"></div>
+                    <div class="sk-circle2 sk-child"></div>
+                    <div class="sk-circle3 sk-child"></div>
+                    <div class="sk-circle4 sk-child"></div>
+                    <div class="sk-circle5 sk-child"></div>
+                    <div class="sk-circle6 sk-child"></div>
+                    <div class="sk-circle7 sk-child"></div>
+                    <div class="sk-circle8 sk-child"></div>
+                    <div class="sk-circle9 sk-child"></div>
+                    <div class="sk-circle10 sk-child"></div>
+                    <div class="sk-circle11 sk-child"></div>
+                    <div class="sk-circle12 sk-child"></div>
+                  </div>
+                </div>
 
-    <!-- /* loader */ -->
+                <!-- /* loader */ -->
                 <fieldset *ngIf="firstreg">
                   <form [formGroup]="step1Form">
                     <input class="errormessage" type="text" name="name" formControlName="name" placeholder="Name" />
@@ -59,12 +59,13 @@
                       Cannot Be Empty</p>
                     <p class="errormessage" *ngIf="step1FormErrors.phoneNumber.minlength ">Please Enter Valid Phone
                       Number</p>
-                    <input type="text" name="regno" placeholder="Registration No." />
-                    <!-- <p class="errormessage" *ngIf="step1FormErrors.email.required ||step1FormErrors.email.email || (step1Form.controls.email.pristine && submitted)">Email can't be empty or email should be valid</p> -->
-                    <input type="text" name="state" placeholder="State" />
-
-                    <input type="button" name="next" class="next action-button" (click)="firststep()" value="Next"
-                      (click)="preRgistration()" />
+                    <input type="text" name="regno" placeholder="Registration No." formControlName="registrationNumber" />
+                    <p class="errormessage" *ngIf="step1FormErrors.registrationNumber.required || (step1Form.controls.registrationNumber.pristine && submitted)">Registration
+                      Number can't be empty</p>
+                    <input type="text" name="state" placeholder="State" formControlName="state" />
+                    <p class="errormessage" *ngIf="step1FormErrors.state.required || (step1Form.controls.state.pristine && submitted)">State
+                      can't be empty</p>
+                    <input type="button" name="next" class="next action-button" (click)="firststep()" value="Next" />
 
                   </form>
 
@@ -81,8 +82,8 @@
                       Cannot Be Empty</p>
                     <!-- <input type="text" name="language" formControlName="language"  placeholder="Language" /> -->
                     <!-- <label>Language:</label> -->
-                    <tag-input data-placeholder="Enter alltags" formControlName="language" (onAdd)="onAddLanguage($event)" onlyFromAutocomplete="true"
-                      blinkIfDupe="true" placeholder="Language">
+                    <tag-input data-placeholder="Enter alltags" formControlName="language" (onAdd)="onAddLanguage($event)"
+                      onlyFromAutocomplete="true" blinkIfDupe="true" placeholder="Language">
                       <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
                         [showDropdownIfEmpty]="true" placeholder="Choose language" [autocompleteItems]="languageOfObjects">
                       </tag-input-dropdown>
@@ -97,25 +98,29 @@
                     <p class="errormessage" *ngIf="step2FormErrors.dob.required || (step2Form.controls.dob.pristine && submitted)">Date
                       of
                       Birth Cannot Be Empty</p>
-                      <div class="col-md-3 col-xs-3 nomarginrw">
-              
-                        <p class="genderm">Gender</p>
-                      </div>
-                      <div class="col-md-5 col-xs-5 nomarginrw">
-                        <p class="gmalef">
-                          <input name="gender" type="radio" id="test1" value="Male" formControlName="gender"  />
-                          <label for="test1">Male</label>
-                          <!-- <span class="error_message" [ngStyle]="{'font-size':'13px'}" *ngIf="step1FormErrors.gender.required">Please Select Gender</span> -->
-                        </p>
-                      </div>
-                      <div class="col-md-4 col-xs-4 nomarginrw">
-                          <p class="gmalef">
-                            <input name="gender" type="radio" id="test2" value="Female" formControlName="gender" />
-                            <label for="test2">Female</label>
-                            <!-- <span class="error_message" [ngStyle]="{'font-size':'13px'}" *ngIf="step1FormErrors.gender.required">Please Select Gender</span> -->
-                          </p>
-                        </div>
-                  
+                    <!-- <div class="col-md-2 col-xs-2 nomarginrw">
+
+                      <p class="genderm">Gender</p>
+                    </div> -->
+                    <!-- <div class="col-md-3 col-xs-3 nomarginrw">
+                      <p class="gmalef">
+                        <input name="gender" type="radio" id="test1" value="Male" formControlName="gender" />
+                        <label for="test1">Male</label>
+                      </p>
+                    </div>
+                    <div class="col-md-3 col-xs-3 nomarginrw">
+                      <p class="gmalef">
+                        <input name="gender" type="radio" id="test2" value="Female" formControlName="gender" />
+                        <label for="test2">Female</label>
+                      </p>
+                    </div>
+                    <div class="col-md-3 col-xs-3 nomarginrw">
+                      <p class="gmalef">
+                        <input name="gender" type="radio" id="test3" value="Others" formControlName="gender" />
+                        <label for="test3">Others</label>
+                      </p>
+                    </div> -->
+
                     <input type="button" name="previous" class="previous action-button" (click)="previousfirst()" value="Previous" />
                     <input type="button" name="next" class="next action-button" (click)="secondstep() " value="Next" />
                   </form>
@@ -137,16 +142,18 @@
                       Cannot Be Empty</p>
                     <!-- <input type="text" name="speciality"  formControlName="speciality" placeholder="Speciality" /> -->
                     <!-- <label>Speciality:</label> -->
-                    <tag-input formControlName="speciality" (onAdd)="onAddSpeciality($event)" onlyFromAutocomplete="true" placeholder="Speciality"
-                      blinkIfDupe="true">
+                    <tag-input formControlName="speciality" (onAdd)="onAddSpeciality($event)" onlyFromAutocomplete="true"
+                      placeholder="Speciality" blinkIfDupe="true">
                       <tag-input-dropdown [appendToBody]="false" [identifyBy]="'specialityName'" [displayBy]="'specialityName'"
                         [showDropdownIfEmpty]="true" placeholder="Choose speciality" [autocompleteItems]="specialityOfObjects">
                       </tag-input-dropdown>
                     </tag-input>
                     <p class="errormessage" *ngIf="step3FormErrors.speciality.required || (step3Form.controls.speciality.pristine && submitted)">Speciality
                       Cannot Be Empty</p>
-                    <input type="text" name="practisingsince" placeholder="Practising Since" />
+                    <input type="text" name="practisingsince" placeholder="Practising Since" formControlName="practicingSince" />
                     <!-- <input type="text" name="location" placeholder="Location" /> -->
+                    <p class="errormessage" *ngIf="step3FormErrors.practicingSince.required || (step3Form.controls.practicingSince.pristine && submitted)">Practicing
+                      Since can't be empty</p>
                     <input type="button" name="previous" class="previous action-button" (click)="previouslast()" value="Previous" />
                     <input type="submit" name="submit" class="submit action-button" value="Next" (click)="thirdstep()" />
                   </form>

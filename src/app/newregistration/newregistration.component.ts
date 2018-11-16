@@ -54,7 +54,8 @@ export class NewregistrationComponent implements OnInit {
     this.step1FormErrors = {
       phoneNumber: {},
       name: {},
-      email: {}
+      registrationNumber: {},
+      state:{}
     };
 
     /***********STEP 2*************/
@@ -62,12 +63,14 @@ export class NewregistrationComponent implements OnInit {
     this.step2FormErrors = {
       city: {},
       language: {},
-      dob: {}
+      dob: {},
+      gender:{}
     };
     /***********STEP 3*************/
     this.step3FormErrors = {
       education: {},
-      speciality: {}
+      speciality: {},
+      practicingSince:{}
     };
     /***********STEP 4*************/
     this.step4FormErrors = {
@@ -174,20 +177,27 @@ export class NewregistrationComponent implements OnInit {
     return this.formBuilder.group({
       phoneNumber: ['', Validators.required],
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
+      registrationNumber: ['',Validators.required],
+      state: ['',Validators.required]
+
     });
   }
   createStep2Form() {
     return this.formBuilder.group({
       dob: ['', Validators.required],
       language: ['', Validators.required],
-      city: ['', Validators.required]
+      city: ['', Validators.required],
+      gender: ['',Validators.required]
+
     });
   }
   createStep3Form() {
     return this.formBuilder.group({
       speciality: ['', Validators.required],
-      education: ['', Validators.required]
+      education: ['', Validators.required],
+      practicingSince: ['',Validators.required]
+
+      
     });
   }
   createStep4Form() {
@@ -470,6 +480,10 @@ saveRegistrationForm(){
     dob:(moment(this.step2Form.value.dob).format('DD-MM-YYYY')),
     education:this.selectedEducatiom,
     speciality:this.selectedSpeciality,
+    practicingSince:this.step3Form.value.practicingSince,
+    state:this.step1Form.value.state,
+    registrationNumber:this.step1Form.value.registrationNumber,
+    gender:this.step2Form.value.gender,
     role:'doctor',
     token:'12345'
   }

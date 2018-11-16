@@ -13,21 +13,17 @@ export class LoginService {
   getAllUsers() {
     return this.http.get(APIURL + 'User')
   }
-  // mydata(data) {
-  //   console.log("Data",data)
-  //   return this.http.post(APIURL + 'User/registration', data)
-  // }
-  otpData(data) {
-    console.log("Data",data)
-    return this.http.post(APIURL + 'User/registration', data)
-  }
   // scanner(data) {
   //   console.log("Data",data)
   //   return this.http.post(APIURL + 'User/loginByScanner', data)
   // }
   /*******************DOCOTOR WEB LOGIN*****************/
-  doctorWebLogin(data){
-    console.log('dada',data)
-    return this.http.post(APIURL+'User/doctorWebLogin',data)
+  doctorWebLogin(logindata){
+    console.log('logindata',logindata)
+    return this.http.post(APIURL+ 'User/doctorWebLogin',logindata)
+  }
+  /****************VERIFY OTP*************************/
+  verifyOtp(data){
+    return this.http.post(APIURL+'User/verifyotp',data)
   }
 }
