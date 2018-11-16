@@ -27,6 +27,14 @@ p.errormessage1 {
     color: red;
     position: absolute;
 }
+p.errormessage {
+    color: red;
+    margin: 0;
+    font-weight: 500;
+    font-style: italic;
+    position: absolute;
+    left: 30px;
+}
 div#left_side {
     padding-left: 0;
 }
