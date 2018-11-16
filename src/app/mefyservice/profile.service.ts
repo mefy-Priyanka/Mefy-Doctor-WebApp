@@ -10,7 +10,7 @@ export class ProfileService {
  
  getDocDetail(id){
    console.log('ff',id)
-   return this.http.get(APIURL+'doctor/'+ id)
+   return this.http.get(APIURL+'doctor/'+id)
 }
 
 }
