@@ -16,6 +16,7 @@ import { DocregistrationService } from './mefyservice/docregistration.service';
 import { LoginService } from './mefyservice/login.service';
 import {ClinicService} from './mefyservice/clinic.service';
 import { AccounttService } from './mefyservice/accountt.service';
+import {ProfileService} from './mefyservice/profile.service';
 
 /******************END OF NEW SERVICES************************************ */
 
@@ -111,6 +112,8 @@ const approutes: Routes = [
     AppointmentService,
     AccountService,
     BillService,
+    ProfileService,
+    // ProfilenavService,
     //new services
     DocregistrationService,
     LoginService,
