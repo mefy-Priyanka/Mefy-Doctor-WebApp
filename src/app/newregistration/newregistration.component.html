@@ -83,7 +83,7 @@
                       Cannot Be Empty</p>
                     <!-- <input type="text" name="language" formControlName="language"  placeholder="Language" /> -->
                     <!-- <label>Language:</label> -->
-                    <tag-input data-placeholder="Enter alltags" formControlName="language" (onAdd)="onAddLanguage($event)"
+                    <tag-input  formControlName="language" (onAdd)="onAddLanguage($event)"
                       onlyFromAutocomplete="true" blinkIfDupe="true" placeholder="Language">
                       <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
                         [showDropdownIfEmpty]="true" placeholder="Choose language" [autocompleteItems]="languageOfObjects">

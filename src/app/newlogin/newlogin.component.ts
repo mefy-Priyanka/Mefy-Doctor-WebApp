@@ -16,6 +16,7 @@ export class NewloginComponent implements OnInit {
   public otpShow: boolean = false;
   public loginForm: FormGroup;
   public otpForm: FormGroup;
+  public loginId:any;
   loginFormErrors: any;
   otpFormErrors: any;
   submitted: boolean = false; //SHOW ERROR,IF INVALID FORM IS SUBMITTED
@@ -136,6 +137,7 @@ export class NewloginComponent implements OnInit {
           // this.toastr.success('User Loggedin Succesful!', 'Wow!');
         }
         else if (result.result.message == 'Doctor loggedIn successfully') {
+          localStorage.setItem('loginId',this.loginForm.value.doctorId)
           this.router.navigate(['/dashboard/main'])
         }
         else {
