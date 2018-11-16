@@ -8,18 +8,19 @@ export class DocregistrationService {
 
   /*********************GET LANGUAGE JSON FILE****************************/
   getLanguageList(data){
-    console.log(data.x)
     return this.httpClient.get(APIURL+'doctor/getList?language='+ data.x)
   }
  /*********************GET EDUCATION JSON FILE****************************/
  getEducationList(data){
-  console.log(data.y)
   return this.httpClient.get(APIURL+'doctor/getList?education='+ data.y)
 }
  /*********************GET SPECIALITY JSON FILE****************************/
  getSpecialityList(data){
-  console.log(data.z)
   return this.httpClient.get(APIURL+'doctor/getList?speciality='+ data.z)
+}
+ /*********************GET STATE JSON FILE****************************/
+ getStateList(data){
+  return this.httpClient.get(APIURL+'doctor/getList?state='+ data.state)
 }
 /*************************DOCTOR'S PREREGISTRATION************************************ */
 preRegistrationApi(data){

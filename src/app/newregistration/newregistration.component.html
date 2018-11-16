@@ -62,13 +62,20 @@
                     <input type="text" name="regno" placeholder="Registration No." formControlName="registrationNumber" />
                     <p class="errormessage" *ngIf="step1FormErrors.registrationNumber.required || (step1Form.controls.registrationNumber.pristine && submitted)">Registration
                       Number can't be empty</p>
-                    <input type="text" name="state" placeholder="State" formControlName="state" />
+                    <!-- <input type="text" name="state" placeholder="State" formControlName="state" /> -->
+                    <ng-template #customItemTemplate let-model="item" let-index="index">
+                      <h5>{{ model.states }} </h5>
+                    </ng-template>
+  
+                    <input class="form-control" [typeaheadItemTemplate]="customItemTemplate" formControlName="state" (typeaheadOnSelect)="onSelectedState($event)"
+                      placeholder="Search..." typeaheadOptionField="states" [typeahead]="stateList" class="form-control"
+                      (typeaheadNoResults)="typeaheadNoStateResults($event)">
                     <p class="errormessage" *ngIf="step1FormErrors.state.required || (step1Form.controls.state.pristine && submitted)">State
                       can't be empty</p>
                     <input type="button" name="next" class="next action-button" (click)="firststep()" value="Next" />
 
                   </form>
-
+                
                 </fieldset>
 
                 <!-- ****************** END OF FORM 1************ -->

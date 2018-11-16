@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../meme-services/shared.service';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AccountService } from '../../meme-services/account.service';
+// import { AccountService } from '../../meme-services/account.service';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
+import { AccounttService } from '../../mefyservice/accountt.service';
+
 
 @Component({
   selector: 'app-manageaccount',
@@ -38,7 +40,7 @@ export class ManageaccountComponent implements OnInit {
   pathName:any;
   submitted: boolean = false;
   public mask = [ /[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/,/\d/,/\d/,/\d/, /\d/, /\d/, /\d/] // Account number validation 
-  constructor(private formBuilder: FormBuilder, public accountService: AccountService,private sharedService: SharedService,private route:ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, public accountService: AccounttService,private sharedService: SharedService,private route:ActivatedRoute) {
     this.accountFormErrors = {
       accountHolderName: {},
       ifscCode: {},
@@ -138,7 +140,7 @@ export class ManageaccountComponent implements OnInit {
         this.accountForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
         console.log(this.accountForm.value);
       console.log(this.accountForm.value);
-      this.accountService.createAccount(this.accountForm.value).subscribe(data => {
+      this.accountService.addBankAccount(this.accountForm.value).subscribe(data => {
         console.log(data);
         this.accountForm.reset();
         this.getAccountDetail();
@@ -159,21 +161,21 @@ export class ManageaccountComponent implements OnInit {
 
   //  Display Account Detail
   getAccountDetail() {
-    this.accountService.getAccountListByDoctorList(this.doctorprofileId).subscribe(data => {
-      console.log(data)
-      this.accountDetail = data.result;
-      console.log(this.accountDetail); 
-      if(data.result && data.result.length!=0){
-        this.detail=this.accountDetail[0];
-        this.showAddAccount=false; 
-        this.displayData=true;
-      } 
-      else
-      {
-        this.showAddAccount=true; 
-        this.displayData=false;
-      }
-    })
+    // this.accountService.getAccountListByDoctorList(this.doctorprofileId).subscribe(data => {
+    //   console.log(data)
+    //   this.accountDetail = data.result;
+    //   console.log(this.accountDetail); 
+    //   if(data.result && data.result.length!=0){
+    //     this.detail=this.accountDetail[0];
+    //     this.showAddAccount=false; 
+    //     this.displayData=true;
+    //   } 
+    //   else
+    //   {
+    //     this.showAddAccount=true; 
+    //     this.displayData=false;
+    //   }
+    // })
   }
   //
   addAccount() {
@@ -207,43 +209,43 @@ export class ManageaccountComponent implements OnInit {
 
   // for Update(edit) Account Detail
   updateAccountInfo(){
-    this.accountForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
-    this.updatedAccountData= this.accountForm.value;
-    this.updatedAccountData._id=this.account._id;
-    console.log(this.updatedAccountData._id);
-    this.accountService.accountUpdate(this.updatedAccountData).subscribe(data => {
-      console.log('updated account data',data);
-      this.accountForm.reset();
-      this.getAccountDetail();
-      this.hideAccountForm = false;
-      this.showAddAccount=false;
-      this.displayData=true;
-      this.sharedService.accountInfo(true);
-    },err=>{
+    // this.accountForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
+    // this.updatedAccountData= this.accountForm.value;
+    // this.updatedAccountData._id=this.account._id;
+    // console.log(this.updatedAccountData._id);
+    // this.accountService.accountUpdate(this.updatedAccountData).subscribe(data => {
+    //   console.log('updated account data',data);
+    //   this.accountForm.reset();
+    //   this.getAccountDetail();
+    //   this.hideAccountForm = false;
+    //   this.showAddAccount=false;
+    //   this.displayData=true;
+    //   this.sharedService.accountInfo(true);
+    // },err=>{
 
-    })
+    // })
    
 
   }
    // delete Account details
-  //  deleteClinicInfo(id) {
-  //   this.accountForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
-  //   this.accountService.deleteAccount(id).subscribe(data => {
-  //     console.log(data)
-  //   this.getAccountDetail();
-  //   this.accountForm.reset();
-  //   this.hideAccountForm = false;
-  //   this.showAddAccount=true;
-  //   this.displayData=false;
-  //   // this.detail={};
-  //     id = '';
-  //   },
-  //     err => {
-  //       console.log(err);
-  //     })
+   deleteClinicInfo(id) {
+    // this.accountForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
+    // this.accountService.deleteAccount(id).subscribe(data => {
+    //   console.log(data)
+    // this.getAccountDetail();
+    // this.accountForm.reset();
+    // this.hideAccountForm = false;
+    // this.showAddAccount=true;
+    // this.displayData=false;
+    // // this.detail={};
+    //   id = '';
+    // },
+    //   err => {
+    //     console.log(err);
+    //   })
  
  
-  // }
+  }
 
     //save at enter
     keyDownFunction(event) {

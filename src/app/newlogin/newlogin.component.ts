@@ -136,6 +136,9 @@ export class NewloginComponent implements OnInit {
           // this.toastr.success('User Loggedin Succesful!', 'Wow!');
         }
         else if (result.result.message == 'Doctor loggedIn successfully') {
+          console.log('fff',result)
+          console.log('data',result.result.user.doctorId)
+          localStorage.setItem('loginId',result.result.user.doctorId)
           this.router.navigate(['/dashboard/main'])
         }
         else {
@@ -161,8 +164,11 @@ export class NewloginComponent implements OnInit {
         phoneNumber: this.loginForm.value.phoneNumber,
         role: 'doctor'
       }
-      this.loginService.verifyOtp(verficationData).subscribe(result => {
-        console.log('result', result)
+      this.loginService.verifyOtp(verficationData).subscribe(value => {
+        console.log('result', value)
+        let result:any={}
+        result=value
+        localStorage.setItem('loginId',result.result.result.doctorId)
         this.loader = false;
         this.router.navigate(['/dashboard/main'])
       },

@@ -21,7 +21,7 @@ export class NewregistrationComponent implements OnInit {
   public activeStep3:boolean=false
   public activeStep4:boolean=false
   /*********** */
-
+   public noStateResult = false 
   step1Form: FormGroup;
   step1FormErrors: any;
  
@@ -41,12 +41,15 @@ export class NewregistrationComponent implements OnInit {
   public languageList: any = [];
   public  educationList: any = [];
   public specialityList: any = [];
+  public stateList:any=[]
   public languageOfObjects:any=[];
   public specialityOfObjects:any=[];
   public educationOfObjects:any=[];
+  public stateOfObjects:any=[];
   public mask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
-  x: any;
-  error: any;
+  public  error: any;
+  public selectedState:any
+
 
   constructor(private formBuilder: FormBuilder, private docService: DocregistrationService) {
     // private toastr: ToastrService
@@ -107,6 +110,7 @@ export class NewregistrationComponent implements OnInit {
     this.getLanguageList()
     this.getEducationList()
     this.getSpecialityList()
+    this.getStateList()
   }
 
   /******************************IT CATCHES ALL CHANGES IN STEP FORM 1******************/
@@ -365,7 +369,18 @@ export class NewregistrationComponent implements OnInit {
     // console.log('selectedSpeciality',this.selectedSpeciality)
    
   }
-   
+    /***********************STATE ON SELECT IN STEP 3*********/
+    onSelectedState(evt) {
+      console.log(evt);
+      this.selectedState =evt.value;
+      console.log('sate',this.selectedState)
+      // console.log('selectedSpeciality',this.selectedSpeciality)
+     
+    }
+    /**************IF RESULT IS NOT FOUND THEN SHOW MESSAGE */
+  typeaheadNoStateResults(event: boolean): void {
+    this.noStateResult = event
+  }
   /********************GET LIST OF Education *****************/
   getEducationList(){
 let data={
@@ -412,7 +427,31 @@ let data={
     err => {
       console.log(err)
     })
-  }//compare dob
+  }
+  /********************GET LIST OF STATE *****************/
+  getStateList(){
+
+    let data={
+     state: "state"
+   }
+   this.docService.getStateList(data).subscribe(data => {
+     let value: any = {}
+     value = data
+     this.stateList = value.result.result
+     console.log(this.stateList)
+    //  for (var i = 0; i < this.stateList.length; i++) {
+    //    var state = {
+    //      stateName: this.stateList[i].GeneralSpeciality,
+         
+    //    }
+    //    this.stateOfObjects.push(state);
+    //  }
+   },
+     err => {
+       console.log(err)
+     })
+   }
+  //compare dob
 compareDob(dob) {
   console.log('dob',dob)
   this.error='';
@@ -481,7 +520,7 @@ saveRegistrationForm(){
     education:this.selectedEducatiom,
     speciality:this.selectedSpeciality,
     practicingSince:this.step3Form.value.practicingSince,
-    state:this.step1Form.value.state,
+    state:this.selectedState,
     registrationNumber:this.step1Form.value.registrationNumber,
     gender:this.step2Form.value.gender,
     role:'doctor',

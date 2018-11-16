@@ -7,12 +7,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagInputModule } from 'ngx-chips';
+import { TypeaheadModule } from 'ngx-bootstrap';
+
 // import { ToastrModule } from 'ngx-toastr';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 /********************NEW SERVICES************************** */
 import { DocregistrationService } from './mefyservice/docregistration.service';
 import { LoginService } from './mefyservice/login.service';
 import {ClinicService} from './mefyservice/clinic.service';
+import { AccounttService } from './mefyservice/accountt.service';
+
 /******************END OF NEW SERVICES************************************ */
 
 // import { RegistrationModule } from './registration/registration.module';
@@ -87,7 +91,8 @@ const approutes: Routes = [
     RouterModule.forRoot(approutes),   //,{useHash: true}
     TextMaskModule,
     TagInputModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    TypeaheadModule.forRoot()
     // ToastrModule.forRoot({   // ToastrModule added
     //   timeOut: 999,
     //   preventDuplicates: true,
@@ -110,6 +115,8 @@ const approutes: Routes = [
     DocregistrationService,
     LoginService,
     ClinicService,
+    AccounttService,
+    /**************/
     HttpClientModule
     // ManageaccountComponent,
     // AuthGuard
