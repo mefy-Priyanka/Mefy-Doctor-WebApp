@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocregistrationService } from '../mefyservice/docregistration.service';
+import { Router } from '@angular/router';
+
 import * as moment from 'moment';
 // import { ToastrService } from 'ngx-toastr';
 
@@ -21,7 +23,8 @@ export class NewregistrationComponent implements OnInit {
   public activeStep3:boolean=false
   public activeStep4:boolean=false
   /*********** */
-   public noStateResult = false 
+   public noStateResult = false ;
+   public loader=false;
   step1Form: FormGroup;
   step1FormErrors: any;
  
@@ -46,12 +49,13 @@ export class NewregistrationComponent implements OnInit {
   public specialityOfObjects:any=[];
   public educationOfObjects:any=[];
   public stateOfObjects:any=[];
+  public practisingYear = [/[1-9]/, /\d/, /\d/, /\d/] // practising year validation
   public mask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
   public  error: any;
   public selectedState:any
 
 
-  constructor(private formBuilder: FormBuilder, private docService: DocregistrationService) {
+  constructor(private formBuilder: FormBuilder, private docService: DocregistrationService,private router: Router) {
     // private toastr: ToastrService
     /***********STEP 1*************/
     this.step1FormErrors = {
@@ -199,7 +203,8 @@ export class NewregistrationComponent implements OnInit {
     return this.formBuilder.group({
       speciality: ['', Validators.required],
       education: ['', Validators.required],
-      practicingSince: ['',Validators.required]
+      practicingSince: ['',Validators.required],
+      issuingAuthority:['',Validators.required]
 
       
     });
@@ -286,6 +291,7 @@ export class NewregistrationComponent implements OnInit {
     /****************** */
   }
   thirdstep() {
+    if (this.comparePracticingYear(this.step3Form.value.practicingSince)) {
     if (this.step3Form.valid) {
       console.log(this.step3Form.value)
       this.submitted = false;
@@ -314,6 +320,10 @@ export class NewregistrationComponent implements OnInit {
       /****************** */
 
     }
+  }
+  else{
+    this.error='Invalid Practicing Year';
+  }
   }
   previouspagelast() {
     this.firstreg = false;
@@ -487,6 +497,40 @@ compareDob(dob) {
   }
 }
 
+comparePracticingYear(year) {
+  console.log('year',year)
+  this.error = '';
+  var formattedYear: any;
+  formattedYear = JSON.parse(year)
+  let presentDat: any;
+  presentDat = moment().utcOffset(0);
+  presentDat.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
+  presentDat.toISOString()
+  var currentYear: any;
+  currentYear = moment(presentDat, "DD/MM/YYYY").year()
+  console.log(currentYear);
+  var enddat = moment();
+  var enddat = moment().subtract(70, "year");
+  let Dat: any;
+  Dat = moment(enddat).utcOffset(0);
+  Dat.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
+  Dat.toISOString()
+  var maxYear: any;
+  maxYear = moment(Dat, "DD/MM/YYYY").year()
+  console.log(maxYear);
+  if ((formattedYear) > (currentYear)) {
+    this.error = 'Invalid Practicing Year';
+    console.log('abc')
+    return false;
+  }
+  else if ((formattedYear) < (maxYear)) {
+    this.error = 'Invalid Practicing Year';
+    return false;
+  }
+  else {
+    return true;
+  }
+}
 /**********************************DOCTOR"S REGISTRATION PART 1 */
  preRgistration(){
    let preRegistrationData={
@@ -507,6 +551,7 @@ compareDob(dob) {
 /********************************** FINAL DOCTOR"S REGISTRATION *********/
 saveRegistrationForm(){
   console.log(this.step4Form.value)
+  this.loader=true
   if(this.step4Form.valid){
     this.compareDob(event);
   let registrationData={
@@ -523,18 +568,24 @@ saveRegistrationForm(){
     state:this.selectedState,
     registrationNumber:this.step1Form.value.registrationNumber,
     gender:this.step2Form.value.gender,
+    issuingAuthority:this.step3Form.value.issuingAuthority,
     role:'doctor',
     token:'12345'
   }
   console.log('registrationData',registrationData)
   this.docService.doctorRegistrationApi(registrationData).subscribe(result=>{
     console.log('result',result)
+    this.loader=false
+    this.router.navigate(['/dashboard']);
+
     // this.toastr.success(' Sucessfully Register!', 'Toastr fun!');
   },
   err=>{
     // this.toastr.error('Registration Failed!', 'Server Issue')
   })
 }else{
+  this.loader=false
+
   // this.toastr.error('Registration Failed!', 'Not Valid')
 }
       }

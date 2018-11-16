@@ -107,21 +107,28 @@
                       of
                       Birth Cannot Be Empty</p>
                       <div class="top_space">
-                    <div class="col-md-3 col-xs-3 nomarginrw">
+                    <div class="col-md-2 col-xs-2 nomarginrw">
 
                       <p class="genderm">Gender</p>
                     </div>
-                    <div class="col-md-5 col-xs-5 nomarginrw">
+                    <div class="col-md-3 col-xs-3 nomarginrw">
                       <p class="gmalef">
                         <input name="gender" type="radio" id="test1" value="Male" formControlName="gender" />
                         <label for="test1">Male</label>
                         <!-- <span class="error_message" [ngStyle]="{'font-size':'13px'}" *ngIf="step1FormErrors.gender.required">Please Select Gender</span> -->
                       </p>
                     </div>
-                    <div class="col-md-4 col-xs-4 nomarginrw">
+                    <div class="col-md-3 col-xs-3 nomarginrw">
                       <p class="gmalef">
                         <input name="gender" type="radio" id="test2" value="Female" formControlName="gender" />
                         <label for="test2">Female</label>
+                        <!-- <span class="error_message" [ngStyle]="{'font-size':'13px'}" *ngIf="step1FormErrors.gender.required">Please Select Gender</span> -->
+                      </p>
+                    </div>
+                    <div class="col-md-4 col-xs-4 nomarginrw">
+                      <p class="gmalef">
+                        <input name="gender" type="radio" id="test5" value="Others" formControlName="gender" />
+                        <label for="test5">Others</label>
                         <!-- <span class="error_message" [ngStyle]="{'font-size':'13px'}" *ngIf="step1FormErrors.gender.required">Please Select Gender</span> -->
                       </p>
                     </div>
@@ -155,8 +162,14 @@
                     </tag-input>
                     <p class="errormessage" *ngIf="step3FormErrors.speciality.required || (step3Form.controls.speciality.pristine && submitted)">Speciality
                       Cannot Be Empty</p>
-                    <input type="text" name="practisingsince" placeholder="Practising Since" formControlName="practicingSince" />
-                    <input type="text" name="issueauthority" placeholder="Issuing Authority" />
+                    <input type="text" name="practisingsince" [textMask]="{mask: practisingYear, guide: false}" placeholder="Practising Since" formControlName="practicingSince" (blur)="comparePracticingYear(step3Form.value.practicingSince)" />
+                    <!-- <input type="text" name="issueauthority" placeholder="Issuing Authority" formControlName="issuingAuthority" /> -->
+                    <!-- <div class="selecta"> -->
+                      <select class="browser-default" formControlName="issuingAuthority">
+                      <option value="" disabled selected>Issuing Authority</option>
+                      <option value="MCI">MCI</option>
+                      </select>
+                      <!-- </div> -->
                     <p class="errormessage" *ngIf="step3FormErrors.practicingSince.required || (step3Form.controls.practicingSince.pristine && submitted)">Practicing
                       Since can't be empty</p>
                     <input type="button" name="previous" class="previous action-button" (click)="previouslast()" value="Previous" />
