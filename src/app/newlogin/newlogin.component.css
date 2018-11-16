@@ -156,6 +156,9 @@ img.mefyLogo {
     top: 10px;
     left: 2em;
 }
+ul.dropdown-menu.ng-star-inserted li a h5 {
+    font-size: 14px !important;
+}
 svg#otp {
     height: 50px;
     width: 24vw;

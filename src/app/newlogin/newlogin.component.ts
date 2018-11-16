@@ -17,6 +17,7 @@ export class NewloginComponent implements OnInit {
   public loginForm: FormGroup;
   public otpForm: FormGroup;
   public loginId:any;
+  public userId:any;
   loginFormErrors: any;
   otpFormErrors: any;
   submitted: boolean = false; //SHOW ERROR,IF INVALID FORM IS SUBMITTED
@@ -126,7 +127,7 @@ export class NewloginComponent implements OnInit {
       let logindata = {
         phoneNumber: this.loginForm.value.phoneNumber,
         role: 'doctor',
-        token: '12345'
+        token: '1234'
       }
       this.loginService.doctorWebLogin(logindata).subscribe(value => {
         console.log('result', value)
@@ -138,6 +139,8 @@ export class NewloginComponent implements OnInit {
         }
         else if (result.result.message == 'Doctor loggedIn successfully') {
           localStorage.setItem('loginId',result.result.user.doctorId)
+          localStorage.setItem('userId',result.result.user.userId)
+          console.log("userId",result.result.user.doctorId)
           this.router.navigate(['/dashboard/main'])
         }
         else {
@@ -168,6 +171,7 @@ export class NewloginComponent implements OnInit {
         let result:any={}
         result=value
         localStorage.setItem('loginId',result.result.result.doctorId)
+        localStorage.setItem('userId',result.result.result.userId)
         this.loader = false;
         this.router.navigate(['/dashboard/main'])
       },

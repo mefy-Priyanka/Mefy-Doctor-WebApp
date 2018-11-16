@@ -324,3 +324,6 @@ p.genderm {
 .selecta {
     margin-top: 1em;
     }
+ul.dropdown-menu.ng-star-inserted li a h5 {
+    font-size: 14px !important;
+}
