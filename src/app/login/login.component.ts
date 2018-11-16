@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MemeLoginService } from '../meme-services/meme-login.service';
+import { ProfileService } from '../mefyservice/profile.service';
 import { Router } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
 
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
   newMessage: any;
   loggedIn:boolean=false;
   public mask = [ /[1-9]/,/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/,/\d/,/\d/,/\d/, /\d/, /\d/] // Phone number validation 
-  constructor(private memeLoginService: MemeLoginService, private socketService: SocketService, private router: Router, private sharedService: SharedService
+  constructor(private memeLoginService: MemeLoginService, private socketService: SocketService, private profileservice:ProfileService,private router: Router, private sharedService: SharedService
 
   ) { }
 

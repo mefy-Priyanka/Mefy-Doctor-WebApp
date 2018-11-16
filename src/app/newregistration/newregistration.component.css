@@ -18,7 +18,7 @@
     border-style: inset;
     border-right: 20px solid #8e51b7;
     left: -7em;
-    height: 89vh;
+    height: 96vh;
     width: 34vw;
 }
 div#noPadding {
@@ -44,7 +44,7 @@ div#noPadding {
     position: relative;
     background: #fff;
     overflow: hidden;
-    height: 69vh;
+    height: 80vh;
     width: 58vw;
 }
 .loginContent {
@@ -192,6 +192,7 @@ img.registerLogo {
 	box-sizing: border-box;
 	width: 100%;
     position: relative;
+    padding-bottom:0px;
 }
 #msform fieldset:not(:first-of-type) {
 	display: none;
@@ -240,7 +241,7 @@ img.registerLogo {
 	margin-bottom: 20px;
 } */
 #progressbar {
-	margin-bottom: 19px;
+	margin-bottom: 12px;
 	overflow: hidden;
 	counter-reset: step;
 }
@@ -304,5 +305,12 @@ p.genderm {
     font-size: 14px;
     font-weight: 500;
   }
-
+  .haveaccount {
+    margin-top: 5px;
+    text-align: center;
+    padding-left: 5em;
+}
+.haveaccount p {
+    margin-bottom: 0;
+}
 

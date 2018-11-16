@@ -13,6 +13,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DocregistrationService } from './mefyservice/docregistration.service';
 import { LoginService } from './mefyservice/login.service';
 import {ClinicService} from './mefyservice/clinic.service';
+import {ProfileService} from './mefyservice/profile.service';
+
 /******************END OF NEW SERVICES************************************ */
 
 // import { RegistrationModule } from './registration/registration.module';
@@ -106,6 +108,8 @@ const approutes: Routes = [
     AppointmentService,
     AccountService,
     BillService,
+    ProfileService,
+    // ProfilenavService,
     //new services
     DocregistrationService,
     LoginService,
