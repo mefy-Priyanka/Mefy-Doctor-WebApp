@@ -736,7 +736,7 @@ input.file-path.validate.up_image {
                     .ng2-tag-input {
                         border-bottom: none !important;
                     }
-                    input.ng2-tag-input__text-input.ng-untouched.ng-pristine.ng-valid {
+                    input.ng2-tag-input__text-input.ng-pristine.ng-valid {
                         width: 327px;
                     }
 /* loader */
@@ -891,6 +891,8 @@ input.file-path.validate.up_image {
   h5.ng-star-inserted {
     font-size: 15px;
 }
+
+
 
 
 
