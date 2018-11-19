@@ -126,8 +126,7 @@ export class NewloginComponent implements OnInit {
     if (this.loginForm.valid) {
       let logindata = {
         phoneNumber: this.loginForm.value.phoneNumber,
-        role: 'doctor',
-        token: '1234'
+        role: 'doctor'
       }
       this.loginService.doctorWebLogin(logindata).subscribe(value => {
         console.log('result', value)
@@ -136,12 +135,6 @@ export class NewloginComponent implements OnInit {
           this.loginShow = false;
           this.otpShow = true
           // this.toastr.success('User Loggedin Succesful!', 'Wow!');
-        }
-        else if (result.result.message == 'Doctor loggedIn successfully') {
-          localStorage.setItem('loginId',result.result.user.doctorId)
-          localStorage.setItem('userId',result.result.user.userId)
-          console.log("userId",result.result.user.doctorId)
-          this.router.navigate(['/dashboard/main'])
         }
         else {
           this.router.navigate(['/register'])

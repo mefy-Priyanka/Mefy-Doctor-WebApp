@@ -573,9 +573,13 @@ saveRegistrationForm(){
     token:'12345'
   }
   console.log('registrationData',registrationData)
-  this.docService.doctorRegistrationApi(registrationData).subscribe(result=>{
-    console.log('result',result)
+  this.docService.doctorRegistrationApi(registrationData).subscribe(value=>{
+    console.log('result',value)
+    let result:any={}
+    result=value
     this.loader=false
+    localStorage.setItem('loginId',result.result.result.doctorId)
+        localStorage.setItem('userId',result.result.result.userId)
     this.router.navigate(['/dashboard']);
 
     // this.toastr.success(' Sucessfully Register!', 'Toastr fun!');
