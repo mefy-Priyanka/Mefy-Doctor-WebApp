@@ -12,6 +12,8 @@ import * as moment from 'moment';
   styleUrls: ['./newregistration.component.css']
 })
 export class NewregistrationComponent implements OnInit {
+  public doctorId:any;
+  public userId:any;
   public submitted: boolean = false
   public firstreg: boolean = true;
   public secondreg: boolean = true;
@@ -117,6 +119,7 @@ export class NewregistrationComponent implements OnInit {
     this.getSpecialityList()
     this.getStateList()
     // this.initmap();
+
   }
   initmap() {
     console.log('data')
@@ -607,15 +610,20 @@ saveRegistrationForm(){
   }
   console.log('registrationData',registrationData)
   this.docService.doctorRegistrationApi(registrationData).subscribe(value=>{
+    // debugger;
     console.log('result',value)
     let result:any={}
     result=value
+    console.log("userrrr",result.result.user.doctorId); 
+    localStorage.setItem('doctorId',result.result.user.doctorId)
+    localStorage.setItem('userId',result.result.user.userId)
     this.loader=false
-    this.router.navigate(['/dashboard']);
+    // this.router.navigate(['/dashboard/main']);
 
     // this.toastr.success(' Sucessfully Register!', 'Toastr fun!');
   },
   err=>{
+    console.log(err)
     // this.toastr.error('Registration Failed!', 'Server Issue')
   })
 }else{
