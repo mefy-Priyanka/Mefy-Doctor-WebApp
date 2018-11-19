@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorregisterService } from '../../meme-services/doctorregister.service';
 import { MemeLoginService } from '../../meme-services/meme-login.service';
-import { SharedService } from '../../meme-services/shared.service';
+import { SharedService } from '../../mefyservice/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompleterService, CompleterData } from 'ng2-completer';
 

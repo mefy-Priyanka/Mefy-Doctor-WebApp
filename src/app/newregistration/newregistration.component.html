@@ -64,12 +64,12 @@
                     <p class="errormessage" *ngIf="step1FormErrors.registrationNumber.required || (step1Form.controls.registrationNumber.pristine && submitted)">Registration
                       Number can't be empty</p>
                     <!-- <input type="text" name="state" placeholder="State" formControlName="state" /> -->
-                    <ng-template #customItemTemplate let-model="item" let-index="index">
+                    <ng-template #customItemTemplate let-model="item" let-index="index" >
                       <h5>{{ model.states }} </h5>
                     </ng-template>
   
                     <input class="form-control" [typeaheadItemTemplate]="customItemTemplate" formControlName="state" (typeaheadOnSelect)="onSelectedState($event)"
-                      placeholder="Search..." typeaheadOptionField="states" [typeahead]="stateList" class="form-control"
+                      placeholder="State" typeaheadOptionField="states" [typeahead]="stateList" class="form-control"
                       (typeaheadNoResults)="typeaheadNoStateResults($event)">
                     <p class="errormessage" *ngIf="step1FormErrors.state.required || (step1Form.controls.state.pristine && submitted)">State
                       can't be empty</p>
@@ -85,7 +85,7 @@
                 <fieldset *ngIf="secondreg">
                   <form [formGroup]="step2Form">
                     <p class="errormessage">{{error}}</p>
-                    <input type="text" name="city" formControlName="city" placeholder="CITY" id="pac-input" name="City"   (keyup)="initmap()" />
+                    <input type="text" name="city" formControlName="city" placeholder="CITY" id="pac-input" name="city"   (keyup)="initmap()" />
                     <p class="errormessage" *ngIf="step2FormErrors.city.required || (step2Form.controls.city.pristine && submitted)">City
                       Cannot Be Empty</p>
                     <!-- <input type="text" name="language" formControlName="language"  placeholder="Language" /> -->

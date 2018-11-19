@@ -9,6 +9,7 @@ export class ClinicService {
 
   // GET DOCTOR CLINIC LIST  
   getCliniclist(doctorId) {
+    console.log(doctorId)
     return this.httpClient.get(APIURL + 'clinic/clinicByDoctorId/' + doctorId)
   }
 

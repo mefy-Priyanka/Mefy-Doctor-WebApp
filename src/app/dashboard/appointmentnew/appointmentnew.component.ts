@@ -3,7 +3,7 @@ import { ScheduleService } from '../../meme-services/schedule.service';
 import * as moment from 'moment';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { AppointmentService } from '../../meme-services/appointment.service';
-import { SharedService } from '../../meme-services/shared.service';
+import { SharedService } from '../../mefyservice/shared.service';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { CompleterService, CompleterData } from 'ng2-completer';
 

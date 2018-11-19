@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from '../../meme-services/shared.service';
+import { SharedService } from '../../mefyservice/shared.service';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { AccountService } from '../../meme-services/account.service';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { AccounttService } from '../../mefyservice/accountt.service';
+
 
 
 @Component({
@@ -21,7 +21,7 @@ export class ManageaccountComponent implements OnInit {
   };
   accountForm: FormGroup;
   accountFormErrors: any;
-  doctorprofileId: any;
+  doctorProfileId: any;
   doctorAccount: any =[];
   accountId: any = {};
   accountDetail: any = [];
@@ -66,7 +66,7 @@ export class ManageaccountComponent implements OnInit {
     });
 
     //
-    this.doctorprofileId = localStorage.getItem('loginId');
+    this.doctorProfileId = localStorage.getItem('doctorId');
     //
     this.getAccountDetail();
     //
@@ -101,7 +101,7 @@ export class ManageaccountComponent implements OnInit {
       accountNumber: [this.account.accountNumber, Validators.required],
       accountType: [this.account.accountType, Validators.required],
       confirmAccountNumber: [this.account.confirmAccountNumber, Validators.required],
-      doctorId: [localStorage.getItem('loginId')]
+      doctorId: [localStorage.getItem('doctorId')]
 
     }, { validator: this.checkIfMatchingPasswords('accountNumber', 'confirmAccountNumber') });
   }
@@ -122,7 +122,7 @@ export class ManageaccountComponent implements OnInit {
       }
     }
   }
-  // Save Account Form
+  /**************CREATE BANK ACCOUNT*****************************/
   saveAccountForm() {
     this.submitted = true;
   // this.accountSubmitted=true
@@ -130,52 +130,52 @@ export class ManageaccountComponent implements OnInit {
   //   this.newIfscCode=this.accountForm.controls.ifscCode.value.toUpperCase()
   //   this.accountForm.controls.ifscCode.patchValue(this.newIfscCode);  
   //   console.log(this.accountForm.value);
-  //   if (this.accountForm.valid) {
-  //     if (this.account._id) {
-  //       this.submitted=false;
-  //       this.accountSubmitted=false;
-  //       this.updateAccountInfo();
-  //     }
-  //     else{
-  //       this.accountForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
-  //       console.log(this.accountForm.value);
-  //     console.log(this.accountForm.value);
-  //     this.accountService.addBankAccount(this.accountForm.value).subscribe(data => {
-  //       console.log(data);
-  //       this.accountForm.reset();
-  //       this.getAccountDetail();
-  //       this.hideAccountForm = false; //for hide account form
-  //       this.showAddAccount = false; //for hide add account button
-  //       this.displayData=true;
-  //       this.sharedService.accountInfo(true);
-  //     },err=>{
+  let accountData={
+    accountHolderName: this.accountForm.value.accountHolderName,
+    ifscCode: this.accountForm.value.ifscCode,
+    accountNumber: this.accountForm.value.accountNumber,
+    accountType: this.accountForm.value.accountType,
+    doctorId:this.doctorProfileId
+  }
+  console.log('fasa',accountData)
+    if (this.accountForm.valid) {
+      this.accountService.addBankAccount(accountData).subscribe(data => {
+        console.log(data);
+        this.accountForm.reset();
 
-  //     })
-  //   }
-    
-  // }
-  // else{
-  //   this.errorMsg = 'Please enter  all the credentials';
-  // }
+        // this.hideAccountForm = false; //for hide account form
+        // this.showAddAccount = false; //for hide add account button
+        // this.displayData=true;
+        // this.sharedService.accountInfo(true);
+      },err=>{
+console.log(err)
+      })
+    }
+  else{
+
+  }
 }
 
-  //  Display Account Detail
+  /*****************GET ACCPOUNT BY DOCTOR ID*********************/
   getAccountDetail() {
-    // this.accountService.getAccountListByDoctorList(this.doctorprofileId).subscribe(data => {
-    //   console.log(data)
-    //   this.accountDetail = data.result;
-    //   console.log(this.accountDetail); 
-    //   if(data.result && data.result.length!=0){
-    //     this.detail=this.accountDetail[0];
-    //     this.showAddAccount=false; 
-    //     this.displayData=true;
-    //   } 
-    //   else
-    //   {
-    //     this.showAddAccount=true; 
-    //     this.displayData=false;
-    //   }
-    // })
+    this.accountService.getBankAccountList(this.doctorProfileId).subscribe(data => {
+      console.log(data)
+      // this.accountDetail = data.result;
+      // console.log(this.accountDetail); 
+      // if(data.result && data.result.length!=0){
+      //   this.detail=this.accountDetail[0];
+      //   this.showAddAccount=false; 
+      //   this.displayData=true;
+      // } 
+      // else
+      // {
+      //   this.showAddAccount=true; 
+      //   this.displayData=false;
+      // }
+    },
+    err=>{
+      console.log(err)
+    })
   }
   //
   addAccount() {
@@ -185,26 +185,26 @@ export class ManageaccountComponent implements OnInit {
     this.hideDeleteButton=false;
   }
   
-  editAccountForm(id) {
-    console.log(this.detail, 'account');
-    this.submitted=false;
-  this.accountSubmitted=false    
-    this.hideDeleteButton=true    
-    this.hideAccountForm = true;
-    this.showAddAccount = false;
-    this.displayData=false;  
-    // this.showEdit=true;
-    //
-    this.account = this.detail;
-    console.log(this.account._id);
-    this.createAccountForm();
-    console.log(this.account._id);
-    this.accountForm.controls.accountHolderName.setValue(this.account.accountHolderName);
-    this.accountForm.controls.ifscCode.setValue(this.account.ifscCode);
-    this.accountForm.controls.accountNumber.setValue(this.account.accountNumber);
-    this.accountForm.controls.confirmAccountNumber.setValue(this.account.confirmAccountNumber);
-    this.accountForm.controls.accountType.setValue(this.account.accountType);
-  }
+  // editAccountForm(id) {
+  //   console.log(this.detail, 'account');
+  //   this.submitted=false;
+  // this.accountSubmitted=false    
+  //   this.hideDeleteButton=true    
+  //   this.hideAccountForm = true;
+  //   this.showAddAccount = false;
+  //   this.displayData=false;  
+  //   // this.showEdit=true;
+  //   //
+  //   this.account = this.detail;
+  //   console.log(this.account._id);
+  //   this.createAccountForm();
+  //   console.log(this.account._id);
+  //   this.accountForm.controls.accountHolderName.setValue(this.account.accountHolderName);
+  //   this.accountForm.controls.ifscCode.setValue(this.account.ifscCode);
+  //   this.accountForm.controls.accountNumber.setValue(this.account.accountNumber);
+  //   this.accountForm.controls.confirmAccountNumber.setValue(this.account.confirmAccountNumber);
+  //   this.accountForm.controls.accountType.setValue(this.account.accountType);
+  // }
 
 
   // for Update(edit) Account Detail
@@ -227,23 +227,14 @@ export class ManageaccountComponent implements OnInit {
    
 
   }
-   // delete Account details
-   deleteClinicInfo(id) {
-    // this.accountForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
-    // this.accountService.deleteAccount(id).subscribe(data => {
-    //   console.log(data)
-    // this.getAccountDetail();
-    // this.accountForm.reset();
-    // this.hideAccountForm = false;
-    // this.showAddAccount=true;
-    // this.displayData=false;
-    // // this.detail={};
-    //   id = '';
-    // },
-    //   err => {
-    //     console.log(err);
-    //   })
- 
+   /******************************DELETE ACCOUNT DETAIL********************/
+   deleteAccountInfo() {
+     this.accountService.deleteBankAccount(this.accountId).subscribe(data=>{
+       console.log('data',data)
+     },
+     err=>{
+       console.log(err)
+     })
  
   }
 

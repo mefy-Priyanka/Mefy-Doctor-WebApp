@@ -4,7 +4,7 @@ import { ProfileService } from '../mefyservice/profile.service';
 import { Router } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
 
-import { SharedService } from '../meme-services/shared.service';
+import { SharedService } from '../mefyservice/shared.service';
 import { SocketService } from '../meme-services/socket.service';
 
 

@@ -55,7 +55,7 @@ export class NewregistrationComponent implements OnInit {
   public mask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
   public  error: any;
   public selectedState:any
-  public selectrdCity:any
+  public selectedCity:any
 
 
   constructor(private formBuilder: FormBuilder, private docService: DocregistrationService,private router: Router) {
@@ -118,8 +118,11 @@ export class NewregistrationComponent implements OnInit {
     this.getEducationList()
     this.getSpecialityList()
     this.getStateList()
-    // this.initmap();
-
+    this.initmap();
+    var input = (<HTMLInputElement>document.getElementById('pac-input'));
+    console.log(input);
+    let autocomplete = new google.maps.places.Autocomplete(input);
+    console.log(autocomplete);
   }
   initmap() {
     console.log('data')
@@ -133,7 +136,7 @@ console.log('input',input)
     var options = {
       bounds: defaultBounds,
       types: ['(cities)'],
-      //  componentRestrictions: {country: "us"}
+       componentRestrictions: {country: "in"}
     };
     console.log('options',options)
     // var autocomplete = new google.maps.places.Autocomplete(input);
@@ -264,8 +267,8 @@ console.log('input',input)
     }
   }
   secondstep() {
-this.selectrdCity=(<HTMLInputElement>document.getElementById('pac-input')).value
-console.log('selectrdCity',this.selectrdCity)
+this.selectedCity=(<HTMLInputElement>document.getElementById('pac-input')).value
+console.log('selectedCity',this.selectedCity)
     if (this.step2Form.valid && this.error != 'Invalid DOB') {
       console.log(this.step2Form.value)
       this.submitted = false;
@@ -485,13 +488,6 @@ let data={
      value = data
      this.stateList = value.result.result
      console.log(this.stateList)
-    //  for (var i = 0; i < this.stateList.length; i++) {
-    //    var state = {
-    //      stateName: this.stateList[i].GeneralSpeciality,
-         
-    //    }
-    //    this.stateOfObjects.push(state);
-    //  }
    },
      err => {
        console.log(err)
@@ -596,7 +592,7 @@ saveRegistrationForm(){
     otp:parseInt(this.step4Form.value.otp),
     email:this.step1Form.value.email,
     language:this.selectedLanguage,
-    city:this.selectrdCity,
+    city:this.selectedCity,
     dob:(moment(this.step2Form.value.dob).format('DD-MM-YYYY')),
     education:this.selectedEducatiom,
     speciality:this.selectedSpeciality,

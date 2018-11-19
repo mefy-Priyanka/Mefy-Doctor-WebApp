@@ -18,19 +18,21 @@
                     <div class="form_entire">
                       <form [formGroup]="accountForm">
                         <input type="text" name="accountHolderName" placeholder="Account's holder name" formControlName="accountHolderName">
-                    <p class="errormessage" *ngIf="accountFormErrors.accountHolderName.required">Education</p>>
+                        <p class="errormessage" *ngIf="accountFormErrors.accountHolderName.required || (accountForm.controls.accountHolderName.pristine && submitted)">Name Can't Be Empty</p>
                         <input type="text" name="ifscCode"  placeholder="IFSC Code" formControlName="ifscCode"> 
-                    <!-- <p class="errormessage" *ngIf="accountFormErrors.ifscCode.required || (accountForm.controls.ifscCode.pristine && submitted)">Education -->
+                    <p class="errormessage" *ngIf="accountFormErrors.ifscCode.required || (accountForm.controls.ifscCode.pristine && submitted)">IFC Code Can't Be Empty</p>
                         <input type="text" name="accountNumber" placeholder="Account Number" formControlName="accountNumber">
-                    <!-- <p class="errormessage" *ngIf="accountFormErrors.accountNumber.required || (accountForm.controls.accountNumber.pristine && submitted)">Education -->
+                    <p class="errormessage" *ngIf="accountFormErrors.accountNumber.required || (accountForm.controls.accountNumber.pristine && submitted)">Account Number Can't Be Empty</p>
                         <input type="text" name="fname" placeholder="Confirm account number" formControlName="confirmAccountNumber">
-                    <!-- <p class="errormessage" *ngIf="accountFormErrors.confirmAccountNumber.required || (accountForm.controls.confirmAccountNumber.pristine && submitted)">Education -->
+                    <p class="errormessage" *ngIf="accountFormErrors.confirmAccountNumber.required || (accountForm.controls.confirmAccountNumber.pristine && submitted)"> Confirm Account Number Can't Be Empty</p>
+                    <span class="error_account" *ngIf="accountFormErrors.confirmAccountNumber.match">Account Number Do Not Match</span>
                         <div class="radio_btn2">
                           <select class="browser-default" formControlName="accountType">
                             <option value="" disabled selected>Account Type</option>
                             <option value="Current"> Current</option>
                             <option value="Saving">Saving</option>
                           </select>
+                    <p class="errormessage" *ngIf="accountFormErrors.accountType.required || (accountForm.controls.accountType.pristine && submitted)">Account Type Can't Be Empty</p>
                         </div>
                       </form>
                     </div>

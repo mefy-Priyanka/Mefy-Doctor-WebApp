@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BillService } from '../../meme-services/bill.service';
-import { SharedService } from '../../meme-services/shared.service';
+import { SharedService } from '../../mefyservice/shared.service';
 import { Router, CanActivate, ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Component({

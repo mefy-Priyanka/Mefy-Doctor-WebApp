@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { DoctorregisterService } from '../../meme-services/doctorregister.service';
-import {SharedService} from '../../meme-services/shared.service';
+import {SharedService} from '../../mefyservice/shared.service';
 import * as moment from 'moment';
 
 

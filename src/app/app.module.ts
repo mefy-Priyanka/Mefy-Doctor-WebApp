@@ -26,7 +26,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { MemeLoginService } from './meme-services/meme-login.service';
 import { ScheduleService } from './meme-services/schedule.service';
 import { DashboardService } from './meme-services/dashboard.service';
-import { SharedService } from './meme-services/shared.service';
+import { SharedService } from './mefyservice/shared.service';
 import { SocketService } from './meme-services/socket.service';
 import { DoctorregisterService } from './meme-services/doctorregister.service';
 import { DoctorPrescriptionService } from './meme-services/doctor-prescription.service';

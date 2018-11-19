@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorPrescriptionService } from '../../../meme-services/doctor-prescription.service';
-import { SharedService } from '../../../meme-services/shared.service';
+import { SharedService } from '../../../mefyservice/shared.service';
 // import { Router } from '@angular/router';
 import { RouterLink, ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 @Component({

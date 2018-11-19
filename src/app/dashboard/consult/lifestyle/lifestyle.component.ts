@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
 import { DoctorPrescriptionService } from '../../../meme-services/doctor-prescription.service';
-import { SharedService } from '../../../meme-services/shared.service';
+import { SharedService } from '../../../mefyservice/shared.service';
 // import { Router, ActivatedRoute, Params } from '@angular/router';
 
 
