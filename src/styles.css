@@ -888,7 +888,9 @@ input.file-path.validate.up_image {
   
   /* loader */
 
-
+  h5.ng-star-inserted {
+    font-size: 15px;
+}
 
 
 

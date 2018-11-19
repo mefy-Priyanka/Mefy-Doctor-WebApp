@@ -193,6 +193,9 @@ img.registerLogo {
 	width: 100%;
     position: relative;
     padding-bottom:0px;
+    height: 283px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 #msform fieldset:not(:first-of-type) {
 	display: none;
@@ -329,4 +332,10 @@ p.genderm {
     .leftContent {
         display: none;
     }
+    }
+
+
+
+    h5.ng-star-inserted {
+        font-size: 15px;
     }
