@@ -85,7 +85,7 @@
                 <fieldset *ngIf="secondreg">
                   <form [formGroup]="step2Form">
                     <p class="errormessage">{{error}}</p>
-                    <input type="text" name="city" formControlName="city" placeholder="CITY" />
+                    <input type="text" name="city" formControlName="city" placeholder="CITY" id="pac-input" name="City"   (keyup)="initmap()" />
                     <p class="errormessage" *ngIf="step2FormErrors.city.required || (step2Form.controls.city.pristine && submitted)">City
                       Cannot Be Empty</p>
                     <!-- <input type="text" name="language" formControlName="language"  placeholder="Language" /> -->
@@ -93,7 +93,7 @@
                     <tag-input  formControlName="language" (onAdd)="onAddLanguage($event)"
                       onlyFromAutocomplete="true" blinkIfDupe="true" placeholder="Language">
                       <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
-                        [showDropdownIfEmpty]="true" placeholder="Choose language" [autocompleteItems]="languageOfObjects">
+                        [showDropdownIfEmpty]="false" placeholder="Choose language" [autocompleteItems]="languageOfObjects">
                       </tag-input-dropdown>
                     </tag-input>
                     <p class="errormessage" *ngIf="step2FormErrors.language.required || (step2Form.controls.language.pristine && submitted)">Language
@@ -147,7 +147,7 @@
                     <tag-input formControlName="education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true"
                       blinkIfDupe="true" placeholder="Education">
                       <tag-input-dropdown [appendToBody]="false" [identifyBy]="'educationName'" [displayBy]="'educationName'"
-                        [showDropdownIfEmpty]="true" placeholder="Choose education" [autocompleteItems]="educationOfObjects">
+                        [showDropdownIfEmpty]="false" placeholder="Choose education" [autocompleteItems]="educationOfObjects">
                       </tag-input-dropdown>
                     </tag-input>
                     <p class="errormessage" *ngIf="step3FormErrors.education.required || (step3Form.controls.education.pristine && submitted)">Education
@@ -157,7 +157,7 @@
                     <tag-input formControlName="speciality" (onAdd)="onAddSpeciality($event)" onlyFromAutocomplete="true"
                       placeholder="Speciality" blinkIfDupe="true">
                       <tag-input-dropdown [appendToBody]="false" [identifyBy]="'specialityName'" [displayBy]="'specialityName'"
-                        [showDropdownIfEmpty]="true" placeholder="Choose speciality" [autocompleteItems]="specialityOfObjects">
+                        [showDropdownIfEmpty]="false" placeholder="Choose speciality" [autocompleteItems]="specialityOfObjects">
                       </tag-input-dropdown>
                     </tag-input>
                     <p class="errormessage" *ngIf="step3FormErrors.speciality.required || (step3Form.controls.speciality.pristine && submitted)">Speciality
