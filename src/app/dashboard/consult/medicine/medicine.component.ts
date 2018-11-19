@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray, FormArrayName } from '@angular/forms';
 import { DoctorPrescriptionService } from '../../../meme-services/doctor-prescription.service';
 import { CompleterService, CompleterData } from 'ng2-completer';
-import { SharedService } from '../../../meme-services/shared.service';
+import { SharedService } from '../../../mefyservice/shared.service';
 import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
 
 @Component({

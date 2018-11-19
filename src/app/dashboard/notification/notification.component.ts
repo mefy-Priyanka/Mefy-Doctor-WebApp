@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
-import { SharedService } from '../../meme-services/shared.service';
+import { SharedService } from '../../mefyservice/shared.service';
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',

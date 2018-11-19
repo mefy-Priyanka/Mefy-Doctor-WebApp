@@ -120,14 +120,14 @@
     </div>
      <div class="sideimg">
         <img src="../assets/images/userimageupdated.png" class="logo_img2aa2">
-        <img [src]="imgUrlPrefix" class="logo_img2aa" [hidden]="!logInfo?.profileImage" >
+        <img [src]="imgUrlPrefix" class="logo_img2aa" [hidden]="!profileInfo?.profileImage" >
       </div>
     <div class="text_nav">
-      <p class="nameloc2">Dr. John Doe
-        <span class="loc2">General Physician</span>
+      <p class="nameloc2">Dr.{{profileInfo?.name}}
+        <span class="loc2">{{profileInfo?.speciality[0]}}</span>
       </p>
-      <p class="nameloc4">Female23
-        <span class="loc4">Durgapur</span>
+      <p class="nameloc4">{{profileInfo?.gender}} {{age}}
+        <span class="loc4">{{profileInfo?.city}}</span>
       </p>
     </div>
     <div class="notifications">

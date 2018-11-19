@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from '../../meme-services/shared.service';
+import { SharedService } from '../../mefyservice/shared.service';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { AccounttService } from '../../mefyservice/accountt.service';

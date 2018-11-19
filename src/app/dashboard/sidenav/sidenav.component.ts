@@ -9,8 +9,9 @@ import { ProfileService } from '../../mefyservice/profile.service';
 })
 export class SidenavComponent implements OnInit {
   doctorProfileId: any;
+  profileInfo: any;
   constructor( private router: Router,private profileService:ProfileService) {
-
+    this.doctorProfileId = localStorage.getItem('doctorId');
   }
 
   ngOnInit() {
@@ -19,15 +20,17 @@ export class SidenavComponent implements OnInit {
 
   //get doctorBasic Info
   doctorProfile() {
-
-    this.profileService.getDocDetail('02580e32-fb9c-490e-a2e7-5da6d4dae19a').subscribe(data=>{
+    console.log("doctorId",this.doctorProfileId);
+    this.profileService.getDocDetail(this.doctorProfileId).subscribe(data=>{
       console.log('result', data);
-      console.log("myresult");
+      this.profileInfo = data;
+      console.log("details",this.profileInfo);
 
+console.log('doctorid');
 
     })
   }
-
+  
 
   // logout from webapp
   logOut() {
