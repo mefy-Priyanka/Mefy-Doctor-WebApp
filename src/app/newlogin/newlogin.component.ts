@@ -172,10 +172,9 @@ export class NewloginComponent implements OnInit {
         this.router.navigate(['/dashboard/main'])
         console.log("userid",this.splitarr)
         this.userarr=result.result.result.userId;
-        // this.splitarr[0] =  this.userarr.split("#")[1];
-        this.myarr=this.userarr.split("#");
+        this.myarr=this.userarr.split("#")[1];
         console.log('id',this.myarr)
-        this.uid=this.myarr[1]
+        this.uid=this.myarr;
         console.log('y',this.uid)
         localStorage.setItem('userId',this.uid)  
       },
