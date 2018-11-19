@@ -76,7 +76,7 @@
                 </div> -->
               </div>
 
-              <div class="row nomargin0row">
+              <div class="row nomargin0row" >
 
                 <div class="col-md-4 col-xs-11 resleft">
                   <div class="simo_txt">
@@ -181,7 +181,7 @@
                         <div class="calender text-center">
                           <ul class="list-inline" id="calender_days">
                             <li *ngFor="let day of weekSchedule" >
-                              <button  (click)="daySelect(day,i)" [ngClass]="{'selectd_day':true,active:clinicForm.get('weekDays').controls[i].get('day').value.slice(0,2).toUpperCase()==day}">
+                              <button  (click)="daySelect(day,i)" [ngClass]="{'selectd_day':true,active:clinicForm.get('weekDays').controls[i].get('day').value?clinicForm.get('weekDays').controls[i].get('day').value.slice(0,2).toUpperCase()==day:''}">
                                 {{day}}
                               </button>
                               <!-- {{clinicForm.get('weekDays').controls[i].get('day').value.slice(0,2).toUpperCase()}} -->

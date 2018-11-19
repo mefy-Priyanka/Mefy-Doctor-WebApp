@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { DoctorPrescriptionService } from '../../../meme-services/doctor-prescription.service';
-import { SharedService } from '../../../meme-services/shared.service';
+import { SharedService } from '../../../mefyservice/shared.service';
 import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
 @Component({
   selector: 'app-follow-up',

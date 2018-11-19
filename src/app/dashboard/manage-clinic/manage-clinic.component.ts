@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, SimpleChanges, OnChanges, ViewChild } fr
 import { FormControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScheduleService } from '../../meme-services/schedule.service';
-import { SharedService } from '../../meme-services/shared.service';
+import { SharedService } from '../../mefyservice/shared.service';
 import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
 import * as moment from 'moment'
 declare var google;
@@ -81,7 +81,7 @@ export class ManageClinicComponent implements OnInit {
       weekDays: []
     };
 
-    this.doctorprofileId = localStorage.getItem('loginId');
+    this.doctorprofileId = localStorage.getItem('doctorId');
 
     // send url path name to change navbar colour
     // this.pathName = (route.snapshot.url)[0].path;
@@ -144,7 +144,7 @@ export class ManageClinicComponent implements OnInit {
       city: ['', Validators.required],
       // pin: ['', Validators.required],
       fee: ['', Validators.required],
-      doctorId: ['02580e32-fb9c-490e-a2e7-5da6d4dae19a'],
+      doctorId: [this.doctorprofileId],
       address: ['', Validators.required],
       // weekDays: [this.days],
       weekDays: this.formBuilder.array([this.newform()])
@@ -269,6 +269,7 @@ export class ManageClinicComponent implements OnInit {
         let response: any = {};
         response = result;
         if (!response.result.error) {
+          this.clinicForm.reset();
           if (response.result.message == "Clinic Created Successfully") {
             //created
             let notifydata = {
@@ -292,7 +293,12 @@ export class ManageClinicComponent implements OnInit {
 
       }),
         err => {
-
+          let notifydata = {
+            type: 'error',
+            title: 'Clinic',
+            msg: 'Creation Failed'
+          }
+          this.sharedService.createNotification(notifydata);
         }
     }
     else {
@@ -385,6 +391,7 @@ export class ManageClinicComponent implements OnInit {
   //get clinic Details through Doctor id
   getClinicList() {
     this.ClinicService.getCliniclist(this.doctorprofileId).subscribe(data => {
+      console.log(data)
       let response: any = {};
       response = data;
       this.clinicList = response.result;

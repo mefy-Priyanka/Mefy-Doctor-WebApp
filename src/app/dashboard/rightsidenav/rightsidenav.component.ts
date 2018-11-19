@@ -5,7 +5,7 @@ import { filter } from 'rxjs/operator/filter';
 import { SocketService } from '../../meme-services/socket.service';
 import { Router } from '@angular/router';
 import { DoctorPrescriptionService } from '../../meme-services/doctor-prescription.service';
-import { SharedService } from '../../meme-services/shared.service';
+import { SharedService } from '../../mefyservice/shared.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 import { DatePipe } from '@angular/common';

@@ -1,5 +1,5 @@
 import { Component, OnInit,ElementRef, ViewChild, Renderer2,Input } from '@angular/core';
-import { SharedService } from '../../../meme-services/shared.service';
+import { SharedService } from '../../../mefyservice/shared.service';
 import { DoctorPrescriptionService } from '../../../meme-services/doctor-prescription.service';
 // import { DomSanitizer } from '@angular/platform-browser';
 import { SocketService } from '../../../meme-services/socket.service';
