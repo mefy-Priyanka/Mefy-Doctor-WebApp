@@ -10,21 +10,26 @@
               <h1 >Please Add Account To Transfer Balance</h1>             
             </div>
             <!-- *************************Form1******************************** -->
+            <!-- [ngStyle]="{'text-transform': 'uppercase'}"ifc  -->
             <div class="form1">
               <div class="card">
                 <div class="row">
                   <div class="card_content">
                     <div class="form_entire">
-                      <form>
-                        <input type="text" name="fname" placeholder="Account's holder name">
-                        <input type="text" name="fname" [ngStyle]="{'text-transform': 'uppercase'}" placeholder="IFSC Code">                        
-                        <input type="text" name="fname" placeholder="Account Number">
-                        <input type="text" name="fname" placeholder="Confirm account number">
+                      <form [formGroup]="accountForm">
+                        <input type="text" name="accountHolderName" placeholder="Account's holder name" formControlName="accountHolderName">
+                    <p class="errormessage" *ngIf="accountFormErrors.accountHolderName.required">Education</p>>
+                        <input type="text" name="ifscCode"  placeholder="IFSC Code" formControlName="ifscCode"> 
+                    <!-- <p class="errormessage" *ngIf="accountFormErrors.ifscCode.required || (accountForm.controls.ifscCode.pristine && submitted)">Education -->
+                        <input type="text" name="accountNumber" placeholder="Account Number" formControlName="accountNumber">
+                    <!-- <p class="errormessage" *ngIf="accountFormErrors.accountNumber.required || (accountForm.controls.accountNumber.pristine && submitted)">Education -->
+                        <input type="text" name="fname" placeholder="Confirm account number" formControlName="confirmAccountNumber">
+                    <!-- <p class="errormessage" *ngIf="accountFormErrors.confirmAccountNumber.required || (accountForm.controls.confirmAccountNumber.pristine && submitted)">Education -->
                         <div class="radio_btn2">
-                          <select class="browser-default">
+                          <select class="browser-default" formControlName="accountType">
                             <option value="" disabled selected>Account Type</option>
-                            <option value="1"> Current</option>
-                            <option value="2">Saving</option>
+                            <option value="Current"> Current</option>
+                            <option value="Saving">Saving</option>
                           </select>
                         </div>
                       </form>

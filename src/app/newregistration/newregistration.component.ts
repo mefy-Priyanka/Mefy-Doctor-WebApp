@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocregistrationService } from '../mefyservice/docregistration.service';
 import { Router } from '@angular/router';
-
+declare var google;
 import * as moment from 'moment';
 // import { ToastrService } from 'ngx-toastr';
 
@@ -53,6 +53,7 @@ export class NewregistrationComponent implements OnInit {
   public mask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
   public  error: any;
   public selectedState:any
+  public selectrdCity:any
 
 
   constructor(private formBuilder: FormBuilder, private docService: DocregistrationService,private router: Router) {
@@ -115,8 +116,27 @@ export class NewregistrationComponent implements OnInit {
     this.getEducationList()
     this.getSpecialityList()
     this.getStateList()
+    // this.initmap();
   }
+  initmap() {
+    console.log('data')
+    var defaultBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(-33.8902, 151.1759),
+      new google.maps.LatLng(-33.8474, 151.2631));
 
+    var input = (<HTMLInputElement>document.getElementById('pac-input'));
+console.log('input',input)
+
+    var options = {
+      bounds: defaultBounds,
+      types: ['(cities)'],
+      //  componentRestrictions: {country: "us"}
+    };
+    console.log('options',options)
+    // var autocomplete = new google.maps.places.Autocomplete(input);
+    // autocomplete.bindTo('bounds', );
+    let autocomplete = new google.maps.places.Autocomplete(input, options);
+  }
   /******************************IT CATCHES ALL CHANGES IN STEP FORM 1******************/
   onStep1FormValuesChanged() {
     for (const field in this.step1FormErrors) {
@@ -241,6 +261,8 @@ export class NewregistrationComponent implements OnInit {
     }
   }
   secondstep() {
+this.selectrdCity=(<HTMLInputElement>document.getElementById('pac-input')).value
+console.log('selectrdCity',this.selectrdCity)
     if (this.step2Form.valid && this.error != 'Invalid DOB') {
       console.log(this.step2Form.value)
       this.submitted = false;
@@ -267,6 +289,17 @@ export class NewregistrationComponent implements OnInit {
       /****************** */
 
     }
+  }
+   // validating address
+   validateAddress() {
+     console.log('city')
+    // if (this.address.length==0) {
+    //   this.messageAddress = "Address Cannot Be Empty";
+    // }
+    // else{
+    //   this.messageAddress="";
+    //   this.message ="";
+    // }
   }
   previousfirst() {
     this.firstreg = true;
@@ -466,7 +499,7 @@ compareDob(dob) {
   console.log('dob',dob)
   this.error='';
   var startdat = moment();
-  var startdate = moment().subtract(25, "year");
+  var startdate = moment().subtract(23, "year");
   // console.log(startdat);
   let presentDat: any;
   presentDat = moment(startdate).utcOffset(0);
@@ -560,7 +593,7 @@ saveRegistrationForm(){
     otp:parseInt(this.step4Form.value.otp),
     email:this.step1Form.value.email,
     language:this.selectedLanguage,
-    city:this.step2Form.value.city,
+    city:this.selectrdCity,
     dob:(moment(this.step2Form.value.dob).format('DD-MM-YYYY')),
     education:this.selectedEducatiom,
     speciality:this.selectedSpeciality,
@@ -573,8 +606,10 @@ saveRegistrationForm(){
     token:'12345'
   }
   console.log('registrationData',registrationData)
-  this.docService.doctorRegistrationApi(registrationData).subscribe(result=>{
-    console.log('result',result)
+  this.docService.doctorRegistrationApi(registrationData).subscribe(value=>{
+    console.log('result',value)
+    let result:any={}
+    result=value
     this.loader=false
     this.router.navigate(['/dashboard']);
 

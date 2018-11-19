@@ -125,35 +125,35 @@ export class ManageaccountComponent implements OnInit {
   // Save Account Form
   saveAccountForm() {
     this.submitted = true;
-  this.accountSubmitted=true
-    console.log(this.accountForm.value);
-    this.newIfscCode=this.accountForm.controls.ifscCode.value.toUpperCase()
-    this.accountForm.controls.ifscCode.patchValue(this.newIfscCode);  
-    console.log(this.accountForm.value);
-    if (this.accountForm.valid) {
-      if (this.account._id) {
-        this.submitted=false;
-        this.accountSubmitted=false;
-        this.updateAccountInfo();
-      }
-      else{
-        this.accountForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
-        console.log(this.accountForm.value);
-      console.log(this.accountForm.value);
-      this.accountService.addBankAccount(this.accountForm.value).subscribe(data => {
-        console.log(data);
-        this.accountForm.reset();
-        this.getAccountDetail();
-        this.hideAccountForm = false; //for hide account form
-        this.showAddAccount = false; //for hide add account button
-        this.displayData=true;
-        this.sharedService.accountInfo(true);
-      },err=>{
+  // this.accountSubmitted=true
+  //   console.log(this.accountForm.value);
+  //   this.newIfscCode=this.accountForm.controls.ifscCode.value.toUpperCase()
+  //   this.accountForm.controls.ifscCode.patchValue(this.newIfscCode);  
+  //   console.log(this.accountForm.value);
+  //   if (this.accountForm.valid) {
+  //     if (this.account._id) {
+  //       this.submitted=false;
+  //       this.accountSubmitted=false;
+  //       this.updateAccountInfo();
+  //     }
+  //     else{
+  //       this.accountForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
+  //       console.log(this.accountForm.value);
+  //     console.log(this.accountForm.value);
+  //     this.accountService.addBankAccount(this.accountForm.value).subscribe(data => {
+  //       console.log(data);
+  //       this.accountForm.reset();
+  //       this.getAccountDetail();
+  //       this.hideAccountForm = false; //for hide account form
+  //       this.showAddAccount = false; //for hide add account button
+  //       this.displayData=true;
+  //       this.sharedService.accountInfo(true);
+  //     },err=>{
 
-      })
-    }
+  //     })
+  //   }
     
-  }
+  // }
   // else{
   //   this.errorMsg = 'Please enter  all the credentials';
   // }

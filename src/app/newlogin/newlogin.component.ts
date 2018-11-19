@@ -16,7 +16,8 @@ export class NewloginComponent implements OnInit {
   public otpShow: boolean = false;
   public loginForm: FormGroup;
   public otpForm: FormGroup;
-  public loginId:any;
+  public doctorId:any;
+  public userarr: any = [];
   public userId:any;
   loginFormErrors: any;
   otpFormErrors: any;
@@ -28,6 +29,9 @@ export class NewloginComponent implements OnInit {
   public mask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
 
   public socket = io('http://ec2-13-232-207-92.ap-south-1.compute.amazonaws.com:5023');
+  public splitarr: any =[];
+  myarr: any;
+  uid: any;
   constructor(private formBuilder: FormBuilder, public loginService: LoginService, private router: Router) {
     this.scanData();
     // this.myAngularxQrCode = this.scannerdata;
@@ -126,8 +130,7 @@ export class NewloginComponent implements OnInit {
     if (this.loginForm.valid) {
       let logindata = {
         phoneNumber: this.loginForm.value.phoneNumber,
-        role: 'doctor',
-        token: '1234'
+        role: 'doctor'
       }
       this.loginService.doctorWebLogin(logindata).subscribe(value => {
         console.log('result', value)
@@ -136,12 +139,6 @@ export class NewloginComponent implements OnInit {
           this.loginShow = false;
           this.otpShow = true
           // this.toastr.success('User Loggedin Succesful!', 'Wow!');
-        }
-        else if (result.result.message == 'Doctor loggedIn successfully') {
-          localStorage.setItem('loginId',result.result.user.doctorId)
-          localStorage.setItem('userId',result.result.user.userId)
-          console.log("userId",result.result.user.doctorId)
-          this.router.navigate(['/dashboard/main'])
         }
         else {
           this.router.navigate(['/register'])
@@ -170,10 +167,16 @@ export class NewloginComponent implements OnInit {
         console.log('result', value)
         let result:any={}
         result=value
-        localStorage.setItem('loginId',result.result.result.doctorId)
-        localStorage.setItem('userId',result.result.result.userId)
+        localStorage.setItem('doctorId',result.result.result.doctorId)
         this.loader = false;
         this.router.navigate(['/dashboard/main'])
+        console.log("userid",this.splitarr)
+        this.userarr=result.result.result.userId;
+        this.myarr=this.userarr.split("#")[1];
+        console.log('id',this.myarr)
+        this.uid=this.myarr;
+        console.log('y',this.uid)
+        localStorage.setItem('userId',this.uid)  
       },
         err => {
           console.log(err)
