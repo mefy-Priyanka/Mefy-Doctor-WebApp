@@ -18,12 +18,12 @@
                     <div class="form_entire">
                       <form [formGroup]="accountForm">
                         <input type="text" name="accountHolderName" placeholder="Account's holder name" formControlName="accountHolderName">
-                    <!-- <p class="errormessage" *ngIf="accountFormErrors.accountHolderName.required || (accountForm.controls.accountHolderName.pristine && submitted)">Education -->
+                    <p class="errormessage" *ngIf="accountFormErrors.accountHolderName.required">Education</p>>
                         <input type="text" name="ifscCode"  placeholder="IFSC Code" formControlName="ifscCode"> 
                     <!-- <p class="errormessage" *ngIf="accountFormErrors.ifscCode.required || (accountForm.controls.ifscCode.pristine && submitted)">Education -->
                         <input type="text" name="accountNumber" placeholder="Account Number" formControlName="accountNumber">
                     <!-- <p class="errormessage" *ngIf="accountFormErrors.accountNumber.required || (accountForm.controls.accountNumber.pristine && submitted)">Education -->
-                        <input type="text" name="fname" placeholder="Confirm account number" formControlName="accountNumber">
+                        <input type="text" name="fname" placeholder="Confirm account number" formControlName="confirmAccountNumber">
                     <!-- <p class="errormessage" *ngIf="accountFormErrors.confirmAccountNumber.required || (accountForm.controls.confirmAccountNumber.pristine && submitted)">Education -->
                         <div class="radio_btn2">
                           <select class="browser-default" formControlName="accountType">
