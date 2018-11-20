@@ -5,7 +5,6 @@ import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { AccounttService } from '../../mefyservice/accountt.service';
 
 
-
 @Component({
   selector: 'app-manageaccount',
   templateUrl: './manageaccount.component.html',
@@ -197,11 +196,19 @@ export class ManageaccountComponent implements OnInit {
     this.displayData = false; //
     this.hideDeleteButton = false;
   }
-
+  /************* ACCOUNT SELECTED FOR DELETE***************/
+selectedAccountId(selectedAccountId){
+  console.log('delete account',selectedAccountId)
+  this.accountId=selectedAccountId
+}
   /******************************DELETE ACCOUNT DETAIL********************/
   deleteAccountInfo() {
+    this.loader=true;
+    console.log('selectedAccountId',this.accountId)
     this.accountService.deleteBankAccount(this.accountId).subscribe(data => {
       console.log('data', data)
+      this.loader=false
+      this.getAccountDetail();
     },
       err => {
         console.log(err)

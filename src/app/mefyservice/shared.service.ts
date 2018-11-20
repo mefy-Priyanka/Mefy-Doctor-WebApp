@@ -100,6 +100,7 @@ export class SharedService {
 
   //get notification type
   createNotification(param) {
+    console.log('notification.',param)
     this.notificationType.next(param)
   }
 
