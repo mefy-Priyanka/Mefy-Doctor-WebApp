@@ -5,12 +5,15 @@ import { APIURL } from '../urlsConfig';
 @Injectable()
 
 export class ProfileService {
- constructor(private http: HttpClient) { }
- //get doctor details
- 
- getDocDetail(id){
-   console.log('ff',id)
-   return this.http.get(APIURL+'doctor/'+id)
-}
+  constructor(private http: HttpClient) { }
+  //get doctor details
 
+  getDocDetail(id) {
+    console.log('ff', id)
+    return this.http.get(APIURL + 'doctor/' + id)
+  }
+  // doctor availability
+  doctorAvailability(available) {
+    return this.http.put(APIURL + 'doctor/profile/' + available.userId, { availability: available.availability })
+  }
 }
