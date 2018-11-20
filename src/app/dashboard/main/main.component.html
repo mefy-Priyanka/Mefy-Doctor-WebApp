@@ -41,13 +41,13 @@
           <div class="row nomargin0row">
             <div class="respcss">
               <ul class="list-inline clinicsmayhave">
-                <li class="postminus">
+                <li class="postminus" *ngFor="let clinic of clinicList?.slice(0,5)">
                   <span class="cinicsuvisit">
-                    <span>A</span></span>
+                    <span>{{(clinic?.clinicName).split(' ')[0].split('')[0] + ((clinic?.clinicName).split(' ')[1] ? (clinic?.clinicName).split(' ')[1].split('')[0] : '') | uppercase}}</span></span>
                 </li>
-                <li class="postminus">
+                <li class="postminus"  *ngIf="(clinicList?.length) > 5">
                   <button type="btn" class="libtn">
-                    <span class="cinicsuvisit6">B</span>
+                    <span class="cinicsuvisit6"> +{{(clinicList).slice(6,(clinicList).length).length + 1}}</span>
                   </button>
                 </li>
               </ul>
