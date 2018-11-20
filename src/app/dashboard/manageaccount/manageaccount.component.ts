@@ -162,6 +162,11 @@ export class ManageaccountComponent implements OnInit {
       this.sharedService.createNotification(notifydata);
     }
   }
+  cancelAccoutForm(){
+    this.hideAccountForm=false;
+    this.showAddAccount=true;
+    this.displayData=true
+  }
 
   /*****************GET ACCPOUNT BY DOCTOR ID*********************/
   getAccountDetail() {
