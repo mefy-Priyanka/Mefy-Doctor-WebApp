@@ -257,6 +257,12 @@ console.log('input',input)
       this.activeStep4=false;
       /****************** */
     } else {
+      let notifydata = {
+        type: 'warning',
+        title: 'Not Valid',
+      }
+     this.sharedServices.createNotification(notifydata);
+
       this.submitted = true
       this.firstreg = true;
       this.secondreg = false;
@@ -286,6 +292,11 @@ console.log('selectedCity',this.selectedCity)
       /****************** */
 
     } else {
+      let notifydata = {
+        type: 'warning',
+        title: 'Not Valid',
+      }
+     this.sharedServices.createNotification(notifydata);
       this.submitted = true
       this.firstreg = false;
       this.secondreg = true;
@@ -349,6 +360,12 @@ console.log('selectedCity',this.selectedCity)
       /****************** */
 
     } else {
+      let notifydata = {
+        type: 'warning',
+        title: 'Not Valid',
+      }
+     this.sharedServices.createNotification(notifydata);
+
       this.submitted = true
       this.firstreg = false;
       this.secondreg = false;
@@ -496,7 +513,7 @@ let data={
        console.log(err)
      })
    }
-  //compare dob
+  /****************compare dob *******************/
 compareDob(dob) {
   console.log('dob',dob)
   this.error='';
@@ -527,8 +544,8 @@ compareDob(dob) {
       msg: 'Invalid DOB'
     }
     console.log('data',notifydata)
-  this.sharedServices.createNotification(notifydata);
-    // return false;
+   this.sharedServices.createNotification(notifydata);
+    return false;
   }
   else if ((moment(dob)).isBefore(Dat._d)) {
     this.error = 'Invalid DOB';
@@ -539,8 +556,8 @@ compareDob(dob) {
     }
     console.log('data',notifydata)
 
-    this.sharedServices.createNotification(notifydata);
-    // return false;
+   this.sharedServices.createNotification(notifydata);
+    return false;
   }
   else{
     return true;
@@ -569,12 +586,19 @@ comparePracticingYear(year) {
   maxYear = moment(Dat, "DD/MM/YYYY").year()
   console.log(maxYear);
   if ((formattedYear) > (currentYear)) {
-    this.error = 'Invalid Practicing Year';
-    console.log('abc')
+    let notifydata = {
+      type: 'error',
+      title: 'Invalid Practicing Year',
+    }
+   this.sharedServices.createNotification(notifydata);
     return false;
   }
   else if ((formattedYear) < (maxYear)) {
-    this.error = 'Invalid Practicing Year';
+    let notifydata = {
+      type: 'error',
+      title: 'Invalid Practicing Year',
+    }
+   this.sharedServices.createNotification(notifydata);
     return false;
   }
   else {
@@ -632,15 +656,23 @@ saveRegistrationForm(){
     localStorage.setItem('doctorId',result.result.user.doctorId)
     localStorage.setItem('userId',result.result.user.userId)
     this.loader=false
-    // this.router.navigate(['/dashboard/main']);
-
-    // this.toastr.success(' Sucessfully Register!', 'Toastr fun!');
+    this.router.navigate(['/dashboard/main']);
   },
   err=>{
     console.log(err)
-    // this.toastr.error('Registration Failed!', 'Server Issue')
+    let notifydata = {
+      type: 'error',
+      title:'Server Issue!',
+      message: 'Something Went Wrong',
+    }
+   this.sharedServices.createNotification(notifydata);
   })
 }else{
+  let notifydata = {
+    type: 'warning',
+    title:'Not Valid!'
+  }
+ this.sharedServices.createNotification(notifydata);
   this.loader=false
 
   // this.toastr.error('Registration Failed!', 'Not Valid')

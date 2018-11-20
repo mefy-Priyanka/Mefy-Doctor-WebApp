@@ -40,6 +40,7 @@ import { BillService } from './meme-services/bill.service';
 import { NewloginComponent } from './newlogin/newlogin.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NewregistrationComponent } from './newregistration/newregistration.component';
+import { NotifyComponent } from './notify/notify.component';
 
 // import { ManageaccountComponent } from './dashboard/manageaccount/manageaccount.component';
 
@@ -78,6 +79,7 @@ const approutes: Routes = [
     // LoginComponent,
     NewloginComponent,
     NewregistrationComponent,
+    NotifyComponent,
  
     // ManageaccountComponent
   ],

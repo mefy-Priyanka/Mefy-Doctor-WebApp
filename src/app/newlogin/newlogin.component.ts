@@ -141,7 +141,7 @@ export class NewloginComponent implements OnInit {
           this.loginShow = false;
           this.otpShow = true
           let notifydata = {
-            type: 'Sucess',
+            type: 'success',
             title: 'OTP',
             msg: 'Sent to registered number'
           }
@@ -149,12 +149,26 @@ export class NewloginComponent implements OnInit {
         this.sharedServices.createNotification(notifydata);
         }
         else {
+          let notifydata = {
+            type: 'warning',
+            title: 'User',
+            msg: 'Not Registered'
+          }
+          console.log('data',notifydata)
+        this.sharedServices.createNotification(notifydata);
           this.router.navigate(['/register'])
         }
       },
         err => {
           this.loader = false;
           console.log("Network Issue");
+          let notifydata = {
+            type: 'warning',
+            title: 'Network Issue',
+            msg: 'Somethnig Went Wrong'
+          }
+          console.log('data',notifydata)
+        this.sharedServices.createNotification(notifydata);
         }
       )
     }
@@ -190,6 +204,13 @@ export class NewloginComponent implements OnInit {
         err => {
           this.loader = false;
           console.log(err)
+          let notifydata = {
+            type: 'warning',
+            title: 'Network Issue',
+            msg: 'Somethnig Went Wrong'
+          }
+          console.log('data',notifydata)
+        this.sharedServices.createNotification(notifydata);
         })
     }
     else {
