@@ -8,6 +8,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagInputModule } from 'ngx-chips';
 import { TypeaheadModule } from 'ngx-bootstrap';
+import { ToastyModule } from "ng2-toasty";
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 /********************NEW SERVICES************************** */
 import { DocregistrationService } from './mefyservice/docregistration.service';
@@ -15,6 +16,7 @@ import { LoginService } from './mefyservice/login.service';
 import {ClinicService} from './mefyservice/clinic.service';
 import { AccounttService } from './mefyservice/accountt.service';
 import {ProfileService} from './mefyservice/profile.service';
+import {DashboarddService} from './mefyservice/dashboardd.service';
 
 /******************END OF NEW SERVICES************************************ */
 
@@ -30,7 +32,7 @@ import { DoctorregisterService } from './meme-services/doctorregister.service';
 import { DoctorPrescriptionService } from './meme-services/doctor-prescription.service';
 import { AppointmentService } from './meme-services/appointment.service';
 import { AccountService } from './meme-services/account.service';
-import { ToastyModule } from "ng2-toasty";
+
 import { AppComponent } from './app.component';
 // import { LoginComponent } from './login/login.component';
 // import { AuthGuard } from './auth.guard';
@@ -114,6 +116,7 @@ const approutes: Routes = [
     LoginService,
     ClinicService,
     AccounttService,
+    DashboarddService,
     /**************/
     HttpClientModule
     // ManageaccountComponent,
