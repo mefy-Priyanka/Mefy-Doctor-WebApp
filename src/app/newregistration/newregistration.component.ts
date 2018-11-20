@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocregistrationService } from '../mefyservice/docregistration.service';
+import { SharedService } from '../mefyservice/shared.service';
+
 import { Router } from '@angular/router';
 declare var google;
 import * as moment from 'moment';
@@ -58,7 +60,7 @@ export class NewregistrationComponent implements OnInit {
   public selectedCity:any
 
 
-  constructor(private formBuilder: FormBuilder, private docService: DocregistrationService,private router: Router) {
+  constructor(private formBuilder: FormBuilder, private docService: DocregistrationService,private router: Router,private sharedServices:SharedService) {
     // private toastr: ToastrService
     /***********STEP 1*************/
     this.step1FormErrors = {
@@ -519,11 +521,26 @@ compareDob(dob) {
   // console.log('Dat..',Dat);
   if ((moment(dob)).isAfter(presentDat._d)) {
     this.error = 'Invalid DOB';
-    return false;
+    let notifydata = {
+      type: 'error',
+      title: 'Registration',
+      msg: 'Invalid DOB'
+    }
+    console.log('data',notifydata)
+  this.sharedServices.createNotification(notifydata);
+    // return false;
   }
   else if ((moment(dob)).isBefore(Dat._d)) {
     this.error = 'Invalid DOB';
-    return false;
+    let notifydata = {
+      type: 'error',
+      title: 'Registration',
+      msg: 'Invalid DOB'
+    }
+    console.log('data',notifydata)
+
+    this.sharedServices.createNotification(notifydata);
+    // return false;
   }
   else{
     return true;
