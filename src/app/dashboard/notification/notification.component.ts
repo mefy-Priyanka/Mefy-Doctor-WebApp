@@ -25,7 +25,10 @@ export class NotificationComponent implements OnInit {
           case 'warning':
             this.warningNotifications(data.title, data.msg);
             break;
-         
+            
+            case 'error':
+            this.errorNotifications(data.title, data.msg);
+            break;
         }
       }
     })
@@ -34,6 +37,17 @@ export class NotificationComponent implements OnInit {
 
   warningNotifications(title, msg) {
     this.toastyService.warning({
+      title: title,
+      msg: msg,
+      showClose: true,
+      timeout: 2000,
+      theme: "bootstrap",
+
+    });
+  }
+
+  errorNotifications(title, msg) {
+    this.toastyService.error({
       title: title,
       msg: msg,
       showClose: true,

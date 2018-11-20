@@ -134,7 +134,7 @@ export class ManageaccountComponent implements OnInit {
         this.getAccountDetail()
         this.accountForm.reset();
         let notifydata = {
-          type: 'sucess',
+          type: 'success',
           title: 'Account',
           msg: 'Created Sucessfully'
         }
@@ -155,7 +155,7 @@ export class ManageaccountComponent implements OnInit {
     }
     else {
       let notifydata = {
-        type: 'Warning',
+        type: 'warning',
         title: 'Account',
         msg: 'Something Went Wrong'
       }
@@ -163,6 +163,7 @@ export class ManageaccountComponent implements OnInit {
     }
   }
   cancelAccoutForm(){
+    this.accountForm.reset();
     this.hideAccountForm=false;
     this.showAddAccount=true;
     this.displayData=true
@@ -214,9 +215,21 @@ selectedAccountId(selectedAccountId){
       console.log('data', data)
       this.loader=false
       this.getAccountDetail();
+      let notifydata = {
+        type: 'success',
+        title: 'Account',
+        msg: 'Deleted'
+      }
+      this.sharedService.createNotification(notifydata);
     },
       err => {
         console.log(err)
+        let notifydata = {
+          type: 'error',
+          title: 'Account',
+          msg: 'Something Went Wrong'
+        }
+        this.sharedService.createNotification(notifydata);
       })
 
   }
