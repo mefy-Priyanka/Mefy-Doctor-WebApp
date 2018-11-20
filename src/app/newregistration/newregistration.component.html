@@ -84,7 +84,7 @@
                 <!--  *******************FORM 2************ -->
                 <fieldset *ngIf="secondreg">
                   <form [formGroup]="step2Form">
-                    <p class="errormessage">{{error}}</p>
+                    <!-- <p class="errormessage">{{error}}</p> -->
                     <input type="text" name="city" formControlName="city" placeholder="CITY" id="pac-input"/>
                     <p class="errormessage" *ngIf="step2FormErrors.city.required || (step2Form.controls.city.pristine && submitted)">City
                       Cannot Be Empty</p>

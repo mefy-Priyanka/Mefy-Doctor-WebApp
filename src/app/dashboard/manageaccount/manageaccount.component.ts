@@ -16,24 +16,25 @@ export class ManageaccountComponent implements OnInit {
   accountFormErrors: any;
   doctorProfileId: any;
 
-  doctorAccount: any =[];
+  doctorAccount: any = [];
   accountId: any = {};
-  getAccountList:any=[]
- 
+  getAccountList: any = []
+
   currentURL: any;
   // showEdit: Boolean =false;
   hideAccountForm: Boolean = false; //hide Account Form
   showAddAccount: Boolean = true; //show add account button
   displayData: Boolean = false; //hide display data
-  hideDeleteButton:Boolean=false // hide delete button in account form
+  hideDeleteButton: Boolean = false // hide delete button in account form
+  public loader:boolean=false /**** LOADER****** */
 
   // public errorMsg: any;
-  pathName:any;
+  pathName: any;
   submitted: boolean = false;
-  public mask = [ /[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/,/\d/,/\d/,/\d/, /\d/, /\d/, /\d/] // Account number validation 
+  public mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Account number validation 
   detail: any;
-  constructor(private formBuilder: FormBuilder, public accountService: AccounttService,private sharedService: SharedService,private route:ActivatedRoute) {
-    
+  constructor(private formBuilder: FormBuilder, public accountService: AccounttService, private sharedService: SharedService, private route: ActivatedRoute) {
+
     this.accountFormErrors = {
       accountHolderName: {},
       ifscCode: {},
@@ -42,11 +43,11 @@ export class ManageaccountComponent implements OnInit {
       confirmAccountNumber: {}
     };
 
-      // send url path name to change navbar colour
-      // this.pathName=(route.snapshot.url)[0].path;
-      // this.sharedService.setPath(this.pathName)
+    // send url path name to change navbar colour
+    // this.pathName=(route.snapshot.url)[0].path;
+    // this.sharedService.setPath(this.pathName)
 
-      this.currentURL = window.location.pathname; 
+    this.currentURL = window.location.pathname;
     console.log(this.currentURL);
     this.sharedService.setPath(this.currentURL);
   }
@@ -65,12 +66,12 @@ export class ManageaccountComponent implements OnInit {
     //
     // this.showAddAccount=true;
   }
-    /******************************IT CATCHES ALL CHANGES IN STEP FORM 1******************/
+  /******************************IT CATCHES ALL CHANGES IN STEP FORM 1******************/
   onAccountFormValuesChanged() {
     // this.errorMsg ='';
-    if(this.accountForm.value!=''){
-      this.submitted=false;   
-     }
+    if (this.accountForm.value != '') {
+      this.submitted = false;
+    }
     for (const field in this.accountFormErrors) {
       if (!this.accountFormErrors.hasOwnProperty(field)) {
         continue;
@@ -118,83 +119,102 @@ export class ManageaccountComponent implements OnInit {
   /**************CREATE BANK ACCOUNT*****************************/
   saveAccountForm() {
     this.submitted = true;
-if(this.accountForm.valid){
-  let accountData={
-    accountHolderName: this.accountForm.value.accountHolderName,
-    ifscCode: this.accountForm.value.ifscCode,
-    accountNumber: this.accountForm.value.accountNumber,
-    accountType: this.accountForm.value.accountType,
-    doctorId:this.doctorProfileId
-  }
-  console.log('fasa',accountData)
+    this.loader=true
+    if (this.accountForm.valid) {
+      let accountData = {
+        accountHolderName: this.accountForm.value.accountHolderName,
+        ifscCode: this.accountForm.value.ifscCode,
+        accountNumber: this.accountForm.value.accountNumber,
+        accountType: this.accountForm.value.accountType,
+        doctorId: this.doctorProfileId
+      }
+      console.log('fasa', accountData)
       this.accountService.addBankAccount(accountData).subscribe(data => {
         console.log(data);
-        this. getAccountDetail() 
+        this.loader=false;
+        this.getAccountDetail()
         this.accountForm.reset();
+        let notifydata = {
+          type: 'sucess',
+          title: 'Account',
+          msg: 'Created Sucessfully'
+        }
+        this.sharedService.createNotification(notifydata);
         this.hideAccountForm = false; //for hide account form
         this.showAddAccount = true; //for hide add account button
-        this.displayData=true;
-        // this.displayData=true;
+        this.displayData = true;
         // this.sharedService.accountInfo(true);
-      },err=>{
-console.log(err)
+      }, err => {
+        console.log(err)
+        let notifydata = {
+          type: 'error',
+          title: 'Account',
+          msg: 'Creation Failed'
+        }
+        this.sharedService.createNotification(notifydata);
       })
     }
-  else{
-
+    else {
+      let notifydata = {
+        type: 'Warning',
+        title: 'Account',
+        msg: 'Something Went Wrong'
+      }
+      this.sharedService.createNotification(notifydata);
+    }
   }
-}
 
   /*****************GET ACCPOUNT BY DOCTOR ID*********************/
   getAccountDetail() {
+    this.loader=true;
     this.accountService.getBankAccountList(this.doctorProfileId).subscribe(data => {
       console.log(data)
-      let result:any={}
-      result=data
-      this.getAccountList=result.result.result
-      console.log('dataaa',this.getAccountList)
-      if(result.result.result && result.result.result.length!=0){
-        this.detail=this.getAccountList[0];
-        this.showAddAccount=true; /*SHOW ADD ACCOUNT **/
-        this.displayData=true; /*DISPLAY DATA **/
-        this.hideAccountForm=false/*HIDE ACCOUNT FORM **/
-      } 
-      else
-      {
-        this.showAddAccount=false; 
-        this.displayData=false;
-        this.hideAccountForm=true;
+      this.loader=false;
+      let result: any = {}
+      result = data
+      this.getAccountList = result.result.result
+      console.log('dataaa', this.getAccountList)
+      if (result.result.result && result.result.result.length != 0) {
+        this.detail = this.getAccountList[0];
+        this.showAddAccount = true; /*SHOW ADD ACCOUNT **/
+        this.displayData = true; /*DISPLAY DATA **/
+        this.hideAccountForm = false/*HIDE ACCOUNT FORM **/
+      }
+      else {
+        this.showAddAccount = false;
+        this.displayData = false;
+        this.hideAccountForm = true;
       }
     },
-    err=>{
-      console.log(err)
-    })
+      err => {
+        console.log(err)
+      })
   }
   /*****************ADD ANOTHER BANK ACCOUNT********************/
   addAccount() {
     this.hideAccountForm = true; // show account form
     this.showAddAccount = false; //for hide account detail
-    this.displayData=false; //
-    this.hideDeleteButton=false;
+    this.displayData = false; //
+    this.hideDeleteButton = false;
   }
 
-   /******************************DELETE ACCOUNT DETAIL********************/
-   deleteAccountInfo() {
-     this.accountService.deleteBankAccount(this.accountId).subscribe(data=>{
-       console.log('data',data)
-     },
-     err=>{
-       console.log(err)
-     })
- 
+  /******************************DELETE ACCOUNT DETAIL********************/
+  deleteAccountInfo() {
+    this.accountService.deleteBankAccount(this.accountId).subscribe(data => {
+      console.log('data', data)
+    },
+      err => {
+        console.log(err)
+      })
+
   }
 
-    //save at enter
-    keyDownFunction(event) {
-      if(event.keyCode == 13) {
-        this.saveAccountForm();
-      }
+  //save at enter
+  keyDownFunction(event) {
+    if (event.keyCode == 13) {
+      this.saveAccountForm();
     }
+  }
 }
 
 
