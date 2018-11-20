@@ -11,12 +11,12 @@
             </div>
             <!-- *************************Form1******************************** -->
             <!-- [ngStyle]="{'text-transform': 'uppercase'}"ifc  -->
-            <div class="form1">
+            <div class="form1" *ngIf="hideAccountForm">
               <div class="card">
                 <div class="row">
                   <div class="card_content">
                     <div class="form_entire">
-                      <form [formGroup]="accountForm">
+                      <form [formGroup]="accountForm" >
                         <input type="text" name="accountHolderName" placeholder="Account's holder name" formControlName="accountHolderName">
                         <p class="errormessage" *ngIf="accountFormErrors.accountHolderName.required || (accountForm.controls.accountHolderName.pristine && submitted)">Name Can't Be Empty</p>
                         <input type="text" name="ifscCode"  placeholder="IFSC Code" formControlName="ifscCode"> 
@@ -46,24 +46,27 @@
             <!-- *************************Form1******************************** -->
             <!-- *************************Form2******************************** -->
             <div class="form2">
-              <div class="row">
-                <div class="col-md-12" id="padding-o">
+              <div class="row" *ngIf="displayData">
+                <div class="col-md-12" id="padding-o" *ngFor="let list of getAccountList">
                   <div id="padding_l">
                     <div class="card">
                       <div class="row">
-                        <div class="card_texte">
+                        <div class="card_texte" >
                           <div class="col-md-12" id="padding-o">
-                            <div class="col-md-10 col-xs-10">
+                            <div class="col-md-10 col-xs-10" >
                               <div class="consult_text2">
                                 <p class="serenity22">Holder Name :
-                                  <span>John Doe</span>
+                                  <span>{{list.accountHolderName}}</span>
                                 </p>
                                 <p class="serenity22">Account No :
-                                  <span>1234</span>
+                                  <span>{{list.accountNumber}}</span>
                                 </p>
                                 <p class="serenity22">IFSC Code :
-                                  <span>SBIN00876</span>
+                                  <span>{{list.ifscCode}}</span>
                                 </p>
+                                <p class="serenity22">Account Type :
+                                    <span>{{list.accountType}}</span>
+                                  </p>
                               </div>
                             </div>
                             <div class="col-md-2 col-xs-2" id="padding-o">
@@ -90,9 +93,9 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <div class="row" *ngIf="showAddAccount">
                 <div class="text-center">
-                  <button class="save_btn2">Add Account</button>
+                  <button class="save_btn2" (click)="addAccount()">Add Account</button>
                 </div>
               </div>
             </div>

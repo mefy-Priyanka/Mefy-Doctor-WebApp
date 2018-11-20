@@ -118,11 +118,12 @@ export class NewregistrationComponent implements OnInit {
     this.getEducationList()
     this.getSpecialityList()
     this.getStateList()
-    this.initmap();
+    // for autocomplete location
     var input = (<HTMLInputElement>document.getElementById('pac-input'));
     console.log(input);
     let autocomplete = new google.maps.places.Autocomplete(input);
     console.log(autocomplete);
+    this.initmap();
   }
   initmap() {
     console.log('data')

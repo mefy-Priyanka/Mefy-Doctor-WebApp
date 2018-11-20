@@ -85,7 +85,7 @@
                 <fieldset *ngIf="secondreg">
                   <form [formGroup]="step2Form">
                     <p class="errormessage">{{error}}</p>
-                    <input type="text" name="city" formControlName="city" placeholder="CITY" id="pac-input" name="city"   (keyup)="initmap()" />
+                    <input type="text" name="city" formControlName="city" placeholder="CITY" id="pac-input"/>
                     <p class="errormessage" *ngIf="step2FormErrors.city.required || (step2Form.controls.city.pristine && submitted)">City
                       Cannot Be Empty</p>
                     <!-- <input type="text" name="language" formControlName="language"  placeholder="Language" /> -->
@@ -110,6 +110,7 @@
                     <div class="col-md-2 col-xs-2 nomarginrw">
 
                       <p class="genderm">Gender</p>
+                    <!-- <p class="errormessage" formControlName="gender"  *ngIf="step2FormErrors.gender.required || (step2Form.controls.gender.pristine && submitted)">Date -->
                     </div>
                     <div class="col-md-3 col-xs-3 nomarginrw">
                       <p class="gmalef">
