@@ -44,7 +44,7 @@
                         <input type="text" name="accountNumber" placeholder="Account Number" formControlName="accountNumber">
                         <p class="errormessage" *ngIf="accountFormErrors.accountNumber.required || (accountForm.controls.accountNumber.pristine && submitted)">Account
                           Number Can't Be Empty</p>
-                        <input type="text" name="fname" placeholder="Confirm account number" formControlName="confirmAccountNumber">
+                        <input type="text" name="fname" placeholder="Confirm account number" formControlName="confirmAccountNumber" onpaste="return false">
                         <p class="errormessage" *ngIf="accountFormErrors.confirmAccountNumber.required || (accountForm.controls.confirmAccountNumber.pristine && submitted)">
                           Confirm Account Number Can't Be Empty</p>
                         <span class="error_account" *ngIf="accountFormErrors.confirmAccountNumber.match">Account Number
@@ -96,7 +96,7 @@
                             </div>
                             <div class="col-md-2 col-xs-2" id="padding-o">
                               <div class="edit_icon">
-                                <button class="edit" data-toggle="modal" data-target="#accountmodal">
+                                <button class="edit" data-toggle="modal" data-target="#accountmodal"  (click)="selectedAccountId(list.accountId)">
                                   <svg version="1.1" id="pencil" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                     x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;"
                                     xml:space="preserve">
@@ -150,7 +150,7 @@
 
 <!-- modal  -->
 <section class="del_modal">
-  <div class="modal fade" id="accountmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="accountmodal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">
       <div class="modal-dialog vertical-align-center modal-sm">
         <div class="modal-content">
@@ -186,7 +186,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="cance_l" data-dismiss="modal">NO</button>
-            <button type="button" class="dele_te" data-dismiss="modal">YES</button>
+            <button type="button" class="dele_te" data-dismiss="modal" (click)="deleteAccountInfo()">YES</button>
           </div>
         </div>
       </div>

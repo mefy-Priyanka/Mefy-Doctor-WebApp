@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../mefyservice/login.service';
 import { ActivatedRoute, Router } from '@angular/router';
-// import { ToastrService } from 'ngx-toastr';
+import { SharedService } from '../mefyservice/shared.service';
+
 import io from 'socket.io-client';
 @Component({
   selector: 'app-newlogin',
@@ -32,7 +33,7 @@ export class NewloginComponent implements OnInit {
   public splitarr: any =[];
   myarr: any;
   uid: any;
-  constructor(private formBuilder: FormBuilder, public loginService: LoginService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, public loginService: LoginService, private router: Router,private sharedServices:SharedService) {
     this.scanData();
     // this.myAngularxQrCode = this.scannerdata;
     this.loginFormErrors = {
@@ -126,7 +127,7 @@ export class NewloginComponent implements OnInit {
   /*******************DOCTOR'S LOGIN********************/
   login() {
     let result: any = {};
-    this.loader = false;
+    this.loader = true;
     if (this.loginForm.valid) {
       let logindata = {
         phoneNumber: this.loginForm.value.phoneNumber,
@@ -135,16 +136,24 @@ export class NewloginComponent implements OnInit {
       this.loginService.doctorWebLogin(logindata).subscribe(value => {
         console.log('result', value)
         result = value;
+        this.loader = false;
         if (result.result.message == 'OTP sent to registered number') {
           this.loginShow = false;
           this.otpShow = true
-          // this.toastr.success('User Loggedin Succesful!', 'Wow!');
+          let notifydata = {
+            type: 'Sucess',
+            title: 'OTP',
+            msg: 'Sent to registered number'
+          }
+          console.log('data',notifydata)
+        this.sharedServices.createNotification(notifydata);
         }
         else {
           this.router.navigate(['/register'])
         }
       },
         err => {
+          this.loader = false;
           console.log("Network Issue");
         }
       )
@@ -179,6 +188,7 @@ export class NewloginComponent implements OnInit {
         localStorage.setItem('userId',this.uid)  
       },
         err => {
+          this.loader = false;
           console.log(err)
         })
     }

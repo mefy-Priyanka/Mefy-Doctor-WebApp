@@ -8,8 +8,6 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagInputModule } from 'ngx-chips';
 import { TypeaheadModule } from 'ngx-bootstrap';
-
-// import { ToastrModule } from 'ngx-toastr';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 /********************NEW SERVICES************************** */
 import { DocregistrationService } from './mefyservice/docregistration.service';
@@ -32,7 +30,7 @@ import { DoctorregisterService } from './meme-services/doctorregister.service';
 import { DoctorPrescriptionService } from './meme-services/doctor-prescription.service';
 import { AppointmentService } from './meme-services/appointment.service';
 import { AccountService } from './meme-services/account.service';
-
+import { ToastyModule } from "ng2-toasty";
 import { AppComponent } from './app.component';
 // import { LoginComponent } from './login/login.component';
 // import { AuthGuard } from './auth.guard';
@@ -93,11 +91,8 @@ const approutes: Routes = [
     TextMaskModule,
     TagInputModule,
     BsDatepickerModule.forRoot(),
-    TypeaheadModule.forRoot()
-    // ToastrModule.forRoot({   // ToastrModule added
-    //   timeOut: 999,
-    //   preventDuplicates: true,
-    // }) 
+    TypeaheadModule.forRoot(),
+    ToastyModule.forRoot(),
    
   ],
   exports: [],
