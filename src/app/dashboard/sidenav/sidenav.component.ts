@@ -10,6 +10,8 @@ import { ProfileService } from '../../mefyservice/profile.service';
 export class SidenavComponent implements OnInit {
   doctorProfileId: any;
   profileInfo: any;
+  status: any;
+  loginStatus: boolean = false;
   constructor( private router: Router,private profileService:ProfileService) {
     this.doctorProfileId = localStorage.getItem('doctorId');
   }
@@ -31,7 +33,30 @@ console.log('doctorid');
     })
   }
   
+  // update availaible status of doctor
+  availabilityDoctor(event) {
 
+    if (event.target.checked) {
+      this.status = 'Online';
+    }
+    if (!event.target.checked) {
+      this.status = 'Offline';
+    }
+    let available = {
+      availability: this.status,
+      userId:  localStorage.getItem('userId')
+    }
+    this.profileService.doctorAvailability(available).subscribe(data => {
+      let response:any={};
+      response=data;
+      this.loginStatus = true;
+      console.log('availability', data);
+      this.status = response.result.availability;
+      console.log(this.status);
+    },
+      err => {
+      })
+  }
   // logout from webapp
   logOut() {
     localStorage.clear();

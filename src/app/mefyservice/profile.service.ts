@@ -12,5 +12,8 @@ export class ProfileService {
    console.log('ff',id)
    return this.http.get(APIURL+'doctor/'+id)
 }
-
+// doctor availability
+doctorAvailability(available){
+  return this.http.put(APIURL + 'doctor/profile/'+available.userId,available.availability)
+}
 }
