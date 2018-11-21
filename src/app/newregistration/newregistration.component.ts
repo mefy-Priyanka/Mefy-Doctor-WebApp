@@ -134,17 +134,13 @@ export class NewregistrationComponent implements OnInit {
       new google.maps.LatLng(-33.8474, 151.2631));
 
     var input = (<HTMLInputElement>document.getElementById('pac-input'));
-console.log('input',input)
 
     var options = {
       bounds: defaultBounds,
       types: ['(cities)'],
        componentRestrictions: {country: "in"}
     };
-    console.log('options',options)
-    // var autocomplete = new google.maps.places.Autocomplete(input);
-    // autocomplete.bindTo('bounds', );
-    let autocomplete = new google.maps.places.Autocomplete(input, options);
+      let autocomplete = new google.maps.places.Autocomplete(input, options);
   }
   /******************************IT CATCHES ALL CHANGES IN STEP FORM 1******************/
   onStep1FormValuesChanged() {
@@ -275,9 +271,11 @@ console.log('input',input)
       /****************** */
     }
   }
+
   secondstep() {
 this.selectedCity=(<HTMLInputElement>document.getElementById('pac-input')).value
 console.log('selectedCity',this.selectedCity)
+this.step2Form.controls.city.setValue(this.selectedCity);
     if (this.step2Form.valid && this.error != 'Invalid DOB') {
       console.log(this.step2Form.value)
       this.submitted = false;
@@ -311,16 +309,17 @@ console.log('selectedCity',this.selectedCity)
     }
   }
    // validating address
-   validateAddress() {
-     console.log('city')
-    // if (this.address.length==0) {
-    //   this.messageAddress = "Address Cannot Be Empty";
-    // }
-    // else{
-    //   this.messageAddress="";
-    //   this.message ="";
-    // }
-  }
+  //  validateAddress(data) {
+  //    this.initmap()
+  //    console.log('city',data)
+  //   // if (this.address.length==0) {
+  //   //   this.messageAddress = "Address Cannot Be Empty";
+  //   // }
+  //   // else{
+  //   //   this.messageAddress="";
+  //   //   this.message ="";
+  //   // }
+  // }
   previousfirst() {
     this.firstreg = true;
     this.secondreg = false;
@@ -634,7 +633,7 @@ saveRegistrationForm(){
     otp:parseInt(this.step4Form.value.otp),
     email:this.step1Form.value.email,
     language:this.selectedLanguage,
-    city:this.selectedCity,
+    city:this.step2Form.value.city,
     dob:(moment(this.step2Form.value.dob).format('DD-MM-YYYY')),
     education:this.selectedEducatiom,
     speciality:this.selectedSpeciality,
