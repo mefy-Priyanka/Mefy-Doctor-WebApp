@@ -15,7 +15,6 @@ import { LoginService } from './mefyservice/login.service';
 import {ClinicService} from './mefyservice/clinic.service';
 import { AccounttService } from './mefyservice/accountt.service';
 import {ProfileService} from './mefyservice/profile.service';
-
 /******************END OF NEW SERVICES************************************ */
 
 // import { RegistrationModule } from './registration/registration.module';
@@ -95,6 +94,7 @@ const approutes: Routes = [
     ToastyModule.forRoot(),
    
   ],
+
   exports: [],
   providers: [
     MemeLoginService,

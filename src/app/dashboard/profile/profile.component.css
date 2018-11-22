@@ -68,6 +68,17 @@ label.locationphone {
     font-size: 15px;
 
 }
+p.locationphone {
+    margin-top: 5px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.53);
+    font-weight: 600;
+    font-size: 15px;
+
+}
+input.pac-input {
+    margin-left: 1em;
+}
 p.reg_no {
     font-family: 'Lato', sans-serif;
     color: rgb(88, 88, 88);
@@ -217,8 +228,8 @@ input.reginput {
     }
 
     /* chipsdata */
-p.chipsdata {
-    color: #ffffff;
+span.chipsdata {
+    /* color: #ffffff;
     margin: 0 2px;
     padding: 0 15px;
     height: 30px;
@@ -227,8 +238,12 @@ p.chipsdata {
     border-radius: 26px;
     background-color: rgba(79, 90, 232, 0.84);
     text-align: center;
-    margin-bottom: 4px;
+    margin-bottom: 4px; */
     /* border: 1px solid #544e4e; */
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.53);
+    font-weight: 600;
+    font-size: 15px;
   }
 
   .closebtn {
@@ -245,7 +260,7 @@ p.chipsdata {
   }
   .chipsdata{
     margin: 0;
-    border-bottom: 1px solid rgba(238, 238, 238, 1);
+    /* border-bottom: 1px solid rgba(238, 238, 238, 1); */
     margin-top: 10px;
   }
   .chipsdata li{

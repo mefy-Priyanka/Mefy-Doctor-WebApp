@@ -632,7 +632,7 @@ saveRegistrationForm(){
     localStorage.setItem('doctorId',result.result.user.doctorId)
     localStorage.setItem('userId',result.result.user.userId)
     this.loader=false
-    // this.router.navigate(['/dashboard/main']);
+    this.router.navigate(['/dashboard/main']);
 
     // this.toastr.success(' Sucessfully Register!', 'Toastr fun!');
   },
