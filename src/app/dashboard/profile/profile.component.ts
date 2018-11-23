@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { DoctorregisterService } from '../../meme-services/doctorregister.service';
-import { MemeLoginService } from '../../meme-services/meme-login.service';
-import { SharedService } from '../../mefyservice/shared.service';
+import { Component, OnInit, NgModule } from '@angular/core';
+// import { DoctorregisterService } from '../../meme-services/doctorregister.service';
+// import { MemeLoginService } from '../../meme-services/meme-login.service';
+// import { SharedService } from '../../mefyservice/shared.service';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DocregistrationService } from '../../mefyservice/docregistration.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CompleterService, CompleterData } from 'ng2-completer';
-
-import * as moment from 'moment';
+import { ProfileService } from '../../mefyservice/profile.service';
 
 
-declare var google;
 
 
 
@@ -16,422 +15,240 @@ declare var google;
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+
 })
+
 export class ProfileComponent implements OnInit {
-  x: any;
+  specialist: any;
+  showSpeciality: boolean = false;
+  messageSpeciality: any;
   doctorProfileId: any;
   logInfo: any = {};
   docProfile: any = {};
-  status: any;
   userInfo: any = {}
-  email: any;
-  city: any;
-  gender: any;
-  public readonly: boolean = true;
+  public doctorpdetail:any;
+  doctoruserId: any;
+  updateinfo:any;
   public validator: boolean = false;
-  pathName: any;
-  currentURL: any;
-  degreeList: any;
-  specialityList: any;
-  languages: any;
-  language: any;
-  issuingAuthority: any;
-  state: any;
-  stateList: any;
-  speciality: any;
-  specialist: any;
-  educationList: any;
-  languageList: any;
-  education: any;
-  messageLanguage: any;
-  messageSpeciality: any;
-  messageEducation: any;
-  showSpeciality: boolean = false;
-  showLanguage: boolean = false;
-  showEducation: boolean = false;
-  dataService: CompleterData;
-  specialityService: CompleterData;
-  public languageService: CompleterData;
-  public stateService: CompleterData;
-  error:any;
-  practiceYear:any;
-  public practisingYear = [/[1-9]/, /\d/, /\d/, /\d/] // practising year validation 
-  constructor(private router: Router, private loginService: MemeLoginService, public doctorRegisterService: DoctorregisterService, private sharedService: SharedService, private route: ActivatedRoute, private completerService: CompleterService) {
+  public specialityOfObjects:any=[];
+  public specialityList: any = [];
+  public selectedSpeciality:any=[];
+  doctorDetail: FormGroup;
+  doctorDetailErrors: any;
+  public selectedLanguage:any=[];
+  public specarr:any;
+  public educarr:any;
+  public langarr:any;
+  public selectedEducation:any=[];
+  public languageList: any = [];
+  public  educationList: any = [];
+  public educationOfObjects:any=[];
+  public languageOfObjects:any=[];
+ constructor(private router: Router,private formBuilder: FormBuilder,private docService: DocregistrationService,private profileService:ProfileService) {
 
-
-    // send url path name to change navbar colour
-    // this.pathName = (route.snapshot.url)[0].path;
-    // this.sharedService.setPath(this.pathName)
-
-    this.currentURL = window.location.pathname;
-    console.log(this.currentURL);
-    this.sharedService.setPath(this.currentURL);
+    /***********STEP 1*************/
+    this.doctorDetailErrors = {
+      phoneNumber: {},
+      name: {},
+      registrationNumber: {},
+      state:{},
+      gender:{},
+      dob:{},
+      city:{},
+      address:{},
+      email:{},
+      speciality:{},
+      education:{},
+      language:{},
+      issuingAuthority:{},
+      practicingSince:{},
+    };
   }
 
   ngOnInit() {
-    this.initmap();
-    this.doctorProfileId = localStorage.getItem('loginId');
-    this.doctorProfile();
+    /*******STEP 1******** */
+    this.doctorDetail = this.createdoctorDetail()
+    this.doctorDetail.valueChanges.subscribe(() => {
+      this.ondoctorDetailValuesChanged();
+    });
 
-    this.getDegreeList();
+    this.doctorProfileId = localStorage.getItem('doctorId');
+    this.doctoruserId = localStorage.getItem('userId');
+    this.doctorProfile();
     this.getSpecialityList();
-    this.getStateList();
+    this.getEducationList();
     this.getLanguageList();
   }
 
-  initmap() {
-    var defaultBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(-33.8902, 151.1759),
-      new google.maps.LatLng(-33.8474, 151.2631));
+  /******************************IT CATCHES ALL CHANGES IN STEP FORM 1******************/
+  ondoctorDetailValuesChanged() {
+    for (const field in this.doctorDetailErrors) {
+      if (!this.doctorDetailErrors.hasOwnProperty(field)) {
+        continue;
+      }
+      // Clear previous errors
+      this.doctorDetailErrors[field] = {};
+      // Get the control
+      const control = this.doctorDetail.get(field);
 
-    var input = (<HTMLInputElement>document.getElementById('pac-input'));
-
-
-    var options = {
-      bounds: defaultBounds,
-      types: ['(cities)'],
-      // componentRestrictions: {country: "us"}
-
-    };
-    let autocomplete = new google.maps.places.Autocomplete(input, options);
+      if (control && control.dirty && !control.valid) {
+        this.doctorDetailErrors[field] = control.errors;
+      }
+    }
   }
 
-  //get doctorBasic Info
+  createdoctorDetail() {
+    return this.formBuilder.group({
+      phoneNumber: ['', Validators.required],
+      name: ['', Validators.required],
+      registrationNumber: ['',Validators.required],
+      state: ['',Validators.required],
+      gender: ['',Validators.required],
+      dob: ['',Validators.required],
+      city: ['',Validators.required],
+      address: ['',Validators.required],
+      email: ['',Validators.required],
+      speciality: ['',Validators.required],
+      education: ['',Validators.required],
+      language: ['',Validators.required], 
+      issuingAuthority: ['',Validators.required],
+      practicingSince: ['',Validators.required]
+    });
+  }
+
+// Doctor profile info
   doctorProfile() {
-    this.loginService.getDoctorDetail(this.doctorProfileId).subscribe(result => {
-      console.log('get doctor profiledata', result);
-      this.logInfo = result.registrationDetails;
-      // this.x = this.logInfo.practicingSince;
-      // console.log(this.x);
-      // console.log(moment(this.x).format('YYYY'));
-      // this.logInfo.practicingSince = (moment(this.x).format('YYYY'));
-      console.log(this.logInfo)
-      this.userInfo = this.logInfo.userId;
+    this.profileService.getDocDetail(this.doctorProfileId).subscribe(data => {
 
+      this.doctorpdetail=data;
+      console.log('get doctor profiledata', this.doctorpdetail);
     },
       err => {
       })
   }
 
-  // update Doctor Profile 
-  updateDoctorProfile(docProfile) {
-    this.error='';
-    this.practiceYear='';
-    this.logInfo.city = (<HTMLInputElement>document.getElementById('pac-input')).value;
-    if(this.compareDob(moment(docProfile.dob).format('YYYY-MM-DD')) && this.comparePracticingYear(docProfile.practicingSince)){
-    let data = {
-      name: docProfile.name,
-      email: docProfile.email,
-      dob: moment(docProfile.dob).format('YYYY-MM-DD'),
-      address: docProfile.address,
-      location: {},
-      _id: this.doctorProfileId,
-      city: docProfile.city,
-      language: docProfile.language,
-      gender: docProfile.gender,
-      education: docProfile.education,
-      speciality: docProfile.speciality,
-      issuingAuthority: docProfile.issuingAuthority,
-      state: docProfile.state,
-      practicingSince: docProfile.practicingSince
+  updateDoctorProfile(updateinfo){
 
+    let doctoridetail = {
+      phoneNumber: updateinfo.phoneNumber,
+      name: updateinfo.name,
+      registrationNumber: updateinfo.registrationNumber,
+      state:updateinfo.state,
+      gender: updateinfo.gender,
+      dob: updateinfo.dob,
+      city: updateinfo.city,
+      address: this.doctorDetail.value.address,
+      email: this.doctorDetail.value.email,
+      speciality: this.doctorDetail.value.speciality,
+      education: this.doctorDetail.value.education,
+      language: this.doctorDetail.value.language,
+      issuingAuthority: updateinfo.issuingAuthority,
+      practicingSince: updateinfo.practicingSince,
+      userId : localStorage.getItem('userId')
     }
-    this.doctorRegisterService.updateDocProfile(data).subscribe(result => {
-
-      console.log('updated doctor data', result);
-      let notifydata = {
-        type: 'success',
-        title: 'Profile',
-        msg: 'Updated Succesfully'
-      }
-      this.sharedService.createNotification(notifydata);
-      this.sharedService.updatedDoctorInfo(true);
-      this.router.navigate(['/dashboard/main']);
+    this.profileService.updateDetail(doctoridetail).subscribe(data => {
+      this.doctorpdetail=data;
+      console.log('result',data)
+      let result:any={}
+      result=data
+      // console.log("ABCD",result.result.speciality);
+      console.log('updated profiledata', this.doctorpdetail);
+      // console.log('updated profiledata', this.result.result.result);
+      // this.router.navigate(['/dashboard/main']);speciality
     },
-      err => {
-      })
-  }
-  else{
-    let notifydata = {
-      type: 'warning',
-      title: 'Invalid',
-      msg: 'Input'
-    }
-    this.sharedService.createNotification(notifydata);
-  }
-}
-
-  // validate email
-  emailValidate(email) {
-    var emailPattern = /^[a-z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$/;
-    if (email == "") {
-    } else if (isNaN(email)) {
-      if (!(email.match(emailPattern))) {
-        this.validator = true;
-      }
-      else
-        this.validator = false;
-    }
-    return false;
-  }
-
-  //get degree list
-  getDegreeList() {
-    this.doctorRegisterService.getDegreeList().subscribe(data => {
-      this.degreeList = data.education;
-      this.dataService = this.completerService.local(this.degreeList, 'Degree', 'Degree');
-      console.log('degree list', this.degreeList)
-    },
-      err => {
-
-      })
-  }
-
-  //get speciality list
-  getSpecialityList() {
-    this.doctorRegisterService.getSpecialityList().subscribe(data => {
-      this.specialityList = data.speciality;
-      console.log('speciality list', this.specialityList);
-      this.specialityService = this.completerService.local(this.specialityList, 'GeneralSpeciality', 'GeneralSpeciality');
-    }, err => {
-
+    err => {
     })
+    
   }
+  /********************GET LIST OF SPECIALITY *****************/
+  getSpecialityList(){
 
-  hideSpeciality() {
-    this.showSpeciality = true;
-  }
-
-  hideLanguage() {
-    this.showLanguage = true;
-  }
-
-  hideEducation() {
-    this.showEducation = true;
-  }
-
-  // remove language
-  removeLanguage(name) {
-    this.language = this.logInfo.language;
-    this.language.splice(this.language.indexOf(name), 1);
-    console.log('language Array', this.languages);
-  }
-
-  // remove speciality
-  removeSpeciality(name) {
-    this.speciality = this.logInfo.speciality,
-      this.speciality.splice(this.speciality.indexOf(name), 1);
-    console.log('speciality array', this.speciality);
-  }
-
-  // remove education
-  removeEducation(name) {
-    this.education = this.logInfo.education,
-      this.education.splice(this.education.indexOf(name), 1);
-    console.log('education array', this.education);
-  }
-
-  // add language
-  addLanguage(data) {
-    this.languages = data;
-    // this.logInfo.language.push(this.languages);
-    // this.languages ="";
-    if (this.languages) {
-      if (this.logInfo.language.includes(this.languages)) {
-        this.messageLanguage = "Language already exists !";
-      }
-      else {
-        this.logInfo.language.push(this.languages);
-        this.languages = '';
-        this.showLanguage = false;
-        this.messageLanguage = "";
-      }
+    let data={
+     z: "speciality"
+   }
+   this.docService.getSpecialityList(data).subscribe(data => {
+     let value: any = {}
+     value = data
+     this.specialityList = value.result.result
+    //  console.log(this.specialityList)
+     for (var i = 0; i < this.specialityList.length; i++) {
+       var spec = {
+         specialityName: this.specialityList[i].GeneralSpeciality,
+         
+       }
+       this.specialityOfObjects.push(spec);
+     }
+   },
+     err => {
+       console.log(err)
+     })
+   }
+     /********************GET LIST OF Education *****************/
+  getEducationList(){
+    let data={
+        y: "education"
     }
-  }
-  // add speciality
-  addSpeciality(data) {
-    this.specialityList = data;
-    // this.logInfo.speciality.push(this.specialityList);
-    // this.specialist ="";
-    if (this.specialityList) {
-      if (this.logInfo.speciality.includes(this.specialityList)) {
-        this.messageSpeciality = "Speciality already exists !";
+      this.docService.getEducationList(data).subscribe(data => {
+        let value: any = {}
+        value = data
+        this.educationList = value.result.result
+        // console.log(this.educationList)
+        for (var i = 0; i < this.educationList.length; i++) {
+          var edu = {
+            educationName: this.educationList[i].Degree,
+            
+          }
+          this.educationOfObjects.push(edu);
+        }
+      },
+        err => {
+          console.log(err)
+        })
       }
-      else {
-        this.logInfo.speciality.push(this.specialityList);
-        this.specialityList = '';
-        this.specialist = '';
-        this.showSpeciality = false;
-        this.messageSpeciality = "";
-      }
-    }
-  }
-
-  // add language
-  addEducation(data) {
-    this.educationList = data;
-    // this.logInfo.education.push(this.educationList);
-    // this.educationList ="";
-    if (this.educationList) {
-      if (this.logInfo.education.includes(this.educationList)) {
-        this.messageEducation = "Education already exists !";
-      }
-      else {
-        this.logInfo.education.push(this.educationList);
-        this.educationList = '';
-        this.showEducation = false;
-        this.messageEducation = "";
-      }
-    }
-  }
-
-  //get state list
-  getStateList() {
-    this.doctorRegisterService.getStateList().subscribe(data => {
-      console.log('state list', data);
-      this.stateList = data.state;
-      this.stateService = this.completerService.local(this.stateList, 'states', 'states');
-    })
-  }
-
-  //get language list
+      
+     /*************************END************************************ */
+    /********************GET LIST OF LANGUAGE *****************/
   getLanguageList() {
-    this.doctorRegisterService.getLanguageList().subscribe(data => {
-      console.log('language', data);
-      this.languageList = data.language;
-      this.languageService = this.completerService.local(this.languageList, 'Language', 'Language');
-    })
+    let data = {
+      x: "language"
+    }
+    this.docService.getLanguageList(data).subscribe(data => {
+      let value: any = {}
+      value = data
+      this.languageList = value.result.result
+      // console.log(this.languageList)
+      for (var i = 0; i < this.languageList.length; i++) {
+        var lang = {
+          langName: this.languageList[i].Language,
+          
+        }
+        this.languageOfObjects.push(lang);
+      }
+    },
+      err => {
+        console.log(err)
+      })
   }
-  //cancel profile data
-  cancelProfile() {
-    this.router.navigate(['/dashboard/main']);
+  /*************************END************************************ */
+   /***********************LANGUAGE ON SELECT IN STEP 2*********/
+   onAddLanguage(evt) {
+    this.selectedLanguage.push(evt.value)
+    this.langarr=this.doctorpdetail.language.append(this.selectedLanguage);
+    console.log("langarr", this.langarr);
   }
-
-  compareDob(dob) {
-    this.error='';
-    var startdat = moment();
-    var startdate = moment().subtract(20, "year");
-    let presentDat: any;
-    presentDat = moment(startdate).utcOffset(0);
-    presentDat.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
-    presentDat.toISOString()
-    presentDat.format("DD-MM-YYYY")
-    console.log(presentDat);
-    var enddat = moment();
-    var enddat = moment().subtract(100, "year");
-    let Dat: any;
-    Dat = moment(enddat).utcOffset(0);
-    Dat.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
-    Dat.toISOString()
-    Dat.format("DD-MM-YYYY")
-    console.log(Dat);
-    if ((moment(dob)).isAfter(presentDat._d)) {
-      this.error = 'Invalid DOB';
-      return false;
-    }
-    else if ((moment(dob)).isBefore(Dat._d)) {
-      this.error = 'Invalid DOB';
-      return false;
-    }
-    else{
-      return true;
-    }
+    /***********************EDUCATION ON SELECT IN STEP 3*********/
+  onAddEducation(evt) {
+    this.selectedEducation.push(evt.value)
+    this.educarr=this.doctorpdetail.education.append(this.selectedEducation);
+    console.log(" this.educarr", this.educarr);
   }
-
-  comparePracticingYear(year) {
-    this.practiceYear = '';
-    var formattedYear: any;
-    formattedYear = JSON.parse(year)
-    let presentDat: any;
-    presentDat = moment().utcOffset(0);
-    presentDat.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
-    presentDat.toISOString()
-    var currentYear: any;
-    currentYear = moment(presentDat, "DD/MM/YYYY").year()
-    console.log(currentYear);
-    var enddat = moment();
-    var enddat = moment().subtract(70, "year");
-    let Dat: any;
-    Dat = moment(enddat).utcOffset(0);
-    Dat.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
-    Dat.toISOString()
-    var maxYear: any;
-    maxYear = moment(Dat, "DD/MM/YYYY").year()
-    console.log(maxYear);
-    if ((formattedYear) > (currentYear)) {
-      this.practiceYear = 'Invalid Practicing Year';
-      console.log('abc')
-      return false;
-    }
-    else if ((formattedYear) < (maxYear)) {
-      this.practiceYear = 'Invalid Practicing Year';
-      return false;
-    }
-    else {
-      return true;
-    }
+      /***********************SPECIALITY ON SELECT IN STEP 3*********/
+  onaAddSpeciality(evt) {
+    // console.log(evt);
+    this.selectedSpeciality.push(evt.value)
+    // console.log('selectedSpeciality',this.selectedSpeciality)
+    this.specarr=this.doctorpdetail.speciality.append(this.selectedSpeciality);
+    console.log(" this.specarr", this.specarr);
   }
-
-  // select item for language
-onItemSelectLanguage(selected){
-
-  this.languages = selected.title;
-  // this.logInfo.language.push(this.languages);
-  // this.languages ="";
-  if (this.languages) {
-    if (this.logInfo.language.includes(this.languages)) {
-      this.messageLanguage = "Language already exists !";
-    }
-    else {
-      this.logInfo.language.push(this.languages);
-      this.languages = '';
-      this.showLanguage = false;
-      this.messageLanguage = "";
-    }
-  }
-
-}  
-
-// select item for speciality
-onItemSelectSpeciality(selected){
-
-  this.specialityList = selected.title;
-  // this.logInfo.speciality.push(this.specialityList);
-  // this.specialist ="";
-  if (this.specialityList) {
-    if (this.logInfo.speciality.includes(this.specialityList)) {
-      this.messageSpeciality = "Speciality already exists !";
-    }
-    else {
-      this.logInfo.speciality.push(this.specialityList);
-      this.specialityList = '';
-      this.specialist = '';
-      this.showSpeciality = false;
-      this.messageSpeciality = "";
-    }
-  }
-
-} 
-
-// select item for education
-onItemSelectEduaction(selected){
-
-  this.educationList = selected.title;
-  // this.logInfo.education.push(this.educationList);
-  // this.educationList ="";
-  if (this.educationList) {
-    if (this.logInfo.education.includes(this.educationList)) {
-      this.messageEducation = "Education already exists !";
-    }
-    else {
-      this.logInfo.education.push(this.educationList);
-      this.educationList = '';
-      this.showEducation = false;
-      this.messageEducation = "";
-    }
-  }
-
-} 
-
 }

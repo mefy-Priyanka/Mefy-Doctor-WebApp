@@ -656,6 +656,8 @@ saveRegistrationForm(){
     localStorage.setItem('userId',result.result.user.userId)
     this.loader=false
     this.router.navigate(['/dashboard/main']);
+
+    // this.toastr.success(' Sucessfully Register!', 'Toastr fun!');
   },
   err=>{
     console.log(err)
