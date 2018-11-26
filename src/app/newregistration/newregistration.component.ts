@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocregistrationService } from '../mefyservice/docregistration.service';
 import { SharedService } from '../mefyservice/shared.service';
-
+import { TagInputModule } from 'ngx-chips';
 import { Router } from '@angular/router';
 declare var google;
 import * as moment from 'moment';
@@ -49,17 +49,18 @@ export class NewregistrationComponent implements OnInit {
   public  educationList: any = [];
   public specialityList: any = [];
   public stateList:any=[]
+  public issuingAuthorityList:any=[];
   public languageOfObjects:any=[];
   public specialityOfObjects:any=[];
   public educationOfObjects:any=[];
-  public stateOfObjects:any=[];
   public practisingYear = [/[1-9]/, /\d/, /\d/, /\d/] // practising year validation
   public mask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
   public  error: any;
   public selectedState:any
+  public selectedIssueAuthority:any;
   public selectedCity:any
 
-
+  
   constructor(private formBuilder: FormBuilder, private docService: DocregistrationService,private router: Router,private sharedServices:SharedService) {
     // private toastr: ToastrService
     /***********STEP 1*************/
@@ -88,9 +89,17 @@ export class NewregistrationComponent implements OnInit {
     this.step4FormErrors = {
       otp: {}
     };
+  
+      TagInputModule.withDefaults({
+       tagInput: {
+            placeholder: 'Add another language',
+            secondaryPlaceholder:'Add Language'
+            // add here other default values for tag-input
+        }
+    });
   }
-
   ngOnInit() {
+    
     /*******STEP 1******** */
     this.step1Form = this.createStep1Form()
 
@@ -120,12 +129,14 @@ export class NewregistrationComponent implements OnInit {
     this.getEducationList()
     this.getSpecialityList()
     this.getStateList()
+    this.getIssueAuthorityList();
     // for autocomplete location
-    var input = (<HTMLInputElement>document.getElementById('pac-input'));
-    console.log(input);
-    let autocomplete = new google.maps.places.Autocomplete(input);
-    console.log(autocomplete);
+    // var input = (<HTMLInputElement>document.getElementById('pac-input'));
+    // console.log(input);
+    // let autocomplete = new google.maps.places.Autocomplete(input);
+    // console.log(autocomplete);
     this.initmap();
+    
   }
   initmap() {
     console.log('data')
@@ -241,7 +252,7 @@ export class NewregistrationComponent implements OnInit {
     });
   }
   firststep() {
-    if (this.step1Form.valid) {
+    if (this.step1Form.valid) {    
       console.log(this.step1Form.value)
       this.firstreg = false;
       this.secondreg = true;
@@ -277,6 +288,13 @@ this.selectedCity=(<HTMLInputElement>document.getElementById('pac-input')).value
 console.log('selectedCity',this.selectedCity)
 this.step2Form.controls.city.setValue(this.selectedCity);
     if (this.step2Form.valid && this.error != 'Invalid DOB') {
+        TagInputModule.withDefaults({
+         tagInput: {
+              placeholder: 'Add another education',
+              secondaryPlaceholder:'Add Education'
+              // add here other default values for tag-input
+          }
+      });
       console.log(this.step2Form.value)
       this.submitted = false;
       this.firstreg = false;
@@ -398,7 +416,7 @@ this.step2Form.controls.city.setValue(this.selectedCity);
   /********************GET LIST OF LANGUAGE *****************/
   getLanguageList() {
     let data = {
-      x: "language"
+      language: "language"
     }
     this.docService.getLanguageList(data).subscribe(data => {
       let value: any = {}
@@ -449,10 +467,22 @@ this.step2Form.controls.city.setValue(this.selectedCity);
   typeaheadNoStateResults(event: boolean): void {
     this.noStateResult = event
   }
+   /***********************STATE ON SELECT IN STEP 3*********/
+   onSelectedIssueAuthority(evt) {
+    console.log(evt);
+    this.selectedIssueAuthority =evt.value;
+    console.log('sate',this.selectedIssueAuthority)
+    // console.log('selectedSpeciality',this.selectedSpeciality)
+   
+  }
+  /**************IF RESULT IS NOT FOUND THEN SHOW MESSAGE */
+typeaheadNoselectedAuthority(event: boolean): void {
+  this.noStateResult = event
+}
   /********************GET LIST OF Education *****************/
   getEducationList(){
 let data={
-    y: "education"
+  education: "education"
 }
   this.docService.getEducationList(data).subscribe(data => {
     let value: any = {}
@@ -477,7 +507,7 @@ let data={
   getSpecialityList(){
 
    let data={
-    z: "speciality"
+    speciality: "speciality"
   }
   this.docService.getSpecialityList(data).subscribe(data => {
     let value: any = {}
@@ -507,6 +537,22 @@ let data={
      value = data
      this.stateList = value.result.result
      console.log(this.stateList)
+   },
+     err => {
+       console.log(err)
+     })
+   }
+   /********************GET LIST OF ISSUE AUTHORITY *****************/
+  getIssueAuthorityList(){
+
+    let data={
+      issuingAuthority: "issuingAuthority"
+   }
+   this.docService.getIsuueAuthorityList(data).subscribe(data => {
+     let value: any = {}
+     value = data
+     this.issuingAuthorityList = value.result.result
+     console.log(this.issuingAuthorityList)
    },
      err => {
        console.log(err)
@@ -565,6 +611,7 @@ compareDob(dob) {
 
 comparePracticingYear(year) {
   console.log('year',year)
+  if(year!=null && Object.keys(year).length != 0){
   this.error = '';
   var formattedYear: any;
   formattedYear = JSON.parse(year)
@@ -604,6 +651,7 @@ comparePracticingYear(year) {
     return true;
   }
 }
+}
 /**********************************DOCTOR"S REGISTRATION PART 1 */
  preRgistration(){
    let preRegistrationData={
@@ -631,7 +679,6 @@ saveRegistrationForm(){
     name:this.step1Form.value.name,
     phoneNumber:this.step1Form.value.phoneNumber,
     otp:parseInt(this.step4Form.value.otp),
-    email:this.step1Form.value.email,
     language:this.selectedLanguage,
     city:this.step2Form.value.city,
     dob:(moment(this.step2Form.value.dob).format('DD-MM-YYYY')),
@@ -673,8 +720,7 @@ saveRegistrationForm(){
   }
  this.sharedServices.createNotification(notifydata);
   this.loader=false
-
-  // this.toastr.error('Registration Failed!', 'Not Valid')
 }
       }
+      
 }

@@ -90,12 +90,11 @@
                       <input type="text" name="city" formControlName="city" placeholder="CITY" id="pac-input" (click)="initmap()" />
                       <p class="errormessage" *ngIf="step2FormErrors.city.required || (step2Form.controls.city.pristine && submitted)">City
                         Cannot Be Empty</p>
-                      <!-- <input type="text" name="language" formControlName="language"  placeholder="Language" /> -->
-                      <!-- <label>Language:</label> -->
-                      <tag-input formControlName="language" (onAdd)="onAddLanguage($event)" onlyFromAutocomplete="true"
-                        blinkIfDupe="true" placeholder="Language">
+                        <!-- <label>Language:</label> -->
+                      <tag-input formControlName="language"  (onAdd)="onAddLanguage($event)" onlyFromAutocomplete="true"
+                        blinkIfDupe="true" >
                         <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
-                          [showDropdownIfEmpty]="false" placeholder="Choose language" [autocompleteItems]="languageOfObjects">
+                          [showDropdownIfEmpty]="false" [autocompleteItems]="languageOfObjects">
                         </tag-input-dropdown>
                       </tag-input>
                       <p class="errormessage" *ngIf="step2FormErrors.language.required || (step2Form.controls.language.pristine && submitted)">Language
@@ -149,9 +148,9 @@
                       <!-- <input type="text" name="education"  formControlName="education" placeholder="Qualifications" /> -->
                       <!-- <label>Education:</label> -->
                       <tag-input formControlName="education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true"
-                        blinkIfDupe="true" placeholder="Education">
+                        blinkIfDupe="true" >
                         <tag-input-dropdown [appendToBody]="false" [identifyBy]="'educationName'" [displayBy]="'educationName'"
-                          [showDropdownIfEmpty]="false" placeholder="Choose education" [autocompleteItems]="educationOfObjects">
+                          [showDropdownIfEmpty]="false"  [autocompleteItems]="educationOfObjects">
                         </tag-input-dropdown>
                       </tag-input>
                       <p class="errormessage" *ngIf="step3FormErrors.education.required || (step3Form.controls.education.pristine && submitted)">Education
@@ -159,22 +158,22 @@
                       <!-- <input type="text" name="speciality"  formControlName="speciality" placeholder="Speciality" /> -->
                       <!-- <label>Speciality:</label> -->
                       <tag-input formControlName="speciality" (onAdd)="onAddSpeciality($event)" onlyFromAutocomplete="true"
-                        placeholder="Speciality" blinkIfDupe="true">
+                         blinkIfDupe="true">
                         <tag-input-dropdown [appendToBody]="false" [identifyBy]="'specialityName'" [displayBy]="'specialityName'"
-                          [showDropdownIfEmpty]="false" placeholder="Choose speciality" [autocompleteItems]="specialityOfObjects">
+                          [showDropdownIfEmpty]="false"  [autocompleteItems]="specialityOfObjects">
                         </tag-input-dropdown>
                       </tag-input>
                       <p class="errormessage" *ngIf="step3FormErrors.speciality.required || (step3Form.controls.speciality.pristine && submitted)">Speciality
                         Cannot Be Empty</p>
                       <input type="text" name="practisingsince" [textMask]="{mask: practisingYear, guide: false}"
                         placeholder="Practising Since" formControlName="practicingSince" (blur)="comparePracticingYear(step3Form.value.practicingSince)" />
-                      <!-- <input type="text" name="issueauthority" placeholder="Issuing Authority" formControlName="issuingAuthority" /> -->
-                      <!-- <div class="selecta"> -->
-                      <select class="browser-default" formControlName="issuingAuthority">
-                        <option value="" disabled selected>Issuing Authority</option>
-                        <option value="MCI">MCI</option>
-                      </select>
-                      <!-- </div> -->
+                      
+                      <ng-template #customItemTemplate1 let-model="item" let-index="index">
+                        <h5>{{ model.issuingAuthority }} </h5>
+                      </ng-template>
+                      <input class="form-control" [typeaheadItemTemplate]="customItemTemplate1" formControlName="issuingAuthority"
+                      (typeaheadOnSelect)="onSelectedIssueAuthority($event)" placeholder="Issue Authority" typeaheadOptionField="issuingAuthority"
+                      [typeahead]="issuingAuthorityList" class="form-control" (typeaheadNoResults)="typeaheadNoselectedAuthority($event)">
                       <p class="errormessage" *ngIf="step3FormErrors.practicingSince.required || (step3Form.controls.practicingSince.pristine && submitted)">Practicing
                         Since can't be empty</p>
                       <input type="button" name="previous" class="previous action-button" (click)="previouslast()"
