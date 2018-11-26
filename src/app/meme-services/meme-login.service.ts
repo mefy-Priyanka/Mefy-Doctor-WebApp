@@ -10,6 +10,7 @@ import 'rxjs/add/operator/catch';
 export class MemeLoginService {
   public headers: any;
   public options: any;
+  getDocDetail: any;
 
   constructor(private http: Http) { }
 

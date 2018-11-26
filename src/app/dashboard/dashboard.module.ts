@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule, Routes, RouterLink } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -7,6 +7,7 @@ import { FilterPipeModule } from "ngx-filter-pipe";
 import { Ng2CompleterModule } from "ng2-completer";
 import { ConsultModule } from "./consult/consult.module";
 import { TextMaskModule } from "angular2-text-mask";
+import { TagInputModule } from 'ngx-chips';
 import { BsDatepickerModule } from "ngx-bootstrap";
 import { ToastyModule } from "ng2-toasty";
 import { DashboardComponent } from "./dashboard.component";
@@ -50,12 +51,14 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FilterPipeModule,
     Ng2CompleterModule,
+    TagInputModule,
     TextMaskModule,
     BsDatepickerModule.forRoot(),
     ToastyModule.forRoot(),
     TimepickerModule.forRoot(),
 
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [
     SearchHealthRecordPipe,
     DashboardComponent,

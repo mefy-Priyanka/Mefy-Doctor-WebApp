@@ -1,68 +1,53 @@
 <div class="row nomarginrow0">
   <div class="col-md-8 nopaddingleft pdng0">
     <div class="card maincontent">
-      <form>
+      <form [formGroup]="doctorDetail">
         <div class="row nomarginrow0">
           <div class="col-md-10 nopadding0col1">
             <div class="input-field col-md-12">
               <p class="reg_no">Registration No./Uprn No.:
               </p>
               <div class="labeloutput">
-                <label class="location" for="location">1234</label>
+                <label class="location" for="location">{{doctorpdetail.registrationNumber}}</label>
               </div>
-            </div>
-          </div>
-          <div id="reg_no" class="collapse">
-            <div class="input-field col-md-12">
-              <input type="text" placeholder="Reg no." class="reginput">
             </div>
           </div>
         </div>
 
         <div class="input-field col-md-12">
           <p class="labelpf">Name:</p>
-          <input placeholder="Name" id="first_name" type="text">
+          <p class="locationphone">{{doctorpdetail.name}}</p>
         </div>
-
-
         <div class="input-field col-md-12">
           <p class="reg_no">Mobile Number:</p>
         </div>
         <div class="abellable">
-          <label class="locationphone" for="location">2377895741</label>
+          <label class="locationphone" for="location">{{doctorpdetail.phoneNumber}}</label>
         </div>
         <div class="input-field col-md-12 speciaity">
-          <p class="labelpf">Email:</p>
-        </div>
-        <div class="abellable">
-          <label class="locationphone" for="location">hello@mefy.com</label>
-        </div>
-        <!-- <div class="input-field col-md-12" idid="test2"="radiobtn">
-          <p class="reg_no">Gender:
-          </p>
-        </div>
-        <p class="gen_m">
-          <input name="group1" type="radio"  value="Male"/>
-          <label for="test2">Male</label>
-          <input name="group1" type="radio" id="test4" value="Female"/>
-          <label for="test4">Female</label>
-        </p> -->
-        <div class="input-field col-md-12 speciaity">
-          <p class="labelpf">Date of Birth:</p>
-          <input  #dp="bsDatepicker" bsDatepicker placeholder="Enter DOB"  name="bday"  [bsConfig]="{  dateInputFormat: 'YYYY-MM-DD' }">
-          <span class="error_message" [ngStyle]="{'font-size':'13px'}">{{error}}</span>
+          <p class="labelpf">Gender:</p>
+          <p class="locationphone">{{doctorpdetail.gender}}</p>
         </div>
         <div class="input-field col-md-12 speciaity locatn">
-          <p class="labelpf">City:
-          </p>
-          <input placeholder="Location" id="first_name" id="pac-input" type="text">
+          <p class="labelpf">Date of Birth:</p>
+          <p class="locationphone">{{doctorpdetail.dob}}</p>
+        </div>
+        <div class="input-field col-md-12 speciaity locatn">
+          <p class="labelpf">City:</p>
+          <p class="locationphone">{{doctorpdetail.city}}</p>
         </div>
         <div class="input-field col-md-12 speciaity locatn">
           <p class="labelpf">Address:
           </p>
-          <input placeholder="Address" id="first_name" id="pac-input" type="text">
+          <span class="chipsdata">{{doctorpdetail.address}}</span><input formControlName="address" id="first_name" id="pac-input"
+            type="text">
         </div>
-
+        <div class="input-field col-md-12 speciaity locatn">
+          <p class="labelpf">Email:
+          </p>
+          <span class="chipsdata">{{doctorpdetail.email}}</span><input id="first_name" id="pac-input" type="text"
+            formControlName="email">
+        </div>
         <div class="row nomarginrow0">
           <div class="col-md-6">
             <p class="labelpf">Speciality:
@@ -71,144 +56,93 @@
         </div>
 
         <div class="col-md-12 nomarginrw">
-          <div class="col-md-11 col-xs-10 nopadding0col1">
-            <div class="chipdatain">
-              <ul class="list-inline chipsdata">
-                <li>
-                  <p class="chipsdata">ABCD
-                    <span class="closebtn" (click)="removeSpeciality(list)">&times;</span>
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-1 col-xs-2 nopadding0col1">
-            <div class="addchips">
-              <button class="addprofile">+</button>
-            </div>
-          </div>
-        </div>
-        <div class="row nomarginrow0">
-          <div class="input-field col-md-10 col-xs-9 speciaity nopaddingright">
-            <ng2-completer placeholder="Expertise" [(ngModel)]=specialist [ngModelOptions]="{standalone: true}" [datasource]="specialityService"
-              [minSearchLength]="0" (selected)="onItemSelectSpeciality($event)"></ng2-completer>
-          </div>
-          <div class="col-md-2 col-xs-3 nopaddingleft">
-            <div class="addchip">
-            </div>
-
-          </div>
-        </div>
-
-
-        <div class="row nomarginrow0">
-          <div class="col-md-6">
-            <p class="labelpf">Qualifications:
+          <div class="col-md-12 col-xs-10 nopadding0col1">
+            <ul class="list-inline chipsdata">
+              <li *ngFor="let list of doctorpdetail.speciality">
+                <p class="chipsdata">{{list}}
+                </p>
+              </li>
+            </ul>
+            <p></p>
+            <p>
+              <tag-input formControlName="speciality" (onAdd)="onaAddSpeciality($event)" onlyFromAutocomplete="true"
+                placeholder="Speciality" blinkIfDupe="true">
+                <tag-input-dropdown [appendToBody]="false" [identifyBy]="'specialityName'" [displayBy]="'specialityName'"
+                  [showDropdownIfEmpty]="false" placeholder="Choose speciality" [autocompleteItems]="specialityOfObjects">
+                </tag-input-dropdown>
+              </tag-input>
             </p>
           </div>
         </div>
-
-
-
-        <div class="col-md-12 nomarginrw">
-          <div class="col-md-11 col-xs-10 nopadding0col1">
-            <div class="chipdatain">
-              <!-- <span >{{qError}}</span> -->
-              <!-- <input type="text" placeholder="Enter your quaification" name="Quaification" class="ctmin"> -->
-              <ul class="list-inline chipsdata">
-                <li *ngFor="let data of logInfo.education">
-                  <p class="chipsdata">{{data}}
-                    <span class="closebtn" (click)="removeEducation(data)">&times;</span>
-                  </p>
-                </li>
-                <!-- <li>
-                  <p class="chipsdata">MD
-                    <span class="closebtn">&times;</span>
-                  </p>
-                </li> -->
-
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-1 col-xs-2 nopadding0col1" *ngIf="!showEducation">
-            <div class="addchips">
-              <button class="addprofile" (click)="hideEducation()">+</button>
-            </div>
-          </div>
-        </div>
-        <div class="row nomarginrow0" *ngIf="showEducation">
-          <div class="input-field col-md-10 col-xs-9 speciaity nopaddingright">
-            <ng2-completer placeholder="Education"
-              [minSearchLength]="0" (selected)="onItemSelectEduaction($event)"></ng2-completer>
-
-          </div>
-          <div class="col-md-2 col-xs-3 nopaddingleft">
-            <div class="addchip">
-            </div>
-
-          </div>
-        </div>
-
         <div class="row nomarginrow0">
-          <div class="col-md-6">
-            <!-- <span class="error_message" [ngStyle]="{'font-size':'13px'}">{{messageLanguage}}</span> -->
-            <p class="labelpf">Language:
-            </p>
+            <div class="col-md-6">
+              <p class="labelpf">Education:
+              </p>
+            </div>
           </div>
-        </div>
         <div class="col-md-12 nomarginrw">
-          <div class="col-md-11 col-xs-10 nopadding0col1">
-            <div class="chipdatain">
+            <div class="col-md-12 col-xs-10 nopadding0col1">
               <ul class="list-inline chipsdata">
-                <li *ngFor="let listData of logInfo.language">
-                  <p class="chipsdata">ABCD
-                    <span class="closebtn">&times;</span>
+                <li *ngFor="let edulist of doctorpdetail.education">
+                  <p class="chipsdata">{{edulist}}
                   </p>
                 </li>
               </ul>
+              <p></p>
+              <p>
+                  <tag-input formControlName="education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true"
+                  blinkIfDupe="true" placeholder="Education">
+                  <tag-input-dropdown [appendToBody]="false" [identifyBy]="'educationName'" [displayBy]="'educationName'"
+                    [showDropdownIfEmpty]="false" placeholder="Choose education" [autocompleteItems]="educationOfObjects">
+                  </tag-input-dropdown>
+                </tag-input>
+              </p>
             </div>
           </div>
-          <div class="col-md-1 col-xs-2 nopadding0col1">
-            <div class="addchips">
-              <button class="addprofile">+</button>
+          <div class="row nomarginrow0">
+              <div class="col-md-6">
+                <p class="labelpf">Language:
+                </p>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="row nomarginrow0" *ngIf="showLanguage">
-          <div class="input-field col-md-10 col-xs-9 speciaity nopaddingright">
-            <ng2-completer placeholder="Language" [minSearchLength]="0"></ng2-completer>
-          </div>
-          <div class="col-md-2 col-xs-3 nopaddingleft">
-            <div class="addchip">
+          <div class="col-md-12 nomarginrw">
+              <div class="col-md-12 col-xs-10 nopadding0col1">
+                <ul class="list-inline chipsdata">
+                  <li *ngFor="let langlist of doctorpdetail.language">
+                    <p class="chipsdata">{{langlist}}
+                    </p>
+                  </li>
+                </ul>
+                <p></p>
+                <p>
+                    <tag-input  formControlName="language" (onAdd)="onAddLanguage($event)"
+                    onlyFromAutocomplete="true" blinkIfDupe="true" placeholder="Language">
+                    <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
+                      [showDropdownIfEmpty]="false" placeholder="Choose language" [autocompleteItems]="languageOfObjects">
+                    </tag-input-dropdown>
+                  </tag-input>
+                </p>
+              </div>
             </div>
-
-          </div>
-        </div>
-
 
 
         <div class="input-field col-md-12 speciaity authority">
           <p class="labelpf">Issuing Authority:
           </p>
-          <input placeholder="Authority" [readOnly]="true" type="text">
-        </div>
-        <div class="input-field col-md-12 speciaity">
-          <p class="labelpf">Body of MCI:
-          </p>
-          <ng2-completer placeholder="MCI" name="Name" [minSearchLength]="0"></ng2-completer>
+          <p class="locationphone">{{doctorpdetail.issuingAuthority}}</p>
         </div>
 
-        <div class="input-field col-md-12 speciaity">
+
+        <div class="input-field col-md-12 speciaity locatn">
           <p class="labelpf">Practicing Since:
           </p>
-          <input placeholder="YYYY"  type="text" name="bday">
-          <!-- <span class="error_message" [ngStyle]="{'font-size':'13px'}">{{practiceYear}}</span> -->
+          <p class="locationphone">{{doctorpdetail.practicingSince}}</p>
         </div>
       </form>
       <!-- </form> -->
       <p class="lastbtn">
-        <button type="button" class="btn btn-default">Save</button>
-          <button type="button" class="cancelbtn">Cancel</button>
+        <button type="button" class="btn btn-default" (click)="updateDoctorProfile(doctorpdetail)">Save</button>
+        <button type="button" class="cancelbtn">Cancel</button>
       </p>
 
     </div>
