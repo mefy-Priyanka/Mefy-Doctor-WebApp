@@ -260,46 +260,57 @@ export class ManageClinicComponent implements OnInit {
     this.error = {};
     this.timeError = '';
     this.city = (<HTMLInputElement>document.getElementById('pac-input')).value;
+    this.clinicForm.controls.doctorId.setValue(this.doctorprofileId);
     // console.log(this.city);
     if (this.clinicForm.valid) {
       this.submitted = false;
       this.clinicForm.controls.city.setValue(this.city);
-      this.ClinicService.addClinic(this.clinicForm.value).subscribe(result => {
-        console.log('ADD CLINIC RESULT', result)
-        let response: any = {};
-        response = result;
-        if (!response.result.error) {
-          this.clinicForm.reset();
-          if (response.result.message == "Clinic Created Successfully") {
-            //created
+
+      if (this.clinicData.clinicId) {
+
+        this.updateClinicInfo();
+      }
+      else {
+
+        this.ClinicService.addClinic(this.clinicForm.value).subscribe(result => {
+          console.log('ADD CLINIC RESULT', result)
+          let response: any = {};
+          response = result;
+          if (!response.result.error) {
+            this.clinicForm.reset();
+            if (response.result.message == "Clinic Created Successfully") {
+              //created
+              let notifydata = {
+                type: 'success',
+                title: 'Clinic',
+                msg: 'Created Succesfully'
+              }
+              this.sharedService.createNotification(notifydata);
+              this.formHide = false;
+              this.getClinicList();
+            }
+            else if (response.result.message == "You had another clinic on this time for same day") {
+              //time collapsed
+              let notifydata = {
+                type: 'warning',
+                title: 'Clinic',
+                msg: 'Time Collapsed,Please check your clinic timings '
+              }
+              this.sharedService.createNotification(notifydata);
+
+            }
+          }
+
+        }),
+          err => {
             let notifydata = {
-              type: 'success',
+              type: 'error',
               title: 'Clinic',
-              msg: 'Created Succesfully'
+              msg: 'Creation Failed'
             }
             this.sharedService.createNotification(notifydata);
           }
-          else if (response.result.message == "You had another clinic on this time for same day") {
-            //time collapsed
-            let notifydata = {
-              type: 'warning',
-              title: 'Clinic',
-              msg: 'Time Collapsed,Please check your clinic timings '
-            }
-            this.sharedService.createNotification(notifydata);
-
-          }
-        }
-
-      }),
-        err => {
-          let notifydata = {
-            type: 'error',
-            title: 'Clinic',
-            msg: 'Creation Failed'
-          }
-          this.sharedService.createNotification(notifydata);
-        }
+      }
     }
     else {
       console.log(this.clinicForm.controls.weekDays.valid)
@@ -394,17 +405,20 @@ export class ManageClinicComponent implements OnInit {
       console.log(data)
       let response: any = {};
       response = data;
-      this.clinicList = response.result;
-      console.log(this.clinicList);
-      if (this.clinicList.length == 0) {
-        this.formHide = true;
-        this.cancel = false;
-        this.createSchedule = false;
+      if (!response.result.error) {
+        this.clinicList = response.result.result;
+        console.log(this.clinicList);
+        if (this.clinicList.length == 0) {
+          this.formHide = true;
+          this.cancel = false;
+          this.createSchedule = false;
+        }
+        else {
+          this.formHide = false;
+          this.createSchedule = true;
+        }
       }
-      else {
-        this.formHide = false;
-        this.createSchedule = true;
-      }
+
     },
       err => {
       })
@@ -421,15 +435,19 @@ export class ManageClinicComponent implements OnInit {
 
   //update Clinic through clinic Id
   updateClinicInfo() {
-    this.clinicForm.controls.city.setValue(this.city);
-    this.clinicForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
 
-    this.updatedValue = this.clinicForm.value;
-    this.updatedValue._id = this.clinicData._id
+    console.log('update function', this.clinicForm)
+    // this.clinicForm.controls.city.setValue(this.city);
+    // this.clinicForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
 
-    this.scheduleService.updateClinic(this.updatedValue).subscribe(data => {
+    // this.updatedValue = this.clinicForm.value;
+    // this.updatedValue._id = this.clinicData._id
 
-      if (data.message == "Clinic Time conflicts with another clinic.") {
+    this.ClinicService.updateClinic(this.clinicData.clinicId, this.clinicForm.value).subscribe(data => {
+      console.log('updatedvalue result', data)
+      let response:any={};
+      response=data;
+      if (response.message == "Clinic Time conflicts with another clinic.") {
         let notifydata = {
           type: 'warning',
           title: 'Clinic',
@@ -439,15 +457,13 @@ export class ManageClinicComponent implements OnInit {
 
       }
       else {
-        this.updateClinicList = data.result;
+        this.updateClinicList = response.result;
         let notifydata = {
           type: 'success',
           title: 'Clinic',
           msg: 'Updated Succesfully'
         }
         this.sharedService.createNotification(notifydata);
-
-        console.log(this.updateClinicList);
         this.getClinicList();
         this.clinicForm.reset();
         this.days = [];
@@ -455,18 +471,28 @@ export class ManageClinicComponent implements OnInit {
         this.showEdit = false;
         this.dataDisplay = true;
         this.createSchedule = true;
-        this.clinicData._id = '';
+        this.clinicData.clinicId = '';
       }
 
     },
       err => {
       })
   }
+
+
+
   createClinic() {
     this.dataDisplay = false; // Click on plus icon data hide
     this.createSchedule = false; //hide plus icon when schedule form is open
     this.formHide = true;
     this.cancel = false;
+    this.weekForm = this.clinicForm.get('weekDays') as FormArray;
+    console.log(this.weekForm);
+    let formgroup = <FormArray>this.clinicForm.get('weekDays');
+    for (let index = formgroup.length - 1; index > 0; index--) {
+      // Remove all but one occurrence and then add back only what the model dictates.
+      formgroup.removeAt(index);
+    }
 
   }
 
@@ -519,8 +545,17 @@ export class ManageClinicComponent implements OnInit {
     }
   }
 
-  // edit clinic form
-  editSchedule(id) {
+  // eSHOW DATA OF SELECTED CLINIC TO EDIT
+  editClinic(id) {
+    console.log(this.clinicForm.get('weekDays') as FormArray);
+    this.weekForm = this.clinicForm.get('weekDays') as FormArray;
+    console.log(this.weekForm.length);
+    // (<FormArray>this.clinicForm.get('weekDays')).removeAt(this.weekForm.length-1);
+    // this.clinicForm.controls.weekDays.controls[1].removeControl('item1');
+    // while (this.weekForm.length !== 0) {
+    //   this.weekForm.removeAt(this.weekForm.length-1)
+    // }
+    console.log(id)
     this.showEdit = false;
     this.formHide = true;
     this.createSchedule = false;
@@ -528,36 +563,50 @@ export class ManageClinicComponent implements OnInit {
     this.show = true;
     this.createClinic();
 
-    this.scheduleService.getSingleClinicList(id).subscribe(data => {
-      this.clinicData = data.result
+
+    // this.clinicForm.reset();
+    console.log(this.clinicForm.get('weekDays') as FormArray);
+    this.ClinicService.getSingleClinicDetail(id).subscribe(data => {
+      console.log('single clinic detail', data)
+      let response: any = {};
+      response = data;
+      this.clinicData = response;
       console.log(this.clinicData)
       this.clinicForm.controls.clinicName.setValue(this.clinicData.clinicName);
       this.clinicForm.controls.phoneNumber.setValue(this.clinicData.phoneNumber);
       this.clinicForm.controls.city.setValue(this.clinicData.city);
       this.clinicForm.controls.address.setValue(this.clinicData.address);
       this.clinicForm.controls.fee.setValue(this.clinicData.fee);
-      this.clinicForm.controls.startTime.setValue(this.clinicData.startTime);
-      this.clinicForm.controls.endTime.setValue(this.clinicData.endTime);
-
-      this.clinicForm.controls.weekDays.setValue(this.clinicData.weekDays);
-      // console.log(this.clinicForm.controls.weekDays)
-      this.days = this.clinicData.weekDays;
-      console.log(this.days)
-      console.log(this.clinicData._id)
+      // SHOW WEEKDAYS VALUE
+      for (let i = 0; i < this.clinicData.weekDays.length; i++) {
+        (<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['day'].setValue(this.clinicData.weekDays[i].day);
+        (<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['startTime'].setValue(this.clinicData.weekDays[i].startTime);
+        (<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['endTime'].setValue(this.clinicData.weekDays[i].endTime);
+        if (i < this.clinicData.weekDays.length - 1) {
+          this.weekForm.push(this.newform());
+        }
+      }
     })
 
   }
 
   // cancel saving or editing clinic form
   cancelSave() {
+
+    console.log(this.clinicForm.get('weekDays') as FormArray);
     this.error = {};
     this.dataDisplay = true;
     this.formHide = false;
     this.createSchedule = true;
     this.showEdit = false;
     this.clinicForm.reset();
-    this.days = [];
-
+    console.log('reset form value', this.clinicForm)
+    //  removes form arrayindexes 
+    let formgroup = <FormArray>this.clinicForm.get('weekDays');
+    for (let index = formgroup.length - 1; index > 0; index--) {
+      // Remove all but one occurrence and then add back only what the model dictates.
+      formgroup.removeAt(index);
+    }
   }
 
   // delete  selected clinic 
@@ -672,7 +721,7 @@ export class ManageClinicComponent implements OnInit {
       })
   }
   // hide & show on click
-  clinicEdit(id, i) {
+  showOptions(id, i) {
     this.selected = i;
     // this.showEdit = true;
     if (this.showEdit == true) {
