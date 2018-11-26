@@ -7,8 +7,26 @@
         <div class="col-md-7" id="padding_left">
           <div class="row">
             <div class="manage_heading">
-              <h1 >Please Add Account To Transfer Balance</h1>             
+              <h1>Please Add Account To Transfer Balance</h1>
             </div>
+               <!-- /* loader */ -->
+               <div class="loading" *ngIf="loader">
+                <div class="sk-circle">
+                  <div class="sk-circle1 sk-child"></div>
+                  <div class="sk-circle2 sk-child"></div>
+                  <div class="sk-circle3 sk-child"></div>
+                  <div class="sk-circle4 sk-child"></div>
+                  <div class="sk-circle5 sk-child"></div>
+                  <div class="sk-circle6 sk-child"></div>
+                  <div class="sk-circle7 sk-child"></div>
+                  <div class="sk-circle8 sk-child"></div>
+                  <div class="sk-circle9 sk-child"></div>
+                  <div class="sk-circle10 sk-child"></div>
+                  <div class="sk-circle11 sk-child"></div>
+                  <div class="sk-circle12 sk-child"></div>
+                </div>
+              </div>
+              <!-- /* loader */ -->
             <!-- *************************Form1******************************** -->
             <!-- [ngStyle]="{'text-transform': 'uppercase'}"ifc  -->
             <div class="form1" *ngIf="hideAccountForm">
@@ -16,28 +34,36 @@
                 <div class="row">
                   <div class="card_content">
                     <div class="form_entire">
-                      <form [formGroup]="accountForm" >
+                      <form [formGroup]="accountForm">
                         <input type="text" name="accountHolderName" placeholder="Account's holder name" formControlName="accountHolderName">
-                        <p class="errormessage" *ngIf="accountFormErrors.accountHolderName.required || (accountForm.controls.accountHolderName.pristine && submitted)">Name Can't Be Empty</p>
-                        <input type="text" name="ifscCode"  placeholder="IFSC Code" formControlName="ifscCode"> 
-                    <p class="errormessage" *ngIf="accountFormErrors.ifscCode.required || (accountForm.controls.ifscCode.pristine && submitted)">IFC Code Can't Be Empty</p>
+                        <p class="errormessage" *ngIf="accountFormErrors.accountHolderName.required || (accountForm.controls.accountHolderName.pristine && submitted)">Name
+                          Can't Be Empty</p>
+                        <input type="text" name="ifscCode" placeholder="IFSC Code" formControlName="ifscCode">
+                        <p class="errormessage" *ngIf="accountFormErrors.ifscCode.required || (accountForm.controls.ifscCode.pristine && submitted)">IFC
+                          Code Can't Be Empty</p>
                         <input type="text" name="accountNumber" placeholder="Account Number" formControlName="accountNumber">
-                    <p class="errormessage" *ngIf="accountFormErrors.accountNumber.required || (accountForm.controls.accountNumber.pristine && submitted)">Account Number Can't Be Empty</p>
-                        <input type="text" name="fname" placeholder="Confirm account number" formControlName="confirmAccountNumber">
-                    <p class="errormessage" *ngIf="accountFormErrors.confirmAccountNumber.required || (accountForm.controls.confirmAccountNumber.pristine && submitted)"> Confirm Account Number Can't Be Empty</p>
-                    <span class="error_account" *ngIf="accountFormErrors.confirmAccountNumber.match">Account Number Do Not Match</span>
+                        <p class="errormessage" *ngIf="accountFormErrors.accountNumber.required || (accountForm.controls.accountNumber.pristine && submitted)">Account
+                          Number Can't Be Empty</p>
+                        <input type="text" name="fname" placeholder="Confirm account number" formControlName="confirmAccountNumber" onpaste="return false">
+                        <p class="errormessage" *ngIf="accountFormErrors.confirmAccountNumber.required || (accountForm.controls.confirmAccountNumber.pristine && submitted)">
+                          Confirm Account Number Can't Be Empty</p>
+                        <span class="error_account" *ngIf="accountFormErrors.confirmAccountNumber.match">Account Number
+                          Do Not Match</span>
                         <div class="radio_btn2">
                           <select class="browser-default" formControlName="accountType">
                             <option value="" disabled selected>Account Type</option>
                             <option value="Current"> Current</option>
                             <option value="Saving">Saving</option>
                           </select>
-                    <p class="errormessage" *ngIf="accountFormErrors.accountType.required || (accountForm.controls.accountType.pristine && submitted)">Account Type Can't Be Empty</p>
+                          <p class="errormessage" *ngIf="accountFormErrors.accountType.required || (accountForm.controls.accountType.pristine && submitted)">Account
+                            Type Can't Be Empty</p>
                         </div>
                       </form>
                     </div>
                     <div class="text-center">
                       <button class="save_btn" (click)=" saveAccountForm()">Save Account</button>
+                      <button class="cancelbtn" (click)="cancelAccoutForm()" >Cancel</button>
+                      
                     </div>
                   </div>
                 </div>
@@ -51,9 +77,9 @@
                   <div id="padding_l">
                     <div class="card">
                       <div class="row">
-                        <div class="card_texte" >
+                        <div class="card_texte">
                           <div class="col-md-12" id="padding-o">
-                            <div class="col-md-10 col-xs-10" >
+                            <div class="col-md-10 col-xs-10">
                               <div class="consult_text2">
                                 <p class="serenity22">Holder Name :
                                   <span>{{list.accountHolderName}}</span>
@@ -65,22 +91,30 @@
                                   <span>{{list.ifscCode}}</span>
                                 </p>
                                 <p class="serenity22">Account Type :
-                                    <span>{{list.accountType}}</span>
-                                  </p>
+                                  <span>{{list.accountType}}</span>
+                                </p>
                               </div>
                             </div>
                             <div class="col-md-2 col-xs-2" id="padding-o">
                               <div class="edit_icon">
-                                <button class="edit">
-                                  <svg version="1.1" id="pencil" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                    viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;" xml:space="preserve">
+                                <button class="edit" data-toggle="modal" data-target="#accountmodal"  (click)="selectedAccountId(list.accountId)">
+                                  <svg version="1.1" id="pencil" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;"
+                                    xml:space="preserve">
                                     <g>
-                                      <path d="M438.931,30.403c-40.4-40.5-106.1-40.5-146.5,0l-268.6,268.5c-2.1,2.1-3.4,4.8-3.8,7.7l-19.9,147.4
-                                   c-0.6,4.2,0.9,8.4,3.8,11.3c2.5,2.5,6,4,9.5,4c0.6,0,1.2,0,1.8-0.1l88.8-12c7.4-1,12.6-7.8,11.6-15.2c-1-7.4-7.8-12.6-15.2-11.6
-                                   l-71.2,9.6l13.9-102.8l108.2,108.2c2.5,2.5,6,4,9.5,4s7-1.4,9.5-4l268.6-268.5c19.6-19.6,30.4-45.6,30.4-73.3
-                                   S458.531,49.903,438.931,30.403z M297.631,63.403l45.1,45.1l-245.1,245.1l-45.1-45.1L297.631,63.403z M160.931,416.803l-44.1-44.1
-                                   l245.1-245.1l44.1,44.1L160.931,416.803z M424.831,152.403l-107.9-107.9c13.7-11.3,30.8-17.5,48.8-17.5c20.5,0,39.7,8,54.2,22.4
-                                   s22.4,33.7,22.4,54.2C442.331,121.703,436.131,138.703,424.831,152.403z" />
+                                      <g id="trash">
+                                        <path style="fill:#fff;" d="M29.98,6.818c-0.096-1.57-1.387-2.816-2.98-2.816h-3v-1V3c0-1.657-1.344-3-3-3H11
+                                     C9.343,0,8,1.343,8,3v0.001v1H5c-1.595,0-2.885,1.246-2.981,2.816H2V8v1c0,1.104,0.896,2,2,2l0,0v17c0,2.209,1.791,4,4,4h16
+                                     c2.209,0,4-1.791,4-4V11l0,0c1.104,0,2-0.896,2-2V8V6.818H29.98z M10,3.001c0-0.553,0.447-1,1-1h10c0.553,0,1,0.447,1,1v1H10
+                                     V3.001z M26,28.001c0,1.102-0.898,2-2,2H8c-1.103,0-2-0.898-2-2v-17h20V28.001z M28,8v1H4V8V7.001c0-0.553,0.447-1,1-1h22
+                                     c0.553,0,1,0.447,1,1V8z" />
+                                        <path style="fill:#fff;" d="M9,28.005h2c0.553,0,1-0.447,1-1v-13c0-0.553-0.447-1-1-1H9c-0.553,0-1,0.447-1,1v13
+                                     C8,27.558,8.447,28.005,9,28.005z M9,14.004h2v13H9V14.004z" />
+                                        <path style="fill:#fff;" d="M15,28.005h2c0.553,0,1-0.447,1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553,0-1,0.447-1,1v13
+                                     C14,27.558,14.447,28.005,15,28.005z M15,14.004h2v13h-2V14.004z" />
+                                        <path style="fill:#fff;" d="M21,28.005h2c0.553,0,1-0.447,1-1v-13c0-0.553-0.447-1-1-1h-2c-0.553,0-1,0.447-1,1v13
+                                     C20,27.558,20.447,28.005,21,28.005z M21,14.004h2v13h-2V14.004z" />
+                                      </g>
                                     </g>
                                   </svg>
                                 </button>
@@ -96,6 +130,7 @@
               <div class="row" *ngIf="showAddAccount">
                 <div class="text-center">
                   <button class="save_btn2" (click)="addAccount()">Add Account</button>
+                
                 </div>
               </div>
             </div>
@@ -113,3 +148,50 @@
   </div>
 </section>
 <!-- ************************ManageAccount****************************** -->
+
+<!-- modal  -->
+<section class="del_modal">
+  <div class="modal fade" id="accountmodal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+      <div class="modal-dialog vertical-align-center modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <svg version="1.1" id="del_svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px" y="0px" viewBox="0 0 612 612" style="enable-background:new 0 0 612 612;" xml:space="preserve">
+                <g>
+                  <g>
+                    <polygon points="424.032,443.7 443.7,424.032 325.667,306 443.7,187.967 424.032,168.3 306,286.333 187.967,168.3 168.3,187.967 
+                   286.333,306 168.3,424.032 187.967,443.7 306,325.667 		" />
+                    <path d="M612,306C612,137.004,474.995,0,306,0C137.004,0,0,137.004,0,306c0,168.995,137.004,306,306,306
+                   C474.995,612,612,474.995,612,306z M27.818,306C27.818,152.36,152.36,27.818,306,27.818S584.182,152.36,584.182,306
+                   S459.64,584.182,306,584.182S27.818,459.64,27.818,306z" />
+                  </g>
+                </g>
+
+              </svg>
+            </div>
+            <div class="text_modal">
+              <p class="dele_test2"> Are you sure?</p>
+              <p class="dele_test"> Do you really want to delete this Account?</p>
+            </div>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="cance_l" data-dismiss="modal">NO</button>
+            <button type="button" class="dele_te" data-dismiss="modal" (click)="deleteAccountInfo()">YES</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- modal  -->

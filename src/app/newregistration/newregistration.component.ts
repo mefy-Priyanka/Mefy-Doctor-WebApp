@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocregistrationService } from '../mefyservice/docregistration.service';
+import { SharedService } from '../mefyservice/shared.service';
+
 import { Router } from '@angular/router';
 declare var google;
 import * as moment from 'moment';
@@ -58,7 +60,7 @@ export class NewregistrationComponent implements OnInit {
   public selectedCity:any
 
 
-  constructor(private formBuilder: FormBuilder, private docService: DocregistrationService,private router: Router) {
+  constructor(private formBuilder: FormBuilder, private docService: DocregistrationService,private router: Router,private sharedServices:SharedService) {
     // private toastr: ToastrService
     /***********STEP 1*************/
     this.step1FormErrors = {
@@ -132,17 +134,13 @@ export class NewregistrationComponent implements OnInit {
       new google.maps.LatLng(-33.8474, 151.2631));
 
     var input = (<HTMLInputElement>document.getElementById('pac-input'));
-console.log('input',input)
 
     var options = {
       bounds: defaultBounds,
       types: ['(cities)'],
        componentRestrictions: {country: "in"}
     };
-    console.log('options',options)
-    // var autocomplete = new google.maps.places.Autocomplete(input);
-    // autocomplete.bindTo('bounds', );
-    let autocomplete = new google.maps.places.Autocomplete(input, options);
+      let autocomplete = new google.maps.places.Autocomplete(input, options);
   }
   /******************************IT CATCHES ALL CHANGES IN STEP FORM 1******************/
   onStep1FormValuesChanged() {
@@ -255,6 +253,12 @@ console.log('input',input)
       this.activeStep4=false;
       /****************** */
     } else {
+      let notifydata = {
+        type: 'warning',
+        title: 'Not Valid',
+      }
+     this.sharedServices.createNotification(notifydata);
+
       this.submitted = true
       this.firstreg = true;
       this.secondreg = false;
@@ -267,9 +271,11 @@ console.log('input',input)
       /****************** */
     }
   }
+
   secondstep() {
 this.selectedCity=(<HTMLInputElement>document.getElementById('pac-input')).value
 console.log('selectedCity',this.selectedCity)
+this.step2Form.controls.city.setValue(this.selectedCity);
     if (this.step2Form.valid && this.error != 'Invalid DOB') {
       console.log(this.step2Form.value)
       this.submitted = false;
@@ -284,6 +290,11 @@ console.log('selectedCity',this.selectedCity)
       /****************** */
 
     } else {
+      let notifydata = {
+        type: 'warning',
+        title: 'Not Valid',
+      }
+     this.sharedServices.createNotification(notifydata);
       this.submitted = true
       this.firstreg = false;
       this.secondreg = true;
@@ -298,16 +309,17 @@ console.log('selectedCity',this.selectedCity)
     }
   }
    // validating address
-   validateAddress() {
-     console.log('city')
-    // if (this.address.length==0) {
-    //   this.messageAddress = "Address Cannot Be Empty";
-    // }
-    // else{
-    //   this.messageAddress="";
-    //   this.message ="";
-    // }
-  }
+  //  validateAddress(data) {
+  //    this.initmap()
+  //    console.log('city',data)
+  //   // if (this.address.length==0) {
+  //   //   this.messageAddress = "Address Cannot Be Empty";
+  //   // }
+  //   // else{
+  //   //   this.messageAddress="";
+  //   //   this.message ="";
+  //   // }
+  // }
   previousfirst() {
     this.firstreg = true;
     this.secondreg = false;
@@ -347,6 +359,12 @@ console.log('selectedCity',this.selectedCity)
       /****************** */
 
     } else {
+      let notifydata = {
+        type: 'warning',
+        title: 'Not Valid',
+      }
+     this.sharedServices.createNotification(notifydata);
+
       this.submitted = true
       this.firstreg = false;
       this.secondreg = false;
@@ -494,7 +512,7 @@ let data={
        console.log(err)
      })
    }
-  //compare dob
+  /****************compare dob *******************/
 compareDob(dob) {
   console.log('dob',dob)
   this.error='';
@@ -519,10 +537,25 @@ compareDob(dob) {
   // console.log('Dat..',Dat);
   if ((moment(dob)).isAfter(presentDat._d)) {
     this.error = 'Invalid DOB';
+    let notifydata = {
+      type: 'error',
+      title: 'Registration',
+      msg: 'Invalid DOB'
+    }
+    console.log('data',notifydata)
+   this.sharedServices.createNotification(notifydata);
     return false;
   }
   else if ((moment(dob)).isBefore(Dat._d)) {
     this.error = 'Invalid DOB';
+    let notifydata = {
+      type: 'error',
+      title: 'Registration',
+      msg: 'Invalid DOB'
+    }
+    console.log('data',notifydata)
+
+   this.sharedServices.createNotification(notifydata);
     return false;
   }
   else{
@@ -552,12 +585,19 @@ comparePracticingYear(year) {
   maxYear = moment(Dat, "DD/MM/YYYY").year()
   console.log(maxYear);
   if ((formattedYear) > (currentYear)) {
-    this.error = 'Invalid Practicing Year';
-    console.log('abc')
+    let notifydata = {
+      type: 'error',
+      title: 'Invalid Practicing Year',
+    }
+   this.sharedServices.createNotification(notifydata);
     return false;
   }
   else if ((formattedYear) < (maxYear)) {
-    this.error = 'Invalid Practicing Year';
+    let notifydata = {
+      type: 'error',
+      title: 'Invalid Practicing Year',
+    }
+   this.sharedServices.createNotification(notifydata);
     return false;
   }
   else {
@@ -593,7 +633,7 @@ saveRegistrationForm(){
     otp:parseInt(this.step4Form.value.otp),
     email:this.step1Form.value.email,
     language:this.selectedLanguage,
-    city:this.selectedCity,
+    city:this.step2Form.value.city,
     dob:(moment(this.step2Form.value.dob).format('DD-MM-YYYY')),
     education:this.selectedEducatiom,
     speciality:this.selectedSpeciality,
@@ -615,15 +655,25 @@ saveRegistrationForm(){
     localStorage.setItem('doctorId',result.result.user.doctorId)
     localStorage.setItem('userId',result.result.user.userId)
     this.loader=false
-    // this.router.navigate(['/dashboard/main']);
+    this.router.navigate(['/dashboard/main']);
 
     // this.toastr.success(' Sucessfully Register!', 'Toastr fun!');
   },
   err=>{
     console.log(err)
-    // this.toastr.error('Registration Failed!', 'Server Issue')
+    let notifydata = {
+      type: 'error',
+      title:'Server Issue!',
+      message: 'Something Went Wrong',
+    }
+   this.sharedServices.createNotification(notifydata);
   })
 }else{
+  let notifydata = {
+    type: 'warning',
+    title:'Not Valid!'
+  }
+ this.sharedServices.createNotification(notifydata);
   this.loader=false
 
   // this.toastr.error('Registration Failed!', 'Not Valid')

@@ -7,7 +7,7 @@ import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty
 import * as moment from 'moment'
 declare var google;
 import { TextMaskModule } from 'angular2-text-mask';
-import { AppointmentService } from '../../meme-services/appointment.service';
+
 
 
 //NEW IMPORTS 
@@ -66,7 +66,6 @@ export class ManageClinicComponent implements OnInit {
   toastoptions: any;
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, public scheduleService: ScheduleService, private sharedService: SharedService,
     private toastyService: ToastyService, private toastyConfig: ToastyConfig,
-    private appointmentService: AppointmentService,
     private ClinicService: ClinicService
 
   ) {

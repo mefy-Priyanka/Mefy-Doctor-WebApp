@@ -8,8 +8,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagInputModule } from 'ngx-chips';
 import { TypeaheadModule } from 'ngx-bootstrap';
-
-// import { ToastrModule } from 'ngx-toastr';
+import { ToastyModule } from "ng2-toasty";
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 /********************NEW SERVICES************************** */
 import { DocregistrationService } from './mefyservice/docregistration.service';
@@ -17,6 +16,7 @@ import { LoginService } from './mefyservice/login.service';
 import {ClinicService} from './mefyservice/clinic.service';
 import { AccounttService } from './mefyservice/accountt.service';
 import {ProfileService} from './mefyservice/profile.service';
+import {DashboarddService} from './mefyservice/dashboardd.service';
 
 /******************END OF NEW SERVICES************************************ */
 
@@ -40,6 +40,7 @@ import { BillService } from './meme-services/bill.service';
 import { NewloginComponent } from './newlogin/newlogin.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NewregistrationComponent } from './newregistration/newregistration.component';
+import { NotifyComponent } from './notify/notify.component';
 
 // import { ManageaccountComponent } from './dashboard/manageaccount/manageaccount.component';
 
@@ -78,6 +79,7 @@ const approutes: Routes = [
     // LoginComponent,
     NewloginComponent,
     NewregistrationComponent,
+    NotifyComponent,
  
     // ManageaccountComponent
   ],
@@ -93,13 +95,11 @@ const approutes: Routes = [
     TextMaskModule,
     TagInputModule,
     BsDatepickerModule.forRoot(),
-    TypeaheadModule.forRoot()
-    // ToastrModule.forRoot({   // ToastrModule added
-    //   timeOut: 999,
-    //   preventDuplicates: true,
-    // }) 
+    TypeaheadModule.forRoot(),
+    ToastyModule.forRoot(),
    
   ],
+
   exports: [],
   providers: [
     MemeLoginService,
@@ -119,6 +119,7 @@ const approutes: Routes = [
     LoginService,
     ClinicService,
     AccounttService,
+    DashboarddService,
     /**************/
     HttpClientModule
     // ManageaccountComponent,

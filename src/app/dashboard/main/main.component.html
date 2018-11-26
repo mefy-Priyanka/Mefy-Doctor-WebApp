@@ -1,5 +1,23 @@
 <div class="row nomargin0row">
   <div class="col-md-8 nopadding0col">
+       <!-- /* loader */ -->
+       <div class="loading" *ngIf="loader">
+          <div class="sk-circle">
+            <div class="sk-circle1 sk-child"></div>
+            <div class="sk-circle2 sk-child"></div>
+            <div class="sk-circle3 sk-child"></div>
+            <div class="sk-circle4 sk-child"></div>
+            <div class="sk-circle5 sk-child"></div>
+            <div class="sk-circle6 sk-child"></div>
+            <div class="sk-circle7 sk-child"></div>
+            <div class="sk-circle8 sk-child"></div>
+            <div class="sk-circle9 sk-child"></div>
+            <div class="sk-circle10 sk-child"></div>
+            <div class="sk-circle11 sk-child"></div>
+            <div class="sk-circle12 sk-child"></div>
+          </div>
+        </div>
+        <!-- /* loader */ -->
     <div class="row ">
       <div class="col-md-6 pleft6">
         <div class="card topmr">
@@ -7,7 +25,7 @@
             <div class="col-md-12">
               <ul class="list-inline clinics_have">
                 <li>
-                  <p class="clinics7">0</p>
+                  <p class="clinics7">{{doctorDetail.clinic}}</p>
                 </li>
                 <li>
                   <p class="clinics1">Clinics</p>
@@ -23,13 +41,13 @@
           <div class="row nomargin0row">
             <div class="respcss">
               <ul class="list-inline clinicsmayhave">
-                <li class="postminus">
+                <li class="postminus" *ngFor="let clinic of clinicList?.slice(0,5)">
                   <span class="cinicsuvisit">
-                    <span>A</span></span>
+                    <span>{{(clinic?.clinicName).split(' ')[0].split('')[0] + ((clinic?.clinicName).split(' ')[1] ? (clinic?.clinicName).split(' ')[1].split('')[0] : '') | uppercase}}</span></span>
                 </li>
-                <li class="postminus">
+                <li class="postminus"  *ngIf="(clinicList?.length) > 5">
                   <button type="btn" class="libtn">
-                    <span class="cinicsuvisit6">B</span>
+                    <span class="cinicsuvisit6"> +{{(clinicList).slice(6,(clinicList).length).length + 1}}</span>
                   </button>
                 </li>
               </ul>
@@ -45,7 +63,7 @@
             <div class="col-md-12">
               <ul class="list-inline clinics_have">
                 <li>
-                  <p class="clinics7">0</p>
+                  <p class="clinics7">{{doctorDetail.eConsultPatient}}</p>
                 </li>
                 <li>
                   <p class="clinics1">Today's</p>
@@ -87,7 +105,7 @@
             <div class="col-md-12">
               <ul class="list-inline clinics_have">
                 <li>
-                  <p class="clinics7">0</p>
+                  <p class="clinics7">{{doctorDetail.clincVistPatient}}</p>
                 </li>
                 <li>
                   <p class="clinics1">Today's</p>

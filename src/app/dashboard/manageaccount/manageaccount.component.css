@@ -96,7 +96,7 @@ svg#pencil {
     margin-left: 5px;
 }
 .edit_icon {
-    background: #378ff8;
+    background: #f44336;
     border-radius: 2px 4px 3px 28px;
     float: right;
 }
@@ -137,3 +137,149 @@ p.serenity22 {
 }
 
 /* ************************Responsive****************************** */
+/************************************** modal css ***************************/
+section.del_modal {
+    height: 100vh;
+    text-align: center;
+}
+button.cance_l:hover {
+    background: rgba(158, 158, 158, 0.32);
+}
+button.dele_te:hover {
+    background: rgba(216, 30, 46, 0.28);
+}
+p.dele_test2 {
+    padding-left: 6px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.71);
+    font-weight: 500;
+    font-size: 24px;
+    /* margin-bottom: 1em; */
+    /* line-height: 8px; */
+}
+p.dele_test {
+    padding-left: 6px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.78);
+    font-weight: 500;
+    font-size: 14px;
+}
+svg#del_svg {
+    height: 45px;
+    width: 40px;
+    vertical-align: middle;
+    fill: #d80027;
+}
+div#accountmodal  .modal-body {
+    padding:0em 1em;
+
+}
+div#accountmodal  .modal-content {
+    padding: 0;
+    box-shadow: none;
+    border: none;
+}
+div#accountmodal  button.close {
+    margin: 8px 8px 0 0;
+    color: rgba(0, 0, 0, 0.4); 
+    opacity: 1;
+}
+div#accountmodal  .modal-content h4 {
+    font-family: 'Lato', sans-serif;
+    font-size: 23px;
+    text-align: center;
+}
+div#accountmodal  .modal-footer {
+    border:none;
+    border-radius:5px;
+    padding-bottom: 4em;
+    /* margin-bottom: 10px; */
+    background-color: #ffffff;
+    text-align:center;
+}
+.text_modal {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 26px;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+}
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    padding: 0;
+    max-height: 70%;
+    width: 55%;
+    margin: auto;
+    overflow-y: auto;
+    border-radius: 5px;
+    will-change: top, opacity;
+    box-shadow: none;
+}
+div#accountmodal  .modal-header {
+    border: none;
+    padding:0;
+    /* background: linear-gradient(to right,rgba(86, 127, 251, 1), rgba(182, 108, 245, 1)); */
+    border-radius: 5px 5px 0 0;
+    font-family: 'Lato', sans-serif;
+    color: #fff;
+}
+button.dele_te {
+    outline: none;
+    border: 1px solid#e02748;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 50px;
+    color: #e02748;
+    background: transparent;
+    height: 30px;
+    width: 69px;
+}
+button.btn_delde {
+    margin: 10em 0;
+    height: 42px;
+    width: 120px;
+    background: #4f5ae8;
+    border: none;
+    color: #fff;
+}
+button.cance_l {
+    border: 1px solid rgb(123, 122, 122);
+    cursor: pointer;
+    color: #676464;
+    font-family: 'Lato', sans-serif;
+    height: 30px;
+    font-weight: 500;
+    background: transparent;
+    margin-right: 14px;
+    width: 69px;
+    border-radius: 50px;
+}
+/* modal css */
+.cancelbtn {
+    border-radius: 50px;
+    background: transparent;
+    border: 1px solid #909090;
+    font-size: 12px;
+    color: #909090;
+    margin-top: 3em;
+    margin-bottom: 2em;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    width: 94px;
+    height: 37px;
+}
+button.cancelbtn:hover {
+    background: #909090;
+    color: white;
+}
