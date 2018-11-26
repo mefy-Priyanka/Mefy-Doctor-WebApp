@@ -259,12 +259,17 @@ span.chipsdata {
     color: #000;
   }
   .chipsdata{
-    margin: 0;
+    /* margin: 0; */
     /* border-bottom: 1px solid rgba(238, 238, 238, 1); */
-    margin-top: 10px;
+    /* margin-top: 10px; */
   }
   .chipsdata li{
     padding: 0;
+    background: #8e51b7;
+    border-radius: 50px;
+    margin-right: 10px;
+    color: #fff;
+    padding: 5px;
   
   }
   .chipdatain{

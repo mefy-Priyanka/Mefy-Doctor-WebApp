@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
   doctorDetailErrors: any;
   public selectedLanguage:any=[];
   public specarr:any;
-  public educarr:any;
+  public educarr=[];
   public langarr:any;
   public selectedEducation:any=[];
   public languageList: any = [];
@@ -140,13 +140,14 @@ export class ProfileComponent implements OnInit {
       city: updateinfo.city,
       address: this.doctorDetail.value.address,
       email: this.doctorDetail.value.email,
-      speciality: this.doctorDetail.value.speciality,
-      education: this.doctorDetail.value.education,
-      language: this.doctorDetail.value.language,
+      speciality: this.specarr,
+      education: this.educarr,
+      language: this.langarr,
       issuingAuthority: updateinfo.issuingAuthority,
       practicingSince: updateinfo.practicingSince,
       userId : localStorage.getItem('userId')
     }
+    console.log(doctoridetail)
     this.profileService.updateDetail(doctoridetail).subscribe(data => {
       this.doctorpdetail=data;
       console.log('result',data)
@@ -234,13 +235,14 @@ export class ProfileComponent implements OnInit {
    /***********************LANGUAGE ON SELECT IN STEP 2*********/
    onAddLanguage(evt) {
     this.selectedLanguage.push(evt.value)
-    this.langarr=this.doctorpdetail.language.append(this.selectedLanguage);
+    this.langarr=this.doctorpdetail.language.concat(this.selectedLanguage);
     console.log("langarr", this.langarr);
   }
     /***********************EDUCATION ON SELECT IN STEP 3*********/
   onAddEducation(evt) {
-    this.selectedEducation.push(evt.value)
-    this.educarr=this.doctorpdetail.education.append(this.selectedEducation);
+    this.selectedEducation.push(evt.value);
+    this.educarr.push(evt.value);
+    this.educarr=this.doctorpdetail.education.concat(this.selectedEducation);
     console.log(" this.educarr", this.educarr);
   }
       /***********************SPECIALITY ON SELECT IN STEP 3*********/
@@ -248,7 +250,7 @@ export class ProfileComponent implements OnInit {
     // console.log(evt);
     this.selectedSpeciality.push(evt.value)
     // console.log('selectedSpeciality',this.selectedSpeciality)
-    this.specarr=this.doctorpdetail.speciality.append(this.selectedSpeciality);
+    this.specarr=this.doctorpdetail.speciality.concat(this.selectedSpeciality);
     console.log(" this.specarr", this.specarr);
   }
 }
