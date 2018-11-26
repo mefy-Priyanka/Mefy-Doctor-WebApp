@@ -9,10 +9,10 @@
     <div class="row" id="marbtm-0">
       <div class="scroll">
         <div class="mtop2">
-          <div class="card" *ngFor="let list of clinicList">
+          <div class="card" *ngFor="let list of clinicList ;let k=index;">
             <div class="card_text" *ngIf="!formHide" >
               <div class="webdropdown">
-                <button class="btn_circ" (click)="showOptions(list.clinicId,i)">
+                <button class="btn_circ" (click)="showOptions(list.clinicId,k)">
                   <svg version="1.1" id="dot" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px" viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
                     <g>
@@ -23,7 +23,7 @@
                   </svg>
                 </button>
 
-                <div class="webdropdown-content" *ngIf="showEdit && i==selected">
+                <div class="webdropdown-content" *ngIf="showEdit && k==selected">
                   <span class="triangle"></span>
                   <a>
                     <ul class="list-inline edditsp bor_der">

@@ -721,6 +721,7 @@ export class ManageClinicComponent implements OnInit {
   }
   // hide & show on click
   showOptions(id, i) {
+    console.log(i)
     this.selected = i;
     // this.showEdit = true;
     if (this.showEdit == true) {
