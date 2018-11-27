@@ -54,27 +54,48 @@
                   <fieldset *ngIf="firstreg">
                     <form [formGroup]="step1Form">
                       <input class="errormessage" type="text" name="name" formControlName="name" placeholder="Name" />
-                      <p class="errormessage" *ngIf="step1FormErrors.name.required || (step1Form.controls.name.pristine && submitted)">Name
+                      <p class="errormessage" [ngStyle]="{'font-size':'11px'}" *ngIf="step1FormErrors.name.required || (step1Form.controls.name.pristine && submitted1)">Name
                         Cannot Be Empty</p>
                       <input class="errormessage" type="text" name="mobile" formControlName="phoneNumber" [textMask]="{mask: mask, guide: false}"
                         placeholder="Mobile Number" minlength="8" />
-                      <p class="errormessage" *ngIf="step1FormErrors.phoneNumber.required || (step1Form.controls.phoneNumber.pristine && submitted)">PhoneNumber
+                      <p class="errormessage"  [ngStyle]="{'font-size':'11px'}" *ngIf="step1FormErrors.phoneNumber.required || (step1Form.controls.phoneNumber.pristine && submitted1)">PhoneNumber
                         Cannot Be Empty</p>
-                      <p class="errormessage" *ngIf="step1FormErrors.phoneNumber.minlength ">Please Enter Valid Phone
+                      <p class="errormessage"  [ngStyle]="{'font-size':'11px'}" *ngIf="step1FormErrors.phoneNumber.minlength ">Please Enter Valid Phone
                         Number</p>
-                      <input type="text" name="regno" placeholder="Registration No." formControlName="registrationNumber" />
-                      <p class="errormessage" *ngIf="step1FormErrors.registrationNumber.required || (step1Form.controls.registrationNumber.pristine && submitted)">Registration
-                        Number can't be empty</p>
-                      <!-- <input type="text" name="state" placeholder="State" formControlName="state" /> -->
-                      <ng-template #customItemTemplate let-model="item" let-index="index">
-                        <h5>{{ model.states }} </h5>
-                      </ng-template>
+                        <tag-input formControlName="language" (onAdd)="onAddLanguage($event)" onlyFromAutocomplete="true"
+                        blinkIfDupe="true">
+                        <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
+                          [showDropdownIfEmpty]="false" [autocompleteItems]="languageOfObjects">
+                        </tag-input-dropdown>
+                      </tag-input>
+                      <p class="errormessage" [ngStyle]="{'font-size':'11px'}"  *ngIf="step1FormErrors.language.required || (step1Form.controls.language.pristine && submitted1)">Language
+                        Cannot Be Empty</p>
+                      <div class="top_space">
+                        <div class="col-md-2 col-xs-2 nomarginrw">
 
-                      <input class="form-control" [typeaheadItemTemplate]="customItemTemplate" formControlName="state"
-                        (typeaheadOnSelect)="onSelectedState($event)" placeholder="State" typeaheadOptionField="states"
-                        [typeahead]="stateList" class="form-control" (typeaheadNoResults)="typeaheadNoStateResults($event)">
-                      <p class="errormessage" *ngIf="step1FormErrors.state.required || (step1Form.controls.state.pristine && submitted)">State
-                        can't be empty</p>
+                          <p class="genderm">Gender</p>
+                          <p class="errormessage" [ngStyle]="{'font-size':'11px'}" *ngIf="step1FormErrors.gender.required || (step1Form.controls.gender.pristine && submitted1)">choose the gender
+                        </div>
+                        <div class="col-md-3 col-xs-3 nomarginrw">
+                          <p class="gmalef">
+                            <input name="gender" type="radio" id="test1" value="Male" formControlName="gender" />
+                            <label for="test1">Male</label>
+                          </p>
+                        </div>
+                        <div class="col-md-3 col-xs-3 nomarginrw">
+                          <p class="gmalef">
+                            <input name="gender" type="radio" id="test2" value="Female" formControlName="gender" />
+                            <label for="test2">Female</label>
+                            </p>
+                        </div>
+                        <div class="col-md-4 col-xs-4 nomarginrw">
+                          <p class="gmalef">
+                            <input name="gender" type="radio" id="test5" value="Others" formControlName="gender" />
+                            <label for="test5">Others</label>
+                           </p>
+                        </div>
+                      </div>
+                  
                       <input type="button" name="next" class="next action-button" (click)="firststep()" value="Next" />
 
                     </form>
@@ -86,56 +107,36 @@
                   <!--  *******************FORM 2************ -->
                   <fieldset *ngIf="secondreg">
                     <form [formGroup]="step2Form">
-                      <!-- <p class="errormessage">{{error}}</p> -->
-                      <input type="text" name="city" formControlName="city" placeholder="CITY" id="pac-input" (click)="initmap()" />
-                      <p class="errormessage" *ngIf="step2FormErrors.city.required || (step2Form.controls.city.pristine && submitted)">City
-                        Cannot Be Empty</p>
-                      <!-- <input type="text" name="language" formControlName="language"  placeholder="Language" /> -->
-                      <!-- <label>Language:</label> -->
-                      <tag-input formControlName="language" (onAdd)="onAddLanguage($event)" onlyFromAutocomplete="true"
-                        blinkIfDupe="true" placeholder="Language">
-                        <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
-                          [showDropdownIfEmpty]="false" placeholder="Choose language" [autocompleteItems]="languageOfObjects">
-                        </tag-input-dropdown>
-                      </tag-input>
-                      <p class="errormessage" *ngIf="step2FormErrors.language.required || (step2Form.controls.language.pristine && submitted)">Language
-                        Cannot Be Empty</p>
-                      <!-- <input type="text" name="dob" formControlName="dob"  placeholder="Date Of Birth" /> -->
-                      <!-- <div class="col-xs-12 col-12 col-md-4 form-group"> -->
+
                       <input type="text" formControlName="dob" placeholder="Date Of Birth" #dp="bsDatepicker" class="form-control"
                         bsDatepicker (bsValueChange)="compareDob($event)">
-                      <!-- </div> -->
-                      <p class="errormessage" *ngIf="step2FormErrors.dob.required || (step2Form.controls.dob.pristine && submitted)">Date
-                        of
-                        Birth Cannot Be Empty</p>
-                      <div class="top_space">
-                        <div class="col-md-2 col-xs-2 nomarginrw">
+                      <p class="errormessage"  [ngStyle]="{'font-size':'11px'}" *ngIf="step2FormErrors.dob.required || (step2Form.controls.dob.pristine && submitted2)">Date
+                        of Birth Cannot Be Empty</p>
+                      <tag-input formControlName="education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true"
+                        blinkIfDupe="true">
+                        <tag-input-dropdown [appendToBody]="false" [identifyBy]="'educationName'" [displayBy]="'educationName'"
+                          [showDropdownIfEmpty]="false" [autocompleteItems]="educationOfObjects">
+                        </tag-input-dropdown>
+                      </tag-input>
+                      <p class="errormessage" [ngStyle]="{'font-size':'11px'}"  *ngIf="step2FormErrors.education.required || (step2Form.controls.education.pristine && submitted2)">Education
+                        Cannot Be Empty</p>
+                      <ng-template #customItemTemplate let-model="item" let-index="index">
+                        <h5>{{ model.states }} </h5>
+                      </ng-template>
 
-                          <p class="genderm">Gender</p>
-                          <!-- <p class="errormessage" formControlName="gender"  *ngIf="step2FormErrors.gender.required || (step2Form.controls.gender.pristine && submitted)">Date -->
-                        </div>
-                        <div class="col-md-3 col-xs-3 nomarginrw">
-                          <p class="gmalef">
-                            <input name="gender" type="radio" id="test1" value="Male" formControlName="gender" />
-                            <label for="test1">Male</label>
-                            <!-- <span class="error_message" [ngStyle]="{'font-size':'13px'}" *ngIf="step1FormErrors.gender.required">Please Select Gender</span> -->
-                          </p>
-                        </div>
-                        <div class="col-md-3 col-xs-3 nomarginrw">
-                          <p class="gmalef">
-                            <input name="gender" type="radio" id="test2" value="Female" formControlName="gender" />
-                            <label for="test2">Female</label>
-                            <!-- <span class="error_message" [ngStyle]="{'font-size':'13px'}" *ngIf="step1FormErrors.gender.required">Please Select Gender</span> -->
-                          </p>
-                        </div>
-                        <div class="col-md-4 col-xs-4 nomarginrw">
-                          <p class="gmalef">
-                            <input name="gender" type="radio" id="test5" value="Others" formControlName="gender" />
-                            <label for="test5">Others</label>
-                            <!-- <span class="error_message" [ngStyle]="{'font-size':'13px'}" *ngIf="step1FormErrors.gender.required">Please Select Gender</span> -->
-                          </p>
-                        </div>
-                      </div>
+                      <input class="form-control" [typeaheadItemTemplate]="customItemTemplate" formControlName="state"
+                        (typeaheadOnSelect)="onSelectedState($event)" placeholder="State" typeaheadOptionField="states"
+                        [typeahead]="stateList" class="form-control" (typeaheadNoResults)="typeaheadNoStateResults($event)">
+                      <p class="errormessage" [ngStyle]="{'font-size':'11px'}"  *ngIf="step2FormErrors.state.required || (step2Form.controls.state.pristine && submitted2)">State
+                        can't be empty</p>
+                      <input type="text" name="city" formControlName="city" placeholder="CITY" id="pac-input" (click)="initmap()" />
+                      <p class="errormessage" [ngStyle]="{'font-size':'11px'}"  *ngIf="step2FormErrors.city.required || (step2Form.controls.city.pristine && submitted2)">City
+                        Cannot Be Empty</p>
+
+                      <!-- <input type="text" name="dob" formControlName="dob"  placeholder="Date Of Birth" /> -->
+                      <!-- <div class="col-xs-12 col-12 col-md-4 form-group"> -->
+
+
                       <input type="button" name="previous" class="previous action-button" (click)="previousfirst()"
                         value="Previous" />
                       <input type="button" name="next" class="next action-button" (click)="secondstep() " value="Next" />
@@ -148,35 +149,34 @@
                     <form [formGroup]="step3Form">
                       <!-- <input type="text" name="education"  formControlName="education" placeholder="Qualifications" /> -->
                       <!-- <label>Education:</label> -->
-                      <tag-input formControlName="education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true"
-                        blinkIfDupe="true" placeholder="Education">
-                        <tag-input-dropdown [appendToBody]="false" [identifyBy]="'educationName'" [displayBy]="'educationName'"
-                          [showDropdownIfEmpty]="false" placeholder="Choose education" [autocompleteItems]="educationOfObjects">
-                        </tag-input-dropdown>
-                      </tag-input>
-                      <p class="errormessage" *ngIf="step3FormErrors.education.required || (step3Form.controls.education.pristine && submitted)">Education
-                        Cannot Be Empty</p>
+
                       <!-- <input type="text" name="speciality"  formControlName="speciality" placeholder="Speciality" /> -->
                       <!-- <label>Speciality:</label> -->
                       <tag-input formControlName="speciality" (onAdd)="onAddSpeciality($event)" onlyFromAutocomplete="true"
-                        placeholder="Speciality" blinkIfDupe="true">
+                        blinkIfDupe="true">
                         <tag-input-dropdown [appendToBody]="false" [identifyBy]="'specialityName'" [displayBy]="'specialityName'"
-                          [showDropdownIfEmpty]="false" placeholder="Choose speciality" [autocompleteItems]="specialityOfObjects">
+                          [showDropdownIfEmpty]="false" [autocompleteItems]="specialityOfObjects">
                         </tag-input-dropdown>
                       </tag-input>
-                      <p class="errormessage" *ngIf="step3FormErrors.speciality.required || (step3Form.controls.speciality.pristine && submitted)">Speciality
+                      <p class="errormessage" [ngStyle]="{'font-size':'11px'}"  *ngIf="step3FormErrors.speciality.required || (step3Form.controls.speciality.pristine && submitted3)">Speciality
                         Cannot Be Empty</p>
+                      <input type="text" name="regno" placeholder="Registration No." formControlName="registrationNumber" />
+                      <p class="errormessage" [ngStyle]="{'font-size':'11px'}"  *ngIf="step3FormErrors.registrationNumber.required || (step3Form.controls.registrationNumber.pristine && submitted3)">Registration
+                        Number can't be empty</p>
                       <input type="text" name="practisingsince" [textMask]="{mask: practisingYear, guide: false}"
                         placeholder="Practising Since" formControlName="practicingSince" (blur)="comparePracticingYear(step3Form.value.practicingSince)" />
-                      <!-- <input type="text" name="issueauthority" placeholder="Issuing Authority" formControlName="issuingAuthority" /> -->
-                      <!-- <div class="selecta"> -->
-                      <select class="browser-default" formControlName="issuingAuthority">
-                        <option value="" disabled selected>Issuing Authority</option>
-                        <option value="MCI">MCI</option>
-                      </select>
-                      <!-- </div> -->
-                      <p class="errormessage" *ngIf="step3FormErrors.practicingSince.required || (step3Form.controls.practicingSince.pristine && submitted)">Practicing
+                      <p class="errormessage" [ngStyle]="{'font-size':'11px'}" *ngIf="step3FormErrors.practicingSince.required || (step3Form.controls.practicingSince.pristine && submitted3)">Practicing
                         Since can't be empty</p>
+
+                      <ng-template #customItemTemplate1 let-model="item" let-index="index">
+                        <h5>{{ model.issuingAuthority }} </h5>
+                      </ng-template>
+                      <input class="form-control" [typeaheadItemTemplate]="customItemTemplate1" formControlName="issuingAuthority"
+                        (typeaheadOnSelect)="onSelectedIssueAuthority($event)" placeholder="Issue Authority"
+                        typeaheadOptionField="issuingAuthority" [typeahead]="issuingAuthorityList" class="form-control"
+                        (typeaheadNoResults)="typeaheadNoselectedAuthority($event)">
+                      <p class="errormessage" [ngStyle]="{'font-size':'11px'}" *ngIf="step3FormErrors.issuingAuthority.required || (step3Form.controls.issuingAuthority.pristine && submitted3)">State
+                        can't be empty</p>
                       <input type="button" name="previous" class="previous action-button" (click)="previouslast()"
                         value="Previous" />
                       <input type="submit" name="submit" class="submit action-button" value="Next" (click)="thirdstep()" />
@@ -215,7 +215,7 @@
                       </svg>
                       <p>Please enter the OTP you received</p>
                       <input type="text" name="otp" placeholder="OTP" formControlName="otp" />
-                      <p class="errormessage" *ngIf="step4FormErrors.otp.required || (step4Form.controls.otp.pristine && submitted)">Otp
+                      <p class="errormessage" [ngStyle]="{'font-size':'11px'}" *ngIf="step4FormErrors.otp.required || (step4Form.controls.otp.pristine && submitted4)">Otp
                         Cannot Be Empty</p>
                       <input type="button" name="previous" class="previous action-button" (click)="previouspagelast()"
                         value="Previous" />
