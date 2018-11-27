@@ -60,6 +60,7 @@
             <ul class="list-inline chipsdata">
               <li *ngFor="let list of doctorpdetail.speciality">
                 <p class="chipsdata">{{list}}
+                    <span class="closebtn" (click)="removeSpeciality(list)">&times;</span>
                 </p>
               </li>
             </ul>
@@ -86,6 +87,7 @@
               <ul class="list-inline chipsdata">
                 <li *ngFor="let edulist of doctorpdetail.education">
                   <p class="chipsdata">{{edulist}}
+                      <span class="closebtn" (click)="removeEducation(edulist)">&times;</span>
                   </p>
                 </li>
               </ul>

@@ -38,8 +38,10 @@ export class ProfileComponent implements OnInit {
   doctorDetailErrors: any;
   // languages: any;
   language=[];
+  speciality=[];
+  education=[];
   public selectedLanguage:any=[];
-  public specarr:any;
+  public specarr=[];
   public educarr=[];
   public langarr=[];
   public selectedEducation:any=[];
@@ -269,4 +271,21 @@ export class ProfileComponent implements OnInit {
     this.langarr.push(this.language);
     console.log("hi",this.langarr)
   }
+    // remove speciality
+    removeSpeciality(name) {
+      this.speciality = this.doctorpdetail.speciality,
+        this.speciality.splice(this.speciality.indexOf(name), 1);
+      console.log('speciality array', this.speciality);
+      this.specarr.push(this.speciality);
+      console.log("hi",this.specarr)
+    }
+  
+    // remove education
+    removeEducation(name) {
+      this.education = this.doctorpdetail.education,
+        this.education.splice(this.education.indexOf(name), 1);
+      console.log('education array', this.education);
+      this.educarr.push(this.education);
+      console.log("hi",this.educarr)
+    }
 }
