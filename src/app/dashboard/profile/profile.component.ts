@@ -38,8 +38,10 @@ export class ProfileComponent implements OnInit {
   doctorDetailErrors: any;
   // languages: any;
   language=[];
+  speciality=[];
+  education=[];
   public selectedLanguage:any=[];
-  public specarr:any;
+  public specarr=[];
   public educarr=[];
   public langarr=[];
   public selectedEducation:any=[];
@@ -166,15 +168,16 @@ export class ProfileComponent implements OnInit {
   }
   /********************GET LIST OF SPECIALITY *****************/
   getSpecialityList(){
-
+   
     let data={
-     z: "speciality"
+      speciality: "speciality"
    }
    this.docService.getSpecialityList(data).subscribe(data => {
+     debugger;
      let value: any = {}
      value = data
      this.specialityList = value.result.result
-    //  console.log(this.specialityList)
+     console.log(this.specialityList)
      for (var i = 0; i < this.specialityList.length; i++) {
        var spec = {
          specialityName: this.specialityList[i].GeneralSpeciality,
@@ -190,7 +193,7 @@ export class ProfileComponent implements OnInit {
      /********************GET LIST OF Education *****************/
   getEducationList(){
     let data={
-        y: "education"
+      education: "education"
     }
       this.docService.getEducationList(data).subscribe(data => {
         let value: any = {}
@@ -214,7 +217,7 @@ export class ProfileComponent implements OnInit {
     /********************GET LIST OF LANGUAGE *****************/
   getLanguageList() {
     let data = {
-      x: "language"
+      language: "language"
     }
     this.docService.getLanguageList(data).subscribe(data => {
       let value: any = {}
@@ -269,4 +272,21 @@ export class ProfileComponent implements OnInit {
     this.langarr.push(this.language);
     console.log("hi",this.langarr)
   }
+    // remove speciality
+    removeSpeciality(name) {
+      this.speciality = this.doctorpdetail.speciality,
+        this.speciality.splice(this.speciality.indexOf(name), 1);
+      console.log('speciality array', this.speciality);
+      this.specarr.push(this.speciality);
+      console.log("hi",this.specarr)
+    }
+  
+    // remove education
+    removeEducation(name) {
+      this.education = this.doctorpdetail.education,
+        this.education.splice(this.education.indexOf(name), 1);
+      console.log('education array', this.education);
+      this.educarr.push(this.education);
+      console.log("hi",this.educarr)
+    }
 }

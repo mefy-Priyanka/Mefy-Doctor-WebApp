@@ -19,7 +19,7 @@ export class ProfileService {
   }
   updateDetail(doctoridetail) {
     console.log('updatedDetail', doctoridetail)
-    return this.http.put(APIURL + 'doctor/profile/' + doctoridetail.userId,{email:doctoridetail.email,address:doctoridetail.address,speciality:doctoridetail.speciality,education:doctoridetail.education,language:doctoridetail.langName})
+    return this.http.put(APIURL + 'doctor/profile/' + doctoridetail.userId,{email:doctoridetail.email,address:doctoridetail.address,speciality:doctoridetail.speciality,education:doctoridetail.education,language:doctoridetail.language})
   }
 
 }
