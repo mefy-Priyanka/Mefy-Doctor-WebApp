@@ -74,6 +74,7 @@
             </p>
           </div>
         </div>
+
         <div class="row nomarginrow0">
             <div class="col-md-6">
               <p class="labelpf">Education:
@@ -109,7 +110,8 @@
               <div class="col-md-12 col-xs-10 nopadding0col1">
                 <ul class="list-inline chipsdata">
                   <li *ngFor="let langlist of doctorpdetail.language">
-                    <p class="chipsdata">{{langlist}}
+                    <p class="chipsdata">{{langlist}} 
+                        <span class="closebtn" (click)="removeLanguage(langlist)">&times;</span>
                     </p>
                   </li>
                 </ul>
@@ -142,7 +144,7 @@
       <!-- </form> -->
       <p class="lastbtn">
         <button type="button" class="btn btn-default" (click)="updateDoctorProfile(doctorpdetail)">Save</button>
-        <button type="button" class="cancelbtn">Cancel</button>
+        <button type="button" class="cancelbtn" (click)="cancelForm()">Cancel</button>
       </p>
 
     </div>
