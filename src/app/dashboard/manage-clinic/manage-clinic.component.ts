@@ -611,9 +611,11 @@ export class ManageClinicComponent implements OnInit {
   // delete  selected clinic 
   deleteClinicInfo(id) {
     this.showEdit = false;
-    this.scheduleService.deleteClinic(id).subscribe(data => {
+    this.ClinicService.deleteClinic(id).subscribe(data => {
       console.log(data);
-      if (data.message == "Clinic is deleted") {
+      let response:any={};
+      response=data;
+      if (response.message == "Clinic is deleted") {
         this.showModal = false;
         let notifydata = {
           type: 'success',
@@ -623,7 +625,7 @@ export class ManageClinicComponent implements OnInit {
         this.sharedService.createNotification(notifydata);
         this.getClinicList();
       }
-      else if (data.message == "There are appointments for this clinic") {
+      else if (response.message == "There are appointments for this clinic") {
         this.deleteClinincId = id;
         this.showModal = true;
       }
