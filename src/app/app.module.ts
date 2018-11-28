@@ -10,6 +10,7 @@ import { TagInputModule } from 'ngx-chips';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { ToastyModule } from "ng2-toasty";
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { AppointmentService } from './meme-services/appointment.service';
 /********************NEW SERVICES************************** */
 import { DocregistrationService } from './mefyservice/docregistration.service';
 import { LoginService } from './mefyservice/login.service';
@@ -30,7 +31,7 @@ import { SharedService } from './mefyservice/shared.service';
 import { SocketService } from './meme-services/socket.service';
 import { DoctorregisterService } from './meme-services/doctorregister.service';
 import { DoctorPrescriptionService } from './meme-services/doctor-prescription.service';
-import { AppointmentService } from './meme-services/appointment.service';
+import { AppointmentsService } from './mefyservice/appointments.service';
 import { AccountService } from './meme-services/account.service';
 
 import { AppComponent } from './app.component';
@@ -120,6 +121,7 @@ const approutes: Routes = [
     ClinicService,
     AccounttService,
     DashboarddService,
+    AppointmentsService,
     /**************/
     HttpClientModule
     // ManageaccountComponent,
