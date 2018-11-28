@@ -111,7 +111,7 @@ export class AppointmentnewComponent implements OnInit {
   // display timeslots of selected clinic
   viewTimeSlots(clinic, index) {
 console.log('clinic details',clinic)
-debugger;
+// debugger;
     if (!this.viewSlots) {
       this.selected = index
 
