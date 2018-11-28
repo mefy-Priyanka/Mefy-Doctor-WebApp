@@ -42,12 +42,9 @@ export class ManageaccountComponent implements OnInit {
       confirmAccountNumber: {}
     };
 
-    // send url path name to change navbar colour
-    // this.pathName=(route.snapshot.url)[0].path;
-    // this.sharedService.setPath(this.pathName)
-
+ /*GET CURRENT URL, send url path name to change navbar colour*/
     this.currentURL = window.location.pathname;
-    console.log(this.currentURL);
+    // console.log('accoutn url',this.currentURL);
     this.sharedService.setPath(this.currentURL);
   }
 

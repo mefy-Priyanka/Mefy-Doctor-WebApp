@@ -15,11 +15,17 @@ import { ClinicService } from '../../mefyservice/clinic.service';
 export class MainComponent implements OnInit {
  
   public doctorId:any
+  public  currentURL: any;
   public doctorDetail:any={};
   public loader:boolean=false /***LOADER */
   public clinicList:any=[]
   constructor(private sanitizer: DomSanitizer, private dashboardService: DashboarddService, private sharedService: SharedService, private router: Router,private clincService: ClinicService) {
     this.doctorId= localStorage.getItem('doctorId');
+
+    /*GET CURRENT URL, send url path name to change navbar colour*/
+    this.currentURL = window.location.pathname;
+    // console.log('dashboard url',this.currentURL);
+    this.sharedService.setPath(this.currentURL);
   }
 
   ngOnInit() {
