@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ScheduleService } from '../../meme-services/schedule.service';
+// import { ClinicService } from '../../meme-services/schedule.service';
 import * as moment from 'moment';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { AppointmentService } from '../../meme-services/appointment.service';
+import { ClinicService } from '../../mefyservice/clinic.service';
 import { SharedService } from '../../mefyservice/shared.service';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { CompleterService, CompleterData } from 'ng2-completer';
@@ -24,7 +25,7 @@ export class AppointmentnewComponent implements OnInit {
   viewSlots: boolean = false;
   slotDetails: any;
   clinicName: any;
-  clinicId:any;
+  clinicId: any;
   name: any;
   email: any;
   pathName: any;
@@ -45,24 +46,27 @@ export class AppointmentnewComponent implements OnInit {
   dateErr: any = '';
   error: any;
   Date: any;
-  informationNew:any;
-  individualNumber:any;
-  whenSlotsClicked :Boolean= true;
+  informationNew: any;
+  individualNumber: any;
+  whenSlotsClicked: Boolean = true;
   patientData = {
     userId: '',
     name: ''
   }
   status: any;
   errMessage: any;
-  appointmentType:any="";
-  dateAppointment:any;
-  message:any;
-  presentTime:any;
-  public mask = [ /[1-9]/,/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/,/\d/,/\d/,/\d/, /\d/, /\d/] // Phone number validation 
-  constructor(private router: Router,public scheduleService: ScheduleService, private appointmentService: AppointmentService, private sharedService: SharedService, private route: ActivatedRoute, private completerService: CompleterService) {
-    this.doctorProfileId = localStorage.getItem('loginId');
+  appointmentType: any = "clinicVisit";
+  dateAppointment: any;
+  message: any;
+  presentTime: any;
+  public mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
 
-    // send url path name to change navbar colour
+
+  constructor(private router: Router, public ClinicService: ClinicService, private appointmentService: AppointmentService, private sharedService: SharedService, private route: ActivatedRoute, private completerService: CompleterService) {
+
+    this.doctorProfileId = localStorage.getItem('doctorId');
+
+   /*GET CURRENT URL, send url path name to change navbar colour*/
    this.currentURL = window.location.pathname; 
    console.log('currenturl',this.currentURL)
  this.sharedService.setPath(this.currentURL);
@@ -73,30 +77,33 @@ export class AppointmentnewComponent implements OnInit {
 
   ngOnInit() {
     this.getClinicList();
-   
+
   }
 
   //  clinic list by date
   clinicListByDate(value) {
     this.compareAppointmentdate(value);
     this.Date = value;
-   this.appointmentDate = value;
-    this.scheduleService.getClinicByDate(this.doctorProfileId, this.appointmentDate).subscribe(result => {
-    this.clinicList = result.result;
-     },
-      err => {
+    this.appointmentDate = value;
+    // this.ClinicService.clinicByDateType(this.doctorProfileId, this.appointmentDate, this.appointmentType).subscribe(result => {
+    //   console.log('result',result)
+    //   // this.clinicList = result.result;
+    // },
+    //   err => {
 
-      })
+    //   })
   }
 
   //  clinic list of current date
   getClinicList() {
     console.log('clinic list')
-    this.selectedDate = new Date();
-    this.scheduleService.getClinicByDate(this.doctorProfileId, this.selectedDate).subscribe(result => {
-      console.log('clinic list',result);
-      this.clinicList = result.result;
-       },
+    this.selectedDate = moment().toISOString();
+    this.ClinicService.clinicByDateType(this.doctorProfileId, this.selectedDate, this.appointmentType).subscribe(result => {
+      console.log('clinic list', result);
+      let response:any={};
+      response=result;
+      this.clinicList = response.result.clinic;
+    },
       err => {
 
       })
@@ -104,42 +111,46 @@ export class AppointmentnewComponent implements OnInit {
 
   // display timeslots of selected clinic
   viewTimeSlots(clinic, index) {
-    
+console.log('clinic details',clinic)
+// debugger;
     if (!this.viewSlots) {
       this.selected = index
-      
+
       this.clinicName = clinic.clinicName;
-    
-      this.clinicId=clinic._id;
-     
+
+      this.clinicId = clinic.clinicId;
+
       if (this.appointmentDate) {
-        
-        console.log(this.appointmentDate)
+
+        // console.log(this.appointmentDate)
         this.presentTime = moment();
         this.presentTime.toISOString()
       }
       else {
-        
-        this.appointmentDate  = moment().utcOffset(0);
-        this.appointmentDate .set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
-        this.appointmentDate .toISOString()
-        this.appointmentDate .format()
-        this.appointmentDate=this.appointmentDate._d
-        console.log( this.appointmentDate );
-        this.presentTime = moment();
-        this.presentTime.toISOString()
-        console.log(this.presentTime)
+this.appointmentDate=moment().toISOString();
+        // this.appointmentDate = moment().utcOffset(0);
+        // this.appointmentDate.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
+        // this.appointmentDate.toISOString()
+        // this.appointmentDate.format()
+        // this.appointmentDate = this.appointmentDate._d
+        // console.log(this.appointmentDate);
+        // this.presentTime = moment();
+        // this.presentTime.toISOString()
+        // console.log(this.presentTime)
       }
-   
-      this.appointmentService.getTimeSlots(this.doctorProfileId, this.appointmentDate, clinic._id, this.presentTime._d).subscribe(result => {
-         console.log('time slots',result);
+
+      this.ClinicService.clinicSlots(clinic.clinicId, this.appointmentDate).subscribe(result => {
+        console.log('time slots', result);
+        let response:any={};
+        response=result;
         this.viewSlots = true;
-        this.slots = result.timeslots;
-        this.presentTime='';
-        console.log(this.slots);
+        this.slots = response.result.response;
+        this.presentTime = '';
+        console.log('dggdgdjh',this.slots);
+        console.log('slot details',this.slots[0],this.slots[0].slot2)
       },
         err => {
-
+console.log(err)
         })
     }
     else {
@@ -150,12 +161,12 @@ export class AppointmentnewComponent implements OnInit {
   // fetch details of selected slots
   getSlotsDetails(detail) {
     console.log(detail.startTime)
-    this.whenSlotsClicked=false;
+    this.whenSlotsClicked = false;
     if (detail) {
       this.slotDetails = detail;
       this.slotSelect = true;
       return true;
-      
+
     }
     else {
       return false;
@@ -193,7 +204,7 @@ export class AppointmentnewComponent implements OnInit {
           clinicName: this.clinicName,
           individualId: this.patientData.userId,
           patientName: this.patientData.name,
-          clinicId:this.clinicId
+          clinicId: this.clinicId
         }
         this.appointmentService.createAppointment(appointmentDetail).subscribe(result => {
           console.log(result);
@@ -248,7 +259,7 @@ export class AppointmentnewComponent implements OnInit {
       this.sharedService.createNotification(notifydata);
     },
       err => {
-        
+
       })
   }
 
@@ -273,12 +284,12 @@ export class AppointmentnewComponent implements OnInit {
 
   // get detail of individual patient
   individualDetail(data) {
-    this.individualNumber=data.userId.phoneNumber;
+    this.individualNumber = data.userId.phoneNumber;
     this.patientData = {
       userId: data._id,
       name: data.name
     }
-   
+
     // this.individualNumber="";
     let notifydata = {
       type: 'success',
@@ -287,7 +298,7 @@ export class AppointmentnewComponent implements OnInit {
     }
     this.sharedService.createNotification(notifydata);
     this.individualList = [];
-    this.cardShow=false;
+    this.cardShow = false;
   }
 
   // compare date for evnt creation
@@ -323,17 +334,33 @@ export class AppointmentnewComponent implements OnInit {
     }
   }
 
-  navigateClinic(){
+  navigateClinic() {
     this.router.navigate(['dashboard/clinic']);
 
   }
 
   //get appointment type
   getType(data) {
-    this.appointmentType = data;
+    if (data == 'visit') {
+      this.appointmentType = 'clinicVisit';
+    }
+    else if (data == 'eConsult') {
+      this.appointmentType = 'eConsult';
+    }
+    
+    this.ClinicService.clinicByDateType(this.doctorProfileId, this.appointmentDate, this.appointmentType).subscribe(result => {
+      console.log('result', result);
+      let response:any={};
+      response=result;
+      this.clinicList = response.result.clinic;
+      console.log('clinic list',this.clinicList)
+    },
+      err => {
+
+      })
   }
 
- getAppointmentlist() {
+  getAppointmentlist() {
     this.informationNew = [];
     this.dateAppointment;
     this.appointmentService.getAppointmentList(localStorage.getItem('loginId'), this.dateAppointment).subscribe(

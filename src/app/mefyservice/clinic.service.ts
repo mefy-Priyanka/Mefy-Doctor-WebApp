@@ -13,10 +13,10 @@ export class ClinicService {
     return this.httpClient.get(APIURL + 'clinic/clinicByDoctorId/' + doctorId)
   }
 
-// GET SPECIFIC CLINIC DETAIL
-getSingleClinicDetail(clinicId){
-  return this.httpClient.get(APIURL+'clinic/'+clinicId)
-}
+  // GET SPECIFIC CLINIC DETAIL
+  getSingleClinicDetail(clinicId) {
+    return this.httpClient.get(APIURL + 'clinic/' + clinicId)
+  }
 
   // DOCTOR CREATE CLINIC  
   addClinic(data) {
@@ -28,5 +28,21 @@ getSingleClinicDetail(clinicId){
     return this.httpClient.put(APIURL + 'clinic/updateClinic/' + clinicId, data);
   }
 
+  // DOCTOR DELETE CLINIC
+  deleteClinic(clinicId) {
+    return this.httpClient.delete(APIURL + 'clinic/' + clinicId)
+  }
 
+
+  // GET CLINIC LIST BY DOCTORID,DATE,TYPE
+  clinicByDateType(doctorId, date, type) {
+    console.log(doctorId,date,type)
+    return this.httpClient.get(APIURL + 'clinic/clinicbydate?doctorId=' + doctorId + '&date=' + date + '&type=' + type)
+  }
+
+  //GET CLINIC SLOTS
+  clinicSlots(clinicId,date){
+    console.log(clinicId,date)
+    return this.httpClient.get(APIURL+'clinic/getTimeSlot?clinicId='+clinicId+'&date='+date)
+  }
 }

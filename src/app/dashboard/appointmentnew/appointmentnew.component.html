@@ -110,13 +110,13 @@
             <form action="#">
               <div class="col-md-6">
                 <p>
-                  <input name="group1" type="radio" id="visittype"/>
+                  <input name="group1" type="radio" id="visittype" (click)="getType('visit')"/>
                   <label for="visittype" class="typebtn" style="padding-left:3em !important">Visit</label>
                 </p>
               </div>
               <div class="col-md-6">
                 <p>
-                  <input name="group1" type="radio" id="econsulttype"/>
+                  <input name="group1" type="radio" id="econsulttype" (click)="getType('eConsult')"/>
                   <label for="econsulttype" class="typebtn" style="padding-left:3em !important">Econsult</label>
                 </p>
               </div>
@@ -133,14 +133,14 @@
           </div>
         </div>
 
-        <span class="error_messageno"> No Clinic available</span>
-        <div class="cardcustom col-md-12 pading0custom">
+        <span class="error_messageno"  *ngIf="clinicList?.length==0"> No Clinic available</span>
+        <div class="cardcustom col-md-12 pading0custom" *ngFor="let list of clinicList; let i=index;">
           <div class="row">
             <div class="col-md-6 ">
               <div class="cinic_viewcard">
-                <p class="clinic_nm">Dutta Pharmaceuticals</p>
-                <p class="clinic_cntct">1234456789</p>
-                <p class="address1_cinic">Orissa , India</p>
+                <p class="clinic_nm">{{list.clinicName}}</p>
+                <p class="clinic_cntct">{{list.phoneNumber}}</p>
+                <p class="address1_cinic">{{list.city}}</p>
               </div>
 
             </div>
@@ -148,18 +148,18 @@
               <div class="col-md-12 pcard">
                 <div class="row">
                   <div class="col-md-8 col-xs-8 text-center pading0custom">
-                    <div class="scheduletym_clinic">
-                      <span class="clinic_tymstart">10:00 AM &nbsp;&nbsp;</span>
+                    <div class="scheduletym_clinic" *ngFor="let time of list.weekDays">
+                      <span class="clinic_tymstart">{{time.startTime}}&nbsp;&nbsp;</span>
                       <span class="duration_schedule">To</span>
-                      <span class="clinic_tymstart">&nbsp;&nbsp;11:00 AM</span>
+                      <span class="clinic_tymstart">&nbsp;&nbsp;{{time.endTime}}</span>
                     </div>
                     <div class="manage_btn">
-                      <button class="btncustom">Manage Clinic</button>
+                      <button class="btncustom"  (click)="navigateClinic()">Manage Clinic</button>
                     </div>
                   </div>
                   <div class="col-md-4 col-xs-4 pading0custom">
                     <div class="sloatview">
-                      <button class="sloatviewbtn">View Slots</button>
+                      <button class="sloatviewbtn"  (click)="viewTimeSlots(list,i)">View Slots</button>
 
                     </div>
                   </div>
@@ -170,17 +170,20 @@
               </div>
 
             </div>
-            <section class="slotsbook">
+            <section class="slotsbook" *ngIf="viewSlots && i==selected">
               <hr>
               <div class="left_dist">
                 <div class="row">
-                  <div class="col-md-2 col-xs-4">
-                    <button type="btn" class="multislotsdisable">
-                      <span class="clinic_slot">10:05 AM</span>
+                  <div class="col-md-2 col-xs-4" *ngFor="let slot of slots">
+                    <div *ngFor="let tslot of slot.slot">
+                    <button type="btn" class="multislotsdisable"  [disabled]="tslot.status=='Booked'" [ngClass]="{'multislots':tslot.status=='UnBooked','multislotsdisable':tslot.status=='Booked'}"
+                    (click)="getSlotsDetails(tslot)">
+                      <span class="clinic_slot">{{tslot.sTime}}</span>
                       <!-- <span class="slot_schedule">To</span> -->
                       <hr class="slot_schedule" data-content="To"> 
-                      <span class="clinic_slot">11:05 AM</span>
+                      <span class="clinic_slot">{{tslot.eTime}}</span>
                     </button>
+                  </div>
                   </div>
                 </div>
               </div>
