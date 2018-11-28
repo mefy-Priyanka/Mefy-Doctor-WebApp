@@ -82,13 +82,11 @@ export class ManageClinicComponent implements OnInit {
 
     this.doctorprofileId = localStorage.getItem('doctorId');
 
-    // send url path name to change navbar colour
-    // this.pathName = (route.snapshot.url)[0].path;
-    // this.sharedService.setPath(this.pathName)
+    
 
-    // SEND THE URL PATH FOR MENU COLOR CHANGE
+    /*GET CURRENT URL, send url path name to change navbar colour*/
     this.currentURL = window.location.pathname;
-    console.log(this.currentURL);
+    // console.log('clinc url',this.currentURL);
     this.sharedService.setPath(this.currentURL);
 
     this.date = new Date().toISOString();

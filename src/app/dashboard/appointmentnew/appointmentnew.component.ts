@@ -64,6 +64,7 @@ export class AppointmentnewComponent implements OnInit {
 
     // send url path name to change navbar colour
    this.currentURL = window.location.pathname; 
+   console.log('currenturl',this.currentURL)
  this.sharedService.setPath(this.currentURL);
 
     this.currentDate = new Date().toISOString();
