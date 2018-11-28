@@ -36,10 +36,14 @@ export class ProfileComponent implements OnInit {
   public selectedSpeciality:any=[];
   doctorDetail: FormGroup;
   doctorDetailErrors: any;
+  // languages: any;
+  language=[];
+  speciality=[];
+  education=[];
   public selectedLanguage:any=[];
-  public specarr:any;
+  public specarr=[];
   public educarr=[];
-  public langarr:any;
+  public langarr=[];
   public selectedEducation:any=[];
   public languageList: any = [];
   public  educationList: any = [];
@@ -156,7 +160,7 @@ export class ProfileComponent implements OnInit {
       // console.log("ABCD",result.result.speciality);
       console.log('updated profiledata', this.doctorpdetail);
       // console.log('updated profiledata', this.result.result.result);
-      // this.router.navigate(['/dashboard/main']);speciality
+      this.router.navigate(['/dashboard/main']);
     },
     err => {
     })
@@ -253,4 +257,35 @@ export class ProfileComponent implements OnInit {
     this.specarr=this.doctorpdetail.speciality.concat(this.selectedSpeciality);
     console.log(" this.specarr", this.specarr);
   }
+    //cancel profile 
+    cancelForm() {
+      this.router.navigate(['/dashboard/main']);
+    }
+
+  // remove language
+  removeLanguage(name) {
+    this.language = this.doctorpdetail.language;
+    console.log( this.language);
+    this.language.splice(this.language.indexOf(name), 1);
+    console.log('language Array', this.language);
+    this.langarr.push(this.language);
+    console.log("hi",this.langarr)
+  }
+    // remove speciality
+    removeSpeciality(name) {
+      this.speciality = this.doctorpdetail.speciality,
+        this.speciality.splice(this.speciality.indexOf(name), 1);
+      console.log('speciality array', this.speciality);
+      this.specarr.push(this.speciality);
+      console.log("hi",this.specarr)
+    }
+  
+    // remove education
+    removeEducation(name) {
+      this.education = this.doctorpdetail.education,
+        this.education.splice(this.education.indexOf(name), 1);
+      console.log('education array', this.education);
+      this.educarr.push(this.education);
+      console.log("hi",this.educarr)
+    }
 }

@@ -60,6 +60,7 @@
             <ul class="list-inline chipsdata">
               <li *ngFor="let list of doctorpdetail.speciality">
                 <p class="chipsdata">{{list}}
+                    <span class="closebtn" (click)="removeSpeciality(list)">&times;</span>
                 </p>
               </li>
             </ul>
@@ -74,6 +75,7 @@
             </p>
           </div>
         </div>
+
         <div class="row nomarginrow0">
             <div class="col-md-6">
               <p class="labelpf">Education:
@@ -85,6 +87,7 @@
               <ul class="list-inline chipsdata">
                 <li *ngFor="let edulist of doctorpdetail.education">
                   <p class="chipsdata">{{edulist}}
+                      <span class="closebtn" (click)="removeEducation(edulist)">&times;</span>
                   </p>
                 </li>
               </ul>
@@ -109,7 +112,8 @@
               <div class="col-md-12 col-xs-10 nopadding0col1">
                 <ul class="list-inline chipsdata">
                   <li *ngFor="let langlist of doctorpdetail.language">
-                    <p class="chipsdata">{{langlist}}
+                    <p class="chipsdata">{{langlist}} 
+                        <span class="closebtn" (click)="removeLanguage(langlist)">&times;</span>
                     </p>
                   </li>
                 </ul>
@@ -142,7 +146,7 @@
       <!-- </form> -->
       <p class="lastbtn">
         <button type="button" class="btn btn-default" (click)="updateDoctorProfile(doctorpdetail)">Save</button>
-        <button type="button" class="cancelbtn">Cancel</button>
+        <button type="button" class="cancelbtn" (click)="cancelForm()">Cancel</button>
       </p>
 
     </div>
