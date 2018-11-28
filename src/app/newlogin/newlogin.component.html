@@ -44,8 +44,10 @@
               <form [formGroup]="loginForm">
                 <div class="form-group phoneDiv">
                   <label></label>
-                  <input type="text" class="form-control inputPhone" [textMask]="{mask: mask, guide: false}" placeholder="Phone Number" formControlName="phoneNumber">
-                  <p class="errormessage" *ngIf="loginFormErrors.phoneNumber.required || (loginForm.controls.phoneNumber.pristine && submitted)">Number can not be empty</p>
+                  <input type="text" class="form-control inputPhone" [textMask]="{mask: mask, guide: false}" minlength="8" placeholder="Phone Number" formControlName="phoneNumber">
+                  <p class="errormessage"  [ngStyle]="{'font-size':'11px'}" *ngIf="loginFormErrors.phoneNumber.required || (loginForm.controls.phoneNumber.pristine && submitted)">Number can not be empty</p>
+                  <p class="errormessage"  [ngStyle]="{'font-size':'11px'}" *ngIf="loginFormErrors.phoneNumber.minlength ">Please Enter Valid Phone
+                    Number</p>
                   <i class="fa fa-mobile right" aria-hidden="true"></i>
                 </div>
                 <div class="loginRegister">
