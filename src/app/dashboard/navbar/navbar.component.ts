@@ -15,11 +15,11 @@ import{ScheduleService} from '../../meme-services/schedule.service';
 export class NavbarComponent implements OnInit {
   doctorProfileId: any;
   prescriptionId:any;
-  whenDashboardClicked :Boolean= true;
-  whenCreditClicked:Boolean=true;
-  whenAppoinmentClicked:Boolean=true;
-  whenClinicsClicked:Boolean=true;
-  whenEConsultClicked:Boolean=true;
+  whenDashboardClicked :Boolean= true;  /*for Dashboard*/
+  whenCreditClicked:Boolean=false;      /*for Credit*/
+  whenAppoinmentClicked:Boolean=false;  /*for Appointment*/
+  whenClinicsClicked:Boolean=false;     /*for Clinic*/
+  whenEConsultClicked:Boolean=false;    /*for Econsult*/
   pathName:any;
   clinicList=[];
   searchInput:any;
@@ -30,14 +30,16 @@ export class NavbarComponent implements OnInit {
   public elementRef;
   constructor(myElement: ElementRef,private scheduleService:ScheduleService,private router: Router, private ePrescriptionService: DoctorPrescriptionService,private sharedService: SharedService,private route: ActivatedRoute) {
  
-    this.doctorProfileId = localStorage.getItem('loginId');
+    this.doctorProfileId = localStorage.getItem('doctorId');
 
     this.elementRef = myElement;
 
     // change colour of item depending on route parameter
     this.sharedService.urlPathInfo.subscribe(data=>{
+      console.log('/dashboard/main',data)
    if(data=='/dashboard/main' || data=='/dashboard/profile' || data=='/dashboard/account'){
         this.dashboardChangeColor();
+        console.log('/dashboard/main',data)
       }
       else if(data=='/dashboard/clinic'){
        this.clinicsColourChange();
@@ -58,7 +60,6 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.whenDashboardClicked=false;
   }
 // create prescription
   // navigateEprescription() {
@@ -85,43 +86,43 @@ export class NavbarComponent implements OnInit {
   // }
   //using ngClass on click for dashboard
   dashboardChangeColor(){  
-    this.whenDashboardClicked=false;
-    this.whenCreditClicked=true;
-  this.whenEConsultClicked=true;
-  this.whenClinicsClicked=true;
-  this.whenAppoinmentClicked=true;
+    this.whenDashboardClicked=true;
+    this.whenCreditClicked=false;
+  this.whenEConsultClicked=false;
+  this.whenClinicsClicked=false;
+  this.whenAppoinmentClicked=false;
 }
   //using ngClass on click for EConsult
 eConsultColourChange(){
-  this.whenEConsultClicked=false;  
-  this.whenCreditClicked=true; 
-  this.whenDashboardClicked=true;
-  this.whenAppoinmentClicked=true;
-  this.whenClinicsClicked=true;
+  this.whenEConsultClicked=true;  
+  this.whenCreditClicked=false; 
+  this.whenDashboardClicked=false;
+  this.whenAppoinmentClicked=false;
+  this.whenClinicsClicked=false;
 }
  //using ngClass on click for Clinics
  clinicsColourChange(){
-  this.whenClinicsClicked=false; 
-  this.whenDashboardClicked=true;
-  this.whenEConsultClicked=true;
-  this.whenAppoinmentClicked=true;
-  this.whenCreditClicked=true; 
+  this.whenClinicsClicked=true; 
+  this.whenDashboardClicked=false;
+  this.whenEConsultClicked=false;
+  this.whenAppoinmentClicked=false;
+  this.whenCreditClicked=false; 
 }
  //using ngClass on click for Appoinment
  appoinmentColourChange(){
-  this.whenAppoinmentClicked=false; 
-  this.whenDashboardClicked=true;
-  this.whenEConsultClicked=true;
-  this.whenCreditClicked=true;
-  this.whenClinicsClicked=true;
+  this.whenAppoinmentClicked=true; 
+  this.whenDashboardClicked=false;
+  this.whenEConsultClicked=false;
+  this.whenCreditClicked=false;
+  this.whenClinicsClicked=false;
 }
  //using ngClass on click for Credit
  creditColourChange(){
   this.whenCreditClicked=false; 
-  this.whenDashboardClicked=true;
-  this.whenEConsultClicked=true;
-  this.whenAppoinmentClicked=true;
-  this.whenClinicsClicked=true;
+  this.whenDashboardClicked=false;
+  this.whenEConsultClicked=false;
+  this.whenAppoinmentClicked=false;
+  this.whenClinicsClicked=false;
 }
 
 // search input

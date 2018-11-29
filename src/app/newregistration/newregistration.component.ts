@@ -706,8 +706,15 @@ export class NewregistrationComponent implements OnInit {
       result=data
       console.log(result.message)
       console.log(result.result.message)
+      if(result.result.message=="User already registered"){
+        let notification = {
+          type: 'error',
+          title: 'Phone Number already exists',
+        }
+        this.sharedServices.createNotification(notification);
+      }
 
-      if(result.result.message=='OTP sent to registered number'){
+    else  if(result.result.message=='OTP sent to registered number'){
         this.saveRegistrationForm();
       }
       else{

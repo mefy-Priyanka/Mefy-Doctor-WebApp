@@ -10,6 +10,7 @@ import { TagInputModule } from 'ngx-chips';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { ToastyModule } from "ng2-toasty";
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { AppointmentService } from './meme-services/appointment.service';
 /********************NEW SERVICES************************** */
 import { DocregistrationService } from './mefyservice/docregistration.service';
 import { LoginService } from './mefyservice/login.service';
@@ -30,12 +31,12 @@ import { SharedService } from './mefyservice/shared.service';
 import { SocketService } from './meme-services/socket.service';
 import { DoctorregisterService } from './meme-services/doctorregister.service';
 import { DoctorPrescriptionService } from './meme-services/doctor-prescription.service';
-import { AppointmentService } from './meme-services/appointment.service';
+import { AppointmentsService } from './mefyservice/appointments.service';
 import { AccountService } from './meme-services/account.service';
 
 import { AppComponent } from './app.component';
 // import { LoginComponent } from './login/login.component';
-// import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './auth.guard';
 import { BillService } from './meme-services/bill.service';
 import { NewloginComponent } from './newlogin/newlogin.component';
 import { QRCodeModule } from 'angularx-qrcode';
@@ -57,12 +58,9 @@ const approutes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: './dashboard/dashboard.module#DashboardModule'
+    loadChildren: './dashboard/dashboard.module#DashboardModule',canActivate: [AuthGuard]
   },
-  // {
-  //   path: 'login',
-  //   component: LoginComponent
-  // },
+
   {
     path: 'newlogin',
     component: NewloginComponent
@@ -120,10 +118,11 @@ const approutes: Routes = [
     ClinicService,
     AccounttService,
     DashboarddService,
+    AppointmentsService,
     /**************/
-    HttpClientModule
+    HttpClientModule,
     // ManageaccountComponent,
-    // AuthGuard
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -21,6 +21,8 @@ import { IfObservable } from 'rxjs/observable/IfObservable';
 })
 export class ManageClinicComponent implements OnInit {
   @ViewChild('close') close: ElementRef;
+
+  /*********************************** USED VARIABLES  ********************************************* */
   clinicForm: FormGroup;
   weekForm: FormArray;
   clinicFormErrors: any;
@@ -35,6 +37,8 @@ export class ManageClinicComponent implements OnInit {
   updatedValue: any;
   appointmentList: any;
   currentURL: any;
+  sTime: '';
+  eTime: '';
   public colorday: Boolean = false;
   public submitted: boolean = false;
   public searchElementRef: ElementRef;
@@ -64,11 +68,15 @@ export class ManageClinicComponent implements OnInit {
   public mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
   public fee = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // fee validation 
   toastoptions: any;
+  /******************************************************************************************************************************************* */
+
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, public scheduleService: ScheduleService, private sharedService: SharedService,
     private toastyService: ToastyService, private toastyConfig: ToastyConfig,
     private ClinicService: ClinicService
 
   ) {
+
+    /******************ERRORS OF CLINICFORM ********************** */
     this.clinicFormErrors = {
       clinicName: {},
       phoneNumber: {},
@@ -79,35 +87,39 @@ export class ManageClinicComponent implements OnInit {
       endTime: {},
       weekDays: []
     };
+    /****************************** ENDS **************************************** */
 
-    this.doctorprofileId = localStorage.getItem('doctorId');
+    this.doctorprofileId = localStorage.getItem('doctorId');     // GET DOCTORID FROM LOCALSTORAGE
 
-    // send url path name to change navbar colour
-    // this.pathName = (route.snapshot.url)[0].path;
-    // this.sharedService.setPath(this.pathName)
+    
 
-    // SEND THE URL PATH FOR MENU COLOR CHANGE
+    /*GET CURRENT URL, send url path name to change navbar colour*/
     this.currentURL = window.location.pathname;
-    console.log(this.currentURL);
+    // console.log('clinc url',this.currentURL);
     this.sharedService.setPath(this.currentURL);
+    /****************************************************************** */
 
+    /********************* INITIALISE CURRENT DATE BY DEFAULT ******** */
     this.date = new Date().toISOString();
     console.log(this.date);
     this.Fdate = moment(this.date).format('DD/MM/YYYY');
     console.log("formatted date" + this.Fdate);
+    /***************************************************************** */
 
     this.toastyConfig.theme = "bootstrap";
   }
 
   ngOnInit() {
-    this.clinicForm = this.createclinicForm();
 
+    // INITIALISE CLINIC FORM CREATION
+    this.clinicForm = this.createclinicForm();
     this.clinicForm.valueChanges.subscribe(() => {
       this.onclinicFormValuesChanged();
     });
 
-    this.getClinicList();
-    // for autocomplete location
+    this.getClinicList();   // GET DOCTORS CLINIC LIST ON PAGE LOADING
+
+    // FOR AUTOCOMPLETE OF LOCATION
     var input = (<HTMLInputElement>document.getElementById('pac-input'));
     console.log(input);
     let autocomplete = new google.maps.places.Autocomplete(input);
@@ -116,6 +128,7 @@ export class ManageClinicComponent implements OnInit {
 
   }
 
+  /******************************************** CATCH THE CHANGES IN CLINICFORM************************************/
   onclinicFormValuesChanged() {
     this.error = "";
     this.errMessage = '';
@@ -134,7 +147,9 @@ export class ManageClinicComponent implements OnInit {
       }
     }
   }
+  /***************************************************** ENDS ****************************************************** */
 
+  /*********************************************  CREATE CLINIC FORM ****************************************** */
 
   createclinicForm() {
     return this.formBuilder.group({
@@ -150,22 +165,24 @@ export class ManageClinicComponent implements OnInit {
     });
 
   }
+  /******************************************************* ENDS ****************************************************** */
+
+  /********************************************** FORM ARRAY FOR WEEKDAYS **************************************** */
   newform() {
     return this.formBuilder.group({
       day: ['', Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
     })
-
   }
+  /******************************************************* ENDS ******************************************************** */
+
+  /***************************************** GOOGLE MAP INITIALISATION ***************************************** */
   initmap() {
     var defaultBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(-33.8902, 151.1759),
       new google.maps.LatLng(-33.8474, 151.2631));
-
     var input = (<HTMLInputElement>document.getElementById('pac-input'));
-
-
     var options = {
       bounds: defaultBounds,
       types: ['(cities)'],
@@ -175,86 +192,10 @@ export class ManageClinicComponent implements OnInit {
 
     let autocomplete = new google.maps.places.Autocomplete(input, options);
   }
+  /**************************************************** ENDS ************************************************** */
 
-
-
-
-  // COMPARE END TIME WITH START TIME
-  comparewithEndTime(i) {
-    this.jindex = i;
-    console.log('INSIDE COMPARE WITH END TIME');
-    if ((<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['endTime'].value) {
-      let starttime: any;
-      starttime = moment((<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['startTime'].value).utcOffset(0);
-      // console.log(starttime)
-      starttime.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
-      // console.log(starttime)
-      starttime.toISOString()
-      // console.log(starttime)
-      starttime.format()
-      console.log(starttime)
-      let time1 = moment(starttime._i, "HH:mm a");
-      // console.log(time1)
-
-      let endtime: any;
-      endtime = moment((<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['endTime'].value).utcOffset(0);
-      endtime.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
-      endtime.toISOString()
-      endtime.format();
-      let time2 = moment(endtime._i, "HH:mm a");
-      // console.log(time2)
-
-      if (time1.isAfter(time2)) {
-        this.timeError = ' Start Time cannot be after endTime';
-      }
-      else {
-        this.timeError = '';
-      }
-
-    }
-
-  }
-
-  // COMPARE START TIME WITH ENDTIME
-  comparewithStartTime(i) {
-    this.jindex = i;
-    if ((<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['startTime'].value) {
-      let starttime: any;
-      starttime = moment((<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['startTime'].value).utcOffset(0);
-      // console.log(starttime)
-      starttime.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
-      // console.log(starttime)
-      starttime.toISOString()
-      // console.log(starttime)
-      starttime.format()
-      // console.log(starttime)
-      let time1 = moment(starttime._i, "HH:mm a");
-      // console.log(time1)
-
-      let endtime: any;
-      endtime = moment((<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['endTime'].value).utcOffset(0);
-      endtime.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
-      endtime.toISOString()
-      endtime.format();
-      let time2 = moment(endtime._i, "HH:mm a");
-      // console.log(time2)
-
-      if (time1.isAfter(time2)) {
-        this.timeError = 'End Time Cannot Be Before Start Time';
-      }
-      else {
-        this.timeError = '';
-      }
-
-    }
-
-
-  }
-
-
-  //CREATE CLINIC
+  /********************************************* CREATE CLINIC AND UPDATE CLINIC ********************************* */
   saveclinicForm() {
-
     console.log('CLINIC FORM VALUE', this.clinicForm)
     this.error = {};
     this.timeError = '';
@@ -392,114 +333,84 @@ export class ManageClinicComponent implements OnInit {
     //   }
     // }
   }
-  //save at enter
-  keyDownFunction(event) {
-    if (event.keyCode == 13) {
-      this.saveclinicForm();
-    }
-  }
-  //get clinic Details through Doctor id
-  getClinicList() {
-    this.ClinicService.getCliniclist(this.doctorprofileId).subscribe(data => {
-      console.log(data)
-      let response: any = {};
-      response = data;
-      if (!response.result.error) {
-        this.clinicList = response.result.result;
-        console.log(this.clinicList);
-        if (this.clinicList.length == 0) {
-          this.formHide = true;
-          this.cancel = false;
-          this.createSchedule = false;
-        }
-        else {
-          this.formHide = false;
-          this.createSchedule = true;
-        }
-      }
 
-    },
-      err => {
-      })
-  }
-  //get clinic Details through Clinic id
-  getsingleClinicDetails() {
-    this.ClinicService.getSingleClinicDetail(this.doctorprofileId).subscribe(data => {
-      this.singleClinicList = data;
-      console.log(this.singleClinicList);
-    },
-      err => {
-      })
-  }
+  /********************************************************* ENDS ************************************************************* */
 
-  //update Clinic through clinic Id
-  updateClinicInfo() {
+  /************************************************** COMPARE END TIME WITH START TIME ****************************************** */
+  comparewithEndTime(i) {
+    this.jindex = i;
+    console.log('INSIDE COMPARE WITH END TIME');
+    if ((<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['endTime'].value) {
+      let starttime: any;
+      starttime = moment((<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['startTime'].value).utcOffset(0);
+      // console.log(starttime)
+      starttime.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
+      // console.log(starttime)
+      starttime.toISOString()
+      // console.log(starttime)
+      starttime.format()
+      console.log(starttime)
+      let time1 = moment(starttime._i, "HH:mm a");
+      // console.log(time1)
 
-    console.log('update function', this.clinicForm)
-    // this.clinicForm.controls.city.setValue(this.city);
-    // this.clinicForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
+      let endtime: any;
+      endtime = moment((<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['endTime'].value).utcOffset(0);
+      endtime.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
+      endtime.toISOString()
+      endtime.format();
+      let time2 = moment(endtime._i, "HH:mm a");
+      // console.log(time2)
 
-    // this.updatedValue = this.clinicForm.value;
-    // this.updatedValue._id = this.clinicData._id
-
-    this.ClinicService.updateClinic(this.clinicData.clinicId, this.clinicForm.value).subscribe(data => {
-      console.log('updatedvalue result', data)
-      let response:any={};
-      response=data;
-      if (response.message == "Clinic Time conflicts with another clinic.") {
-        let notifydata = {
-          type: 'warning',
-          title: 'Clinic',
-          msg: 'time collapsed !'
-        }
-        this.sharedService.createNotification(notifydata);
-
+      if (time1.isAfter(time2)) {
+        this.timeError = ' Start Time cannot be after endTime';
       }
       else {
-        this.updateClinicList = response.result;
-        let notifydata = {
-          type: 'success',
-          title: 'Clinic',
-          msg: 'Updated Succesfully'
-        }
-        this.sharedService.createNotification(notifydata);
-        this.getClinicList();
-        this.clinicForm.reset();
-        this.days = [];
-        this.formHide = false;
-        this.showEdit = false;
-        this.dataDisplay = true;
-        this.createSchedule = true;
-        this.clinicData.clinicId = '';
+        this.timeError = '';
       }
 
-    },
-      err => {
-      })
-  }
-
-
-
-  createClinic() {
-    this.dataDisplay = false; // Click on plus icon data hide
-    this.createSchedule = false; //hide plus icon when schedule form is open
-    this.formHide = true;
-    this.cancel = false;
-    this.weekForm = this.clinicForm.get('weekDays') as FormArray;
-    console.log(this.weekForm);
-    let formgroup = <FormArray>this.clinicForm.get('weekDays');
-    for (let index = formgroup.length - 1; index > 0; index--) {
-      // Remove all but one occurrence and then add back only what the model dictates.
-      formgroup.removeAt(index);
     }
 
   }
+  /************************************************************ ENDS ************************************************************** */
+
+  /*********************************************************  COMPARE START TIME WITH ENDTIME ************************************** */
+  comparewithStartTime(i) {
+    this.jindex = i;
+    if ((<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['startTime'].value) {
+      let starttime: any;
+      starttime = moment((<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['startTime'].value).utcOffset(0);
+      // console.log(starttime)
+      starttime.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
+      // console.log(starttime)
+      starttime.toISOString()
+      // console.log(starttime)
+      starttime.format()
+      // console.log(starttime)
+      let time1 = moment(starttime._i, "HH:mm a");
+      // console.log(time1)
+
+      let endtime: any;
+      endtime = moment((<FormArray>this.clinicForm.controls['weekDays']).controls[i]['controls']['endTime'].value).utcOffset(0);
+      endtime.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
+      endtime.toISOString()
+      endtime.format();
+      let time2 = moment(endtime._i, "HH:mm a");
+      // console.log(time2)
+
+      if (time1.isAfter(time2)) {
+        this.timeError = 'End Time Cannot Be Before Start Time';
+      }
+      else {
+        this.timeError = '';
+      }
+
+    }
 
 
+  }
+  /***************************************************** ENDS *************************************************************************** */
 
-
-
-  // SELECT DAYS FROM OPTIONS AND FILL DAY VALUE OF WEEKDAYS ACCORDING TO INDEX
+  /***************************** SELECT DAYS FROM OPTIONS AND FILL DAY VALUE OF WEEKDAYS ACCORDING TO INDEX **************************/
   daySelect(day, i) {
     this.colorday = true;
     if (day == 'SU') {
@@ -534,17 +445,56 @@ export class ManageClinicComponent implements OnInit {
     //   console.log(this.days)
     // }
   }
+  /********************************************************** ENDS ***************************************************************** */
 
-  // selected days name
-  getDaysName() {
-    if (this.days && this.days.length == '') {
-    }
-    else {
-      this.saveclinicForm();
-    }
+  /************************************************* UPDATE CLINIC THROUGH CLINICID ************************************************ */
+  updateClinicInfo() {
+
+    console.log('update function', this.clinicForm)
+    // this.clinicForm.controls.city.setValue(this.city);
+    // this.clinicForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
+
+    // this.updatedValue = this.clinicForm.value;
+    // this.updatedValue._id = this.clinicData._id
+
+    this.ClinicService.updateClinic(this.clinicData.clinicId, this.clinicForm.value).subscribe(data => {
+      console.log('updatedvalue result', data)
+      let response: any = {};
+      response = data;
+      if (response.message == "Clinic Time conflicts with another clinic.") {
+        let notifydata = {
+          type: 'warning',
+          title: 'Clinic',
+          msg: 'time collapsed !'
+        }
+        this.sharedService.createNotification(notifydata);
+
+      }
+      else {
+        this.updateClinicList = response.result;
+        let notifydata = {
+          type: 'success',
+          title: 'Clinic',
+          msg: 'Updated Succesfully'
+        }
+        this.sharedService.createNotification(notifydata);
+        this.getClinicList();
+        this.clinicForm.reset();
+        this.days = [];
+        this.formHide = false;
+        this.showEdit = false;
+        this.dataDisplay = true;
+        this.createSchedule = true;
+        this.clinicData.clinicId = '';
+      }
+
+    },
+      err => {
+      })
   }
+  /******************************************************** ENDS ****************************************************************** */
 
-  // eSHOW DATA OF SELECTED CLINIC TO EDIT
+  /************************************************** SHOW DATA OF SELECTED CLINIC TO EDIT **************************************** */
   editClinic(id) {
     console.log(this.clinicForm.get('weekDays') as FormArray);
     this.weekForm = this.clinicForm.get('weekDays') as FormArray;
@@ -588,8 +538,63 @@ export class ManageClinicComponent implements OnInit {
     })
 
   }
+  /******************************************************* ENDS *********************************************************** */
 
-  // cancel saving or editing clinic form
+  /********************************************  GET DOCTOR CLINIC LIST THROUGH DOCTORID *********************************** */
+  getClinicList() {
+    this.ClinicService.getCliniclist(this.doctorprofileId).subscribe(data => {
+      console.log(data)
+      let response: any = {};
+      response = data;
+      if (!response.result.error) {
+        this.clinicList = response.result.result;
+        console.log(this.clinicList);
+        if (this.clinicList.length == 0) {
+          this.formHide = true;
+          this.cancel = false;
+          this.createSchedule = false;
+        }
+        else {
+          this.formHide = false;
+          this.createSchedule = true;
+        }
+      }
+
+    },
+      err => {
+      })
+  }
+  /************************************************************* ENDS ************************************************************* */
+
+  /******************************************************* GET CLINIC DETAILS THROUGH CLINICID ************************************ */
+  getsingleClinicDetails() {
+    this.ClinicService.getSingleClinicDetail(this.doctorprofileId).subscribe(data => {
+      this.singleClinicList = data;
+      console.log(this.singleClinicList);
+    },
+      err => {
+      })
+  }
+  /************************************************** ENDS *************************************************************************** */
+
+  /************************************* SHOW ADD CLINIC FORM ON CLICKING PLUS ICON *********************************************/
+  createClinic() {
+    this.dataDisplay = false; // Click on plus icon data hide
+    this.createSchedule = false; //hide plus icon when schedule form is open
+    this.formHide = true;
+    this.cancel = false;
+    this.weekForm = this.clinicForm.get('weekDays') as FormArray;
+    console.log(this.weekForm);
+    let formgroup = <FormArray>this.clinicForm.get('weekDays');
+    for (let index = formgroup.length - 1; index > 0; index--) {
+      // Remove all but one occurrence and then add back only what the model dictates.
+      formgroup.removeAt(index);
+    }
+
+  }
+  /********************************************************* ENDS ************************************************************** */
+
+  /****************************************** CANCEL ADDING OR EDITING OF CLINIC FORM DATA ************************************ */
   cancelSave() {
 
     console.log(this.clinicForm.get('weekDays') as FormArray);
@@ -607,13 +612,71 @@ export class ManageClinicComponent implements OnInit {
       formgroup.removeAt(index);
     }
   }
+  /*************************************************** ENDS ************************************************* */
 
-  // delete  selected clinic 
+  /**********************************************   SHOW EDIT AND DELETE OPTIONS ********************************* */
+  showOptions(id, i) {
+    console.log(i)
+    this.selected = i;
+    // this.showEdit = true;
+    if (this.showEdit == true) {
+      this.showEdit = !this.showEdit;
+    }
+    else if (this.showEdit == false) {
+      this.showEdit = !this.showEdit;
+    }
+  }
+  /******************************************** ENDS ********************************************************** */
+
+  /**********************************************  ADD NEW FORMARRAY  ****************************************** */
+  addNewweekday() {
+    console.log('INSIDE ADD FORM FUNCTION');
+    this.weekForm = this.clinicForm.get('weekDays') as FormArray;
+    this.weekForm.push(this.newform());
+    // (<FormArray>this.clinicForm.get('weekDays')).push(new FormControl(''));
+  }
+  /********************************************** ENDS ************************************************************* */
+
+  /********************************************** REMOVE SELECTED INSTANCE FROM FORMARRAY ************************** */
+  removeWeekDay(i) {
+    console.log(i)
+    this.weekForm = this.clinicForm.get('weekDays') as FormArray;
+    this.weekForm.removeAt(i);
+  }
+  /******************************************* ENDS ******************************************************  */
+
+  /**********************************************  SHOW TIME ON HOVER OVER ANY DAY **************************************** */
+  showTime(data) {
+    console.log('mouseon', data)
+    this.sTime = data.startTime;
+    this.eTime = data.endTime;
+  }
+  /***************************************************** ENDS ********************************************************** */
+
+  /**********************************************  HIDE TIME ON LEAVING DAY ******************************************* */
+  hideTime(data) {
+    console.log('mouseoff', data);
+    this.sTime = '';
+    this.eTime = '';
+  }
+  /****************************************************** ENDS ********************************************************* */
+
+  /************************************************ SAVE FORM ON ENTER KEY *********************************************** */
+  keyDownFunction(event) {
+    if (event.keyCode == 13) {
+      this.saveclinicForm();
+    }
+  }
+  /************************************************** ENDS *********************************************************** */
+
+  /******************************************** DELETE SELECTED CLINIC ******************************************** */
   deleteClinicInfo(id) {
     this.showEdit = false;
-    this.scheduleService.deleteClinic(id).subscribe(data => {
+    this.ClinicService.deleteClinic(id).subscribe(data => {
       console.log(data);
-      if (data.message == "Clinic is deleted") {
+      let response: any = {};
+      response = data;
+      if (response.message == "Clinic is deleted") {
         this.showModal = false;
         let notifydata = {
           type: 'success',
@@ -623,7 +686,7 @@ export class ManageClinicComponent implements OnInit {
         this.sharedService.createNotification(notifydata);
         this.getClinicList();
       }
-      else if (data.message == "There are appointments for this clinic") {
+      else if (response.message == "There are appointments for this clinic") {
         this.deleteClinincId = id;
         this.showModal = true;
       }
@@ -672,6 +735,8 @@ export class ManageClinicComponent implements OnInit {
 
 
   }
+  /*************************************************** ENDS ************************************************** */
+
 
   // compare start and end time
   compareTime(time) {
@@ -719,18 +784,7 @@ export class ManageClinicComponent implements OnInit {
 
       })
   }
-  // hide & show on click
-  showOptions(id, i) {
-    console.log(i)
-    this.selected = i;
-    // this.showEdit = true;
-    if (this.showEdit == true) {
-      this.showEdit = !this.showEdit;
-    }
-    else if (this.showEdit == false) {
-      this.showEdit = !this.showEdit;
-    }
-  }
+
 
   // compare time for clinic creation and updation
   compareTwoTime() {
@@ -812,13 +866,15 @@ export class ManageClinicComponent implements OnInit {
     // });
   }
 
-  addNewweekday() {
-    console.log('INSIDE ADD FORM FUNCTION');
-    this.weekForm = this.clinicForm.get('weekDays') as FormArray;
-    this.weekForm.push(this.newform());
-    // (<FormArray>this.clinicForm.get('weekDays')).push(new FormControl(''));
-  }
 
+  // selected days name
+  getDaysName() {
+    if (this.days && this.days.length == '') {
+    }
+    else {
+      this.saveclinicForm();
+    }
+  }
   getday(day) {
     console.log('dat', day)
   }

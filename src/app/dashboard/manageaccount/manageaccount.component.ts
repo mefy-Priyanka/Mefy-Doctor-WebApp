@@ -22,7 +22,7 @@ export class ManageaccountComponent implements OnInit {
   currentURL: any;
   // showEdit: Boolean =false;
   hideAccountForm: Boolean = false; //hide Account Form
-  showAddAccount: Boolean = true; //show add account button
+  // showAddAccount: Boolean = true; //show add account button
   displayData: Boolean = false; //hide display data
   hideDeleteButton: Boolean = false // hide delete button in account form
   public loader:boolean=false /**** LOADER****** */
@@ -42,12 +42,9 @@ export class ManageaccountComponent implements OnInit {
       confirmAccountNumber: {}
     };
 
-    // send url path name to change navbar colour
-    // this.pathName=(route.snapshot.url)[0].path;
-    // this.sharedService.setPath(this.pathName)
-
+ /*GET CURRENT URL, send url path name to change navbar colour*/
     this.currentURL = window.location.pathname;
-    console.log(this.currentURL);
+    // console.log('accoutn url',this.currentURL);
     this.sharedService.setPath(this.currentURL);
   }
 
@@ -133,6 +130,7 @@ export class ManageaccountComponent implements OnInit {
         this.loader=false;
         this.getAccountDetail()
         this.accountForm.reset();
+        // this.showAddAccount = false; /*hide ADD ACCOUNT **/
         let notifydata = {
           type: 'success',
           title: 'Account',
@@ -140,7 +138,7 @@ export class ManageaccountComponent implements OnInit {
         }
         this.sharedService.createNotification(notifydata);
         this.hideAccountForm = false; //for hide account form
-        this.showAddAccount = true; //for hide add account button
+        // this.showAddAccount = true; //for hide add account button
         this.displayData = true;
         // this.sharedService.accountInfo(true);
       }, err => {
@@ -154,6 +152,7 @@ export class ManageaccountComponent implements OnInit {
       })
     }
     else {
+    this.loader=false;
       let notifydata = {
         type: 'warning',
         title: 'Account',
@@ -165,7 +164,7 @@ export class ManageaccountComponent implements OnInit {
   cancelAccoutForm(){
     this.accountForm.reset();
     this.hideAccountForm=false;
-    this.showAddAccount=true;
+    // this.showAddAccount=true;
     this.displayData=true
   }
 
@@ -181,12 +180,12 @@ export class ManageaccountComponent implements OnInit {
       console.log('dataaa', this.getAccountList)
       if (result.result.result && result.result.result.length != 0) {
         this.detail = this.getAccountList[0];
-        this.showAddAccount = true; /*SHOW ADD ACCOUNT **/
+        // this.showAddAccount = false; /*hide ADD ACCOUNT **/
         this.displayData = true; /*DISPLAY DATA **/
         this.hideAccountForm = false/*HIDE ACCOUNT FORM **/
       }
       else {
-        this.showAddAccount = false;
+        // this.showAddAccount = false;
         this.displayData = false;
         this.hideAccountForm = true;
       }
@@ -198,7 +197,7 @@ export class ManageaccountComponent implements OnInit {
   /*****************ADD ANOTHER BANK ACCOUNT********************/
   addAccount() {
     this.hideAccountForm = true; // show account form
-    this.showAddAccount = false; //for hide account detail
+    // this.showAddAccount = false; //for hide account detail
     this.displayData = false; //
     this.hideDeleteButton = false;
   }
@@ -214,6 +213,7 @@ selectedAccountId(selectedAccountId){
     this.accountService.deleteBankAccount(this.accountId).subscribe(data => {
       console.log('data', data)
       this.loader=false
+      // this.showAddAccount=false;
       this.getAccountDetail();
       let notifydata = {
         type: 'success',
