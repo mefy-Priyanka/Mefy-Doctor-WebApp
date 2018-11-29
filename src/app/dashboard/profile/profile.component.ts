@@ -173,7 +173,6 @@ export class ProfileComponent implements OnInit {
       speciality: "speciality"
    }
    this.docService.getSpecialityList(data).subscribe(data => {
-     debugger;
      let value: any = {}
      value = data
      this.specialityList = value.result.result
