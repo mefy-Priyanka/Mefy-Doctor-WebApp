@@ -35,7 +35,7 @@ import { AccountService } from './meme-services/account.service';
 
 import { AppComponent } from './app.component';
 // import { LoginComponent } from './login/login.component';
-// import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './auth.guard';
 import { BillService } from './meme-services/bill.service';
 import { NewloginComponent } from './newlogin/newlogin.component';
 import { QRCodeModule } from 'angularx-qrcode';
@@ -57,12 +57,9 @@ const approutes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: './dashboard/dashboard.module#DashboardModule'
+    loadChildren: './dashboard/dashboard.module#DashboardModule',canActivate: [AuthGuard]
   },
-  // {
-  //   path: 'login',
-  //   component: LoginComponent
-  // },
+
   {
     path: 'newlogin',
     component: NewloginComponent
@@ -121,9 +118,9 @@ const approutes: Routes = [
     AccounttService,
     DashboarddService,
     /**************/
-    HttpClientModule
+    HttpClientModule,
     // ManageaccountComponent,
-    // AuthGuard
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

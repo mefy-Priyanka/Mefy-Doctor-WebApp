@@ -13,7 +13,7 @@ export class AppComponent {
   title = 'app';
   doctorProfileId: any;
   constructor( private route: ActivatedRoute, private router: Router,private sharedService: SharedService){
-      this.doctorProfileId = localStorage.getItem('loginId');
+      this.doctorProfileId = localStorage.getItem('doctorId');
     if(this.doctorProfileId) {
       this.router.navigate(['/dashboard/main']);
     }
