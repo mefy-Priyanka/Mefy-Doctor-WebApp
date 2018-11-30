@@ -206,7 +206,7 @@
                         <hr class="light_schedule">
                         <!-- <div> -->
                         <div class="calender text-center">
-                          <button class="closeButton" (click)="removeWeekDay(i)">&#10005;</button>
+                          <button *ngIf="i!=0" class="closeButton" (click)="removeWeekDay(i)">&#10005;</button>
                           <ul class="list-inline" id="calender_days">
                             <li *ngFor="let day of weekSchedule">
                               <button (click)="daySelect(day,i)" [ngClass]="{'selectd_day':true,active:clinicForm.get('weekDays').controls[i].get('day').value?clinicForm.get('weekDays').controls[i].get('day').value.slice(0,2).toUpperCase()==day:''}">
