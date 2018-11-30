@@ -416,5 +416,22 @@ svg#clinic{
     width: 20px;
     fill: #5a7ffb;
 }
-
-
+p.doctoraname{
+    font-size: 12px;
+    font-family: 'Roboto',sans-serif;
+    color: #8398ac;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 0px;
+}
+.resultMsg p {
+    text-align: center;
+    font-size: 14px;
+    color: #9aabbe;
+    font-weight: 500;
+    font-family: 'Roboto',sans-serif;
+}
+.resultMsg span {
+    color: #936ff8;
+    font-weight: 600;
+}

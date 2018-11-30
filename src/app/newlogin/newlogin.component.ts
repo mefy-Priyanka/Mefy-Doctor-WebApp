@@ -190,7 +190,7 @@ export class NewloginComponent implements OnInit {
         console.log('result', value)
         let result:any={}
         result=value 
-        if(result.result.message=="imcorrect otp"){
+        if(result.result.message==" Otp verification failed"){
           this.loader = false;
     let notifydata = {
     type: 'error',

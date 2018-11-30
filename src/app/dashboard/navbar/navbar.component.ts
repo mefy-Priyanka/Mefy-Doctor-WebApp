@@ -36,10 +36,8 @@ export class NavbarComponent implements OnInit {
 
     // change colour of item depending on route parameter
     this.sharedService.urlPathInfo.subscribe(data=>{
-      console.log('/dashboard/main',data)
    if(data=='/dashboard/main' || data=='/dashboard/profile' || data=='/dashboard/account'){
         this.dashboardChangeColor();
-        console.log('/dashboard/main',data)
       }
       else if(data=='/dashboard/clinic'){
        this.clinicsColourChange();

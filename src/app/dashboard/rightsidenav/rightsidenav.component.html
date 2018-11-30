@@ -4,12 +4,19 @@
   <div class="calendar rightnav">
     <ul class="list-inline calender_health">
       <li>
-        <input type="text" class="form-control appoinmentdate2" #dp="bsDatepicker" bsDatepicker placeholder="Choose a date">
-
+        <input type="text" class="form-control appoinmentdate2" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" [(ngModel)]="myDateYMD" bsDatepicker #dpYMD="bsDatepicker" bsDatepicker (bsValueChange)="selectedDate($event)">
+        <button class="btn btn-success"  (click)="dpYMD.toggle()" [attr.aria-expanded]="dpYMD.isOpen">Date Picker</button>
       </li>
     </ul>
 
   </div>
+  <!-- <div class="resultMsg">
+    <p>Showing Result : 
+      <span>30/11/2018</span>
+    </p>
+  </div> -->
+  <span class="error_message" [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{ error}}</span>
+  <span class="error_message" [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{ dateErr}}</span>
   <div class="hrmenu">
     <hr class="menuhr">
     <span class="menu">
@@ -28,6 +35,24 @@
 
           </svg>
         </button>
+          <!-- /* loader */ -->
+          <div class="loading" *ngIf="loader">
+            <div class="sk-circle">
+              <div class="sk-circle1 sk-child"></div>
+              <div class="sk-circle2 sk-child"></div>
+              <div class="sk-circle3 sk-child"></div>
+              <div class="sk-circle4 sk-child"></div>
+              <div class="sk-circle5 sk-child"></div>
+              <div class="sk-circle6 sk-child"></div>
+              <div class="sk-circle7 sk-child"></div>
+              <div class="sk-circle8 sk-child"></div>
+              <div class="sk-circle9 sk-child"></div>
+              <div class="sk-circle10 sk-child"></div>
+              <div class="sk-circle11 sk-child"></div>
+              <div class="sk-circle12 sk-child"></div>
+            </div>
+          </div>
+          <!-- /* loader */ -->
         <!-- <div class="dropdown_doctor">
           <div id="myDropdown" class="dropdown-content_videoa">
             <span class="triangle24"></span>
@@ -214,11 +239,11 @@
               Clinic Visit</a>
           </div>
         </div> -->
-
+    
       </div>
 
     </span>
-    <div class="consultime">
+    <!-- <div class="consultime">
       <ul class="list-inline timings">
         <li>
           <span class="date">Mon 11</span>
@@ -232,21 +257,21 @@
     <div class="whomwith">
       <p class="modeofconsult">eConsult with</p>
       <p class="doctorname"> Mr. Manish Kashyap</p>
-    </div>
-    <!-- <span class="noappointment">{{message}}</span> -->
+    </div> -->
   </div>
-  <div>
+<div *ngIf="appointmentData">
+  <div *ngFor="let list of ActiveAppointment">
   <div class="hrmenu">
       <div class="consultime">
         <ul class="list-inline timings">
           <li>
-            <span class="date">12/11/2018</span>
+            <span class="date">{{list.appointmentDate}}</span>
           </li>
           <li>
-            <span class="time">09:00 AM To 10:00 AM</span>
+            <span class="time">{{list.appointmentTimeFrom}}To {{list.appointmentTimeTo}}</span>
           </li>
           <li class="float_right">
-            <button class="cross_btn" data-toggle="modal" data-target="#sidenavdel">
+            <button class="cross_btn" data-toggle="modal" data-target="#sidenavdel" (click)="cancelAppointmentButton(list)">
               <svg version="1.1" id="r_close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 469.785 469.785" style="enable-background:new 0 0 469.785 469.785;" xml:space="preserve">
                             <g transform="matrix(1.25 0 0 -1.25 0 45)">
@@ -267,18 +292,21 @@
 
           </li>
 
-          <li class="float_right">
+          <!-- <li class="float_right">
               <button class="cnslt_btn"> Consult</button>    
-            </li>
+            </li> -->
         </ul>
       </div>
       <div class="whomwith">
-        <p class="modeofconsult">Appointment Type</p>
-        <p class="doctorname">Clinic Name</p>
+        <p class="modeofconsult">{{list.appointmentType}}</p>
+        <p class="doctorname">{{list?.clinicName}}</p>
       </div>
       <hr class="menuhr">
   </div>
   </div>
+</div>
+  <p class="doctoraname" *ngIf="noAppointment" >No Appointment For Today</p>
+
 </section>
 <p class="requestheading">
   <span class="newheading">New</span>
@@ -444,7 +472,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="cance_l" data-dismiss="modal">NO</button>
-            <button type="button" class="dele_te" data-dismiss="modal">YES</button>
+            <button type="button" class="dele_te" data-dismiss="modal" (click)="cancelAppointment()">YES</button>
           </div>
         </div>
       </div>

@@ -22,10 +22,17 @@ export class AppointmentsService {
   createAppointment(data) {
     return this.httpClient.post(APIURL + 'appointment/bookAppointment', data)
   }
-  // GET /appointment/doctorAppointmentList
   // GET APPOITNEMENT LIST
   getAppointmentList(doctorId, appointmentDate) {
+    console.log('apponitment',doctorId, appointmentDate)
     return this.httpClient.get(APIURL + 'appointment/doctorAppointmentList?doctorId=' + doctorId + '&appointmentDate=' + appointmentDate)
   }
-
+  /*********************CANCEL APPOINTMENT LIST************************/
+  cancelAppointment(appointmentId){
+    return this.httpClient.post(APIURL + 'appointment/cancelAppointment',appointmentId)
+  }
+/************************GET DOCTOR"S CURRENT SCHEDULE LIST******************** */
+getDoctorCurrentAppointment(doctorId){
+  return this.httpClient.get(APIURL+'appointment/getDoctorEvents?doctorId='+doctorId)
+}
 }
