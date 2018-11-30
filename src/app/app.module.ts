@@ -42,6 +42,7 @@ import { NewloginComponent } from './newlogin/newlogin.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NewregistrationComponent } from './newregistration/newregistration.component';
 import { NotifyComponent } from './notify/notify.component';
+import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 
 // import { ManageaccountComponent } from './dashboard/manageaccount/manageaccount.component';
 
@@ -69,6 +70,7 @@ const approutes: Routes = [
     path: 'register',
     component: NewregistrationComponent
   },
+  { path: "privacy", component: PrivacypolicyComponent },
 ];
 
 @NgModule({
@@ -78,6 +80,7 @@ const approutes: Routes = [
     NewloginComponent,
     NewregistrationComponent,
     NotifyComponent,
+    PrivacypolicyComponent,
  
     // ManageaccountComponent
   ],
