@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../mefyservice/shared.service';
+import { AppointmentsService } from '../../mefyservice/appointments.service';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment'
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
@@ -13,14 +14,15 @@ import { ClinicService } from '../../mefyservice/clinic.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
- 
-  public doctorId:any
-  public  currentURL: any;
-  public doctorDetail:any={};
   public clinicList:any=[]
+  public doctorId:any={};
+  public  currentURL: any={};
+  public doctorDetail:any={};
+  public noAppointment:boolean=true;  /* Show and hide appointment message*/
   public loader:boolean=false /***LOADER */
   public clinicMessage:boolean=true
-  constructor(private sanitizer: DomSanitizer, private dashboardService: DashboarddService, private sharedService: SharedService, private router: Router,private clincService: ClinicService) {
+
+  constructor(private sanitizer: DomSanitizer,private appointmentService: AppointmentsService, private dashboardService: DashboarddService, private sharedService: SharedService, private router: Router,private clincService: ClinicService) {
     this.doctorId= localStorage.getItem('doctorId');
 
     /*GET CURRENT URL, send url path name to change navbar colour*/
@@ -43,9 +45,14 @@ getDoctorDetail(){
     this.loader=false
       result=data
       this.doctorDetail=result.result
-      console.log('doctor dashboard detail',this.doctorDetail)
-
-   
+      console.log('doctor dashboard detail',this.doctorDetail)  
+      if(this.doctorDetail.clincVistPatient!=0){
+        console.log('clincVistPatient number',this.doctorDetail.clincVistPatient)
+       this.noAppointment=false
+      }
+      else{
+        this.noAppointment=true
+      }
   },
   err=>{
     console.log(err)
@@ -68,5 +75,5 @@ getClinicByDoctorId(){
    
   })
 }
- 
+
 }
