@@ -2,7 +2,8 @@ import { Component, OnInit,ElementRef } from '@angular/core';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { DoctorPrescriptionService } from '../../meme-services/doctor-prescription.service';
 import{SharedService} from '../../mefyservice/shared.service'
-import{ScheduleService} from '../../meme-services/schedule.service';
+import{ClinicService} from '../../mefyservice/clinic.service'
+
 
 @Component({
   selector: 'app-navbar',
@@ -28,7 +29,7 @@ export class NavbarComponent implements OnInit {
     clinicName: ''
   };
   public elementRef;
-  constructor(myElement: ElementRef,private scheduleService:ScheduleService,private router: Router, private ePrescriptionService: DoctorPrescriptionService,private sharedService: SharedService,private route: ActivatedRoute) {
+  constructor(myElement: ElementRef,private clinicService:ClinicService,private router: Router, private ePrescriptionService: DoctorPrescriptionService,private sharedService: SharedService,private route: ActivatedRoute) {
  
     this.doctorProfileId = localStorage.getItem('doctorId');
 
@@ -128,9 +129,12 @@ searchResult(value){
   this.clinicList=[];
   this.filterField.clinicName = value;
 if(value){
-    this.scheduleService.getClinicList(localStorage.getItem('loginId')).subscribe(data => {
-      if(data.result.length!=0){
-        this.clinicList = data.result;
+    this.clinicService.getCliniclist(localStorage.getItem('doctorId')).subscribe(data => {
+      let result:any={}
+      result=data
+      console.log('clinic list search',result)
+      if(result.result.length!=0){
+        this.clinicList = result.result;
         this.searchInput="";
         console.log(this.clinicList);
       }

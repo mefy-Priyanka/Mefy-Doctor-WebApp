@@ -33,8 +33,6 @@ export class RightsidenavComponent implements OnInit {
   public elementRef;
   public appointmentDate:any;
   public selectedAppointmentdate:any;
-  public error: any;
-  public dateErr:any;
   public Date:any
   public myDateYMD= new Date();
 
@@ -106,7 +104,6 @@ export class RightsidenavComponent implements OnInit {
     // this.message = '';
     // this.hideConsult = false;
     if (date != null) {
-      this.compareAppointmentdate(date);
       this.Date = date;
     this.appointmentDate = date;
     this.selectedAppointmentdate = moment(this.appointmentDate).format('YYYY-MM-DD');
@@ -120,8 +117,6 @@ export class RightsidenavComponent implements OnInit {
              var status = result.result.result.filter(function(status) {
               return status.status =='Active' ;
             });
-            console.log('Active /////////////////////')
-
                 console.log('Active Appointment list',status)
                 this.ActiveAppointment=status
                 this.noAppointment=false ;/*hide message*/
@@ -133,9 +128,7 @@ export class RightsidenavComponent implements OnInit {
             let notification = {
               type: 'warning',
               title: 'No any Appointment ',
-            }
-            console.log('Active ////nnnvbnvg/////////////////')
-            
+            }            
             this.sharedService.createNotification(notification);
           } 
 
@@ -230,23 +223,6 @@ this.appointmentService.cancelAppointment(data).subscribe(data=>{
     // this.router.navigate(['dashboard/consultnew']);
     // this.sharedService.getAppointmnetType(appData);
     // this.sharedService.saveClinicvisit(true);
-  }
-
-  /******************COMPARING PRESENT DATE WITH SELECTED DATE ******************** */
-  compareAppointmentdate(value) {
-    this.error = '';
-    let presentDate: any;
-    presentDate = moment().utcOffset(0);
-    presentDate.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
-    presentDate.toISOString()
-    presentDate.format()
-    console.log(presentDate);
-    if ((moment(presentDate)).isAfter(value)) {
-      this.error = 'Appointment date cannot be before present date';
-      this.noAppointment=false;
-  
-    }
-
   }
 
 }
