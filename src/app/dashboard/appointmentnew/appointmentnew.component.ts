@@ -224,7 +224,7 @@ export class AppointmentnewComponent implements OnInit {
           appointmentDate: this.appointmentDate,
           appointmentTimeFrom: this.slotDetails.sTime,     //moment(startTime._d).toString(),
           appointmentTimeTo: this.slotDetails.eTime,   //moment(endTime._d).toString(),
-          // clinicName: this.clinicName,
+          clinicName: this.clinicName,
 
           patientName: this.patientData.name,
 

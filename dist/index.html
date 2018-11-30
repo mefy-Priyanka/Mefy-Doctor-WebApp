@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Mefy Care</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./assets/images/mefylogo.png">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../assets/css/responsive.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:700,100,200,300,400,500" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">
+<link rel="stylesheet"    href="  https://cdn.jsdelivr.net/npm/ng2-toasty@4.0.3/style.css">
+<!-- /*****************************date picker*************** -->
+<link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">
+
+<!-- style-bootstrap.css -->
+</head>
+
+<body>
+
+  <app-root></app-root>
+
+ <!-- jQuery library -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <!-- Latest compiled JavaScript -->
+ <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.2.2/web-animations.min.js"></script> -->
+
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASDgAcEuYqUSVQZY0sg6Ry6olLNueZ9FQ&libraries=places" asyncdefer></script>
+ <audio id="callAudio">
+  <source src="assets/memetone.mp3" type="audio/mp3"> </audio>
+  <!-- ***************************dropdown****************************** -->
+  <script>
+    /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (event) {
+      if (!event.target.matches('.funnel_btn')) {
+
+        var dropdowns = document.getElementsByClassName("dropdown-content_video");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
+  <!-- ***************************dropdown****************************** -->
+  <!-- **************************************modal box********************************* -->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      function alignModal() {
+        var modalDialog = $(this).find(".modal-dialog");
+
+        // Applying the top margin on modal dialog to align it vertically center
+        modalDialog.css("margin-top", Math.max(0, ($(window).height() - modalDialog.height()) / 2));
+      }
+      // Align modal when it is displayed
+      $(".modal").on("shown.bs.modal", alignModal);
+
+      // Align modal when user resize the window
+      $(window).on("resize", function () {
+        $(".modal:visible").each(alignModal);
+      });
+    });
+  </script>
+  <!-- **************************************modal box********************************* -->
+
+
+
+
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
+
+</html>
