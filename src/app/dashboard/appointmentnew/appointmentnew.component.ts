@@ -131,7 +131,7 @@ export class AppointmentnewComponent implements OnInit {
 
   /************************************ VIEW TIME SLOTS OF SELECTED CLINIC ******************************** */
   viewTimeSlots(clinic, index) {
-    console.log('clinic details', clinic)
+    console.log('clinic details', clinic);
     if (!this.viewSlots) {
       this.selected = index
 
@@ -202,7 +202,8 @@ export class AppointmentnewComponent implements OnInit {
     }
     else {
       this.errMessage = '';
-      if (this.patientData.individualId != "" && this.patientData.name != " " && this.appointmentDate && this.slotDetails) {
+      console.log(this.patientData.individualId,this.patientData.name,this.appointmentDate ,this.slotDetails,this.appointmentType)
+      if (this.patientData.individualId != "" && this.patientData.name != " " && this.appointmentDate && this.slotDetails && this.appointmentType!="") {
         this.dateErr = '';
         this.error = '';
         // this.Fdate = moment(this.selectedDate).format('DD/MM/YYYY');
@@ -260,7 +261,7 @@ export class AppointmentnewComponent implements OnInit {
             this.sharedService.saveAppointmentList(response.result)
             this.viewSlots = false;
             this.slotDetails = '';
-            this.appointmentType = '';
+            // this.appointmentType = '';
             this.appointmentDate = '';
             this.individualNumber = '';
             this.sharedService.updatedDasboardInfo(true);
@@ -281,7 +282,13 @@ export class AppointmentnewComponent implements OnInit {
           })
       }
       else {
-        this.errMessage = 'Please Enter All The Credentials';
+        // this.errMessage = 'Please Enter All The Credentials';
+        let notifydata = {
+          type: 'warning',
+          title: 'Please',
+          msg: 'Enter All Credentials'
+        }
+        this.sharedService.createNotification(notifydata);
       }
     }
   }
