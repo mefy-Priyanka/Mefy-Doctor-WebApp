@@ -15,6 +15,7 @@ import { ClinicService } from '../../mefyservice/clinic.service';
 })
 export class MainComponent implements OnInit {
   public clinicList: any = []
+  public ActiveAppointmentList:any=[]
   public doctorId: any = {};
   public currentURL: any = {};
   public doctorDetail: any = {};
@@ -44,6 +45,7 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.getDoctorDetail();
     this.getClinicByDoctorId();
+    this.getCurrentDateAppointmentlist();
   }
 
   /****************GET DOCTOR"S DASHBOARD DETAIL BY LOGIN DOCTORID************** */
@@ -86,5 +88,40 @@ export class MainComponent implements OnInit {
 
     })
   }
+/*****************GET CURRENT DATE DOCTOR"S APPOINTMENT ACTIVE LIST***************** */
+getCurrentDateAppointmentlist() {
+  this.appointmentService.getDoctorCurrentAppointment(localStorage.getItem('doctorId')).subscribe(data=>{
+    let result:any={}
+    result=data
+    if(result.result.result != null && Object.keys(result.result.result).length != 0){
 
+    var status = result.result.result.filter(function(status) {
+      return status.status =='Active' ;
+    });
+    for (let i = 0; i < status.length; i++) {
+      if( status!= null && Object.keys(status).length != 0){
+      console.log('Active Appointment list',status)
+      this.ActiveAppointmentList=status
+    }
+
+   else {
+    this.loader=false;
+    } 
+
+  }
+}
+else{
+  // this.appointmentData=false;
+      this.noAppointment=true;
+      this.loader=false;
+}
+  },err=>{
+    console.log(err)
+    let notification = {
+      type: 'warning',
+      title: 'Server Issue ',
+    }
+    this.sharedService.createNotification(notification);
+  }) 
+}
 }
