@@ -62,6 +62,29 @@ console.log('doctorid');
     localStorage.clear();
     this.router.navigate(['/newlogin']);
   }
+  // preview profile picture
+  previewProfile(event) {
+    let fileList: FileList = event.target.files;
+    let fileTarget = fileList;
+    console.log('fileTarget',fileTarget)
+    let file: File = fileTarget[0];
 
+    // this.names = file;
+    console.log("File information :", file.name);
+    let formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+    // this.doctorRegService.profilePicture(formData).subscribe(result => {
+      // console.log('file uploaded', result)
+      // this.fileId = result.upload._id;
+      let data = {
+        // profileImage: this.fileId,
+        _id: this.doctorProfileId,
+      }
+      // this.doctorRegService.updateDocProfile(data).subscribe(result => {
+        // this.sharedService.updatedDoctorInfo(true);
+    //   }, err => {
+    //   })
+    // })
+  }
 
 }
