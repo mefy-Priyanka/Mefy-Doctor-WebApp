@@ -120,17 +120,18 @@
           <hr class="linehr">
           <div class="respcss4">
             <div class="row">
-              <!-- <ul class="list-inline clinicsmayhave">
-                <li class="postminus">
+              <ul class="list-inline clinicsmayhave">
+                <li class="postminus" *ngFor="let appointments of ActiveAppointmentList?.slice(0,5)">
                   <span class="cinicsuvisit">
+                      <span>{{(appointments?.clinicName).split(' ')[0].split('')[0] + ((appointments?.clinicName).split(' ')[1] ? (appointments?.clinicName).split(' ')[1].split('')[0] : '') | uppercase}}</span>
                   </span>
                 </li>
-                <li class="postminus2">
-                  <button type="btn" class="libtn">
-                    <span class="cinicsuvisit6">sd</span>
-                  </button>
-                </li>
-              </ul> -->
+                <li class="postminus"  *ngIf="(ActiveAppointmentList?.length) > 5">
+                    <button type="btn" class="libtn">
+                      <span class="cinicsuvisit6"> +{{(ActiveAppointmentList).slice(6,(ActiveAppointmentList).length).length + 1}}</span>
+                    </button>
+                  </li>
+              </ul>
               <span class="clinics1 spbottom" *ngIf="noAppointment">No appointments for today</span>
             </div>
           </div>
