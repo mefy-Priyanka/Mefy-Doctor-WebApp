@@ -100,7 +100,7 @@ export class NewregistrationComponent implements OnInit {
 
     TagInputModule.withDefaults({
       tagInput: {
-        placeholder: 'Add another language',
+        placeholder: 'Add more',
         secondaryPlaceholder: 'Add Language'
         // add here other default values for tag-input
       }
@@ -263,7 +263,7 @@ export class NewregistrationComponent implements OnInit {
       console.log(this.step1Form.value)
       TagInputModule.withDefaults({
         tagInput: {
-          placeholder: 'Add another education',
+          placeholder: 'Add more',
           secondaryPlaceholder: 'Add Education'
           // add here other default values for tag-input
         }
