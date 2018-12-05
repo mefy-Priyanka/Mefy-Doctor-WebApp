@@ -71,7 +71,7 @@ export class NewregistrationComponent implements OnInit {
     this.step1FormErrors = {
       phoneNumber: {},
       name: {},
-      language: {},
+      dob: {},
       gender: {}
 
     };
@@ -82,7 +82,8 @@ export class NewregistrationComponent implements OnInit {
       city: {},
       state: {},
       education: {},
-      dob: {}
+      language: {}
+      
 
     };
     /***********STEP 3*************/
@@ -98,13 +99,13 @@ export class NewregistrationComponent implements OnInit {
       otp: {}
     };
 
-    TagInputModule.withDefaults({
-      tagInput: {
-        placeholder: 'Add another language',
-        secondaryPlaceholder: 'Add Language'
-        // add here other default values for tag-input
-      }
-    });
+    // TagInputModule.withDefaults({
+    //   tagInput: {
+    //     placeholder: 'Add another language',
+    //     secondaryPlaceholder: 'Add Language'
+    //     // add here other default values for tag-input
+    //   }
+    // });
   }
   ngOnInit() {
 
@@ -229,13 +230,13 @@ export class NewregistrationComponent implements OnInit {
     return this.formBuilder.group({
       phoneNumber: ['', Validators.required],
       name: ['', Validators.required],
-      language: ['', Validators.required],
+      dob: ['', Validators.required],
       gender: ['', Validators.required]
     });
   }
   createStep2Form() {
     return this.formBuilder.group({
-      dob: ['', Validators.required],
+      language: ['', Validators.required],
       education: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required]
@@ -259,15 +260,8 @@ export class NewregistrationComponent implements OnInit {
     });
   }
   firststep() {
-    if (this.step1Form.valid) {
+   if (this.step1Form.valid && this.error != 'Invalid DOB') {
       console.log(this.step1Form.value)
-      TagInputModule.withDefaults({
-        tagInput: {
-          placeholder: 'Add another education',
-          secondaryPlaceholder: 'Add Education'
-          // add here other default values for tag-input
-        }
-      });
       this.firstreg = false;
       this.secondreg = true;
       this.thirdreg = false;
@@ -298,29 +292,13 @@ export class NewregistrationComponent implements OnInit {
     }
   }
 
-  secondstep() {
-      TagInputModule.withDefaults({
-        tagInput: {
-          placeholder: 'Add another education',
-          secondaryPlaceholder: 'Add Education'
-          // add here other default values for tag-input
-        }
-      });
-    
+  secondstep() { 
     this.selectedCity = (<HTMLInputElement>document.getElementById('pac-input')).value
     console.log('selectedCity', this.selectedCity)
     this.step2Form.controls.city.setValue(this.selectedCity);
    
-    if (this.step2Form.valid && this.error != 'Invalid DOB') {
+    if (this.step2Form.valid ) {
       console.log(this.step2Form.value)
-      TagInputModule.withDefaults({
-        tagInput: {
-          placeholder: 'Add another speciality',
-          secondaryPlaceholder: 'Add Speciality'
-          // add here other default values for tag-input
-        }
-      });
-      // this.submitted = false;
       this.firstreg = false;
       this.secondreg = false;
       this.thirdreg = true;
@@ -351,13 +329,6 @@ export class NewregistrationComponent implements OnInit {
     }
   }
   previousfirst() {
-    TagInputModule.withDefaults({
-      tagInput: {
-        placeholder: 'Add another language',
-        secondaryPlaceholder: 'Add Language'
-        // add here other default values for tag-input
-      }
-    });
     this.firstreg = true;
     this.secondreg = false;
     this.thirdreg = false;
@@ -369,13 +340,6 @@ export class NewregistrationComponent implements OnInit {
     /****************** */
   }
   previouslast() {
-    TagInputModule.withDefaults({
-      tagInput: {
-        placeholder: 'Add another education',
-        secondaryPlaceholder: 'Add Education'
-        // add here other default values for tag-input
-      }
-    });
     this.firstreg = false;
     this.secondreg = true;
     this.thirdreg = false;
@@ -387,14 +351,6 @@ export class NewregistrationComponent implements OnInit {
     /****************** */
   }
   thirdstep() {
-    // this.submitted = false;
-    TagInputModule.withDefaults({
-      tagInput: {
-        placeholder: 'Add another speciality',
-        secondaryPlaceholder: 'Add Speciality'
-        // add here other default values for tag-input
-      }
-    });
     if (this.comparePracticingYear(this.step3Form.value.practicingSince)) {
       if (this.step3Form.valid) {
         console.log(this.step3Form.value)
@@ -436,13 +392,6 @@ export class NewregistrationComponent implements OnInit {
     }
   }
   previouspagelast() {
-    TagInputModule.withDefaults({
-      tagInput: {
-        placeholder: 'Add another speciality',
-        secondaryPlaceholder: 'Add Speciality'
-        // add here other default values for tag-input
-      }
-    });
     this.firstreg = false;
     this.secondreg = false;
     this.thirdreg = true;
@@ -454,29 +403,7 @@ export class NewregistrationComponent implements OnInit {
     this.activeStep4 = false
     /****************** */
   }
-  /********************GET LIST OF LANGUAGE *****************/
-  getLanguageList() {
-    let data = {
-      language: "language"
-    }
-    this.docService.getLanguageList(data).subscribe(data => {
-      let value: any = {}
-      value = data
-      this.languageList = value.result.result
-      console.log(this.languageList)
-      for (var i = 0; i < this.languageList.length; i++) {
-        var lang = {
-          langName: this.languageList[i].Language,
-
-        }
-        this.languageOfObjects.push(lang);
-      }
-    },
-      err => {
-        console.log(err)
-      })
-  }
-  /*************************END************************************ */
+ 
   /***********************LANGUAGE ON SELECT IN STEP 2*********/
   onAddLanguage(evt) {
     // console.log(evt);
@@ -487,7 +414,6 @@ export class NewregistrationComponent implements OnInit {
   onAddEducation(evt) {
     // console.log(evt);
     this.selectedEducatiom.push(evt.value)
-    // console.log('selectedLanguage',this.selectedLanguage)
   }
   /***********************SPECIALITY ON SELECT IN STEP 3*********/
   onAddSpeciality(evt) {
@@ -520,6 +446,29 @@ export class NewregistrationComponent implements OnInit {
   typeaheadNoselectedAuthority(event: boolean): void {
     this.noStateResult = event
   }
+   /********************GET LIST OF LANGUAGE *****************/
+   getLanguageList() {
+    let data = {
+      language: "language"
+    }
+    this.docService.getLanguageList(data).subscribe(data => {
+      let value: any = {}
+      value = data
+      this.languageList = value.result.result
+      console.log(this.languageList)
+      for (var i = 0; i < this.languageList.length; i++) {
+        var lang = {
+          langName: this.languageList[i].Language,
+
+        }
+        this.languageOfObjects.push(lang);
+      }
+    },
+      err => {
+        console.log(err)
+      })
+  }
+  /*************************END************************************ */
   /********************GET LIST OF Education *****************/
   getEducationList() {
     let data = {
@@ -745,7 +694,7 @@ export class NewregistrationComponent implements OnInit {
         otp: parseInt(this.step4Form.value.otp),
         language: this.selectedLanguage,
         city: this.step2Form.value.city,
-        dob: (moment(this.step2Form.value.dob).format('DD-MM-YYYY')),
+        dob: (moment(this.step1Form.value.dob).format('DD-MM-YYYY')),
         education: this.selectedEducatiom,
         speciality: this.selectedSpeciality,
         practicingSince: this.step3Form.value.practicingSince,

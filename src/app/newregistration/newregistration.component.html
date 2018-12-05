@@ -62,14 +62,12 @@
                         Cannot Be Empty</p>
                       <p class="errormessage"  [ngStyle]="{'font-size':'11px'}" *ngIf="step1FormErrors.phoneNumber.minlength ">Please Enter Valid Phone
                         Number</p>
-                        <tag-input formControlName="language" (onAdd)="onAddLanguage($event)" onlyFromAutocomplete="true"
-                        blinkIfDupe="true">
-                        <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
-                          [showDropdownIfEmpty]="false" [autocompleteItems]="languageOfObjects">
-                        </tag-input-dropdown>
-                      </tag-input>
-                      <p class="errormessage" [ngStyle]="{'font-size':'11px'}"  *ngIf="step1FormErrors.language.required || (step1Form.controls.language.pristine && submitted1)">Language
-                        Cannot Be Empty</p>
+                        <input type="text" formControlName="dob" placeholder="Date Of Birth" #dp="bsDatepicker" class="form-control"
+                        bsDatepicker (bsValueChange)="compareDob($event)">
+                      <p class="errormessage"  [ngStyle]="{'font-size':'11px'}" *ngIf="step1FormErrors.dob.required || (step1Form.controls.dob.pristine && submitted2)">Date
+                        of Birth Cannot Be Empty</p>
+                       
+
                       <div class="top_space">
                         <div class="col-md-2 col-xs-2 nomarginrw">
 
@@ -108,16 +106,22 @@
                   <fieldset *ngIf="secondreg">
                     <form [formGroup]="step2Form">
 
-                      <input type="text" formControlName="dob" placeholder="Date Of Birth" #dp="bsDatepicker" class="form-control"
-                        bsDatepicker (bsValueChange)="compareDob($event)">
-                      <p class="errormessage"  [ngStyle]="{'font-size':'11px'}" *ngIf="step2FormErrors.dob.required || (step2Form.controls.dob.pristine && submitted2)">Date
-                        of Birth Cannot Be Empty</p>
-                      <tag-input formControlName="education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true"
-                        blinkIfDupe="true">
+                        <tag-input formControlName="language" (onAdd)="onAddLanguage($event)" onlyFromAutocomplete="true"
+                        blinkIfDupe="true"  [onlyFromAutocomplete]="true" secondaryPlaceholder="Add Language" placeholder="Add Another Language">
+                        <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
+                          [showDropdownIfEmpty]="false" [autocompleteItems]="languageOfObjects">
+                        </tag-input-dropdown>
+                      </tag-input>
+                      <p class="errormessage" [ngStyle]="{'font-size':'11px'}"  *ngIf="step2FormErrors.language.required || (step2Form.controls.language.pristine && submitted1)">Language
+                          Cannot Be Empty</p>
+
+                      <tag-input formControlName="education" secondaryPlaceholder="Add Education" placeholder="Add Another Education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true"
+                        blinkIfDupe="true"  [onlyFromAutocomplete]="true">
                         <tag-input-dropdown [appendToBody]="false" [identifyBy]="'educationName'" [displayBy]="'educationName'"
                           [showDropdownIfEmpty]="false" [autocompleteItems]="educationOfObjects">
                         </tag-input-dropdown>
                       </tag-input>
+
                       <p class="errormessage" [ngStyle]="{'font-size':'11px'}"  *ngIf="step2FormErrors.education.required || (step2Form.controls.education.pristine && submitted2)">Education
                         Cannot Be Empty</p>
                       <ng-template #customItemTemplate let-model="item" let-index="index">
@@ -153,9 +157,9 @@
                       <!-- <input type="text" name="speciality"  formControlName="speciality" placeholder="Speciality" /> -->
                       <!-- <label>Speciality:</label> -->
                       <tag-input formControlName="speciality" (onAdd)="onAddSpeciality($event)" onlyFromAutocomplete="true"
-                        blinkIfDupe="true">
+                        blinkIfDupe="true" [onlyFromAutocomplete]="true" secondaryPlaceholder="Add Speciality" placeholder="Add Another Speciality" >
                         <tag-input-dropdown [appendToBody]="false" [identifyBy]="'specialityName'" [displayBy]="'specialityName'"
-                          [showDropdownIfEmpty]="false" [autocompleteItems]="specialityOfObjects">
+                          [showDropdownIfEmpty]="false" [autocompleteItems]="specialityOfObjects" >
                         </tag-input-dropdown>
                       </tag-input>
                       <p class="errormessage" [ngStyle]="{'font-size':'11px'}"  *ngIf="step3FormErrors.speciality.required || (step3Form.controls.speciality.pristine && submitted3)">Speciality
