@@ -132,11 +132,12 @@
     </div>
     <div class="notifications">
       <ul class="list-inline">
-        <li class="on_line" [hidden]="!loginStatus">{{status}}</li>
+        <li class="on_line">{{status}}</li>
+        <!-- [hidden]="!loginStatus" -->
         <li>
             <label class="switch">
-                <input type="checkbox"  (change)="availabilityDoctor($event)" [checked]="false">
-                <span class="slider round" [ngStyle]=   "{'color': status =='Online' ? '#23e29c' : '#fff'}"></span>
+                <input type="checkbox"  (change)="availabilityDoctor($event)" [checked]="status=='Online'">
+                <span class="slider round" [ngStyle]= "{'color': status =='Online' ? '#23e29c' : '#fff'}"></span>
               </label>
           </li>
         </ul>
