@@ -9,6 +9,7 @@ import { SharedService } from '../../mefyservice/shared.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 import { DatePipe } from '@angular/common';
+import { TabHeadingDirective } from 'ngx-bootstrap';
 
 
 
@@ -33,6 +34,7 @@ export class RightsidenavComponent implements OnInit {
   public elementRef;
   public appointmentDate:any;
   public selectedAppointmentdate:any;
+  public getAppointment:any;
   public Date:any
   public myDateYMD= new Date();
 
@@ -43,10 +45,19 @@ export class RightsidenavComponent implements OnInit {
     private router: Router,
     private ePrescriptionService: DoctorPrescriptionService,
     private sharedService: SharedService, myElement: ElementRef, private sanitizer: DomSanitizer) {
-
-
     this.elementRef = myElement;
-
+    /*get Appointment List*/
+  this.sharedService.appointmentList.subscribe(data=>{
+  let result:any={}
+  result=data
+  if (Object.keys(data).length != 0) {
+  console.log('appointment get',data)
+  console.log('appointment get',result.result.status)
+  console.log('status',result.result)
+  this.ActiveAppointment.push(result.result)
+  this.getCurrentDateAppointmentlist();
+  }
+})
   }
 
   ngOnInit() {
@@ -55,22 +66,36 @@ export class RightsidenavComponent implements OnInit {
 /*****************GET CURRENT DATE DOCTOR"S APPOINTMENT ACTIVE LIST***************** */
   getCurrentDateAppointmentlist() {
     this.appointmentService.getDoctorCurrentAppointment(localStorage.getItem('doctorId')).subscribe(data=>{
+      this.loader=false;
       let result:any={}
       result=data
       if(result.result.result != null && Object.keys(result.result.result).length != 0){
+
+      var status = result.result.result.filter(function(status) {
+        return status.status =='Active' ;
+      });
+      for (let i = 0; i < status.length; i++) {
+        if( status!= null && Object.keys(status).length != 0){
+        console.log('Active Appointment list',status)
+        this.ActiveAppointment=status
+        this.appointmentData=true;
+        this.noAppointment=false
         this.loader=false;
-        this.appointmentData=true
-        var status = result.result.result.filter(function(status) {
-          return status.status =='Active' ;
-        });
-            console.log('Active Appointment list',status)
-            this.ActiveAppointment=status
-            this.noAppointment=false /*hide message*/
       }
-      else{
+
+     else {
+      this.loader=false;
+        this.appointmentData=false;
+        this.noAppointment=true;
+      } 
+
+    }
+  }
+  else{
+    this.appointmentData=false;
+        this.noAppointment=true;
         this.loader=false;
-        this.noAppointment=true /*show message*/
-      }
+  }
     },err=>{
       this.loader=false;
       console.log(err)
@@ -101,6 +126,7 @@ export class RightsidenavComponent implements OnInit {
  /**************** API FOR DOCTOR"S APPOINTMENT LIST BY DATE AND DOCTORID **************/
   selectedDate(date) {
     console.log('date',date)
+    this.loader=true;
     // this.message = '';
     // this.hideConsult = false;
     if (date != null) {
@@ -110,29 +136,41 @@ export class RightsidenavComponent implements OnInit {
     console.log('selectedAppointmentdate',this.selectedAppointmentdate)
       this.appointmentService.getAppointmentList(localStorage.getItem('doctorId'), this.selectedAppointmentdate).subscribe(data => {
           console.log(data);
+          this.loader=false;
           let result:any={}
           result=data
           if(result.result.result != null && Object.keys(result.result.result).length != 0){
-             console.log('result',result.result)
-             var status = result.result.result.filter(function(status) {
-              return status.status =='Active' ;
-            });
-                console.log('Active Appointment list',status)
-                this.ActiveAppointment=status
-                this.noAppointment=false ;/*hide message*/
-                this.appointmentData=true;
-          }else{
+          var status = result.result.result.filter(function(status) {
+            return status.status =='Active' ;
+          });
+          for (let i = 0; i < status.length; i++) {
+            if( status!= null && Object.keys(status).length != 0){
+            console.log('Active Appointment list',status)
+            this.ActiveAppointment=status
+            this.appointmentData=true;
+            this.noAppointment=false;
+            this.loader=false;
+          }
+
+         else {
             this.appointmentData=false;
             this.noAppointment=true;
-            this.appointmentData=false;
-            let notification = {
-              type: 'warning',
-              title: 'No any Appointment ',
-            }            
-            this.sharedService.createNotification(notification);
+            this.loader=false;
+            // let notification = {
+            //   type: 'warning',
+            //   title: 'No any Appointment ',
+            // }            
+            // this.sharedService.createNotification(notification);
           } 
 
-        },
+        }
+      }
+      else{
+        this.appointmentData=false;
+            this.noAppointment=true;
+            this.loader=false;
+      }
+      },
         err => {
           console.log(err)
           let notification = {
@@ -159,7 +197,10 @@ let data={
 }
 this.appointmentService.cancelAppointment(data).subscribe(data=>{
   console.log('cancelAppointment',data)
-  this.loader=true;
+  this.loader=false;
+  let result:any={}
+  result=data
+  this.sharedService.cancdelAppointmentData(result.result.result)
   this.getCurrentDateAppointmentlist()
 
 })
