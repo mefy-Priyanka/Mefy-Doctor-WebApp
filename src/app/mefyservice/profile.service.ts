@@ -17,9 +17,9 @@ export class ProfileService {
   doctorAvailability(available) {
     return this.http.put(APIURL + 'doctor/profile/' + available.userId, { availability: available.availability })
   }
-  updateDetail(doctoridetail) {
+  updateDetail(userId,doctoridetail) {
     console.log('updatedDetail', doctoridetail)
-    return this.http.put(APIURL + 'doctor/profile/' + doctoridetail.userId,{email:doctoridetail.email,address:doctoridetail.address,speciality:doctoridetail.speciality,education:doctoridetail.education,language:doctoridetail.language})
+    return this.http.put(APIURL + 'doctor/profile/' +userId,doctoridetail)
   }
 
 }
