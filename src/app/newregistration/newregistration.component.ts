@@ -98,14 +98,6 @@ export class NewregistrationComponent implements OnInit {
     this.step4FormErrors = {
       otp: {}
     };
-
-    // TagInputModule.withDefaults({
-    //   tagInput: {
-    //     placeholder: 'Add another language',
-    //     secondaryPlaceholder: 'Add Language'
-    //     // add here other default values for tag-input
-    //   }
-    // });
   }
   ngOnInit() {
 
