@@ -44,7 +44,7 @@ console.log('doctorid');
     }
     let available = {
       availability: this.status,
-      userId:  localStorage.getItem('userId')
+      userId:  localStorage.getItem('doctorId')
     }
     this.profileService.doctorAvailability(available).subscribe(data => {
       let response:any={};

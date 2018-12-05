@@ -1,15 +1,11 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { AppointmentsService } from '../../mefyservice/appointments.service';
 import * as moment from 'moment';
-import { filter } from 'rxjs/operator/filter';
-import { SocketService } from '../../meme-services/socket.service';
 import { Router } from '@angular/router';
+import { AppointmentsService } from '../../mefyservice/appointments.service';
+import { SocketService } from '../../meme-services/socket.service';
 import { DoctorPrescriptionService } from '../../meme-services/doctor-prescription.service';
 import { SharedService } from '../../mefyservice/shared.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-
-import { DatePipe } from '@angular/common';
-import { TabHeadingDirective } from 'ngx-bootstrap';
 
 
 
@@ -51,9 +47,6 @@ export class RightsidenavComponent implements OnInit {
   let result:any={}
   result=data
   if (Object.keys(data).length != 0) {
-  console.log('appointment get',data)
-  console.log('appointment get',result.result.status)
-  console.log('status',result.result)
   this.ActiveAppointment.push(result.result)
   this.getCurrentDateAppointmentlist();
   }
