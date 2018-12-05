@@ -192,6 +192,11 @@ p.subtxt {
     /* text-align: center; */
     margin-left: 6%;
 }
+button.loginbutton:hover {
+    background: linear-gradient(to right, #e090ec, #7645dd);
+    transition: all 2s linear 0.3s;
+}
+/* responsive css */
 @media only screen and (min-width : 1440px) and (max-width : 1920px) {
 
 
