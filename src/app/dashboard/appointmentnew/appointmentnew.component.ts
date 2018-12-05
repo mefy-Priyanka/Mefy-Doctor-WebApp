@@ -382,15 +382,16 @@ export class AppointmentnewComponent implements OnInit {
 
   /*********************************  COMPARING PRESENT DATE WITH SELECTED DATE    ************************************ */
   compareAppointmentdate(value) {
+    console.log('compare appointment date value',value)
     this.error = '';
     this.dateErr = '';
     let presentDate: any;
     presentDate = moment().utcOffset(0);
     presentDate.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
     presentDate.toISOString()
-    presentDate.format()
+    presentDate.format();
     console.log(presentDate);
-    if ((moment(presentDate)).isAfter(value)) {
+    if ((moment(presentDate._d)).isAfter(value)) {
       this.error = 'Appointment date cannot be before present date';
       console.log('Appointment date cannot be before present date', this.error);
       // this.submitted=true
