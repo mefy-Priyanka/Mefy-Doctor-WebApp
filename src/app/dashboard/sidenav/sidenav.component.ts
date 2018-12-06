@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from '../../mefyservice/profile.service';
 import { SharedService } from '../../mefyservice/shared.service';
-
+import { IMAGEURL } from '../../urlsConfig';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -12,14 +13,20 @@ import { SharedService } from '../../mefyservice/shared.service';
 export class SidenavComponent implements OnInit {
   /************************************ USED VARIABLES ******************************************** */
   doctorProfileId: any;
+  userId:any
   profileInfo: any;
   status: any;
+  profileImageId:any;
+  imgUrlPrefix:any;
   loginStatus: boolean = false;
+  loader:boolean=false
+  
   /***********************************************************************************************/
 
-  constructor(private router: Router, private profileService: ProfileService, private sharedService: SharedService) {
+  constructor(private router: Router, private profileService: ProfileService, private sharedService: SharedService,private sanitizer: DomSanitizer) {
 
     this.doctorProfileId = localStorage.getItem('doctorId');  //GET DOCTORID FROM LOCALSTORAGE
+    this.userId=localStorage.getItem('userId') //GET USERID FROM LOCALSTORAGE
 
   }
 
@@ -29,10 +36,15 @@ export class SidenavComponent implements OnInit {
 
   /***************************************** GET DOCTOR PROFILE DEATILS *************************************** */
   doctorProfile() {
+    this.loader=true
     console.log("DOCTORID", this.doctorProfileId);
     this.profileService.getDocDetail(this.doctorProfileId).subscribe(data => {
       console.log('PROFILE DETAILS', data);
       this.profileInfo = data;
+      this.loader=false
+      console.log('doctor profile',this.profileInfo)
+      this.imgUrlPrefix = this.sanitizer.bypassSecurityTrustResourceUrl(IMAGEURL + "/uploads/avatars/responsive/" + this.profileInfo.profileImage+"_sm.png");
+      console.log('imgUrlPrefix',this.imgUrlPrefix)/*Diplay doctor's dp*/
       this.status = this.profileInfo.availability ? this.profileInfo.availability : 'Online';
       // console.log("PROFILE DETAILS", this.profileInfo);
     }, err => {
@@ -51,7 +63,7 @@ export class SidenavComponent implements OnInit {
     }
     let available = {
       availability: this.status,
-      userId: localStorage.getItem('userId')
+      userId: this.userId
     }
     // API CALL FOR CHANGING STATUS
     this.profileService.doctorAvailability(available).subscribe(data => {
@@ -98,30 +110,58 @@ export class SidenavComponent implements OnInit {
   }
   /**************************************** ENDS *************************************************************** */
 
-  // preview profile picture
+  /************************ *Preview  DOCTOR"S Profile Picture***********************************/
   previewProfile(event) {
+    this.loader=true
     let fileList: FileList = event.target.files;
     let fileTarget = fileList;
-    console.log('fileTarget',fileTarget)
-    let file: File = fileTarget[0];
-
-    // this.names = file;
-    console.log("File information :", file.name);
+    let avatar: File = fileTarget[0];
+    console.log("File information :", avatar.name);
     let formData: FormData = new FormData();
-    formData.append('file', file, file.name);
-    // this.doctorRegService.profilePicture(formData).subscribe(result => {
-      // console.log('file uploaded', result)
-      // this.fileId = result.upload._id;
+    formData.append('avatar', avatar, avatar.name);
+    console.log("File information :", formData);
+    this.profileService.doctorImageUpload(formData).subscribe(result => {
+      console.log('file uploaded', result)
+      let value:any={}
+      value=result
+      this.profileImageId=value.imageId
       let data = {
-        // profileImage: this.fileId,
-        _id: this.doctorProfileId,
+        profileImage: this.profileImageId
       }
-      // this.doctorRegService.updateDocProfile(data).subscribe(result => {
-        // this.sharedService.updatedDoctorInfo(true);
-    //   }, err => {
-    //   })
-    // })
+      this.profileService.updateDetail(this.userId,data).subscribe(result => {
+        console.log('doctor updated profile',result)
+        this.loader=false
+           let notifydata = {
+        type: 'success',
+        title: 'Profile Image',
+        msg: 'Uploded'
+      }
+      this.sharedService.createNotification(notifydata);
+        this.doctorProfile();
+        this.sharedService.updatedDoctorInfo(true);
+      }, err => {
+        this.loader=false
+        let notifydata = {
+          type: 'error',
+          title: 'Something went',
+          msg: 'Wrong'
+        }
+        this.sharedService.createNotification(notifydata);
+      })
+
+      }, err => {
+        this.loader=false
+        let notifydata = {
+          type: 'error',
+          title: 'Something went',
+          msg: 'Wrong'
+        }
+        this.sharedService.createNotification(notifydata);
+        console.log(err)
+      })
+ 
   }
+
   /**************************************** ENDS *************************************************************** */
 
 }

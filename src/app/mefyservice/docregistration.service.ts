@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { APIURL } from '../urlsConfig';
-import { IMAGEURL } from '../urlsConfig';
+
 
 @Injectable()
 export class DocregistrationService {
@@ -36,9 +36,6 @@ preRegistrationApi(data){
 doctorRegistrationApi(data){
   return this.httpClient.post(APIURL+'User/registration',data)
 }
-/********************************DOCTOR"S IMAGE UPLOAD***************************** */
-doctorImageUpload(data){
-  return this.httpClient.post(IMAGEURL+'/upload',data)
-}
+
 
 }
