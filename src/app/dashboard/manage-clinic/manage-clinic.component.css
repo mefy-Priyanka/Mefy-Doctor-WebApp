@@ -259,6 +259,9 @@ button.selectd_day.active {
     border: none;
     box-shadow: none;
     color: #7b7979;
+    height: 30px;
+    width: 30px;
+    line-height: 28px;
 }
 /* li.date_choose {
     background: linear-gradient(to right, rgb(121, 120, 250),rgba(178, 109, 247, 1));
@@ -786,4 +789,9 @@ button.addcal {
 }
 ul#calender_days {
     margin-bottom: 0px;
+}
+.check{
+    opacity: 1;
+    position: inherit;
+    pointer-events: all;
 }
