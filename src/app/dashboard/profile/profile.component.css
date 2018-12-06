@@ -343,3 +343,60 @@ button.addprofile {
   
     }
 }
+button.eDit {
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    top: -9px;
+    left: 6em;
+    margin-right: 8px;
+    color: #fff;
+    background: transparent;
+    /* background: linear-gradient(to bottom, #20de9e, #08b9b1); */
+    /* box-shadow: 0px 1px 16px 3px rgba(109, 117, 113, 0.18); */
+}
+.input-field.col-md-12.speciaity.locatn.eMail {
+    position: relative;
+}
+svg#editsvg {
+    height: 41px;
+    width: 22px;
+  fill:#8e51b7;
+}
+span.detailShow {
+    margin-top: 5px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.53);
+    font-weight: 600;
+    font-size: 15px;
+    margin-left: 10px;
+}
+button.aDd {
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    right: 0;
+    top: 0px;
+    margin-right: 8px;
+    color: #fff;
+    background: transparent;
+    /* background: linear-gradient(to bottom, #20de9e, #08b9b1);
+    box-shadow: 0px 1px 16px 3px rgba(109, 117, 113, 0.18); */
+}
+li.specialityChip {
+    background: #8e51b7;
+    border-radius: 50px;
+    margin-right: 10px;
+    color: #fff;
+    padding: 5px;
+}

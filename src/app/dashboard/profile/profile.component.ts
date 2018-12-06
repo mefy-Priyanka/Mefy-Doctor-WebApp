@@ -21,7 +21,10 @@ import { ProfileService } from '../../mefyservice/profile.service';
 
 export class ProfileComponent implements OnInit {
   specialist: any;
-  showSpeciality: boolean = false;
+  public showSpeciality: boolean = false;
+  public specialityShow: boolean = false;
+  public educationShow:boolean=false;
+ public languageShow:boolean=false;
   messageSpeciality: any;
   doctorProfileId: any;
   logInfo: any = {};
@@ -49,6 +52,8 @@ export class ProfileComponent implements OnInit {
   public  educationList: any = [];
   public educationOfObjects:any=[];
   public languageOfObjects:any=[];
+  public showFill: boolean=false;
+  public showaddr: boolean=false;
  constructor(private router: Router,private formBuilder: FormBuilder,private docService: DocregistrationService,private profileService:ProfileService) {
 
     /***********STEP 1*************/
@@ -287,5 +292,20 @@ export class ProfileComponent implements OnInit {
       console.log('education array', this.education);
       this.educarr.push(this.education);
       console.log("hi",this.educarr)
+    }
+    edit(){
+      this.showFill=true;
+    }
+    email(){
+      this.showaddr=true;
+    }
+    addspeciality(){
+    this.specialityShow=true;
+    }
+    addEducation(){
+      this.educationShow=true;
+    }
+    addLanguage(){
+      this.languageShow=true;
     }
 }
