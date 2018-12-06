@@ -1,0 +1,201 @@
+.padding15px{
+    padding: 0 15px;
+}
+.tablecell {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.tablecell3 {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.tablecell3 h2 {
+    margin: 0;
+    font-size: 26px;
+    color: #37cdb6;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+.textvr{
+    background: linear-gradient(to right, #3f51b5cc, rgba(103, 58, 183, 0.71)), url(../../assets/images/memecare.png);
+    display: table;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+hr.welcomebr {
+    width: 200px;
+    margin: 25px auto;
+    border: 1px solid #fff;
+}
+.nomarginrw{
+    padding: 0;
+}
+.tablecell h1 {
+    font-size: 58px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+p.genderm {
+    color: rgb(68, 67, 67);
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Roboto',sans-serif;
+
+}
+.loginscr{
+    display: table;
+    height: 90vh;
+    width: 100%;
+}
+button.loginbtnscr {
+    width: 120px;
+    background: #37cdb6;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    margin-top: 5em;
+    height: 44px;
+    border-radius: 4px;
+  float: left;
+}
+button.loginbtnscrsignup {
+    width: 120px;
+    background: #37cdb6;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    margin-top: 5em;
+    height: 44px;
+    border-radius: 4px;
+  float: center;
+}
+button.loginbtnscrleft {
+    width: 120px;
+    background: transparent;
+    font-weight: bold;
+    color: #37cdb6;
+    border-radius: 1px;
+    cursor: pointer;
+    margin-top: 5em;
+    height: 44px;
+    border-radius: 4px;
+    float: right;
+    border: 2px solid #37cdb6;
+}
+.middlewidth {
+   width: 80%;
+    margin: 0 auto;
+}
+img.loggo {
+    background: #5e77fa;
+    height: 50px;
+    width: 120px;
+    margin: 0 auto;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+input.ctmin {
+
+    font-size: 14px !important;
+    border-bottom: 1px solid #d4dce6;
+}
+input.ctmin::-webkit-input-placeholder{
+    /* color:  rgb(68, 67, 67); */
+    color: rgb(102, 105, 102);
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+}
+input.ctmin.ng-pristine.ng-invalid.ng-touched::placeholder {
+    color: rgb(102, 105, 102);
+}
+.nomarginrowbtm{
+    margin: 0;
+}
+a.forgotpsd {
+    text-decoration: none;
+    float: right;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-family: 'Roboto', sans-serif;
+    color: #37cdb6;
+}
+.noaccount p {
+    margin: 0;
+    font-size: 15px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+.noaccount {
+    margin-top: 15px;
+}
+svg#meme_logologin {
+    width: 340px;
+    height: 91px;
+
+}
+p.hethcare {
+    font-size: 25px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+a.createacc {
+    text-decoration: none;
+    color: #37cdb6;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+}
+.remebrme {
+    margin-top: 13px;
+}
+p.gmalef {
+    text-align: right;
+}
+p.otpresend {
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    
+    color:rgba(99, 96, 96, 0.6392156862745098);
+    font-family: 'Roboto', sans-serif;
+}
+.gmalef label {
+    color: #444343;
+    font-weight: 400;
+    font-family: 'Roboto',sans-serif;
+}
+svg#meme_logosign{
+    height: 50px;
+    margin: 4em 0 0 2em;
+    width: 150px;
+
+}
+
+
+.scrlarea {
+    height: 100vh !important;
+    overflow-y: auto;
+}
+
+@media only screen and (min-width: 320px) and (max-width:1024px){
+    .middlewidth[_ngcontent-c1] {
+        width: 310px;
+    }
+    p.gmalef[_ngcontent-c1] {
+        text-align: left;
+    }
+
+}

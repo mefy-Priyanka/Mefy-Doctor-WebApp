@@ -1,0 +1,90 @@
+<!-- date of birth section -->
+<section class="sign_in">
+        <div class="row nomarginrowbtm">
+          <span [ngStyle]="{'-webkit-text-fill-color':'	red','font-size':'14px'}">{{message}}</span>
+          <span [ngStyle]="{'-webkit-text-fill-color':'	red','font-size':'14px'}">{{messageNew}}</span>
+          <!-- <span>{{sErr}}</span>
+          <span>{{qErr}}</span> -->
+                <p class="qualification">Please tell us about your Qualifications</p>
+                <div class="row nomarginrowbtm">
+                  <div class="col-md-11 col-xs-11 nomarginrw">
+                      <ng2-completer placeholder="Qualifications"  [(ngModel)]="qualifications" [datasource]="dataService"  [minSearchLength]="0" (keyup)="validateQualificaions()" (selected)="onItemSelectQualification($event)"></ng2-completer >
+                        <p [ngStyle]="{'-webkit-text-fill-color':'	red','font-size':'13px','text-align':'left'}">{{messageQualification}}</p>
+                    <!-- <input type="text" placeholder="Qualifications" name="Quaification" class="ctmin" (focusout)="validateQualificaions()" [(ngModel)]="qualifications"> -->
+                  </div>
+                  <div class="col-md-1 col-xs-1 nomarginrw">
+                    <!-- <button class="addremove" (click)="addQualificaions(qualifications)">+</button> -->
+                  </div>
+                  <!-- <div class="col s12">
+                    <div class="row">
+                      <div class="input-field">
+                        <i class="material-icons prefix">textsms</i>
+                        <input type="text" id="autocomplete-input" class="autocomplete">
+                        <label for="autocomplete-input">Autocomplete</label>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+        </div>
+  <div class="row nomarginrowbtm">
+    <div class="col-md-12 nomarginrw">
+      <div class="chipdatain">
+        <!-- <span >{{qError}}</span> -->
+      <!-- <input type="text" placeholder="Enter your quaification" name="Quaification" class="ctmin"> -->
+      <ul class="list-inline chipsdata">
+        <li *ngFor="let list of qualification">
+            <p class="chipsdata">{{list}} <span class="closebtn" onclick="this.parentElement.style.display='none'" (click)="removeQualification()">&times;</span></p>
+        </li>
+      </ul>
+      <!-- <span class="chipsdata" *ngFor="let list of qualification">{{list}}</span> -->
+    </div>
+    </div>
+    <!-- <div class="col-md-2 nomarginrw">
+      <button type="btn" class="saveinput">Save</button>
+    </div> -->
+  </div>
+
+  <div class="row nomarginrowbtm">
+    <p class="qualification">Please tell us about your Speciality</p>
+    <div class="row nomarginrowbtm">
+      <div class="col-md-11 col-xs-11 nomarginrw">
+          <ng2-completer   placeholder="Speciality"  [(ngModel)]="specialities" [datasource]="specialityService" [minSearchLength]="0" (keyup)="validateSpeciality()" (selected)="onItemSelectSpeciality($event)"></ng2-completer >
+            <p [ngStyle]="{'-webkit-text-fill-color':'	red','font-size':'13px','text-align':'left'}">{{messageSpeciality}}</p>
+        <!-- <input type="text" placeholder="Speciality" name="Speciality" class="ctmin"(focusout)="validateSpeciality()" [(ngModel)]="specialities"> -->
+      </div>
+      <div class="col-md-1 col-xs-1 nomarginrw">
+        <!-- <button class="addremove"  (click)="addSpeciality(specialities)">+</button> -->
+      </div>
+    </div>
+  </div>
+  <div class="row nomarginrowbtm">
+    <!-- <div class="col-md-10 nomarginrw">
+      <input type="text" placeholder="Enter your speciality" name="Quaification" class="ctmin">
+<span *ngFor="let li of speciality">{{li}}</span>
+    </div>
+    <div class="col-md-2 nomarginrw">
+      <button type="btn" class="saveinput">Save</button>
+    </div> -->
+    <div class="col-md-12 nomarginrw">
+        <div class="chipdatain">
+          <!-- <p>{{sError}}</p> -->
+        <!-- <input type="text" placeholder="Enter your quaification" name="Quaification" class="ctmin"> -->
+        <ul class="list-inline chipsdata">
+          <li *ngFor="let li of speciality">
+              <p class="chipsdata">{{li}} <span class="closebtn" onclick="this.parentElement.style.display='none'" (click)="removeSpeciality(li)">&times;</span></p>
+          </li>
+        </ul>
+       </div>
+      </div>
+  </div>
+
+  <div class="row nomarginrowbtm">
+    <!-- <div class="col-md-6 "> -->
+      <!-- <button type="button" class="loginbtnscrleft">Previous</button> -->
+    <!-- </div> -->
+    <div class="col-md-12 ">
+      <button type="button" class="loginbtnscr" (click)="addProfileData()">Next</button>
+    </div>
+
+  </div>
+</section>

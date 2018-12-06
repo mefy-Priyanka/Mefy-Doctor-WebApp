@@ -17,13 +17,13 @@ export class ProfileService {
   doctorAvailability(available) {
     return this.http.put(APIURL + 'doctor/profile/' + available.userId, { availability: available.availability })
   }
-  /****************UPDATE DOCTOR"S PROFILE**********************/
   updateDetail(userId,doctoridetail) {
     console.log('updatedDetail', doctoridetail)
     return this.http.put(APIURL + 'doctor/profile/' +userId,doctoridetail)
   }
-/********************************DOCTOR"S IMAGE UPLOAD***************************** */
+  /********************************DOCTOR"S IMAGE UPLOAD***************************** */
 doctorImageUpload(data){
   return this.http.post(IMAGEURL+'/upload',data)
 }
+
 }

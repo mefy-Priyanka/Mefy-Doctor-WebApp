@@ -43,14 +43,13 @@ div#noPadding {
     position: relative;
     background: #fff;
     overflow: hidden;
-    height: auto;
+    height: 69vh;
     width: 58vw;
 }
 .loginContent {
-    /* padding-left: 4em;
+    padding-left: 4em;
     margin-top:6em;
-    margin-right: 2em; */
-    margin: 18% 8%;
+    margin-right: 2em;
 }
 .loginContent h1 {
     color: #9151b7;
@@ -71,23 +70,18 @@ div#noPadding {
     top: 0;
 }
 .loginRegister {
-    text-align: left;
-    margin-top: 2em;
+    text-align: center;
 }
 button.loginbutton {
     border-radius: 50px;
     height: 39px;
-    padding: 0 26px;
+    width: 113px;
     margin-top: 1em;
     cursor: pointer;
-    letter-spacing: 1px;
-    opacity: 0.9;
     outline: none;
     border: none;
-    color: #ffffff;
-    background: linear-gradient(to right, #7645dd, #e090ec);
-    font-family: Lato;
-    font-size: 14px;
+    color: #fff;
+    background: linear-gradient(to bottom,#683d90,#9a57c7);
 }
 .row.nomargin {
     margin: 0;
@@ -119,28 +113,27 @@ input[type="text"]::placeholder {
 }
 .noaccount p {
     margin: 0;
-    font-size: 14px;
-    text-align: left;
+    font-size: 15px;
+    text-align: center;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    font-style: italic;
 }
 .noaccount {
     margin-top: 15px;
     text-align: center;
 }
-input.form-control.inputPhone{
+input.form-control.inputPhone {
+    /* border: 1px solid #00000052; */
     height: 34px;
-    margin: 0px;
-    font-style: italic;
+    /* border-radius: 50px; */
+    margin:0px;
     position: relative;
 }
 i.fa.fa-mobile.right {
-    font-size: 22px;
+    font-size: 26px;
     position: absolute;
-    top: 32px;
-    right: 0;
-    color: #8e51b7;
+    top: 29px;
+    right: 15px;
 }
 .form-group.phoneDiv {
     position: relative;
@@ -170,70 +163,8 @@ svg#otp {
     height: 50px;
     width: 24vw;
 }
-
-
-h1.loginheading {
-    font-size: 27px;
-    font-family: Lato;
-    text-transform: uppercase;
-    text-align: left;
-    font-weight: 600;
-    color: #7846dd;
-    margin-bottom: 5px;
-    margin-left: 6%;
-    margin-top: 3em;
-}
-p.subtxt {
-    font-size: 15px;
-    text-align: left;
-    font-family: lato;
-    font-style: italic;
-    color: #333;
-    /* text-align: center; */
-    margin-left: 6%;
-}
-button.loginbutton:hover {
-    background: linear-gradient(to right, #e090ec, #7645dd);
-    transition: all 2s linear 0.3s;
-}
-/* responsive css */
-@media only screen and (min-width : 1440px) and (max-width : 1920px) {
-
-
-    .FormContent{
-        height:56vh;
-       
-}
-}
-
 @media only screen and (min-width : 320px) and (max-width : 1024px) {
     .leftContent {
         display: none;
     }
-    .FormContent{
-       
-        width: 90%;
-        margin: 0 auto;
     }
-    h1.loginheading {
-        
-        margin-top: 1em;
-        text-align: center;
-    }
-    input.form-control.inputPhone.ng-pristine.ng-invalid.ng-touched::placeholder {
-        font-size: 12px;
-    }
-    .loginRegister{
-        text-align: center;
-       
-    }
-    p.subtxt {
-       
-        text-align: center;
-    }
-    .noaccount p {
-      
-        text-align: center;
-    }
-
-}

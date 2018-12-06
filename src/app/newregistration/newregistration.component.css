@@ -44,23 +44,12 @@ div#noPadding {
     position: relative;
     background: #fff;
     overflow: hidden;
-    height: auto;
-    width: 60%;
+    height: 80vh;
+    width: 58vw;
 }
-h1.regheading {
-    font-size: 27px;
-    font-family: Lato;
-    text-transform: uppercase;
-    text-align: left;
-    font-weight: 600;
-    color: #7846dd;
-    margin-bottom: 5px;
-   
-    margin-top: 25px !important;
-}
-/* .loginContent {
+.loginContent {
     margin-right: 2em;
-} */
+}
 .loginContent h1 {
     color: #9151b7;
     font-size: 26px;
@@ -68,15 +57,7 @@ h1.regheading {
     margin: 0;
 }
 .loginContent p {
-    text-align: left;
-    
-}
-p.genderm {
-    margin-left: 25px;
-    margin-bottom:0px;
-}
-.row.genderoptions {
-    margin-left: 25px;
+    text-align: center;
 }
 .backCover {
     background: #9151b7;
@@ -86,9 +67,6 @@ p.genderm {
     position: unset;
     border-radius: 264px 0 0 264px;
     top: 0;
-}
-.genderoptions .col-md-4.col-xs-4.nomarginrw {
-    margin-top: 12px;
 }
 .loginRegister {
     text-align: center;
@@ -102,8 +80,7 @@ button.loginbutton {
     outline: none;
     border: none;
     color: #fff;
-    /* background: linear-gradient(to bottom,#683d90,#9a57c7); */
-    background: linear-gradient(to right, #7645dd, #e090ec);
+    background: linear-gradient(to bottom,#683d90,#9a57c7);
 }
 .row.nomargin {
     margin: 0;
@@ -208,14 +185,6 @@ img.registerLogo {
 	text-align: center;
 	position: relative;
 }
-#msform {
-    width: 100%;
-    margin-top: 3em !important;
-    /* margin: 50px auto; */
-    text-align: center;
-    /* position: relative; */
-    margin: 0 auto;
-}
 #msform fieldset {
 	background: white;
 	border: 0 none;
@@ -232,17 +201,17 @@ img.registerLogo {
 	display: none;
 }
 #msform input, #msform textarea {
-    /* padding: 15px 0 0 15px; */
+	padding: 15px 0 0 15px;
     border-bottom: 1px solid #9e9e9e;
     border-radius: 0px;
-    margin-bottom: 0px !important;
-    width: 100%;
-    box-sizing: border-box;
-    color: #444;
-    font-size: 16px;
-    font-family: Lato;
+    /* margin-bottom: 10px; */
+    margin-bottom:0px !important;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
 }
-
 #msform[_ngcontent-c1] input[_ngcontent-c1], #msform[_ngcontent-c1] textarea[_ngcontent-c1]::placeholder{
     /* color: #656363 !important; */
     font-family: Roboto;
@@ -253,17 +222,16 @@ img.registerLogo {
 #msform .action-button {
 
     width: 100px;
-    background: linear-gradient(to right, #7645dd, #e090ec);
+    background: linear-gradient(to bottom,#683d90,#9a57c7);
     border-radius: 50px;
     font-weight: bold;
+    color: white;
     border: 0 none;
     cursor: pointer;
-    outline: none;
+    outline:none;
+    height: 41px !important;
     padding: 6px 5px;
-    margin-top: 10px;
-}
-.pleft0 {
-    padding-left: 0px;
+    margin-top: 15px;
 }
 #msform .action-button:hover, #msform .action-button:focus {
 	box-shadow: 0 0 0 2px white, 0 0 0 3px #683d90;
@@ -348,17 +316,10 @@ p.genderm {
   .haveaccount {
     margin-top: 5px;
     text-align: center;
-    padding-left: 0em;
+    padding-left: 5em;
 }
 .haveaccount p {
-    margin-bottom: 20px;
-    text-align: center;
-    font-style: italic;
-    margin-top: 9px;
-    font-family: lato;
-    color: #444;
-    font-weight: 500;
-    font-size: 14px;
+    margin-bottom: 0;
 }
 .top_space {
     margin-top: 1em;
@@ -380,7 +341,7 @@ p.genderm {
     }
     /* scrollbar css */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -394,6 +355,4 @@ p.genderm {
 }
    /* scrollbar css */
 
-   .bottomspace {
-    margin-bottom: 15px;
-}
+     

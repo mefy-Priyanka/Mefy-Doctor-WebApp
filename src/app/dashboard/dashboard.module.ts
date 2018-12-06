@@ -34,7 +34,6 @@ const routes: Routes = [
       { path: "profile", component: ProfileComponent },
       { path: "account", component: ManageaccountComponent },
       { path: "raisebill", component: RaiseBillComponent },
-
       {
         path: "consultnew",
         loadChildren: "./consult/consult.module#ConsultModule"
@@ -72,7 +71,7 @@ const routes: Routes = [
     ManageaccountComponent,
     RaiseBillComponent,
     AppointmentnewComponent,
-    NotificationComponent,
+    NotificationComponent
   ]
 })
 export class DashboardModule { }
