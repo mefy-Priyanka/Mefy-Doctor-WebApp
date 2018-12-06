@@ -39,12 +39,12 @@ export class SidenavComponent implements OnInit {
     this.loader=true
     console.log("DOCTORID", this.doctorProfileId);
     this.profileService.getDocDetail(this.doctorProfileId).subscribe(data => {
-      console.log('PROFILE DETAILS', data);
+      // console.log('PROFILE DETAILS', data);
       this.profileInfo = data;
       this.loader=false
       console.log('doctor profile',this.profileInfo)
       this.imgUrlPrefix = this.sanitizer.bypassSecurityTrustResourceUrl(IMAGEURL + "/uploads/avatars/responsive/" + this.profileInfo.profileImage+"_sm.png");
-      console.log('imgUrlPrefix',this.imgUrlPrefix)/*Diplay doctor's dp*/
+      // console.log('imgUrlPrefix',this.imgUrlPrefix)/*Diplay doctor's dp*/
       this.status = this.profileInfo.availability ? this.profileInfo.availability : 'Online';
       // console.log("PROFILE DETAILS", this.profileInfo);
     }, err => {
