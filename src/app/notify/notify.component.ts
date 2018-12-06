@@ -55,6 +55,10 @@ this.toastyConfig.theme = "bootstrap";
   }
 
   successNotification(title, msg) {
+    // Just add default Toast with title only
+    // this.toastyService.success('Hi there');
+
+
     this.toastyService.success({
       title: title,
       msg: msg,

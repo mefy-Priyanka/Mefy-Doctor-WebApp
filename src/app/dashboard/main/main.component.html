@@ -51,7 +51,7 @@
                   </button>
                 </li>
               </ul>
-              <p class="clinics1 spbottom" *ngIf="clinicMessage">No Clinic Present</p>
+              <!-- <p class="clinics1 spbottom">No Clinic Present</p> -->
             </div>
           </div>
 
@@ -70,7 +70,7 @@
                   <p class="clinics1">eConsult</p>
                 </li>
                 <li class="manage_button">
-                  <button type="button" class="managebutton" >Manage</button>
+                  <button type="button" class="managebutton" (click)="getConsultType('eConsult')">Manage</button>
                 </li>
               </ul>
             </div>
@@ -91,7 +91,7 @@
                   </button>
                 </li>
               </ul> -->
-              <span class="clinics1 spbottom" >No appointments for today</span>
+              <span class="clinics1 spbottom">No appointments for today</span>
             </div>
           </div>
 
@@ -112,7 +112,7 @@
                   <p class="clinics1">Clinic visits</p>
                 </li>
                 <li class="manage_button">
-                  <button type="button" class="managebutton"  [routerLink]="['/dashboard/appnew']" >Manage</button>
+                  <button type="button" class="managebutton" (click)="getConsultType('visit')">Manage</button>
                 </li>
               </ul>
             </div>
@@ -130,8 +130,8 @@
                     <span class="cinicsuvisit6">k</span>
                   </button>
                 </li>
-              </ul>
-              <span class="clinics1 spbottom" *ngIf="noAppointment">No appointments for today</span>
+              </ul> -->
+              <span class="clinics1 spbottom">No appointments for today</span>
             </div>
           </div>
         </div>

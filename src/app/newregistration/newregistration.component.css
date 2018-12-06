@@ -80,8 +80,7 @@ button.loginbutton {
     outline: none;
     border: none;
     color: #fff;
-    /* background: linear-gradient(to bottom,#683d90,#9a57c7); */
-    background: linear-gradient(to right, #7645dd, #e090ec);
+    background: linear-gradient(to bottom,#683d90,#9a57c7);
 }
 .row.nomargin {
     margin: 0;
@@ -223,9 +222,7 @@ img.registerLogo {
 #msform .action-button {
 
     width: 100px;
-    /* background: linear-gradient(to bottom,#683d90,#9a57c7); */
-    
-    background: linear-gradient(to right, #7645dd, #e090ec);
+    background: linear-gradient(to bottom,#683d90,#9a57c7);
     border-radius: 50px;
     font-weight: bold;
     color: white;

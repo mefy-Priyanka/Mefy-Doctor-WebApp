@@ -22,8 +22,6 @@ export class SharedService {
   appointmentType: BehaviorSubject<any> = new BehaviorSubject({});
   consultHide: BehaviorSubject<any> = new BehaviorSubject(false);
   appointmentList: BehaviorSubject<any> = new BehaviorSubject({});
-  cancelAppointmentList: BehaviorSubject<any> = new BehaviorSubject({});
-
 
   info: any;
 
@@ -122,9 +120,5 @@ export class SharedService {
 
   saveAppointmentList(param) {
     this.appointmentList.next(param);
-  }
-  /***** Rightside Nav Appointment data */
-  cancdelAppointmentData(param){
-this.cancelAppointmentList.next(param);
   }
 }

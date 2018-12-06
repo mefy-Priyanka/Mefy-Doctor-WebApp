@@ -35,22 +35,6 @@ input.form-control.appoinmentdate2 {
 a.up_arrow {
     border-bottom: 1px solid rgba(86, 94, 234, 0.14) !important;
 }
-button.btn.btn-success.dateCal {
-    background: transparent;
-    box-shadow: none;
-    right: 43px;
-    position: absolute;
-    outline: none;
-    top: -3px;
-}
-svg#calender {
-    height: 36px;
-    width: 23px;
-    fill:#8a51b8;
-    position: absolute;
-    left: 0;
-    top: 0;
-}
 input.form-control.appoinmentdate2:focus {
     border-bottom: none;
 }
@@ -73,9 +57,6 @@ ul.list-inline.calender_health {
 }
 ul.list-inline.calender_health li {
     padding: 0;
-    display: flex;
-    flex-direction: row;
-    position: relative;
 }
 .hrmenu {
     margin-top: 20px;
@@ -435,22 +416,5 @@ svg#clinic{
     width: 20px;
     fill: #5a7ffb;
 }
-p.doctoraname{
-    font-size: 12px;
-    font-family: 'Roboto',sans-serif;
-    color: #8398ac;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 0px;
-}
-.resultMsg p {
-    text-align: center;
-    font-size: 14px;
-    color: #9aabbe;
-    font-weight: 500;
-    font-family: 'Roboto',sans-serif;
-}
-.resultMsg span {
-    color: #936ff8;
-    font-weight: 600;
-}
+
+

@@ -39,14 +39,10 @@ export class ProfileComponent implements OnInit {
   public selectedSpeciality:any=[];
   doctorDetail: FormGroup;
   doctorDetailErrors: any;
-  // languages: any;
-  language=[];
-  speciality=[];
-  education=[];
   public selectedLanguage:any=[];
-  public specarr=[];
+  public specarr:any;
   public educarr=[];
-  public langarr=[];
+  public langarr:any;
   public selectedEducation:any=[];
   public languageList: any = [];
   public  educationList: any = [];
@@ -54,6 +50,9 @@ export class ProfileComponent implements OnInit {
   public languageOfObjects:any=[];
   public showFill: boolean=false;
   public showaddr: boolean=false;
+  language: any;
+  speciality: any;
+  education: any;
  constructor(private router: Router,private formBuilder: FormBuilder,private docService: DocregistrationService,private profileService:ProfileService) {
 
     /***********STEP 1*************/
@@ -165,7 +164,7 @@ export class ProfileComponent implements OnInit {
       // console.log("ABCD",result.result.speciality);
       console.log('updated profiledata', this.doctorpdetail);
       // console.log('updated profiledata', this.result.result.result);
-      this.router.navigate(['/dashboard/main']);
+      // this.router.navigate(['/dashboard/main']);speciality
     },
     err => {
     })
@@ -173,15 +172,15 @@ export class ProfileComponent implements OnInit {
   }
   /********************GET LIST OF SPECIALITY *****************/
   getSpecialityList(){
-   
+
     let data={
-      speciality: "speciality"
+     z: "speciality"
    }
    this.docService.getSpecialityList(data).subscribe(data => {
      let value: any = {}
      value = data
      this.specialityList = value.result.result
-     console.log(this.specialityList)
+    //  console.log(this.specialityList)
      for (var i = 0; i < this.specialityList.length; i++) {
        var spec = {
          specialityName: this.specialityList[i].GeneralSpeciality,
@@ -197,7 +196,7 @@ export class ProfileComponent implements OnInit {
      /********************GET LIST OF Education *****************/
   getEducationList(){
     let data={
-      education: "education"
+        y: "education"
     }
       this.docService.getEducationList(data).subscribe(data => {
         let value: any = {}
@@ -221,7 +220,7 @@ export class ProfileComponent implements OnInit {
     /********************GET LIST OF LANGUAGE *****************/
   getLanguageList() {
     let data = {
-      language: "language"
+      x: "language"
     }
     this.docService.getLanguageList(data).subscribe(data => {
       let value: any = {}
