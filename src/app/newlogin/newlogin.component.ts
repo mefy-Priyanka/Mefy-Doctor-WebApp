@@ -156,7 +156,6 @@ export class NewloginComponent implements OnInit {
           }
           console.log('data',notifydata)
         this.sharedServices.createNotification(notifydata);
-          this.router.navigate(['/register'])
         }
       },
         err => {
@@ -174,6 +173,7 @@ export class NewloginComponent implements OnInit {
     }
     else {
       this.submitted = true
+      this.loader = false;
     }
   }
   /************************VERIFY OTP**************************/
@@ -189,7 +189,15 @@ export class NewloginComponent implements OnInit {
       this.loginService.verifyOtp(verficationData).subscribe(value => {
         console.log('result', value)
         let result:any={}
-        result=value
+        result=value 
+        if(result.result.message==" Otp verification failed"){
+          this.loader = false;
+    let notifydata = {
+    type: 'error',
+    title: 'Otp verification failed!'
+    }
+     this.sharedServices.createNotification(notifydata);
+        }else{
         localStorage.setItem('doctorId',result.result.result.doctorId)
         this.loader = false;
         this.router.navigate(['/dashboard/main'])
@@ -200,6 +208,7 @@ export class NewloginComponent implements OnInit {
         this.uid=this.myarr;
         console.log('y',this.uid)
         localStorage.setItem('userId',this.uid)  
+        }
       },
         err => {
           this.loader = false;
