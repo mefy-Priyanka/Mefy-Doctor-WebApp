@@ -23,7 +23,7 @@
               </svg>
             </span>
           </button>
-          <input type="file" name="myfile"  (change)="preveiwProfile($event)" /><span class="add"> Add new photo</span>
+          <input type="file" name="myfile"  (change)="previewProfile($event)" /><span class="add"> Add new photo</span>
         </div>
           </li>
         </ul>
@@ -132,11 +132,12 @@
     </div>
     <div class="notifications">
       <ul class="list-inline">
-        <li class="on_line" [hidden]="!loginStatus">{{status}}</li>
+        <li class="on_line">{{status}}</li>
+        <!-- [hidden]="!loginStatus" -->
         <li>
             <label class="switch">
-                <input type="checkbox"  (change)="availabilityDoctor($event)" [checked]="false">
-                <span class="slider round" [ngStyle]=   "{'color': status =='Online' ? '#23e29c' : '#fff'}"></span>
+                <input type="checkbox"  (change)="availabilityDoctor($event)" [checked]="status=='Online'">
+                <span class="slider round" [ngStyle]= "{'color': status =='Online' ? '#23e29c' : '#fff'}"></span>
               </label>
           </li>
         </ul>
@@ -191,19 +192,19 @@
         <li class="hidden-lg hidden-sm" (click)="sidenavNavigation('Credit')">
           <a >Transaction</a>
         </li>
-        <li>
+        <!-- <li>
           <a>Support</a>
-          <!-- http://meme.care/support.html -->
+          http://meme.care/support.html
         </li>
         <li>
           <a>F.A.Q</a>
-        </li>
-        <li>
+        </li> -->
+        <li [routerLink]="['/privacy']">
           <a>Terms and Condition</a>
         </li>
-        <li>
+        <!-- <li>
           <a>Privacy policy</a>
-        </li>
+        </li> -->
 
       </ul>
     </footer>

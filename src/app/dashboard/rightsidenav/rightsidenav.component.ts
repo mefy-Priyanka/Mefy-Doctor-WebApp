@@ -1,15 +1,11 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { AppointmentService } from '../../meme-services/appointment.service';
 import * as moment from 'moment';
-import { filter } from 'rxjs/operator/filter';
-import { SocketService } from '../../meme-services/socket.service';
 import { Router } from '@angular/router';
+import { AppointmentsService } from '../../mefyservice/appointments.service';
+import { SocketService } from '../../meme-services/socket.service';
 import { DoctorPrescriptionService } from '../../meme-services/doctor-prescription.service';
 import { SharedService } from '../../mefyservice/shared.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-
-import { DatePipe } from '@angular/common';
-import { APIURL } from '../../urlsConfig';
 
 
 
@@ -22,343 +18,245 @@ import { APIURL } from '../../urlsConfig';
   }
 })
 export class RightsidenavComponent implements OnInit {
-  age: any;
-  individualDetails: any;
-  imgUrlPrefix: any;
-  informationData: any;
-  cancelData: any;
-  cancelId: any;
-  date: any;
-  audio2: any;
+
+
+  public ActiveAppointment:any=[];
+  public informationNew:any=[];
+  public selectedAppointmentData: any = {};
+  public cancelAppointmentId:any={};
+  public noAppointment:boolean=false;  /* Show and hide appointment message*/
+  public loader:boolean=true;
+  public appointmentData:boolean=true;
   public elementRef;
-  doctorId: any;
-  caller: any = {};
-  app: any = {};
-  callerData: any = {};
-  informationNew: any = [];
-  message: any = "";
-  peer: any = {};
-  hideData: boolean = false;
-  dateAppointment: any;
-  incoming: any = false;
-  consult: any;
-  list: any;
-  hideConsult: boolean = false;
-  // consultId:any;
-  filterAppointment = {
-    appointmentType: ''
-  };
-  prescriptionId: any;
-  refreshIntervalId: any;
-  appointmentData: any = {};
-  constructor(private appointmentService: AppointmentService,
+  public appointmentDate:any;
+  public selectedAppointmentdate:any;
+  public getAppointment:any;
+  public Date:any
+  public myDateYMD= new Date();
+
+
+
+  constructor(private appointmentService: AppointmentsService,
     private socketService: SocketService,
     private router: Router,
     private ePrescriptionService: DoctorPrescriptionService,
     private sharedService: SharedService, myElement: ElementRef, private sanitizer: DomSanitizer) {
-
-    this.dateAppointment = new Date();
     this.elementRef = myElement;
-    this.sharedService.appointmentList.subscribe(data => {
-      if (Object.keys(data).length != 0) {
-        this.list = data;
-        this.informationNew.push(this.list)
-        console.log(this.informationNew)
-        this.getAppointmentlist();
-      }
-    })
-
+    /*get Appointment List*/
+  this.sharedService.appointmentList.subscribe(data=>{
+  let result:any={}
+  result=data
+  if (Object.keys(data).length != 0) {
+  this.ActiveAppointment.push(result.result)
+  this.getCurrentDateAppointmentlist();
+  }
+})
   }
 
   ngOnInit() {
-    this.getAppointmentlist();
-    this.checkDate();
-    this.socketService.incomingCall().subscribe((data: any) => {
-
-      console.log('callerData...', data);
-      this.incoming = true;
-      this.caller.id = data.callerId;
-      this.caller.name = data.fromUserName;
-      this.caller.socketId = data.fromSocketId;
-  
-      this.caller.callerEasyRTC = data.callerEasyRTC;
-      this.caller.roomId = data.roomId;
-      this.audio2 = document.getElementById('callAudio');
-      this.getindividualDetails();
-      this.audio2.load();
-      // this.audio2.isPlaying = true;
-      // this.audio2.play();
-      if (this.audio2.paused) {
-        this.audio2.load();
-        this.audio2.play();
-        this.audio2.loop = true
-      } else {
-        this.audio2.currentTime = 0;
-
-      }
-      //  this.audio2.play();
-      //     this.audio2.loop = true
-      setTimeout(() => {     // after certain time call automatically disconnected;
-        this.reject();
-      }, 32000);
-      //audio loop sdhfreuiregr
-      // if(!this.accept() && !this.reject()){
-
-      // }
-    });
-
-
-    // this.sharedService.appointmentDate.subscribe(data=>{
-    //   
-    //   // if(Object.keys(data).length!=0){
-    //     this.getAppointmentlist(data);
-    //   // }
-    // })
+    this.getCurrentDateAppointmentlist();
   }
+/*****************GET CURRENT DATE DOCTOR"S APPOINTMENT ACTIVE LIST***************** */
+  getCurrentDateAppointmentlist() {
+    this.appointmentService.getDoctorCurrentAppointment(localStorage.getItem('doctorId')).subscribe(data=>{
+      this.loader=false;
+      let result:any={}
+      result=data
+      if(result.result.result != null && Object.keys(result.result.result).length != 0){
 
-
-  // doctor
-  reject() {
-    this.incoming = false;
-    this.caller = {};
-    this.socketService.sendMessage('reject', { callerId: this.caller.id, callerSocketId: this.caller.socketId, callerEasyRTC: this.caller.callerEasyRTC, receiverId: localStorage.getItem('loginId') })
-    this.audio2.pause();//when call disconnected,audio stop
-    // this.audio2.currentTime = 0;
-    // this.audio2.isPlaying = false;
-    // this.audio2.load();
-    this.audio2 = null;
-    // return true;
-  }
-
-  //doctor
-  accept() {
-    this.router.navigate(['/dashboard/consultnew'], { queryParams: { callerId: this.caller.id, callerEasyRTC: this.caller.callerEasyRTC, roomId: this.caller.roomId } })
-    this.peer = this.caller.id
-    this.incoming = false;
-    // this.sharedService.makeCall(this.caller.callerEasyRTC);
-    this.socketService.sendMessage('accept', { callerId: this.caller.id, callerSocketId: this.caller.socketId, callerEasyRTC: this.caller.callerEasyRTC, receiverId: localStorage.getItem('loginId') })
-    this.audio2.pause();//when call connected,audio stop
-    this.audio2 = null;
-    // return true;
-
-  }
-
-
-  getAppointmentlist() {
-    this.informationNew = [];
-    // let date: any;
-    // date = moment().utcOffset(0);
-    // date.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
-    // date.toISOString();
-    // date.format();
-
-    this.dateAppointment;
-    this.appointmentService.getAppointmentList(localStorage.getItem('loginId'), this.dateAppointment).subscribe(
-      data => {
-        console.log(data)
-
-        if (data.result.length != 0) {
-          data.result.forEach(element => {
-
-            if (element.status == 'New') {
-              this.message = "";
-              this.informationNew.push(element);
-
-              console.log(this.informationNew)
-            }
-          });
-          if (this.informationNew.length == 0) {
-
-            this.message = "No Appointments For Today";
-          }
-
-        }
-        else {
-
-          this.message = "No Appointments For Today";
-        }
-
-
-      },
-      err => {
+      var status = result.result.result.filter(function(status) {
+        return status.status =='Active' ;
       });
+      for (let i = 0; i < status.length; i++) {
+        if( status!= null && Object.keys(status).length != 0){
+        console.log('Active Appointment list',status)
+        this.ActiveAppointment=status
+        this.appointmentData=true;
+        this.noAppointment=false
+        this.loader=false;
+      }
+
+     else {
+      this.loader=false;
+        this.appointmentData=false;
+        this.noAppointment=true;
+      } 
+
+    }
+  }
+  else{
+    this.appointmentData=false;
+        this.noAppointment=true;
+        this.loader=false;
+  }
+    },err=>{
+      this.loader=false;
+      console.log(err)
+      let notification = {
+        type: 'warning',
+        title: 'Server Issue ',
+      }
+      this.sharedService.createNotification(notification);
+    }) 
   }
 
   // get type to filter data
   getType(data) {
-    this.filterAppointment.appointmentType = data;
-    this.hideData = false;
+    // this.filterAppointment.appointmentType = data;
+    // this.hideData = false;
   }
 
   // hide and show details on click
   filterData() {
-    if (this.hideData == true) {
-      this.hideData = !this.hideData;
-    }
-    else if (this.hideData == false) {
-      this.hideData = !this.hideData;
-    }
+    // if (this.hideData == true) {
+    //   this.hideData = !this.hideData;
+    // }
+    // else if (this.hideData == false) {
+    //   this.hideData = !this.hideData;
+    // }
   }
 
-  //appointmnet list for date selected
-  dateChanged(e) {
-    this.message = '';
-    this.hideConsult = false;
-    if (e != null) {
-      this.checkDate();
-      this.informationNew = [];
-
-      this.dateAppointment = e;
-
-      this.appointmentService.getAppointmentList(localStorage.getItem('loginId'), e).subscribe(
-        data => {
+ /**************** API FOR DOCTOR"S APPOINTMENT LIST BY DATE AND DOCTORID **************/
+  selectedDate(date) {
+    console.log('date',date)
+    this.loader=true;
+    // this.message = '';
+    // this.hideConsult = false;
+    if (date != null) {
+      this.Date = date;
+    this.appointmentDate = date;
+    this.selectedAppointmentdate = moment(this.appointmentDate).format('YYYY-MM-DD');
+    console.log('selectedAppointmentdate',this.selectedAppointmentdate)
+      this.appointmentService.getAppointmentList(localStorage.getItem('doctorId'), this.selectedAppointmentdate).subscribe(data => {
           console.log(data);
-          // this.informationNew = data.result;
-          if (data.result.length != 0) {
-            data.result.forEach(element => {
-              if (element.status == 'New') {
-                this.message = "";
-                this.informationNew.push(element);
-
-              }
-
-            });
-            console.log(this.informationNew)
-            if (this.informationNew.length == 0) {
-
-              this.message = "No Appointments for day";
-            }
-          }
-          else {
-            this.message = "No appointments for day";
+          this.loader=false;
+          let result:any={}
+          result=data
+          if(result.result.result != null && Object.keys(result.result.result).length != 0){
+          var status = result.result.result.filter(function(status) {
+            return status.status =='Active' ;
+          });
+          for (let i = 0; i < status.length; i++) {
+            if( status!= null && Object.keys(status).length != 0){
+            console.log('Active Appointment list',status)
+            this.ActiveAppointment=status
+            this.appointmentData=true;
+            this.noAppointment=false;
+            this.loader=false;
           }
 
-        },
+         else {
+            this.appointmentData=false;
+            this.noAppointment=true;
+            this.loader=false;
+            // let notification = {
+            //   type: 'warning',
+            //   title: 'No any Appointment ',
+            // }            
+            // this.sharedService.createNotification(notification);
+          } 
+
+        }
+      }
+      else{
+        this.appointmentData=false;
+            this.noAppointment=true;
+            this.loader=false;
+      }
+      },
         err => {
+          console.log(err)
+          let notification = {
+            type: 'warning',
+            title: 'Server Issue ',
+          }
+          this.sharedService.createNotification(notification);
         });
     }
-
+  }
+/*****************GET APPOINTMENT ID FROM CANCEL BUTTON *****************/
+  cancelAppointmentButton(data) {
+    this.selectedAppointmentData = data;
+    this.cancelAppointmentId = this.selectedAppointmentData.appointmentId;
+    console.log(this.selectedAppointmentData);
   }
 
-  cancelButton(data) {
-    this.appointmentData = data;
-    this.cancelId = this.appointmentData._id;
-    // this.informationData = this.informationNew[index]
-    console.log(this.appointmentData);
-  }
+  /************************************Cancel Appointment******************/
+  cancelAppointment() {
+    this.loader=true;
+// console.log('appointment',this.cancelAppointmentId)
+let data={
+  appointmentId:this.cancelAppointmentId
+}
+this.appointmentService.cancelAppointment(data).subscribe(data=>{
+  console.log('cancelAppointment',data)
+  this.loader=false;
+  let result:any={}
+  result=data
+  this.sharedService.cancdelAppointmentData(result.result.result)
+  this.getCurrentDateAppointmentlist()
 
-  //Cancel appointment 
-  cancelAppointment(appointment) {
-    let presentTime: any;
-    presentTime = moment();
-    presentTime.toISOString()
-    console.log(presentTime)
-    var durationInMinutes = 30;
-    var MS_PER_MINUTE = 60000;
-    var maxCancelTime = new Date(presentTime + durationInMinutes * MS_PER_MINUTE);
-    console.log(maxCancelTime)
-    if ((moment(this.appointmentData.appointmentTimeFrom)).isBefore(maxCancelTime)) {
-      let notifydata = {
-        type: 'warning',
-        title: 'Appointment Cancel time Limit',
-        msg: '  is already Crossed'
-      }
-      this.sharedService.createNotification(notifydata);   
-    }
-    else{
-    let data = {
-      _id: appointment,
-      currentTime: moment(presentTime._d).toString()
-    }
-    console.log(data)
-    this.appointmentService.cancelAppointmentById(data).subscribe(data => {
-      console.log(data);
-      this.cancelData = data.result;
-      console.log(this.cancelData)
-      let notifydata = {
-        type: 'success',
-        title: 'Appointment',
-        msg: 'Cancelled Succesfully !'
-      }
-      this.sharedService.createNotification(notifydata);
-      this.getAppointmentlist();
-    },
-      err => {
-      })
-    }
+})
   }
 
   // Detecting Clicks Outside the Component
   handleClick(event) {
-    var clickedComponent = event.target;
-    var inside = false;
-    do {
-      if (clickedComponent === this.elementRef.nativeElement) {
-        inside = true;
-      }
-      clickedComponent = clickedComponent.parentNode;
-    } while (clickedComponent);
-    if (inside) {
-      console.log('inside');
-    } else {
-      console.log('outside');
-      if (this.hideData == true) {
-        this.hideData = !this.hideData;
-      }
-    }
+    // var clickedComponent = event.target;
+    // var inside = false;
+    // do {
+    //   if (clickedComponent === this.elementRef.nativeElement) {
+    //     inside = true;
+    //   }
+    //   clickedComponent = clickedComponent.parentNode;
+    // } while (clickedComponent);
+    // if (inside) {
+    //   console.log('inside');
+    // } else {
+    //   console.log('outside');
+    //   if (this.hideData == true) {
+    //     this.hideData = !this.hideData;
+    //   }
+    // }
   }
 
   // calculate age
   getAge(dateString) {
-    var today = new Date();
-    var birthDate = new Date(dateString);
-    this.age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      this.age--;
+    // var today = new Date();
+    // var birthDate = new Date(dateString);
+    // this.age = today.getFullYear() - birthDate.getFullYear();
+    // var m = today.getMonth() - birthDate.getMonth();
+    // if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    //   this.age--;
 
-    }
-    return this.age;
+    // }
+    // return this.age;
 
   }
   // individula details from profile id
   getindividualDetails() {
-    this.ePrescriptionService.getindividualDetails(this.caller.id).subscribe(data => {
-      this.individualDetails = data.registrationDetails;
-      console.log(this.individualDetails);
-      this.imgUrlPrefix = this.sanitizer.bypassSecurityTrustResourceUrl(APIURL + "file/fileShow?fileId=" + this.individualDetails.profileImage);
-      console.log(this.imgUrlPrefix);
-      if (this.individualDetails.dob) {
-        this.getAge(this.individualDetails.dob);
-      }
-    },
-      err => {
-      })
+    // this.ePrescriptionService.getindividualDetails(this.caller.id).subscribe(data => {
+    //   this.individualDetails = data.registrationDetails;
+    //   console.log(this.individualDetails);
+    //   this.imgUrlPrefix = this.sanitizer.bypassSecurityTrustResourceUrl(APIURL + "file/fileShow?fileId=" + this.individualDetails.profileImage);
+    //   console.log(this.imgUrlPrefix);
+    //   if (this.individualDetails.dob) {
+    //     this.getAge(this.individualDetails.dob);
+    //   }
+    // },
+    //   err => {
+    //   })
   }
 
   // navigate to prscription page for visit
   consultFunction(data, value) {
-    let appData = {
-      type: data,
-      individualId: value
-    }
-    // this.consult = data;
-    this.router.navigate(['dashboard/consultnew']);
-    this.sharedService.getAppointmnetType(appData);
-    this.sharedService.saveClinicvisit(true);
+    // let appData = {
+    //   type: data,
+    //   individualId: value
+    // }
+    // // this.consult = data;
+    // this.router.navigate(['dashboard/consultnew']);
+    // this.sharedService.getAppointmnetType(appData);
+    // this.sharedService.saveClinicvisit(true);
   }
 
-  // consult button validation in appointment list
-  checkDate() {
-    let presentDate: any;
-    presentDate = moment().utcOffset(0);
-    presentDate.set({ hour: 1, minute: 0, second: 0, millisecond: 0 })
-    presentDate.toISOString()
-    presentDate.format()
-    console.log(presentDate);
-    if (moment(this.dateAppointment).isBefore(presentDate._d)) {
-      this.hideConsult = true;
-    }
-
-  }
 }
