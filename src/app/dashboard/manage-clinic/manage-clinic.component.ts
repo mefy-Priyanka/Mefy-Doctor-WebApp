@@ -678,6 +678,7 @@ export class ManageClinicComponent implements OnInit {
 
   //get clinic Details through Doctor id
   getClinicList() {
+    
     this.ClinicService.getCliniclist(this.doctorprofileId).subscribe(data => {
       console.log(data)
       let response: any = {};
