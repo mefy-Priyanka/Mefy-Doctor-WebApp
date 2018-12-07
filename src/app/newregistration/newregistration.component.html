@@ -61,7 +61,7 @@
                         </div>
                         <div class="col-md-6">
                           <input class="errormessage" type="text" name="mobile" formControlName="phoneNumber" [textMask]="{mask: mask, guide: false}"
-                            placeholder="Mobile Number" minlength="8" />
+                            placeholder="Mobile Number" minlength="8" (change)="numberVerifcation()" />
                           <p class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="step1FormErrors.phoneNumber.required || (step1Form.controls.phoneNumber.pristine && submitted1)">PhoneNumber Cannot Be Empty</p>
                           <p class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="step1FormErrors.phoneNumber.minlength ">Please Enter Valid Phone Number
                           </p>

@@ -62,7 +62,8 @@ export class NewregistrationComponent implements OnInit {
   public error: any;
   public selectedState: any
   public selectedIssueAuthority: any;
-  public selectedCity: any
+  public selectedCity: any;
+  public verficationMessage:any;
 
 
   constructor(private formBuilder: FormBuilder, private docService: DocregistrationService, private router: Router, private sharedServices: SharedService) {
@@ -251,8 +252,10 @@ export class NewregistrationComponent implements OnInit {
 
     });
   }
+  // User Not Registered
+  // "User Already Registered!Please Login"
   firststep() {
-   if (this.step1Form.valid && this.error != 'Invalid DOB') {
+   if (this.step1Form.valid && this.error != 'Invalid DOB' && this.verficationMessage !="User Already Registered!Please Login") {
       console.log(this.step1Form.value)
       this.firstreg = false;
       this.secondreg = true;
@@ -282,6 +285,27 @@ export class NewregistrationComponent implements OnInit {
       this.activeStep4 = false
       /****************** */
     }
+  }
+  numberVerifcation(){
+    let data={
+      phoneNumber:this.step1Form.value.phoneNumber
+    }
+    console.log(data)
+    this.docService.numberVerifivcation(data).subscribe(data=>{
+      console.log('numberVerfication',data)
+      let result:any={}
+      result=data
+     this. verficationMessage=result.message
+     console.log(this.verficationMessage)
+     if(this.verficationMessage==="User Already Registered!Please Login"){
+      let notifydata = {
+        type: 'warning',
+        title: 'User already Registered',
+        message:'from this number'
+      }
+      this.sharedServices.createNotification(notifydata);
+     }
+    })
   }
 
   secondstep() { 
@@ -692,7 +716,7 @@ export class NewregistrationComponent implements OnInit {
         practicingSince: this.step3Form.value.practicingSince,
         state: this.selectedState,
         registrationNumber: this.step3Form.value.registrationNumber,
-        gender: this.step2Form.value.gender,
+        gender: this.step1Form.value.gender,
         issuingAuthority: this.step3Form.value.issuingAuthority,
         role: 'doctor',
         token: '12345'

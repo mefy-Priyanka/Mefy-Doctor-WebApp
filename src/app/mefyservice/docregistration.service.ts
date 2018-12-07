@@ -36,9 +36,8 @@ preRegistrationApi(data){
 doctorRegistrationApi(data){
   return this.httpClient.post(APIURL+'User/registration',data)
 }
-/********************************DOCTOR"S IMAGE UPLOAD***************************** */
-doctorImageUpload(data){
-  return this.httpClient.post(IMAGEURL+'/upload',data)
+/*********************NUMBER VERIFIACTION**********************/
+numberVerifivcation(data){
+  return this.httpClient.post(APIURL+'User/verifyNumber',data)
 }
-
 }
