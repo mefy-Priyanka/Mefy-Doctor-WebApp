@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { APIURL } from '../urlsConfig';
 import { IMAGEURL } from '../urlsConfig';
 
-@Injectable()
+@Injectable() 
 export class DocregistrationService {
 
   constructor(private httpClient: HttpClient) { }
