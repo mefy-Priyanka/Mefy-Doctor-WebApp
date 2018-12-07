@@ -63,7 +63,7 @@
             <p class="reg_no">Address:</p>
           </div>
           <div class="col-md-7">
-            <span class="detailShow">{{doctorpdetail?.address}}</span>
+            <input class="detailShow" formControlName="address"/>
             <button class="eDit" (click)="edit()">
               <svg version="1.1" id="editsvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 x="0px" y="0px" viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;"
@@ -78,7 +78,7 @@
                 </g>
               </svg>
             </button>
-            <input id="first_name" id="pac-input" type="text" *ngIf="showFill" formControlName="address">
+            <!-- <input id="first_name" id="pac-input" type="text" *ngIf="showFill" formControlName="address"> -->
           </div>
         </div>
 
@@ -87,7 +87,11 @@
             <p class="reg_no">Email:</p>
           </div>
           <div class="col-md-7">
-            <span class="detailShow">{{doctorpdetail?.email}}</span>
+            <!-- <span class="detailShow">{{doctorpdetail?.email}}</span> -->
+            <input class="detailShow" formControlName="email" />
+            <p class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="doctorDetailErrors.email.email">PLease enter valid email</p>
+            <p class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="doctorDetailErrors.email.maxLength">Length too long</p>
+
             <button class="eDit" (click)="email()">
               <svg version="1.1" id="editsvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 x="0px" y="0px" viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;"
@@ -102,7 +106,7 @@
                 </g>
               </svg>
             </button>
-            <input id="first_name" id="pac-input" type="text" *ngIf="showaddr" formControlName="email">
+            <!-- <input id="first_name" id="pac-input" type="text" *ngIf="showaddr" formControlName="email"> -->
           </div>
         </div>
 
@@ -113,9 +117,9 @@
           <div class="col-md-7">
             <span class="">
               <ul class="list-inline">
-                <li *ngFor="let list of doctorpdetail?.speciality" class="specialityChip">
+                <li *ngFor="let list of selectedSpeciality;let i=index;" class="specialityChip">
                   <p class="chipsdata">{{list}}
-                    <span class="closebtn" (click)="removeSpeciality(list)">&times;</span>
+                    <span class="closebtn" (click)="removeSpeciality(list,i)">&times;</span>
 
                   </p>
                 </li>
@@ -148,7 +152,7 @@
             </span>
 
             <p *ngIf="specialityShow">
-              <tag-input formControlName="speciality" (onAdd)="onaAddSpeciality($event)" onlyFromAutocomplete="true"
+              <tag-input formControlName="speciality" (onAdd)="onaAddSpeciality($event.specialityName)" onlyFromAutocomplete="true"
                 placeholder="Speciality" blinkIfDupe="true">
                 <tag-input-dropdown [appendToBody]="false" [identifyBy]="'specialityName'" [displayBy]="'specialityName'"
                   [showDropdownIfEmpty]="false" placeholder="Choose speciality" [autocompleteItems]="specialityOfObjects">
@@ -166,9 +170,9 @@
           <div class="col-md-7">
             <span class="">
               <ul class="list-inline">
-                <li *ngFor="let edulist of doctorpdetail?.education" class="specialityChip">
+                <li *ngFor="let edulist of selectedEducation;let k=index;" class="specialityChip">
                   <p class="chipsdata">{{edulist}}
-                    <span class="closebtn" (click)="removeEducation(edulist)">&times;</span>
+                    <span class="closebtn" (click)="removeEducation(edulist,k)">&times;</span>
                   </p>
                 </li>
                 <li><button class="aDd" (click)="addEducation()">
@@ -200,7 +204,7 @@
             </span>
 
             <p *ngIf="educationShow">
-              <tag-input formControlName="education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true"
+              <tag-input formControlName="education" (onAdd)="onAddEducation($event.educationName)" onlyFromAutocomplete="true"
                 blinkIfDupe="true" placeholder="Education">
                 <tag-input-dropdown [appendToBody]="false" [identifyBy]="'educationName'" [displayBy]="'educationName'"
                   [showDropdownIfEmpty]="false" placeholder="Choose education" [autocompleteItems]="educationOfObjects">
@@ -217,9 +221,9 @@
           <div class="col-md-7">
             <span class="">
               <ul class="list-inline">
-                <li *ngFor="let langlist of doctorpdetail?.language" class="specialityChip">
+                <li *ngFor="let langlist of selectedLanguage;let j=index" class="specialityChip">
                   <p class="chipsdata">{{langlist}}
-                    <span class="closebtn" (click)="removeLanguage(langlist)">&times;</span>
+                    <span class="closebtn" (click)="removeLanguage(langlist,j)">&times;</span>
                   </p>
                 </li>
                 <li><button class="aDd" (click)="addLanguage()">
@@ -251,10 +255,10 @@
             </span>
 
             <p *ngIf="languageShow">
-              <tag-input formControlName="language" (onAdd)="onAddLanguage($event)" onlyFromAutocomplete="true"
+              <tag-input formControlName="language" (onAdd)="onAddLanguage($event.langName)" onlyFromAutocomplete="true"
                 blinkIfDupe="true" placeholder="Language">
                 <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
-                  [showDropdownIfEmpty]="false" placeholder="Choose language" [autocompleteItems]="languageOfObjects">
+                  [showDropdownIfEmpty]="false" placeholder="Choose language" [autocompleteItems]="languageList">
                 </tag-input-dropdown>
               </tag-input>
             </p>
