@@ -160,8 +160,8 @@ export class ProfileComponent implements OnInit {
         gender: updateinfo.gender,
         dob: updateinfo.dob,
         city: updateinfo.city,
-        address: updateinfo.address,
-        email: updateinfo.email,
+        address: this.doctorDetail.value.address,
+        email:  this.doctorDetail.value.email,
         speciality: updateinfo.speciality,
         education: updateinfo.education,
         language: updateinfo.language,
@@ -181,6 +181,7 @@ export class ProfileComponent implements OnInit {
             msg: 'Updated Successfully'
           }
           this.sharedService.createNotification(notifydata);
+          this.router.navigate(['/dashboard/main']);
         }
 
         // console.log("ABCD",result.result.speciality);
@@ -198,7 +199,7 @@ export class ProfileComponent implements OnInit {
   getSpecialityList() {
 
     let data = {
-      z: "speciality"
+      speciality: "speciality"
     }
     this.docService.getSpecialityList(data).subscribe(data => {
       let value: any = {}
@@ -221,7 +222,7 @@ export class ProfileComponent implements OnInit {
   /********************GET LIST OF Education *****************/
   getEducationList() {
     let data = {
-      y: "education"
+      education: "education"
     }
     this.docService.getEducationList(data).subscribe(data => {
       console.log('dataaaaaa:::', data)
@@ -246,7 +247,7 @@ export class ProfileComponent implements OnInit {
   /********************GET LIST OF LANGUAGE *****************/
   getLanguageList() {
     let data = {
-      x: "language"
+      language: "language"
     }
     this.docService.getLanguageList(data).subscribe(data => {
       let value: any = {}
