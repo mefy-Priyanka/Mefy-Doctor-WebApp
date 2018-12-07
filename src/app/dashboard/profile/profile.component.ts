@@ -6,11 +6,7 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { DocregistrationService } from '../../mefyservice/docregistration.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from '../../mefyservice/profile.service';
-
-
-
-
-
+// import { SharedService } from '../../mefyservice/shared.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +16,7 @@ import { ProfileService } from '../../mefyservice/profile.service';
 })
 
 export class ProfileComponent implements OnInit {
+  /************************************ USED VARIABLES ***************************************** */
   specialist: any;
   public showSpeciality: boolean = false;
   public specialityShow: boolean = false;
@@ -83,15 +80,14 @@ export class ProfileComponent implements OnInit {
       this.ondoctorDetailValuesChanged();
     });
 
-    this.doctorProfileId = localStorage.getItem('doctorId');
-    this.doctoruserId = localStorage.getItem('userId');
-    this.doctorProfile();
-    this.getSpecialityList();
-    this.getEducationList();
-    this.getLanguageList();
+
+    this.doctorProfile();       // GET DOCTOR PROFILE DETAILS
+    this.getSpecialityList();   // GET  SPECIALITY LIST
+    this.getEducationList();   // GET EDUCATION LIST
+    this.getLanguageList();    // GET LANGUAGE LIST
   }
 
-  /******************************IT CATCHES ALL CHANGES IN STEP FORM 1******************/
+  /****************************** CATHES ALL THE CHANGES IN DOCTORFORM ********************************/
   ondoctorDetailValuesChanged() {
     for (const field in this.doctorDetailErrors) {
       if (!this.doctorDetailErrors.hasOwnProperty(field)) {
@@ -107,7 +103,9 @@ export class ProfileComponent implements OnInit {
       }
     }
   }
+  /****************************************** ENDS ****************************************** */
 
+  /************************************* CREATE DOCTORDETAIL FORM ***************************** */
   createdoctorDetail() {
     return this.formBuilder.group({
       phoneNumber: ['', Validators.required],
@@ -126,6 +124,7 @@ export class ProfileComponent implements OnInit {
       practicingSince: ['', Validators.required]
     });
   }
+  /****************************************** ENDS ************************************************* */
 
   // Doctor profile info
   doctorProfile() {
@@ -145,6 +144,7 @@ export class ProfileComponent implements OnInit {
       err => {
       })
   }
+  /************************************************ ENDS ************************************************ */
 
   updateDoctorProfile(updateinfo) {
     console.log(updateinfo)
