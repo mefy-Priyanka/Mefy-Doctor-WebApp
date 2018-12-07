@@ -201,7 +201,7 @@
                       <!-- <input type="text" name="dob" formControlName="dob"  placeholder="Date Of Birth" /> -->
                       <!-- <div class="col-xs-12 col-12 col-md-4 form-group"> -->
                       <div class="col-md-12 pleft0">
-                          <tag-input formControlName="education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true" blinkIfDupe="true" secondaryPlaceholder="Add Education" placeholder="Add more">
+                          <tag-input formControlName="education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true" blinkIfDupe="true" secondaryPlaceholder="Add Education" placeholder="Add more" [maxItems]='5'>
                               <tag-input-dropdown [appendToBody]="false" [identifyBy]="'educationName'" [displayBy]="'educationName'" [showDropdownIfEmpty]="false"
                                 [autocompleteItems]="educationOfObjects">
                               </tag-input-dropdown>
@@ -223,7 +223,7 @@
 
                       <!-- <input type="text" name="speciality"  formControlName="speciality" placeholder="Speciality" /> -->
                       <!-- <label>Speciality:</label> -->
-                      <tag-input formControlName="speciality" (onAdd)="onAddSpeciality($event)" onlyFromAutocomplete="true" blinkIfDupe="true" secondaryPlaceholder="Add Speciality" placeholder="Add more">
+                      <tag-input formControlName="speciality" (onAdd)="onAddSpeciality($event)" onlyFromAutocomplete="true" blinkIfDupe="true" secondaryPlaceholder="Add Speciality" placeholder="Add more" [maxItems]='5'>
                         <tag-input-dropdown [appendToBody]="false" [identifyBy]="'specialityName'" [displayBy]="'specialityName'" [showDropdownIfEmpty]="false"
                           [autocompleteItems]="specialityOfObjects">
                         </tag-input-dropdown>
