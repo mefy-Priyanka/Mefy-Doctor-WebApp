@@ -1052,7 +1052,7 @@ input.ng2-tag-input__text-input.ng-pristine.ng-valid {
     height: 34px;
     margin: 0px auto;
     background: #eae6e6;
-    margin-top: 8px !important;
+    margin-top: 0px !important;
 }
 input.ng2-tag-input__text-input.ng-valid.ng-dirty.ng-touched
 {
