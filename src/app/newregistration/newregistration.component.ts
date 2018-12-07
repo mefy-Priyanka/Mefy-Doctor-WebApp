@@ -252,26 +252,45 @@ export class NewregistrationComponent implements OnInit {
 
     });
   }
-  // User Not Registered
-  // "User Already Registered!Please Login"
   firststep() {
-   if (this.step1Form.valid && this.error != 'Invalid DOB' && this.verficationMessage !="User Already Registered!Please Login") {
-      console.log(this.step1Form.value)
-      this.firstreg = false;
-      this.secondreg = true;
-      this.thirdreg = false;
-      /******* FOR STYLING ******/
-      this.activeStep1 = false;
-      this.activeStep2 = true;
-      this.activeStep3 = false;
-      this.activeStep4 = false;
-      /****************** */
+   if (this.step1Form.valid && this.error != 'Invalid DOB') {
+    let data={
+      phoneNumber:this.step1Form.value.phoneNumber
+    }
+    this.docService.numberVerifivcation(data).subscribe(data=>{
+      console.log('numberVerfication',data)
+      let result:any={}
+      result=data
+     this. verficationMessage=result.message
+     console.log(this.verficationMessage)
+     if(this.verficationMessage==="User Already Registered!Please Login"){
+      let notifydata = {
+        type: 'warning',
+        title: 'User already Registered',
+        msg:'from this number'
+      }
+      this.sharedServices.createNotification(notifydata);
+     }
+  else{
+    console.log(this.step1Form.value)
+    this.firstreg = false;
+    this.secondreg = true;
+    this.thirdreg = false;
+    /******* FOR STYLING ******/
+    this.activeStep1 = false;
+    this.activeStep2 = true;
+    this.activeStep3 = false;
+    this.activeStep4 = false;
+    /****************** */
+  }
+    })  
     
     } else {
       let notifydata = {
         type: 'warning',
         title: 'Not Valid',
       }
+      console.log('not valid',this.step1Form.value)
       this.sharedServices.createNotification(notifydata);
 
       this.submitted1 = true
@@ -285,27 +304,6 @@ export class NewregistrationComponent implements OnInit {
       this.activeStep4 = false
       /****************** */
     }
-  }
-  numberVerifcation(){
-    let data={
-      phoneNumber:this.step1Form.value.phoneNumber
-    }
-    console.log(data)
-    this.docService.numberVerifivcation(data).subscribe(data=>{
-      console.log('numberVerfication',data)
-      let result:any={}
-      result=data
-     this. verficationMessage=result.message
-     console.log(this.verficationMessage)
-     if(this.verficationMessage==="User Already Registered!Please Login"){
-      let notifydata = {
-        type: 'warning',
-        title: 'User already Registered',
-        message:'from this number'
-      }
-      this.sharedServices.createNotification(notifydata);
-     }
-    })
   }
 
   secondstep() { 
@@ -686,7 +684,7 @@ export class NewregistrationComponent implements OnInit {
         let notifydata = {
           type: 'error',
           title: 'Server Issue!',
-          message: 'Something Went Wrong',
+          msg: 'Something Went Wrong',
         }
         this.sharedServices.createNotification(notifydata);
       }
@@ -747,7 +745,7 @@ export class NewregistrationComponent implements OnInit {
           let notifydata = {
             type: 'error',
             title: 'Server Issue!',
-            message: 'Something Went Wrong',
+            msg: 'Something Went Wrong',
           }
           this.sharedServices.createNotification(notifydata);
         })
