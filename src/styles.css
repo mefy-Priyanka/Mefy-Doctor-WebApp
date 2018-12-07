@@ -1034,6 +1034,9 @@ button.cance_l {
     width: 69px;
     border-radius: 50px;
 }
+footer ul li {
+    outline: none;
+}
 
 
                    
