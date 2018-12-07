@@ -38,7 +38,7 @@ this.toastyConfig.theme = "bootstrap";
       title: title,
       msg: msg,
       showClose: true,
-      timeout: 1000,
+      timeout: 1200,
       theme: "bootstrap",
 
     });

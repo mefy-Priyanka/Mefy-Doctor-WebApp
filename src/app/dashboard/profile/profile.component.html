@@ -6,56 +6,56 @@
           <div class="col-md-5">
             <p class="reg_no">Registration No./Uprn No.:</p>
           </div>
-          <div class="col-md-7"><span class="detailShow">{{doctorpdetail.registrationNumber}}</span></div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.registrationNumber}}</span></div>
         </div>
 
         <div class="row">
           <div class="col-md-5">
             <p class="reg_no">Name:</p>
           </div>
-          <div class="col-md-7"><span class="detailShow">{{doctorpdetail.name}}</span></div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.name}}</span></div>
         </div>
 
         <div class="row">
           <div class="col-md-5">
             <p class="reg_no">Mobile Number:</p>
           </div>
-          <div class="col-md-7"><span class="detailShow">{{doctorpdetail.phoneNumber}}</span></div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.phoneNumber}}</span></div>
         </div>
 
         <div class="row">
           <div class="col-md-5">
             <p class="reg_no">Gender:</p>
           </div>
-          <div class="col-md-7"><span class="detailShow">{{doctorpdetail.gender}}</span></div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.gender}}</span></div>
         </div>
 
         <div class="row">
           <div class="col-md-5">
             <p class="reg_no">Date of Birth:</p>
           </div>
-          <div class="col-md-7"><span class="detailShow">{{doctorpdetail.dob}}</span></div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.dob}}</span></div>
         </div>
 
         <div class="row">
           <div class="col-md-5">
             <p class="reg_no">City:</p>
           </div>
-          <div class="col-md-7"><span class="detailShow">{{doctorpdetail.city}}</span></div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.city}}</span></div>
         </div>
 
         <div class="row">
           <div class="col-md-5">
             <p class="reg_no">Issuing Authority:</p>
           </div>
-          <div class="col-md-7"><span class="detailShow">{{doctorpdetail.issuingAuthority}}</span></div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.issuingAuthority}}</span></div>
         </div>
 
         <div class="row">
           <div class="col-md-5">
             <p class="reg_no">Practicing Since:</p>
           </div>
-          <div class="col-md-7"><span class="detailShow">{{doctorpdetail.practicingSince}}</span></div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.practicingSince}}</span></div>
         </div>
 
         <div class="row">
@@ -63,7 +63,7 @@
             <p class="reg_no">Address:</p>
           </div>
           <div class="col-md-7">
-            <span class="detailShow">{{doctorpdetail.address}}</span>
+            <span class="detailShow">{{doctorpdetail?.address}}</span>
             <button class="eDit" (click)="edit()">
               <svg version="1.1" id="editsvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 x="0px" y="0px" viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;"
@@ -87,7 +87,7 @@
             <p class="reg_no">Email:</p>
           </div>
           <div class="col-md-7">
-            <span class="detailShow">{{doctorpdetail.email}}</span>
+            <span class="detailShow">{{doctorpdetail?.email}}</span>
             <button class="eDit" (click)="email()">
               <svg version="1.1" id="editsvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 x="0px" y="0px" viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;"
@@ -113,7 +113,7 @@
           <div class="col-md-7">
             <span class="">
               <ul class="list-inline">
-                <li *ngFor="let list of doctorpdetail.speciality" class="specialityChip">
+                <li *ngFor="let list of doctorpdetail?.speciality" class="specialityChip">
                   <p class="chipsdata">{{list}}
                     <span class="closebtn" (click)="removeSpeciality(list)">&times;</span>
 
@@ -166,7 +166,7 @@
           <div class="col-md-7">
             <span class="">
               <ul class="list-inline">
-                <li *ngFor="let edulist of doctorpdetail.education" class="specialityChip">
+                <li *ngFor="let edulist of doctorpdetail?.education" class="specialityChip">
                   <p class="chipsdata">{{edulist}}
                     <span class="closebtn" (click)="removeEducation(edulist)">&times;</span>
                   </p>
@@ -217,7 +217,7 @@
           <div class="col-md-7">
             <span class="">
               <ul class="list-inline">
-                <li *ngFor="let langlist of doctorpdetail.language" class="specialityChip">
+                <li *ngFor="let langlist of doctorpdetail?.language" class="specialityChip">
                   <p class="chipsdata">{{langlist}}
                     <span class="closebtn" (click)="removeLanguage(langlist)">&times;</span>
                   </p>

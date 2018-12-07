@@ -156,7 +156,7 @@ export class ProfileComponent implements OnInit {
       userId : localStorage.getItem('userId')
     }
     console.log(doctoridetail)
-    this.profileService.updateDetail(doctoridetail).subscribe(data => {
+    this.profileService.updateDetail(localStorage.getItem('userId'),doctoridetail).subscribe(data => {
       this.doctorpdetail=data;
       console.log('result',data)
       let result:any={}
