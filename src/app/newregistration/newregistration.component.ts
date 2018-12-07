@@ -62,7 +62,8 @@ export class NewregistrationComponent implements OnInit {
   public error: any;
   public selectedState: any
   public selectedIssueAuthority: any;
-  public selectedCity: any
+  public selectedCity: any;
+  public verficationMessage:any;
 
 
   constructor(private formBuilder: FormBuilder, private docService: DocregistrationService, private router: Router, private sharedServices: SharedService) {
@@ -253,22 +254,43 @@ export class NewregistrationComponent implements OnInit {
   }
   firststep() {
    if (this.step1Form.valid && this.error != 'Invalid DOB') {
-      console.log(this.step1Form.value)
-      this.firstreg = false;
-      this.secondreg = true;
-      this.thirdreg = false;
-      /******* FOR STYLING ******/
-      this.activeStep1 = false;
-      this.activeStep2 = true;
-      this.activeStep3 = false;
-      this.activeStep4 = false;
-      /****************** */
+    let data={
+      phoneNumber:this.step1Form.value.phoneNumber
+    }
+    this.docService.numberVerifivcation(data).subscribe(data=>{
+      console.log('numberVerfication',data)
+      let result:any={}
+      result=data
+     this. verficationMessage=result.message
+     console.log(this.verficationMessage)
+     if(this.verficationMessage==="User Already Registered!Please Login"){
+      let notifydata = {
+        type: 'warning',
+        title: 'User already Registered',
+        msg:'from this number'
+      }
+      this.sharedServices.createNotification(notifydata);
+     }
+  else{
+    console.log(this.step1Form.value)
+    this.firstreg = false;
+    this.secondreg = true;
+    this.thirdreg = false;
+    /******* FOR STYLING ******/
+    this.activeStep1 = false;
+    this.activeStep2 = true;
+    this.activeStep3 = false;
+    this.activeStep4 = false;
+    /****************** */
+  }
+    })  
     
     } else {
       let notifydata = {
         type: 'warning',
         title: 'Not Valid',
       }
+      console.log('not valid',this.step1Form.value)
       this.sharedServices.createNotification(notifydata);
 
       this.submitted1 = true
@@ -662,7 +684,7 @@ export class NewregistrationComponent implements OnInit {
         let notifydata = {
           type: 'error',
           title: 'Server Issue!',
-          message: 'Something Went Wrong',
+          msg: 'Something Went Wrong',
         }
         this.sharedServices.createNotification(notifydata);
       }
@@ -692,7 +714,7 @@ export class NewregistrationComponent implements OnInit {
         practicingSince: this.step3Form.value.practicingSince,
         state: this.selectedState,
         registrationNumber: this.step3Form.value.registrationNumber,
-        gender: this.step2Form.value.gender,
+        gender: this.step1Form.value.gender,
         issuingAuthority: this.step3Form.value.issuingAuthority,
         role: 'doctor',
         token: '12345'
@@ -723,7 +745,7 @@ export class NewregistrationComponent implements OnInit {
           let notifydata = {
             type: 'error',
             title: 'Server Issue!',
-            message: 'Something Went Wrong',
+            msg: 'Something Went Wrong',
           }
           this.sharedServices.createNotification(notifydata);
         })
