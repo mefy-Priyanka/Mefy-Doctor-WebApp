@@ -178,14 +178,24 @@
                           placeholder="State" typeaheadOptionField="states" [typeahead]="stateList" class="form-control" (typeaheadNoResults)="typeaheadNoStateResults($event)">
                           <p class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="step2FormErrors.state.required || (step2Form.controls.state.pristine && submitted2)">State can't be empty</p>
                         </div>
+
                       </div>
 
-                      <div class="col-md-12">
 
-                       
-                       
-                      </div>
 
+                      <!-- <input type="text" name="dob" formControlName="dob"  placeholder="Date Of Birth" /> -->
+                      <!-- <div class="col-xs-12 col-12 col-md-4 form-group"> -->
+                      <!-- <div class="col-md-12 pleft0">
+                        <tag-input formControlName="education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true" blinkIfDupe="true" secondaryPlaceholder="Add Education"
+                          placeholder="Add more">
+                          <tag-input-dropdown [appendToBody]="false" [identifyBy]="'educationName'" [displayBy]="'educationName'" [showDropdownIfEmpty]="false"
+                            [autocompleteItems]="educationOfObjects">
+                          </tag-input-dropdown>
+                        </tag-input>
+                        <a class="errormessage floatleft" [ngStyle]="{'font-size':'12px'}" *ngIf="step2FormErrors.education.required || (step2Form.controls.education.pristine && submitted2)">Education Cannot Be Empty</a>
+                      </div> -->
+
+                     
                       
 
                       <!-- <input type="text" name="dob" formControlName="dob"  placeholder="Date Of Birth" /> -->

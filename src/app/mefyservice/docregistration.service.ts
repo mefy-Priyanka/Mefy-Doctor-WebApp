@@ -18,7 +18,8 @@ export class DocregistrationService {
 }
  /*********************GET SPECIALITY JSON FILE****************************/
  getSpecialityList(data){
-  return this.httpClient.get(APIURL+'doctor/getList?speciality='+ data.speciality)
+   console.log(data)
+  return this.httpClient.get(APIURL+'doctor/getList?speciality='+ data.z)
 }
  /*********************GET STATE JSON FILE****************************/
  getStateList(data){
@@ -36,9 +37,8 @@ preRegistrationApi(data){
 doctorRegistrationApi(data){
   return this.httpClient.post(APIURL+'User/registration',data)
 }
-/********************************DOCTOR"S IMAGE UPLOAD***************************** */
-doctorImageUpload(data){
-  return this.httpClient.post(IMAGEURL+'/upload',data)
+/*********************NUMBER VERIFIACTION**********************/
+numberVerifivcation(data){
+  return this.httpClient.post(APIURL+'User/verifyNumber',data)
 }
-
 }

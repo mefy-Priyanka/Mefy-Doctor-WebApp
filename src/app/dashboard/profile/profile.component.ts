@@ -1,12 +1,12 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 // import { DoctorregisterService } from '../../meme-services/doctorregister.service';
 // import { MemeLoginService } from '../../meme-services/meme-login.service';
-// import { SharedService } from '../../mefyservice/shared.service';
+import { SharedService } from '../../mefyservice/shared.service';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocregistrationService } from '../../mefyservice/docregistration.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from '../../mefyservice/profile.service';
-import { SharedService } from '../../mefyservice/shared.service';
+// import { SharedService } from '../../mefyservice/shared.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +18,10 @@ import { SharedService } from '../../mefyservice/shared.service';
 export class ProfileComponent implements OnInit {
   /************************************ USED VARIABLES ***************************************** */
   specialist: any;
-  showSpeciality: boolean = false;
+  public showSpeciality: boolean = false;
+  public specialityShow: boolean = false;
+  public educationShow: boolean = false;
+  public languageShow: boolean = false;
   messageSpeciality: any;
   doctorProfileId: any;
   logInfo: any = {};
@@ -33,28 +36,25 @@ export class ProfileComponent implements OnInit {
   public selectedSpeciality: any = [];
   doctorDetail: FormGroup;
   doctorDetailErrors: any;
-  // languages: any;
-  language = [];
-  speciality = [];
-  education = [];
   public selectedLanguage: any = [];
-  public specarr = [];
+  public specarr: any;
   public educarr = [];
-  public langarr = [];
+  public langarr: any;
   public selectedEducation: any = [];
   public languageList: any = [];
   public educationList: any = [];
   public educationOfObjects: any = [];
   public languageOfObjects: any = [];
+  public showFill: boolean = false;
+  public showaddr: boolean = false;
+  language: any;
+  speciality: any;
+  education: any;
+  hideaddressedit: boolean = false;
+  hideemailedit: boolean = false;
+  constructor(private router: Router, private formBuilder: FormBuilder, private docService: DocregistrationService, private profileService: ProfileService, private sharedService: SharedService) {
 
-  /************************************************************************************************************ */
-
-  constructor(private router: Router, private formBuilder: FormBuilder, private docService: DocregistrationService, private profileService: ProfileService, private SharedService: SharedService) {
-
-    this.doctorProfileId = localStorage.getItem('doctorId');  //GET DOCTORID FROM LOCALSTORAGE
-    this.doctoruserId = localStorage.getItem('userId');       // GET USERID FROM LOCALSTORAGE
-
-    // DOCTOR FORM ERROR INITIALISATION
+    /***********STEP 1*************/
     this.doctorDetailErrors = {
       phoneNumber: {},
       name: {},
@@ -74,8 +74,8 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    // CREATE DOCOTR FROM 
-    this.doctorDetail = this.createdoctorDetail()
+    /*******STEP 1******** */
+    this.doctorDetail = this.createdoctorDetail();
     this.doctorDetail.valueChanges.subscribe(() => {
       this.ondoctorDetailValuesChanged();
     });
@@ -116,7 +116,7 @@ export class ProfileComponent implements OnInit {
       dob: ['', Validators.required],
       city: ['', Validators.required],
       address: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength]],
       speciality: ['', Validators.required],
       education: ['', Validators.required],
       language: ['', Validators.required],
@@ -126,72 +126,86 @@ export class ProfileComponent implements OnInit {
   }
   /****************************************** ENDS ************************************************* */
 
-  /************************************ GET DOCTOR PROFILE INFO ********************************** */
+  // Doctor profile info
   doctorProfile() {
     this.profileService.getDocDetail(this.doctorProfileId).subscribe(data => {
 
       this.doctorpdetail = data;
+      // if(this.doctorpdetail.address)
+      this.doctorDetail.controls.address.setValue(this.doctorpdetail.address);
+      this.doctorDetail.controls.email.setValue(this.doctorpdetail.email ? this.doctorpdetail.email : '');
+
       console.log('get doctor profiledata', this.doctorpdetail);
+      this.selectedSpeciality = this.doctorpdetail.speciality;
+      this.selectedLanguage = this.doctorpdetail.language;
+      this.selectedEducation = this.doctorpdetail.education;
+      console.log('selected speciality', this.selectedSpeciality)
     },
       err => {
       })
   }
   /************************************************ ENDS ************************************************ */
 
-  /*************************************** UODATE DOCTOR PROFILE INFO ********************************************** */
   updateDoctorProfile(updateinfo) {
-console.log('form ',this.doctorDetail.value)
-    let doctoridetail = {
-      phoneNumber: updateinfo.phoneNumber,
-      name: updateinfo.name,
-      registrationNumber: updateinfo.registrationNumber,
-      state: updateinfo.state,
-      gender: updateinfo.gender,
-      dob: updateinfo.dob,
-      city: updateinfo.city,
-      address: this.doctorDetail.value.address,
-      email: this.doctorDetail.value.email,
-      speciality: this.specarr,
-      education: this.educarr,
-      language: this.langarr,
-      issuingAuthority: updateinfo.issuingAuthority,
-      practicingSince: updateinfo.practicingSince,
+    console.log(updateinfo)
+    if (updateinfo.speciality.length == 0 || updateinfo.education.length == 0 || updateinfo.language.length == 0) {
+      window.alert('fie;ds required')
     }
-    console.log(doctoridetail)
-    this.profileService.updateDetail( this.doctoruserId,doctoridetail).subscribe(data => {
-      this.doctorpdetail = data;
-      console.log('UPADTED PROFILE RESULR', data)
-      let result: any = {}
-      result = data
-      // console.log("ABCD",result.result.speciality);
-      console.log('updated profiledata', this.doctorpdetail);
-      // let notifydata = {
-      //   type: 'success',
-      //   title: 'Clinic',
-      //   msg: 'Deleted Succesfully'
-      // }
-      // this.SharedService.createNotification(notifydata);
-      // console.log('updated profiledata', this.result.result.result);
-      this.router.navigate(['/dashboard/main']);
-    },
-      err => {
+    else {
+      let doctoridetail = {
+        phoneNumber: updateinfo.phoneNumber,
+        name: updateinfo.name,
+        registrationNumber: updateinfo.registrationNumber,
+        state: updateinfo.state,
+        gender: updateinfo.gender,
+        dob: updateinfo.dob,
+        city: updateinfo.city,
+        address: updateinfo.address,
+        email: updateinfo.email,
+        speciality: updateinfo.speciality,
+        education: updateinfo.education,
+        language: updateinfo.language,
+        issuingAuthority: updateinfo.issuingAuthority,
+        practicingSince: updateinfo.practicingSince
+      }
+      console.log(doctoridetail)
+      this.profileService.updateDetail(localStorage.getItem('userId'), doctoridetail).subscribe(data => {
+        this.doctorpdetail = data;
+        console.log('result', data)
+        let result: any = {}
+        result = data
+        if (!result.result.error) {
+          let notifydata = {
+            type: 'success',
+            title: 'Profile',
+            msg: 'Updated Successfully'
+          }
+          this.sharedService.createNotification(notifydata);
+        }
 
-      })
+        // console.log("ABCD",result.result.speciality);
+        console.log('updated profiledata', this.doctorpdetail);
+        // console.log('updated profiledata', this.result.result.result);
+        // this.router.navigate(['/dashboard/main']);speciality
+      },
+        err => {
+        })
+    }
+
 
   }
-  /******************************************** ENDS *********************************************************** */
-
-  /***************************** GET LIST OF SPECIALITIES *********************************************/
+  /********************GET LIST OF SPECIALITY *****************/
   getSpecialityList() {
 
     let data = {
-      speciality: "speciality"
+      z: "speciality"
     }
     this.docService.getSpecialityList(data).subscribe(data => {
       let value: any = {}
       value = data
-      this.specialityList = value.result.result
-      console.log(this.specialityList)
+      if (value.result)
+        this.specialityList = value.result.result;
+      //  console.log(this.specialityList)
       for (var i = 0; i < this.specialityList.length; i++) {
         var spec = {
           specialityName: this.specialityList[i].GeneralSpeciality,
@@ -204,13 +218,13 @@ console.log('form ',this.doctorDetail.value)
         console.log(err)
       })
   }
-  /****************************************** ENDS ************************************************* */
-  /****************************** GET LIST OF EDUCATIONS  *************************************************/
+  /********************GET LIST OF Education *****************/
   getEducationList() {
     let data = {
-      education: "education"
+      y: "education"
     }
     this.docService.getEducationList(data).subscribe(data => {
+      console.log('dataaaaaa:::', data)
       let value: any = {}
       value = data
       this.educationList = value.result.result
@@ -227,9 +241,9 @@ console.log('form ',this.doctorDetail.value)
         console.log(err)
       })
   }
-  /****************************************** ENDS ********************************************************** */
 
-  /************************************ GET LIST OF LANGUAGES **********************************************/
+  /*************************END************************************ */
+  /********************GET LIST OF LANGUAGE *****************/
   getLanguageList() {
     let data = {
       language: "language"
@@ -251,71 +265,115 @@ console.log('form ',this.doctorDetail.value)
         console.log(err)
       })
   }
-  /************************************* ENDS *************************************************** */
-
-  /************************************ STORE LANGUAGE SELECTED FROM LIST *********************************/
+  /*************************END************************************ */
+  /***********************LANGUAGE ON SELECT IN STEP 2*********/
   onAddLanguage(evt) {
-    this.selectedLanguage.push(evt.value)
-    this.langarr = this.doctorpdetail.language.concat(this.selectedLanguage);
-    console.log("langarr", this.langarr);
-  }
-  /******************************************* ENDS ***************************************************** */
+    console.log(evt)
+    if (this.selectedLanguage.includes(evt)) {
+      window.alert('Education already present')
+    }
+    else {
+      this.selectedLanguage.push(evt);
+    }
+    this.doctorDetail.controls.language.setValue('')
 
-  /*************************************** STORE EDUCATION SELECTED FROM LIST ********************************************/
+    // this.selectedLanguage.push(evt.value)
+    // this.langarr=this.doctorpdetail.language.concat(this.selectedLanguage);
+    // console.log("langarr", this.langarr);
+  }
+
+  // remove language
+  removeLanguage(name, j) {
+    this.selectedLanguage.splice(j, 1)
+    // this.language = this.doctorpdetail.language;
+    // console.log(this.language);
+    // this.language.splice(this.language.indexOf(name), 1);
+    // console.log('language Array', this.language);
+    // this.langarr.push(this.language);
+    // console.log("hi", this.langarr)
+  }
+
+  /***********************EDUCATION ON SELECT IN STEP 3*********/
   onAddEducation(evt) {
-    this.selectedEducation.push(evt.value);
-    this.educarr.push(evt.value);
-    this.educarr = this.doctorpdetail.education.concat(this.selectedEducation);
-    console.log(" this.educarr", this.educarr);
-  }
-  /******************************************* ENDS ************************************************** */
+    console.log(evt)
+    if (this.selectedEducation.includes(evt)) {
+      window.alert('Education already present')
+    }
+    else {
+      this.selectedEducation.push(evt);
+    }
+    this.doctorDetail.controls.education.setValue('')
 
-  /************************************ STORE SPECAILITY SELECTED FROM LIST *************************************************/
+    // this.selectedEducation.push(evt.value);
+    // this.educarr.push(evt.value);
+    // this.educarr=this.doctorpdetail.education.concat(this.selectedEducation);
+    // console.log(" this.educarr", this.educarr);
+  }
+
+  // remove education
+  removeEducation(name, k) {
+    this.selectedEducation.splice(k, 1)
+    // this.education = this.doctorpdetail.education,
+    //   this.education.splice(this.education.indexOf(name), 1);
+    // console.log('education array', this.education);
+    // this.educarr.push(this.education);
+    // console.log("hi", this.educarr)
+  }
+
+  /***********************SPECIALITY ON SELECT IN STEP 3*********/
   onaAddSpeciality(evt) {
-    // console.log(evt);
-    this.selectedSpeciality.push(evt.value)
+    console.log(evt);
+    if (this.selectedSpeciality.includes(evt)) {
+      window.alert('speciality already present')
+    }
+    else {
+      this.selectedSpeciality.push(evt)
+    }
+    this.doctorDetail.controls.speciality.setValue('')
+    // this.selectedSpeciality.push(evt.value);
     // console.log('selectedSpeciality',this.selectedSpeciality)
-    this.specarr = this.doctorpdetail.speciality.concat(this.selectedSpeciality);
-    console.log(" this.specarr", this.specarr);
+    // this.specarr=this.doctorpdetail.speciality.concat(this.selectedSpeciality);
+    // console.log(" this.specarr", this.specarr);
   }
-  /******************************************* ENDS *********************************************************** */
 
-  /******************************************* CANCLE FORM  *********************************************************** */
+  // remove speciality
+  removeSpeciality(name, i) {
+
+    console.log('name', name, i);
+    console.log(this.selectedSpeciality)
+    this.selectedSpeciality.splice(i, 1)
+    console.log(this.selectedSpeciality)
+    // this.speciality = this.doctorpdetail.speciality,
+    //   this.speciality.splice(this.speciality.indexOf(name), 1);
+    // console.log('speciality array', this.speciality);
+    // this.specarr.push(this.speciality);
+    // console.log("hi",this.specarr)
+  }
+
   //cancel profile 
   cancelForm() {
     this.router.navigate(['/dashboard/main']);
   }
-  /******************************************* ENDS *********************************************************** */
 
-  /*************************************** REMOVE ANY LANGUAGE FROM CHIPS ******************************************************* */
-  removeLanguage(name) {
-    this.language = this.doctorpdetail.language;
-    console.log(this.language);
-    this.language.splice(this.language.indexOf(name), 1);
-    console.log('language Array', this.language);
-    this.langarr.push(this.language);
-    console.log("hi", this.langarr)
+
+
+
+
+  edit() {
+    this.showFill = true;
+    this.doctorDetail.controls.address.setValue('');
   }
-  /******************************************** ENDS ************************************************** */
-
-  /*************************************** REMOVE ANY SPECIALITY  FROM CHIPS ******************************************************* */
-  removeSpeciality(name) {
-    this.speciality = this.doctorpdetail.speciality,
-      this.speciality.splice(this.speciality.indexOf(name), 1);
-    console.log('speciality array', this.speciality);
-    this.specarr.push(this.speciality);
-    console.log("hi", this.specarr)
+  email() {
+    this.showaddr = true;
+    this.doctorDetail.controls.email.setValue('');
   }
-  /******************************************** ENDS ************************************************** */
-
-  /*************************************** REMOVE ANY EDUCATION  FROM CHIPS ******************************************************* */
-  removeEducation(name) {
-    this.education = this.doctorpdetail.education,
-      this.education.splice(this.education.indexOf(name), 1);
-    console.log('education array', this.education);
-    this.educarr.push(this.education);
-    console.log("hi", this.educarr)
+  addspeciality() {
+    this.specialityShow = true;
   }
-  /******************************************** ENDS ************************************************** */
-
+  addEducation() {
+    this.educationShow = true;
+  }
+  addLanguage() {
+    this.languageShow = true;
+  }
 }
