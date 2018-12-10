@@ -105,8 +105,12 @@ export class SidenavComponent implements OnInit {
 
   /***************************************DOCTOR LOGOUT FROM APP ******************************************** */
   logOut() {
+    debugger;
+    this.profileService.updateDetail(this.userId,{availability:'Offline'}).subscribe(result => {
+      console.log('profile updaye with offline',result)
+    })
     localStorage.clear();
-    this.router.navigate(['/newlogin']);
+     this.router.navigate(['/newlogin']);
   }
   /**************************************** ENDS *************************************************************** */
 
