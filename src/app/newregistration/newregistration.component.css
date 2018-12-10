@@ -400,6 +400,13 @@ p.genderm {
     .leftContent {
         display: none;
     }
+    .FormContent{
+        width: 94%;
+    }
+    .res30 {
+        padding-left: 30px;
+    }
+    
     }
 
 
@@ -426,3 +433,5 @@ p.genderm {
    .bottomspace {
     margin-bottom: 15px;
 }
+
+

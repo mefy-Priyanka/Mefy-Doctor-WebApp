@@ -81,7 +81,7 @@
                             (bsValueChange)="compareDob($event)">
                           <p class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="step1FormErrors.dob.required || (step1Form.controls.dob.pristine && submitted2)">Date of Birth Cannot Be Empty</p>
                           </div>
-                          <div class="col-md-6 pleft16">
+                          <div class="col-md-6 pleft16 res30">
                               <p class="genderm top4">Gender
                                   <a class="errormessage text-center" [ngStyle]="{'font-size':'12px'}" *ngIf="step1FormErrors.gender.required || (step1Form.controls.gender.pristine && submitted1)">choose the gender</a>
                               </p>
@@ -279,8 +279,15 @@
                       <p>Please enter the OTP you received</p>
                       <input type="text" name="otp" placeholder="OTP" formControlName="otp" />
                       <p class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="step4FormErrors.otp.required || (step4Form.controls.otp.pristine && submitted4)">Otp Cannot Be Empty</p>
-                      <input type="button" name="previous" class="previous action-button" (click)="previouspagelast()" value="Previous" />
-                      <input type="button" name="next" class="next action-button" (click)="preRgistration()" value="Next" />
+                     <div class="row">
+                       <div class="col-md-6 col-xs-6 text-right">
+                        <input type="button" name="previous" class="previous action-button" (click)="previouspagelast()" value="Previous" />
+                       
+                       </div>
+                       <div class="col-md-6 col-xs-6 text-left">
+                        <input type="button" name="next" class="next action-button" (click)="preRgistration()" value="Next" />
+                       </div>
+                     </div>
                     </form>
                   </fieldset>
                   <!-- ****************** END OF FORM 4************ -->
