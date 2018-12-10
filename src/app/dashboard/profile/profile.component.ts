@@ -6,11 +6,7 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { DocregistrationService } from '../../mefyservice/docregistration.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from '../../mefyservice/profile.service';
-
-
-
-
-
+// import { SharedService } from '../../mefyservice/shared.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +16,7 @@ import { ProfileService } from '../../mefyservice/profile.service';
 })
 
 export class ProfileComponent implements OnInit {
+  /************************************ USED VARIABLES ***************************************** */
   specialist: any;
   public showSpeciality: boolean = false;
   public specialityShow: boolean = false;
@@ -83,15 +80,14 @@ export class ProfileComponent implements OnInit {
       this.ondoctorDetailValuesChanged();
     });
 
-    this.doctorProfileId = localStorage.getItem('doctorId');
-    this.doctoruserId = localStorage.getItem('userId');
-    this.doctorProfile();
-    this.getSpecialityList();
-    this.getEducationList();
-    this.getLanguageList();
+
+    this.doctorProfile();       // GET DOCTOR PROFILE DETAILS
+    this.getSpecialityList();   // GET  SPECIALITY LIST
+    this.getEducationList();   // GET EDUCATION LIST
+    this.getLanguageList();    // GET LANGUAGE LIST
   }
 
-  /******************************IT CATCHES ALL CHANGES IN STEP FORM 1******************/
+  /****************************** CATHES ALL THE CHANGES IN DOCTORFORM ********************************/
   ondoctorDetailValuesChanged() {
     for (const field in this.doctorDetailErrors) {
       if (!this.doctorDetailErrors.hasOwnProperty(field)) {
@@ -107,7 +103,9 @@ export class ProfileComponent implements OnInit {
       }
     }
   }
+  /****************************************** ENDS ****************************************** */
 
+  /************************************* CREATE DOCTORDETAIL FORM ***************************** */
   createdoctorDetail() {
     return this.formBuilder.group({
       phoneNumber: ['', Validators.required],
@@ -126,10 +124,11 @@ export class ProfileComponent implements OnInit {
       practicingSince: ['', Validators.required]
     });
   }
+  /****************************************** ENDS ************************************************* */
 
   // Doctor profile info
   doctorProfile() {
-    this.profileService.getDocDetail(this.doctorProfileId).subscribe(data => {
+    this.profileService.getDocDetail(localStorage.getItem('doctorId')).subscribe(data => {
 
       this.doctorpdetail = data;
       // if(this.doctorpdetail.address)
@@ -140,16 +139,24 @@ export class ProfileComponent implements OnInit {
       this.selectedSpeciality = this.doctorpdetail.speciality;
       this.selectedLanguage = this.doctorpdetail.language;
       this.selectedEducation = this.doctorpdetail.education;
-      console.log('selected speciality', this.selectedSpeciality)
+      // console.log('selected speciality', this.selectedSpeciality)
     },
       err => {
       })
   }
+  /************************************************ ENDS ************************************************ */
 
   updateDoctorProfile(updateinfo) {
     console.log(updateinfo)
     if (updateinfo.speciality.length == 0 || updateinfo.education.length == 0 || updateinfo.language.length == 0) {
-      window.alert('fie;ds required')
+      // window.alert('fie;ds required')
+       let notifydata = {
+        type: 'error',
+      title: 'Profile',
+      msg: 'Fields Required'
+      }
+      this.sharedService.createNotification(notifydata);
+
     }
     else {
       let doctoridetail = {
@@ -160,8 +167,8 @@ export class ProfileComponent implements OnInit {
         gender: updateinfo.gender,
         dob: updateinfo.dob,
         city: updateinfo.city,
-        address: updateinfo.address,
-        email: updateinfo.email,
+        address: this.doctorDetail.value.address,
+        email:  this.doctorDetail.value.email,
         speciality: updateinfo.speciality,
         education: updateinfo.education,
         language: updateinfo.language,
@@ -181,6 +188,7 @@ export class ProfileComponent implements OnInit {
             msg: 'Updated Successfully'
           }
           this.sharedService.createNotification(notifydata);
+          this.router.navigate(['/dashboard/main']);
         }
 
         // console.log("ABCD",result.result.speciality);
@@ -270,7 +278,13 @@ export class ProfileComponent implements OnInit {
   onAddLanguage(evt) {
     console.log(evt)
     if (this.selectedLanguage.includes(evt)) {
-      window.alert('Education already present')
+      // window.alert('Education already present')
+      let notifydata = {
+        type: 'error',
+      title: 'Profile',
+      msg: 'Language already present'
+      }
+      this.sharedService.createNotification(notifydata);
     }
     else {
       this.selectedLanguage.push(evt);
@@ -297,7 +311,13 @@ export class ProfileComponent implements OnInit {
   onAddEducation(evt) {
     console.log(evt)
     if (this.selectedEducation.includes(evt)) {
-      window.alert('Education already present')
+      // window.alert('Education already present')
+      let notifydata = {
+        type: 'error',
+      title: 'Profile',
+      msg: 'Education already present'
+      }
+      this.sharedService.createNotification(notifydata);
     }
     else {
       this.selectedEducation.push(evt);
@@ -324,7 +344,13 @@ export class ProfileComponent implements OnInit {
   onaAddSpeciality(evt) {
     console.log(evt);
     if (this.selectedSpeciality.includes(evt)) {
-      window.alert('speciality already present')
+      // window.alert('speciality already present')
+      let notifydata = {
+        type: 'error',
+      title: 'Profile',
+      msg: 'Speciality already present'
+      }
+      this.sharedService.createNotification(notifydata);
     }
     else {
       this.selectedSpeciality.push(evt)

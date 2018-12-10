@@ -2,7 +2,8 @@ import { Component, OnInit,ElementRef } from '@angular/core';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { DoctorPrescriptionService } from '../../meme-services/doctor-prescription.service';
 import{SharedService} from '../../mefyservice/shared.service'
-import{ScheduleService} from '../../meme-services/schedule.service';
+import{ClinicService} from '../../mefyservice/clinic.service'
+
 
 @Component({
   selector: 'app-navbar',
@@ -15,11 +16,11 @@ import{ScheduleService} from '../../meme-services/schedule.service';
 export class NavbarComponent implements OnInit {
   doctorProfileId: any;
   prescriptionId:any;
-  whenDashboardClicked :Boolean= true;
-  whenCreditClicked:Boolean=true;
-  whenAppoinmentClicked:Boolean=true;
-  whenClinicsClicked:Boolean=true;
-  whenEConsultClicked:Boolean=true;
+  whenDashboardClicked :Boolean= true;  /*for Dashboard*/
+  whenCreditClicked:Boolean=false;      /*for Credit*/
+  whenAppoinmentClicked:Boolean=false;  /*for Appointment*/
+  whenClinicsClicked:Boolean=false;     /*for Clinic*/
+  whenEConsultClicked:Boolean=false;    /*for Econsult*/
   pathName:any;
   clinicList=[];
   searchInput:any;
@@ -28,9 +29,9 @@ export class NavbarComponent implements OnInit {
     clinicName: ''
   };
   public elementRef;
-  constructor(myElement: ElementRef,private scheduleService:ScheduleService,private router: Router, private ePrescriptionService: DoctorPrescriptionService,private sharedService: SharedService,private route: ActivatedRoute) {
+  constructor(myElement: ElementRef,private clinicService:ClinicService,private router: Router, private ePrescriptionService: DoctorPrescriptionService,private sharedService: SharedService,private route: ActivatedRoute) {
  
-    this.doctorProfileId = localStorage.getItem('loginId');
+    this.doctorProfileId = localStorage.getItem('doctorId');
 
     this.elementRef = myElement;
 
@@ -58,7 +59,6 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.whenDashboardClicked=false;
   }
 // create prescription
   // navigateEprescription() {
@@ -85,43 +85,43 @@ export class NavbarComponent implements OnInit {
   // }
   //using ngClass on click for dashboard
   dashboardChangeColor(){  
-    this.whenDashboardClicked=false;
-    this.whenCreditClicked=true;
-  this.whenEConsultClicked=true;
-  this.whenClinicsClicked=true;
-  this.whenAppoinmentClicked=true;
+    this.whenDashboardClicked=true;
+    this.whenCreditClicked=false;
+  this.whenEConsultClicked=false;
+  this.whenClinicsClicked=false;
+  this.whenAppoinmentClicked=false;
 }
   //using ngClass on click for EConsult
 eConsultColourChange(){
-  this.whenEConsultClicked=false;  
-  this.whenCreditClicked=true; 
-  this.whenDashboardClicked=true;
-  this.whenAppoinmentClicked=true;
-  this.whenClinicsClicked=true;
+  this.whenEConsultClicked=true;  
+  this.whenCreditClicked=false; 
+  this.whenDashboardClicked=false;
+  this.whenAppoinmentClicked=false;
+  this.whenClinicsClicked=false;
 }
  //using ngClass on click for Clinics
  clinicsColourChange(){
-  this.whenClinicsClicked=false; 
-  this.whenDashboardClicked=true;
-  this.whenEConsultClicked=true;
-  this.whenAppoinmentClicked=true;
-  this.whenCreditClicked=true; 
+  this.whenClinicsClicked=true; 
+  this.whenDashboardClicked=false;
+  this.whenEConsultClicked=false;
+  this.whenAppoinmentClicked=false;
+  this.whenCreditClicked=false; 
 }
  //using ngClass on click for Appoinment
  appoinmentColourChange(){
-  this.whenAppoinmentClicked=false; 
-  this.whenDashboardClicked=true;
-  this.whenEConsultClicked=true;
-  this.whenCreditClicked=true;
-  this.whenClinicsClicked=true;
+  this.whenAppoinmentClicked=true; 
+  this.whenDashboardClicked=false;
+  this.whenEConsultClicked=false;
+  this.whenCreditClicked=false;
+  this.whenClinicsClicked=false;
 }
  //using ngClass on click for Credit
  creditColourChange(){
   this.whenCreditClicked=false; 
-  this.whenDashboardClicked=true;
-  this.whenEConsultClicked=true;
-  this.whenAppoinmentClicked=true;
-  this.whenClinicsClicked=true;
+  this.whenDashboardClicked=false;
+  this.whenEConsultClicked=false;
+  this.whenAppoinmentClicked=false;
+  this.whenClinicsClicked=false;
 }
 
 // search input
@@ -129,9 +129,12 @@ searchResult(value){
   this.clinicList=[];
   this.filterField.clinicName = value;
 if(value){
-    this.scheduleService.getClinicList(localStorage.getItem('loginId')).subscribe(data => {
-      if(data.result.length!=0){
-        this.clinicList = data.result;
+    this.clinicService.getCliniclist(localStorage.getItem('doctorId')).subscribe(data => {
+      let result:any={}
+      result=data
+      console.log('clinic list search',result)
+      if(result.result.length!=0){
+        this.clinicList = result.result;
         this.searchInput="";
         console.log(this.clinicList);
       }

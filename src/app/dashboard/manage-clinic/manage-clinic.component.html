@@ -1,26 +1,9 @@
 <!-- ************************************Schedule********************************* -->
-<div class="loading" *ngIf="loader">
-  <div class="sk-circle">
-    <div class="sk-circle1 sk-child"></div>
-    <div class="sk-circle2 sk-child"></div>
-    <div class="sk-circle3 sk-child"></div>
-    <div class="sk-circle4 sk-child"></div>
-    <div class="sk-circle5 sk-child"></div>
-    <div class="sk-circle6 sk-child"></div>
-    <div class="sk-circle7 sk-child"></div>
-    <div class="sk-circle8 sk-child"></div>
-    <div class="sk-circle9 sk-child"></div>
-    <div class="sk-circle10 sk-child"></div>
-    <div class="sk-circle11 sk-child"></div>
-    <div class="sk-circle12 sk-child"></div>
-  </div>
-</div>
-
 <div class="row nomargin0row">
   <div class="col-md-8" id="left_side">
-    <div class="new_clinic">Add New Clinic</div>
-    <!-- <div class="new_clinic" *ngIf="clinicList.length !=0 && !formHide">Clinic List</div> -->
-
+    <div class="new_clinic" *ngIf="clinicList.length ==0 || formHide">Add New Clinic</div>
+    <div class="new_clinic" *ngIf="clinicList.length !=0 && !formHide">Clinic List</div>
+    <!-- <div class="new_clinic" *ngIf="show || clinicList.length !=0 && formHide"> Edit Clinic</div> -->
     <!-- <div class="new_clinic">Clinic List</div> -->
 
     <div class="row" id="marbtm-0">
@@ -28,72 +11,7 @@
         <div class="mtop2">
           <div class="card" *ngFor="let list of clinicList ;let k=index;">
             <div class="card_text" *ngIf="!formHide">
-              <!-- <div class="webdropdown">
-                <button class="btn_circ" (click)="showOptions(list.clinicId,k)">
-                  <svg version="1.1" id="dot" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                    x="0px" y="0px" viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
-                    <g>
-                      <path d="M30,16c4.411,0,8-3.589,8-8s-3.589-8-8-8s-8,3.589-8,8S25.589,16,30,16z" />
-                      <path d="M30,44c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S34.411,44,30,44z" />
-                      <path d="M30,22c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S34.411,22,30,22z" />
-                    </g>
-                  </svg>
-                </button>
 
-                <div class="webdropdown-content" *ngIf="showEdit && k==selected">
-                  <span class="triangle"></span>
-                  <a>
-                    <ul class="list-inline edditsp bor_der">
-                      <li>
-                        <button class="eddtn" (click)="editClinic(list.clinicId)">
-                          <svg version="1.1" id="edit_schedule" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                            y="0px" viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;" xml:space="preserve">
-                            <g>
-                              <path d="M438.931,30.403c-40.4-40.5-106.1-40.5-146.5,0l-268.6,268.5c-2.1,2.1-3.4,4.8-3.8,7.7l-19.9,147.4
-                                           c-0.6,4.2,0.9,8.4,3.8,11.3c2.5,2.5,6,4,9.5,4c0.6,0,1.2,0,1.8-0.1l88.8-12c7.4-1,12.6-7.8,11.6-15.2c-1-7.4-7.8-12.6-15.2-11.6
-                                           l-71.2,9.6l13.9-102.8l108.2,108.2c2.5,2.5,6,4,9.5,4s7-1.4,9.5-4l268.6-268.5c19.6-19.6,30.4-45.6,30.4-73.3
-                                           S458.531,49.903,438.931,30.403z M297.631,63.403l45.1,45.1l-245.1,245.1l-45.1-45.1L297.631,63.403z M160.931,416.803l-44.1-44.1
-                                           l245.1-245.1l44.1,44.1L160.931,416.803z M424.831,152.403l-107.9-107.9c13.7-11.3,30.8-17.5,48.8-17.5c20.5,0,39.7,8,54.2,22.4
-                                           s22.4,33.7,22.4,54.2C442.331,121.703,436.131,138.703,424.831,152.403z" />
-                            </g>
-                          </svg>
-                          Edit
-                        </button>
-                      </li>
-                    </ul>
-                  </a>
-                  <hr class="bor_derhr">
-                  <a class="dele_a">
-
-                    <ul class="list-inline edditsp edditsp_up">
-                      <li>
-                        <button class="eddtn" (click)="deleteClinicInfo(list.clinicId)" data-toggle="modal" data-target="#mydelModal">
-                          <svg version="1.1" id="edit_schedule" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                            y="0px" viewBox="0 0 486.4 486.4" style="enable-background:new 0 0 486.4 486.4;" xml:space="preserve">
-                            <g>
-                              <g>
-                                <path d="M446,70H344.8V53.5c0-29.5-24-53.5-53.5-53.5h-96.2c-29.5,0-53.5,24-53.5,53.5V70H40.4c-7.5,0-13.5,6-13.5,13.5
-                                             S32.9,97,40.4,97h24.4v317.2c0,39.8,32.4,72.2,72.2,72.2h212.4c39.8,0,72.2-32.4,72.2-72.2V97H446c7.5,0,13.5-6,13.5-13.5
-                                             S453.5,70,446,70z M168.6,53.5c0-14.6,11.9-26.5,26.5-26.5h96.2c14.6,0,26.5,11.9,26.5,26.5V70H168.6V53.5z M394.6,414.2
-                                             c0,24.9-20.3,45.2-45.2,45.2H137c-24.9,0-45.2-20.3-45.2-45.2V97h302.9v317.2H394.6z"
-                                />
-                                <path d="M243.2,411c7.5,0,13.5-6,13.5-13.5V158.9c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5v238.5
-                                             C229.7,404.9,235.7,411,243.2,411z" />
-                                <path d="M155.1,396.1c7.5,0,13.5-6,13.5-13.5V173.7c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5v208.9
-                                             C141.6,390.1,147.7,396.1,155.1,396.1z" />
-                                <path d="M331.3,396.1c7.5,0,13.5-6,13.5-13.5V173.7c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5v208.9
-                                             C317.8,390.1,323.8,396.1,331.3,396.1z" />
-                              </g>
-                            </g>
-                          </svg>
-                          Delete
-                        </button>
-                      </li>
-                    </ul>
-                  </a>
-                </div>
-               
-              </div> -->
               <div>
                 <div class="row nomargin0row">
 
@@ -104,38 +22,121 @@
                       <p class="theodore">{{list.city}}
                     </div>
                   </div>
-                  <!-- <div class="col-md-2">
-                  <ul class="list-inline" id="visitor-allign">
-                    <li class="digit">34</li>
-                    <li class="visitor">
-                      <p>Visitor</p>
-                      <p>Booking</p>
-                    </li>
-                  </ul>
-                </div> -->
-                  <div class="col-md-3 col-xs-12 nopadding0col1">
-                    <ul class="timings">
-                      <li class="fr">
-                        <span>Thursday</span>
-                      </li>
-                      <li class="morng_tme">10:00 a.m</li>
-                      <li class="time">
-                        <p class="to_time">To</p>
-                      </li>
-                      <li class="morng_tme">11:00 a.m</li>
+                  <div class="col-md-6">
+                    <ul class="list-inline days" id="calender_days">
+                      <div class="dropdown" *ngFor="let days of list.weekDays">
+
+
+                        <li [ngClass]="{'selectd_day':true,active:true}" (mouseenter)="showTime(days)" (mouseleave)="hideTime('leave')">{{days.day.slice(0,2).toUpperCase()}}
+                        </li>
+                        <div class="dropdown-content">
+                          <span _ngcontent-c6="" class="triangle"></span>
+                          <a href="#">{{sTime}}</a>
+                          <a href="#">{{eTime}}</a>
+                        </div>
+                      </div>
+                      <!-- <li>SU</li>
+                        <li>MO</li>
+                        <li>TU</li>
+                        <li>WE</li>
+                        <li>TH</li>
+                        <li>FR</li>
+                        <li>SA</li> -->
+                      <!-- <li *ngFor="let day of weekSchedule ; let m=index;">
+                          
+                              <button [ngClass]="{'selectd_day':true,active:list.weekDays[m]?list.weekDays[m].day.slice(0,2).toUpperCase()==day:''}">
+                                {{day}} 
+                              </button> -->
+                      <!-- {{list.weekDays[m]?list.weekDays[m].day:'jyoti'}} -->
+                      <!-- {{clinicForm.get('weekDays').controls[i].get('day').value.slice(0,2).toUpperCase()}} -->
+                      <!-- </li> -->
+                      <!-- <div class="dropdown">
+                          <li class="dropbtn">SU</li>
+                          <div class="dropdown-content"> -->
+                      <!-- <span _ngcontent-c6="" class="triangle"></span> -->
+                      <!-- <a href="#">10:00AM-12:00PM</a>
+                              <a href="#">10:00AM-12:00PM</a>
+                            </div>
+                            </div>
+                          <li>MO</li>
+                          <li>TU</li>
+                          <li class="selectd_day">WE</li>
+                          <li>TH</li>
+                          <li class="selectd_day">FR</li>
+                          <li>SA</li> -->
                     </ul>
                   </div>
-                  <div class="col-md-2 col-xs-12 text-center" id="padding_r">
-                    <label class="switch1">
-                      <!-- <input type="checkbox" (change)="availabilityClinic($event,details._id)" [checked]="details.availability=='Open'">
-                    <span class="slider1 round1" [ngStyle]="{'color': details.availability=='Open' ? '#23e29c' : '#fff'}">
-                      <p class="open_2" [hidden]="details.availability=='Close'" [ngStyle]="{'-webkit-text-fill-color':details.availability=='Open'?'#fff':'grey'}">OPEN</p> -->
-                      <input type="checkbox">
-                      <span class="slider1 round1">
-                        <p class="open_2">OPEN</p>
-                      </span>
-                    </label>
+                  <div class="col-md-2">
+                    <div class="webdropdown">
+                      <button class="btn_circ" (click)="showOptions(list.clinicId,k)">
+                        <svg version="1.1" id="dot" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                          x="0px" y="0px" viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
+                          <g>
+                            <path d="M30,16c4.411,0,8-3.589,8-8s-3.589-8-8-8s-8,3.589-8,8S25.589,16,30,16z" />
+                            <path d="M30,44c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S34.411,44,30,44z" />
+                            <path d="M30,22c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S34.411,22,30,22z" />
+                          </g>
+                        </svg>
+                      </button>
+
+                      <div class="webdropdown-content" *ngIf="showEdit && k==selected">
+                        <span class="triangle"></span>
+                        <a>
+                          <ul class="list-inline edditsp bor_der">
+                            <li>
+                              <button class="eddtn" (click)="editClinic(list.clinicId)">
+                                <svg version="1.1" id="edit_schedule" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                  x="0px" y="0px" viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;"
+                                  xml:space="preserve">
+                                  <g>
+                                    <path d="M438.931,30.403c-40.4-40.5-106.1-40.5-146.5,0l-268.6,268.5c-2.1,2.1-3.4,4.8-3.8,7.7l-19.9,147.4
+                                                     c-0.6,4.2,0.9,8.4,3.8,11.3c2.5,2.5,6,4,9.5,4c0.6,0,1.2,0,1.8-0.1l88.8-12c7.4-1,12.6-7.8,11.6-15.2c-1-7.4-7.8-12.6-15.2-11.6
+                                                     l-71.2,9.6l13.9-102.8l108.2,108.2c2.5,2.5,6,4,9.5,4s7-1.4,9.5-4l268.6-268.5c19.6-19.6,30.4-45.6,30.4-73.3
+                                                     S458.531,49.903,438.931,30.403z M297.631,63.403l45.1,45.1l-245.1,245.1l-45.1-45.1L297.631,63.403z M160.931,416.803l-44.1-44.1
+                                                     l245.1-245.1l44.1,44.1L160.931,416.803z M424.831,152.403l-107.9-107.9c13.7-11.3,30.8-17.5,48.8-17.5c20.5,0,39.7,8,54.2,22.4
+                                                     s22.4,33.7,22.4,54.2C442.331,121.703,436.131,138.703,424.831,152.403z" />
+                                  </g>
+                                </svg>
+                                Edit
+                              </button>
+                            </li>
+                          </ul>
+                        </a>
+                        <hr class="bor_derhr">
+                        <!-- <a class="dele_a">
+          
+                              <ul class="list-inline edditsp edditsp_up">
+                                <li>
+                                  <button class="eddtn" (click)="deleteClinicInfo(list.clinicId)" data-toggle="modal" data-target="#mydelModal">
+                                    <svg version="1.1" id="edit_schedule" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                      y="0px" viewBox="0 0 486.4 486.4" style="enable-background:new 0 0 486.4 486.4;" xml:space="preserve">
+                                      <g>
+                                        <g>
+                                          <path d="M446,70H344.8V53.5c0-29.5-24-53.5-53.5-53.5h-96.2c-29.5,0-53.5,24-53.5,53.5V70H40.4c-7.5,0-13.5,6-13.5,13.5
+                                                       S32.9,97,40.4,97h24.4v317.2c0,39.8,32.4,72.2,72.2,72.2h212.4c39.8,0,72.2-32.4,72.2-72.2V97H446c7.5,0,13.5-6,13.5-13.5
+                                                       S453.5,70,446,70z M168.6,53.5c0-14.6,11.9-26.5,26.5-26.5h96.2c14.6,0,26.5,11.9,26.5,26.5V70H168.6V53.5z M394.6,414.2
+                                                       c0,24.9-20.3,45.2-45.2,45.2H137c-24.9,0-45.2-20.3-45.2-45.2V97h302.9v317.2H394.6z"
+                                          />
+                                          <path d="M243.2,411c7.5,0,13.5-6,13.5-13.5V158.9c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5v238.5
+                                                       C229.7,404.9,235.7,411,243.2,411z" />
+                                          <path d="M155.1,396.1c7.5,0,13.5-6,13.5-13.5V173.7c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5v208.9
+                                                       C141.6,390.1,147.7,396.1,155.1,396.1z" />
+                                          <path d="M331.3,396.1c7.5,0,13.5-6,13.5-13.5V173.7c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5v208.9
+                                                       C317.8,390.1,323.8,396.1,331.3,396.1z" />
+                                        </g>
+                                      </g>
+                                    </svg>
+                                    Delete
+                                  </button>
+                                </li>
+                              </ul>
+                            </a> -->
+                      </div>
+                    </div>
+
+
                   </div>
+
                 </div>
               </div>
             </div>
@@ -146,35 +147,23 @@
             <div class="card ">
               <div class="row">
                 <div class="card_text1">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  <div>
+                  <form [formGroup]="clinicForm" novalidate (keydown)="keyDownFunction($event)">
                     <div class="row text-center">
                       <!-- <span class="error_message" [ngStyle]="{'font-size':'14px'}">Please Enter The Credentials</span> -->
                       <div class="col-md-12">
                         <div class="col-md-6">
                           <div class="input-field">
-                            <input type="text" class="validate" [(ngModel)]='clinicName' placeholder="Clinic Name">
-                            <p class="errormessage" [ngStyle]="{'font-size':'13px'}" *ngIf="clinibool && clinicName ==''">Please Provide Clinic Detail</p>
+                            <input type="text" class="validate" formControlName="clinicName" placeholder="Clinic Name">
+                            <p class="errormessage" *ngIf="clinicFormErrors.clinicName.required || (clinicForm.controls.clinicName.pristine && submitted)"
+                              [ngStyle]="{'font-size':'13px'}">Please Provide Clinic Detail</p>
 
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="input-field">
-                            <input type="text" id="pac-input" [(ngModel)]='city' placeholder="City"  />
-                            <p class="errormessage" [ngStyle]="{'font-size':'13px'}" *ngIf="citibool && city==''">Please Provide City Detail</p>
+                            <input type="text" id="pac-input" formControlName="city" placeholder="City" />
+                            <p class="errormessage" *ngIf="clinicFormErrors.city.required || (clinicForm.controls.city.pristine && submitted)"
+                              [ngStyle]="{'font-size':'13px'}">Please Provide City Detail</p>
                           </div>
                         </div>
                       </div>
@@ -183,17 +172,19 @@
                       <div class="col-md-12">
                         <div class="col-md-6">
                           <div class="input-field">
-                            <input type="text" [(ngModel)]='address' placeholder="Address">
-                            <p class="errormessage" [ngStyle]="{'font-size':'13px'}" *ngIf="addressbool && address==''">Please Provide Address Detail</p>
+                            <input type="text" formControlName="address" placeholder="Address">
+                            <p class="errormessage" *ngIf="clinicFormErrors.address.required || (clinicForm.controls.address.pristine && submitted)"
+                              [ngStyle]="{'font-size':'13px'}">Please Provide Address Detail</p>
                           </div>
                         </div>
                         <div class="col-md-6">
 
                           <div class="input-field">
-                            <input type="number" placeholder="Contact Number" [(ngModel)]='contactNo' (keyup)="contactvalidation()">
-                            <p class="errormessage" [ngStyle]="{'font-size':'13px'}" *ngIf="contactbool" >Please Provide valid contact Number</p>
-                            <!-- <p class="errormessage" [ngStyle]="{'font-size':'13px'}">Please
-                              Enter Valid Phone Number</p> -->
+                            <input type="text" formControlName="phoneNumber" placeholder="Contact Number" [textMask]="{mask: mask, guide: false}">
+                            <p class="errormessage" *ngIf="clinicFormErrors.phoneNumber.required|| (clinicForm.controls.phoneNumber.pristine && submitted) "
+                              [ngStyle]="{'font-size':'13px'}">Please Provide Contact Number</p>
+                            <p class="errormessage" *ngIf="clinicFormErrors.phoneNumber.minlength" [ngStyle]="{'font-size':'13px'}">Please
+                              Enter Valid Phone Number</p>
                           </div>
                         </div>
 
@@ -203,30 +194,25 @@
                       <div class="col-md-12">
                         <div class="col-md-12">
                           <div class="input-field">
-                            <input type="number" placeholder="Fee(₹)" [(ngModel)]='fee' (keyup)="feevalidation()">
-                            <p class="errormessage" [ngStyle]="{'font-size':'13px'}" *ngIf="feebool " >Please Provide Fee</p>
+                            <input type="text" formControlName="fee" placeholder="Fee(₹)" [textMask]="{mask: fee, guide: false}">
+                            <p class="errormessage" *ngIf="clinicFormErrors.fee.required || (clinicForm.controls.fee.pristine && submitted)"
+                              [ngStyle]="{'font-size':'13px'}">Please Provide Fee</p>
                           </div>
                         </div>
                       </div>
                     </div>
-
-                    <div *ngFor="let weekdata of AllData let i = index">
-                      <div>
+                    <div formArrayName="weekDays" *ngFor="let weekDaysControl of clinicForm.get('weekDays').controls; let i=index;">
+                      <div [formGroupName]="i">
                         <hr class="light_schedule">
                         <!-- <div> -->
                         <div class="calender text-center">
+                          <button *ngIf="i!=0" class="closeButton" (click)="removeWeekDay(i)">&#10005;</button>
                           <ul class="list-inline" id="calender_days">
-                            <li *ngFor="let day of AllData[i] let j = index ">
-                              <!-- <button (click)="daySelect(day,i)" [ngClass]="{'selectd_day':true,active:clinicForm.get('weekDays').controls[i].get('day').value?clinicForm.get('weekDays').controls[i].get('day').value.slice(0,2).toUpperCase()==day:''}">
+                            <li *ngFor="let day of weekSchedule">
+                              <button (click)="daySelect(day,i)" [ngClass]="{'selectd_day':true,active:clinicForm.get('weekDays').controls[i].get('day').value?clinicForm.get('weekDays').controls[i].get('day').value.slice(0,2).toUpperCase()==day:''}">
                                 {{day}}
-                              </button> -->
-                              <!-- <button (click)="daySelect(day,i)" class="selectd_day" [ngClass]="{'active':dayarray.indexOf(day) !=-1}" > -->
-
-                              <button (click)="daySelect(i,j)" class="selectd_day" [ngClass]="{'active':AllData[i][j].active == 1}">
-                                {{day.day |slice:0:2 | uppercase}}
                               </button>
-                              
-                              <!-- {{clinicForm.get('weekDays').controls[i].get('day').value.slice(0,2).toUpperCase(){{}}}} -->
+                              <!-- {{clinicForm.get('weekDays').controls[i].get('day').value.slice(0,2).toUpperCase()}} -->
                             </li>
                             <!-- days.indexOf(day)>-1 -->
                             <!-- <li value="Monday" formControlName="day">SUN</li>
@@ -236,29 +222,20 @@
                             <li>THUR</li>
                             <li>FRI</li>
                             <li>SAT</li> -->
-                            
-                            <li>
-                                <p>
-                                  
-                                      <input type="checkbox"  class="check" (change)="checkfunc($event,i,j)"/>
-                                  
-                            </li> 
-                        
-                            <i  (click)="remove(i)" class="fa fa-close" style="font-size:25px;color:#999"></i>
                           </ul>
-                          
                         </div>
                         <div class="col-md-12">
                           <div class="row">
                             <div class="sp_to">
-                              <!-- <p class="errormessage_ui" [ngStyle]="{'font-size':'13px'}">error.errorMessage -->
-                              <!-- </p> -->
-                              <p class="errormessage_ui" [ngStyle]="{'font-size':'13px'}" >{{this.AllData[i][0].err}}
+                              <p class="errormessage_ui" [ngStyle]="{'font-size':'13px'}">{{error.errorMessage}}
+                              </p>
+                              <p class="errormessage_ui" *ngIf="jindex==i" [ngStyle]="{'font-size':'13px'}">{{timeError}}
                               </p>
                               <div class="col-md-5" id="padding_r">
                                 <div class="input-field">
                                   <label class="sche_dule">Schedule</label>
-                                  <input type="time" class="timepicker" placeholder="Schedule" [(ngModel)]="AllData[i][0].startTime" (keyup)="times(i)">
+                                  <input type="time" class="timepicker" placeholder="Schedule" formControlName="startTime"
+                                    (keyup)="comparewithEndTime(i)">
                                   <!-- <p class="errormessage" *ngIf="j==i" [ngStyle]="{'font-size':'13px'}">{{timeError}}</p> -->
                                 </div>
                               </div>
@@ -268,7 +245,7 @@
                               <div class="col-md-5" id="padding-o">
                                 <div class="input-field" id="top_p">
                                   <div class="time_pickinput">
-                                    <input type="time" class="timepicker" [(ngModel)]="AllData[i][0].endTime" (keyup)="times(i)">
+                                    <input type="time" class="timepicker" formControlName="endTime" (keyup)="comparewithStartTime(i)">
                                   </div>
                                 </div>
                               </div>
@@ -277,24 +254,9 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </form>
 
                   <button class="addcal" (click)="addNewweekday()">+</button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
 
               </div>
