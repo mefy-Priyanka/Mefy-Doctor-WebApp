@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import {HttpModule} from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -14,11 +14,11 @@ import { AppointmentService } from './meme-services/appointment.service';
 /********************NEW SERVICES************************** */
 import { DocregistrationService } from './mefyservice/docregistration.service';
 import { LoginService } from './mefyservice/login.service';
-import {ClinicService} from './mefyservice/clinic.service';
+import { ClinicService } from './mefyservice/clinic.service';
 import { AccounttService } from './mefyservice/accountt.service';
-import {ProfileService} from './mefyservice/profile.service';
-import {DashboarddService} from './mefyservice/dashboardd.service';
-
+import { ProfileService } from './mefyservice/profile.service';
+import { DashboarddService } from './mefyservice/dashboardd.service';
+import { SocketsService } from './mefyservice/sockets.service';
 /******************END OF NEW SERVICES************************************ */
 
 // import { RegistrationModule } from './registration/registration.module';
@@ -59,7 +59,7 @@ const approutes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: './dashboard/dashboard.module#DashboardModule',canActivate: [AuthGuard]
+    loadChildren: './dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard]
   },
 
   {
@@ -81,7 +81,7 @@ const approutes: Routes = [
     NewregistrationComponent,
     NotifyComponent,
     PrivacypolicyComponent,
- 
+
     // ManageaccountComponent
   ],
   imports: [
@@ -98,7 +98,7 @@ const approutes: Routes = [
     BsDatepickerModule.forRoot(),
     TypeaheadModule.forRoot(),
     ToastyModule.forRoot(),
-   
+
   ],
 
   exports: [],
@@ -122,6 +122,7 @@ const approutes: Routes = [
     AccounttService,
     DashboarddService,
     AppointmentsService,
+    SocketsService,
     /**************/
     HttpClientModule,
     // ManageaccountComponent,

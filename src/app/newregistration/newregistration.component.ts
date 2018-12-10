@@ -6,6 +6,7 @@ import { TagInputModule } from 'ngx-chips';
 import { Router } from '@angular/router';
 declare var google;
 import * as moment from 'moment';
+// import { ConsoleReporter } from 'jasmine';
 // import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -466,6 +467,7 @@ export class NewregistrationComponent implements OnInit {
       language: "language"
     }
     this.docService.getLanguageList(data).subscribe(data => {
+      console.log('languagelist',data);
       let value: any = {}
       value = data
       this.languageList = value.result.result

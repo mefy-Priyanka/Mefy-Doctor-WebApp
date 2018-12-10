@@ -45,7 +45,7 @@ export class SidenavComponent implements OnInit {
       console.log('doctor profile',this.profileInfo)
       this.imgUrlPrefix = this.sanitizer.bypassSecurityTrustResourceUrl(IMAGEURL + "/uploads/avatars/responsive/" + this.profileInfo.profileImage+"_sm.png");
       // console.log('imgUrlPrefix',this.imgUrlPrefix)/*Diplay doctor's dp*/
-      this.status = this.profileInfo.availability ? this.profileInfo.availability : 'Online';
+      this.status = this.profileInfo.availability;
       // console.log("PROFILE DETAILS", this.profileInfo);
     }, err => {
     })

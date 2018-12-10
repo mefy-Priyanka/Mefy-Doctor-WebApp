@@ -10,16 +10,16 @@ export class DocregistrationService {
 
   /*********************GET LANGUAGE JSON FILE****************************/
   getLanguageList(data){
-    return this.httpClient.get(APIURL+'doctor/getList?language='+ data.x)
+    return this.httpClient.get(APIURL+'doctor/getList?language='+ data.language)
   }
  /*********************GET EDUCATION JSON FILE****************************/
  getEducationList(data){
-  return this.httpClient.get(APIURL+'doctor/getList?education='+ data.y)
+  return this.httpClient.get(APIURL+'doctor/getList?education='+ data.education)
 }
  /*********************GET SPECIALITY JSON FILE****************************/
  getSpecialityList(data){
    console.log(data)
-  return this.httpClient.get(APIURL+'doctor/getList?speciality='+ data.z)
+  return this.httpClient.get(APIURL+'doctor/getList?speciality='+ data.speciality)
 }
  /*********************GET STATE JSON FILE****************************/
  getStateList(data){
