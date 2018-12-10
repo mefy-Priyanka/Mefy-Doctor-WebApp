@@ -36,18 +36,18 @@
                     <div class="form_entire">
                       <form [formGroup]="accountForm">
                         <input type="text" name="accountHolderName" placeholder="Account's holder name" formControlName="accountHolderName">
-                        <p class="errormessage" *ngIf="accountFormErrors.accountHolderName.required || (accountForm.controls.accountHolderName.pristine && submitted)">Name
+                        <p class="errormessage"  [ngStyle]="{'font-size':'13px'}" *ngIf="accountFormErrors.accountHolderName.required || (accountForm.controls.accountHolderName.pristine && submitted)">Name
                           Can't Be Empty</p>
                         <input type="text" name="ifscCode" placeholder="IFSC Code" formControlName="ifscCode">
-                        <p class="errormessage" *ngIf="accountFormErrors.ifscCode.required || (accountForm.controls.ifscCode.pristine && submitted)">IFC
+                        <p class="errormessage"  [ngStyle]="{'font-size':'13px'}" *ngIf="accountFormErrors.ifscCode.required || (accountForm.controls.ifscCode.pristine && submitted)">IFC
                           Code Can't Be Empty</p>
-                        <input type="text" name="accountNumber" placeholder="Account Number" formControlName="accountNumber">
-                        <p class="errormessage" *ngIf="accountFormErrors.accountNumber.required || (accountForm.controls.accountNumber.pristine && submitted)">Account
+                        <input type="text" name="accountNumber" [textMask]="{mask: mask, guide: false}" placeholder="Account Number" formControlName="accountNumber">
+                        <p class="errormessage"  [ngStyle]="{'font-size':'13px'}" *ngIf="accountFormErrors.accountNumber.required || (accountForm.controls.accountNumber.pristine && submitted)">Account
                           Number Can't Be Empty</p>
-                        <input type="text" name="fname" placeholder="Confirm account number" formControlName="confirmAccountNumber" onpaste="return false">
-                        <p class="errormessage" *ngIf="accountFormErrors.confirmAccountNumber.required || (accountForm.controls.confirmAccountNumber.pristine && submitted)">
+                        <input type="text" name="fname" [textMask]="{mask: mask, guide: false}" placeholder="Confirm account number" formControlName="confirmAccountNumber" onpaste="return false">
+                        <p class="errormessage"  [ngStyle]="{'font-size':'13px'}" *ngIf="accountFormErrors.confirmAccountNumber.required || (accountForm.controls.confirmAccountNumber.pristine && submitted)">
                           Confirm Account Number Can't Be Empty</p>
-                        <span class="error_account" *ngIf="accountFormErrors.confirmAccountNumber.match">Account Number
+                        <span class="error_account"  [ngStyle]="{'font-size':'13px'}" *ngIf="accountFormErrors.confirmAccountNumber.match">Account Number
                           Do Not Match</span>
                         <div class="radio_btn2">
                           <select class="browser-default" formControlName="accountType">
@@ -55,14 +55,14 @@
                             <option value="Current"> Current</option>
                             <option value="Saving">Saving</option>
                           </select>
-                          <p class="errormessage" *ngIf="accountFormErrors.accountType.required || (accountForm.controls.accountType.pristine && submitted)">Account
+                          <p class="errormessage"  [ngStyle]="{'font-size':'13px'}" *ngIf="accountFormErrors.accountType.required || (accountForm.controls.accountType.pristine && submitted)">Account
                             Type Can't Be Empty</p>
                         </div>
                       </form>
                     </div>
                     <div class="text-center">
                       <button class="save_btn" (click)=" saveAccountForm()">Save Account</button>
-                      <button class="cancelbtn" (click)="cancelAccoutForm()" >Cancel</button>
+                      <!-- <button class="cancelbtn" (click)="cancelAccoutForm()" >Cancel</button> -->
                       
                     </div>
                   </div>
@@ -127,12 +127,12 @@
                   </div>
                 </div>
               </div>
-              <div class="row" *ngIf="showAddAccount">
+              <!-- <div class="row" *ngIf="showAddAccount">
                 <div class="text-center">
                   <button class="save_btn2" (click)="addAccount()">Add Account</button>
                 
                 </div>
-              </div>
+              </div> -->
             </div>
             <!-- *************************Form2******************************** -->
           </div>
