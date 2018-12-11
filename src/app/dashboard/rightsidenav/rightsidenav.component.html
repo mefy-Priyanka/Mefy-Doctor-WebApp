@@ -279,7 +279,7 @@
               <span class="doctorname">Individual Name</span>
             </li>
             <li>
-              <span class="time">10:00AM To 11:00AM</span>
+              <span class="time">{{list.appointmentTimeFrom}} To {{list.appointmentTimeTo}}</span>
             </li>
             <li class="float_right">
                 <button type="button" class="accept">
@@ -324,9 +324,9 @@
           </ul>
         </div>
         <div class="whomwith">
-            <p class="date">Clinic Name</p>
+            <p class="date">{{list.clinicName}}</p>
             <!-- doctorname -->
-          <p class="modeofconsult">Clinic Visit</p>
+          <p class="modeofconsult">{{list.appointmentType}}</p>
           
         </div>
         <hr class="menuhr">
