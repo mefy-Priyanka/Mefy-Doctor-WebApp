@@ -402,4 +402,6 @@ export class ProfileComponent implements OnInit {
   addLanguage() {
     this.languageShow = true;
   }
+
+ 
 }
