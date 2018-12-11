@@ -6,7 +6,7 @@
 section.modeforct {
     background: #fff;
     padding-bottom: 20px;
-    height: 37vh;
+    height: 64vh;
     overflow-y: scroll;
 }
 input.form-control.appoinmentdate2 {
@@ -135,8 +135,8 @@ span.menu {
     top: -21px;
     box-shadow: 0px 1px 16px 3px rgba(58, 216, 123, 0.31);
 }
-span.date {
-    display: block;
+.date {
+    /* display: block;
     margin-left: 15px;
     padding: 4px 10px;
     text-align: center;
@@ -146,9 +146,19 @@ span.date {
     font-weight: 400;
     font-family: Lato;
     line-height: 20px;
+    width: 25%;
     background: rgb(121, 120, 250);
     background: linear-gradient(to right, rgb(121, 120, 250),rgba(178, 109, 247, 1));
-    font-size: 11px;
+    font-size: 11px; */
+    padding: 4px 3px;
+    text-align: left;
+    border-radius: 20px;
+    color: #8398ac;
+    font-weight: 600;
+    line-height: 20px;
+    margin-bottom: 0;
+    font-size: 12px;
+
 }
 span.time {
     display: block;
@@ -167,20 +177,21 @@ section.spacesofrw {
 p.modeofconsult {
     font-size: 13px;
     color: #9aabbe;
-    font-weight: 300;
+    font-weight: 500;
     font-family: 'Roboto',sans-serif;
-    margin: 0;
+    margin-left: 3px;
 }
-p.doctorname {
+.doctorname {
     font-size: 12px;
     font-family: 'Roboto',sans-serif;
     color: #8398ac;
     font-weight: 600;
     text-align: left;
     margin-bottom: 0px;
+    margin-left: 21px;
 }
 .whomwith {
-    margin-top: 7px;
+    /* margin-top: 7px; */
     margin-left: 20px;
     margin-bottom: -11px;
 }
@@ -452,4 +463,13 @@ p.doctoraname{
 .resultMsg span {
     color: #936ff8;
     font-weight: 600;
+}
+.bottomContent {
+    position: relative;
+}
+svg#acceptTick {
+    height: 28px;
+    width: 20px;
+    fill: rgb(58, 216, 123);
+    vertical-align: middle;
 }

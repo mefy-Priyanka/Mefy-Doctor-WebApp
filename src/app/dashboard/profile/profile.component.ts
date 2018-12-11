@@ -202,6 +202,7 @@ export class ProfileComponent implements OnInit {
 
 
   }
+
   /********************GET LIST OF SPECIALITY *****************/
   getSpecialityList() {
 
@@ -401,5 +402,6 @@ export class ProfileComponent implements OnInit {
   }
   addLanguage() {
     this.languageShow = true;
-  }
+  } 
+
 }

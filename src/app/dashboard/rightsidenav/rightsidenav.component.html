@@ -276,12 +276,27 @@
         <div class="consultime">
           <ul class="list-inline timings">
             <li>
-              <span class="date">{{list.appointmentDate}}</span>
+              <span class="doctorname">Individual Name</span>
             </li>
             <li>
-              <span class="time">{{list.appointmentTimeFrom}}To {{list.appointmentTimeTo}}</span>
+              <span class="time">10:00AM To 11:00AM</span>
             </li>
             <li class="float_right">
+                <button type="button" class="accept">
+                    <svg version="1.1" id="acceptTick" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px" viewBox="0 0 55.702 55.702" style="enable-background:new 0 0 55.702 55.702;" xml:space="preserve">
+                      <g>
+                        <g>
+                          <path d="M27.851,0C12.494,0,0,12.494,0,27.851s12.494,27.851,27.851,27.851s27.851-12.494,27.851-27.851
+                                  C55.701,12.494,43.208,0,27.851,0z M27.851,51.213c-12.882,0-23.362-10.48-23.362-23.363c0-12.882,10.48-23.362,23.362-23.362
+                                  s23.362,10.481,23.362,23.363S40.733,51.213,27.851,51.213z" />
+                          <path d="M36.729,18.97l-13,13.001l-4.757-4.757c-0.876-0.877-2.297-0.877-3.173,0
+                                  c-0.877,0.876-0.877,2.297,0,3.173l6.344,6.344c0.438,0.438,1.013,0.658,1.587,0.658s1.148-0.219,1.586-0.658l14.587-14.587
+                                  c0.876-0.877,0.876-2.297,0-3.174C39.026,18.094,37.606,18.094,36.729,18.97z" />
+                        </g>
+                      </g>
+                    </svg>
+                  </button>
               <button class="cross_btn" data-toggle="modal" data-target="#sidenavdel" (click)="cancelAppointmentButton(list)">
                 <svg version="1.1" id="r_close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                   x="0px" y="0px" viewBox="0 0 469.785 469.785" style="enable-background:new 0 0 469.785 469.785;"
@@ -309,8 +324,10 @@
           </ul>
         </div>
         <div class="whomwith">
-          <p class="modeofconsult">{{list.appointmentType}}</p>
-          <p class="doctorname">{{list?.clinicName}}</p>
+            <p class="date">Clinic Name</p>
+            <!-- doctorname -->
+          <p class="modeofconsult">Clinic Visit</p>
+          
         </div>
         <hr class="menuhr">
       </div>
@@ -320,13 +337,16 @@
   <!-- <p class="doctoraname" *ngIf="noanyAppointment==false">No Any Appointment</p> -->
 
 </section>
-<p class="requestheading">
-  <span class="newheading">New</span>
-  <span class="consltreqtxt">eConsult Request</span>
-</p>
+
+<div class="bottomContent">
 
 
 
+<div class="fixContent">
+    <p class="requestheading">
+        <span class="newheading">New</span>
+        <span class="consltreqtxt">eConsult Request</span>
+      </p>
 <section class="newrequest">
   <section class="spacesofrw">
     <div class="row nomargin0row">
@@ -385,63 +405,7 @@
       </div>
     </div>
   </section>
-  <section class="spacesofrw">
-    <div class="row nomargin0row">
-      <div class="col-md-3 col-xs-3 nopadding0col">
-        <div class="profileimg">
-          <img src="assets/images/p4.png" class="img-responsive">
-        </div>
-      </div>
-      <div class="col-md-6 col-xs-6 nopadding0col">
-        <div class="nameofuser">
-          <p class="nameofp">John Doe</p>
-          <p class="locgender2">
-            <span class="gender2">Male 21</span>
-            <span class="locationp">Durgapur, India</span>
-          </p>
-        </div>
-      </div>
-      <div class="col-md-3 col-xs-3 nopadding0col">
-        <ul class="list-inline buttonli">
-          <li>
-            <button type="button" class="accept">
-              <svg version="1.1" id="accept" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                x="0px" y="0px" viewBox="0 0 55.702 55.702" style="enable-background:new 0 0 55.702 55.702;" xml:space="preserve">
-                <g>
-                  <g>
-                    <path d="M27.851,0C12.494,0,0,12.494,0,27.851s12.494,27.851,27.851,27.851s27.851-12.494,27.851-27.851
-                                C55.701,12.494,43.208,0,27.851,0z M27.851,51.213c-12.882,0-23.362-10.48-23.362-23.363c0-12.882,10.48-23.362,23.362-23.362
-                                s23.362,10.481,23.362,23.363S40.733,51.213,27.851,51.213z" />
-                    <path d="M36.729,18.97l-13,13.001l-4.757-4.757c-0.876-0.877-2.297-0.877-3.173,0
-                                c-0.877,0.876-0.877,2.297,0,3.173l6.344,6.344c0.438,0.438,1.013,0.658,1.587,0.658s1.148-0.219,1.586-0.658l14.587-14.587
-                                c0.876-0.877,0.876-2.297,0-3.174C39.026,18.094,37.606,18.094,36.729,18.97z" />
-                  </g>
-                </g>
-              </svg>
-            </button>
-          </li>
-          <li>
-            <button type="button" class="accept">
-              <svg version="1.1" id="reject" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                x="0px" y="0px" viewBox="0 0 475.2 475.2" style="enable-background:new 0 0 475.2 475.2;" xml:space="preserve">
-                <g>
-                  <g>
-                    <path d="M405.6,69.6C360.7,24.7,301.1,0,237.6,0s-123.1,24.7-168,69.6S0,174.1,0,237.6s24.7,123.1,69.6,168s104.5,69.6,168,69.6
-                              s123.1-24.7,168-69.6s69.6-104.5,69.6-168S450.5,114.5,405.6,69.6z M386.5,386.5c-39.8,39.8-92.7,61.7-148.9,61.7
-                              s-109.1-21.9-148.9-61.7c-82.1-82.1-82.1-215.7,0-297.8C128.5,48.9,181.4,27,237.6,27s109.1,21.9,148.9,61.7
-                              C468.6,170.8,468.6,304.4,386.5,386.5z" />
-                    <path d="M342.3,132.9c-5.3-5.3-13.8-5.3-19.1,0l-85.6,85.6L152,132.9c-5.3-5.3-13.8-5.3-19.1,0c-5.3,5.3-5.3,13.8,0,19.1
-                              l85.6,85.6l-85.6,85.6c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4l85.6-85.6l85.6,85.6c2.6,2.6,6.1,4,9.5,4
-                              c3.5,0,6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1l-85.4-85.6l85.6-85.6C347.6,146.7,347.6,138.2,342.3,132.9z" />
-                  </g>
-                </g>
-              </svg>
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
+ 
 
 
   <!-- modal  -->
@@ -491,3 +455,5 @@
   </section>
   <!-- modal  -->
 </section>
+</div>
+</div>
