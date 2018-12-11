@@ -181,16 +181,13 @@
               <hr>
               <div class="left_dist">
                 <div class="row">
-                  <div class="col-md-2 col-xs-4" *ngFor="let slot of slots">
-                    <div *ngFor="let tslot of slot.slot">
-                    <button type="btn" class="multislotsdisable"  [disabled]="tslot.status=='Booked'" [ngClass]="{'multislots':tslot.status=='UnBooked','multislotsdisable':tslot.status=='Booked'}"
+                  <div class="col-md-12 col-xs-4 nopadding0col btnSlot" *ngFor="let slot of slots">
+                    <button *ngFor="let tslot of slot.slot" type="btn" class="multislotsdisable"  [disabled]="tslot.status=='Booked'" [ngClass]="{'multislots':tslot.status=='UnBooked','multislotsdisable':tslot.status=='Booked'}"
                     (click)="getSlotsDetails(tslot)">
                       <span class="clinic_slot">{{tslot.sTime}}</span>
-                      <!-- <span class="slot_schedule">To</span> -->
                       <hr class="slot_schedule" data-content="To"> 
                       <span class="clinic_slot">{{tslot.eTime}}</span>
                     </button>
-                  </div>
                   </div>
                 </div>
               </div>

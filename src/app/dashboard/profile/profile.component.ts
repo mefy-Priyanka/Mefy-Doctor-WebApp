@@ -202,6 +202,7 @@ export class ProfileComponent implements OnInit {
 
 
   }
+
   /********************GET LIST OF SPECIALITY *****************/
   getSpecialityList() {
 
