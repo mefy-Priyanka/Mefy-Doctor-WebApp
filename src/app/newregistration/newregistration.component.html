@@ -77,8 +77,12 @@
                         </div> -->
                         <div class="row">
                           <div class="col-md-6 pleft30">
-                            <input type="text" formControlName="dob" placeholder="Date Of Birth" #dp="bsDatepicker" class="form-control" bsDatepicker
-                            (bsValueChange)="compareDob($event)">
+                            <div class="relpos">
+                                <input type="text" formControlName="dob" placeholder="Date Of Birth" #dp="bsDatepicker" class="form-control" bsDatepicker
+                                (bsValueChange)="compareDob($event)">
+                                <i style="font-size:12px" class="fa">&#xf073;</i>
+                            </div>
+                            
                           <p class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="step1FormErrors.dob.required || (step1Form.controls.dob.pristine && submitted2)">Date of Birth Cannot Be Empty</p>
                           </div>
                           <div class="col-md-6 pleft16 res30">
