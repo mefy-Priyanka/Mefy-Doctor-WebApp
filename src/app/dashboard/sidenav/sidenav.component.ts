@@ -19,7 +19,8 @@ export class SidenavComponent implements OnInit {
   profileImageId:any;
   imgUrlPrefix:any;
   loginStatus: boolean = false;
-  loader:boolean=false
+  loader:boolean=false;
+  
   
   /***********************************************************************************************/
 
@@ -36,12 +37,12 @@ export class SidenavComponent implements OnInit {
 
   /***************************************** GET DOCTOR PROFILE DEATILS *************************************** */
   doctorProfile() {
-    this.loader=true
+    // this.loader=true
     console.log("DOCTORID", this.doctorProfileId);
     this.profileService.getDocDetail(this.doctorProfileId).subscribe(data => {
       // console.log('PROFILE DETAILS', data);
       this.profileInfo = data;
-      this.loader=false
+      // this.loader=false
       console.log('doctor profile',this.profileInfo)
       this.imgUrlPrefix = this.sanitizer.bypassSecurityTrustResourceUrl(IMAGEURL + "/uploads/avatars/responsive/" + this.profileInfo.profileImage+"_sm.png");
       // console.log('imgUrlPrefix',this.imgUrlPrefix)/*Diplay doctor's dp*/
@@ -54,7 +55,9 @@ export class SidenavComponent implements OnInit {
 
   /******************************* UPDATE STATUS OF AVAILABILITY OF DOCTOR AS ONLINE OR OFFLINE ************************ */
   availabilityDoctor(event) {
-    console.log('inside availabilty')
+  
+    console.log('inside availabilty');
+    this.loader=true;
     if (event.target.checked) {
       this.status = 'Online';
     }
@@ -69,6 +72,7 @@ export class SidenavComponent implements OnInit {
     this.profileService.doctorAvailability(available).subscribe(data => {
       let response: any = {};
       response = data;
+      this.loader=false;
       if (!response.result.error) {
         // this.loginStatus = true;
         console.log('availability', response);
@@ -115,7 +119,7 @@ export class SidenavComponent implements OnInit {
 
   /************************ *Preview  DOCTOR"S Profile Picture***********************************/
   previewProfile(event) {
-    this.loader=true
+    this.loader=true;
     let fileList: FileList = event.target.files;
     let fileTarget = fileList;
     let avatar: File = fileTarget[0];
@@ -133,7 +137,7 @@ export class SidenavComponent implements OnInit {
       }
       this.profileService.updateDetail(this.userId,data).subscribe(result => {
         console.log('doctor updated profile',result)
-        this.loader=false
+        this.loader=false;
            let notifydata = {
         type: 'success',
         title: 'Profile Image',
@@ -143,7 +147,7 @@ export class SidenavComponent implements OnInit {
         this.doctorProfile();
         this.sharedService.updatedDoctorInfo(true);
       }, err => {
-        this.loader=false
+        this.loader=false;
         let notifydata = {
           type: 'error',
           title: 'Something went',
@@ -153,7 +157,7 @@ export class SidenavComponent implements OnInit {
       })
 
       }, err => {
-        this.loader=false
+        this.loader=false;
         let notifydata = {
           type: 'error',
           title: 'Something went',
