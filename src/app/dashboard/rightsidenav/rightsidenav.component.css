@@ -150,11 +150,12 @@ span.menu {
     background: rgb(121, 120, 250);
     background: linear-gradient(to right, rgb(121, 120, 250),rgba(178, 109, 247, 1));
     font-size: 11px; */
-    padding: 4px 3px;
+    padding: 0px 3px 0 3px;
     text-align: left;
     border-radius: 20px;
-    color: #8398ac;
-    font-weight: 600;
+    font-family: 'Roboto',sans-serif;
+    color: #58b85ac2;
+    font-weight: 500;
     line-height: 20px;
     margin-bottom: 0;
     font-size: 12px;
@@ -163,8 +164,8 @@ span.menu {
 span.time {
     display: block;
     font-size: 11px;
-    color: #6fbff4;
-    font-weight: 400;
+    color: #3e97d2;
+    font-weight: 600;
     font-family: 'Roboto',sans-serif;
     margin-left: -6px;
 }
@@ -179,13 +180,14 @@ p.modeofconsult {
     color: #9aabbe;
     font-weight: 500;
     font-family: 'Roboto',sans-serif;
+    font-style: italic;
     margin-left: 3px;
 }
 .doctorname {
     font-size: 12px;
     font-family: 'Roboto',sans-serif;
-    color: #8398ac;
-    font-weight: 600;
+    color: #8751b9cf;
+    font-weight: 500;
     text-align: left;
     margin-bottom: 0px;
     margin-left: 21px;
@@ -472,4 +474,8 @@ svg#acceptTick {
     width: 20px;
     fill: rgb(58, 216, 123);
     vertical-align: middle;
+}
+span.to {
+    color: #9E9E9E;
+    font-weight: 600;
 }
