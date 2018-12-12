@@ -96,6 +96,7 @@ export class SidenavComponent implements OnInit {
 
     },
       err => {
+        this.loader=false;
         let notifydata = {
           type: 'error',
           title: 'Availability',
