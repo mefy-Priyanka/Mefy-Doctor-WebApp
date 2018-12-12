@@ -144,7 +144,7 @@ p.te_nov {
 }
 .established p {
     padding: 8px 0 25px 17px;
-    width: 76%;
+    /* width: 76%; */
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 14px;
@@ -215,10 +215,10 @@ div#orderjqueryv {
     overflow-y: visible;
 }
 ul.list-inline.volume {
-    display: none;
+    /* display: none; */
 }
 img.img_playersub_img {
-    display: none;
+    /* display: none; */
 }
 /* ******************************video section********************* */
 /* ******************************Dropdown section*********************************** */
