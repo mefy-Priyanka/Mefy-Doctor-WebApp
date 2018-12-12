@@ -24,6 +24,14 @@
 div#noPadding {
     padding: 0;
 }
+.relpos i {
+    position: absolute;
+    right: 0;
+    bottom: 16px;
+}
+.relpos {
+    position: relative;
+}
 .loginform {
     height: 100vh;
     overflow: hidden;
