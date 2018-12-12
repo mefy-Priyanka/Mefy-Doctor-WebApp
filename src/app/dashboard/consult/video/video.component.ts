@@ -57,28 +57,28 @@ export class VideoComponent implements OnInit {
     //       break;;
     //   }
     // });
-    this.socketService.callDisconnected().subscribe(data=>{
-      this.hideVideo = true;
-    })
-    this.elementRef = myElement;
+    // this.socketService.callDisconnected().subscribe(data=>{
+    //   this.hideVideo = true;
+    // })
+    // this.elementRef = myElement;
 
-    this.sharedService.appointmentType.subscribe(data => { 
-      if (Object.keys(data).length != 0) {
-        this.consultId = data.individualId;
-        this.individualHealthRecord()
-        this.hideVideo = true;
-      }
+    // this.sharedService.appointmentType.subscribe(data => { 
+    //   if (Object.keys(data).length != 0) {
+    //     this.consultId = data.individualId;
+    //     this.individualHealthRecord()
+    //     this.hideVideo = true;
+    //   }
    
-    })
+    // })
   }
 
   ngOnInit() {
-    this.individualHealthRecord();
+    // this.individualHealthRecord();
   
-    this.iframeElement = document.getElementById('video-background');
-    console.log("caller",this.callerData)
+    // this.iframeElement = document.getElementById('video-background');
+    // console.log("caller",this.callerData)
 
-    this.url = this.sanitizer.bypassSecurityTrustResourceUrl(videoURL+'?app=' + this.callerData.roomId +'&self='+localStorage.getItem('loginId') + '&selfRole=doctor&peerRole=individual&peer=' + this.callerData.callerId + '&caller=' + this.callerData.callerEasyRTC);
+    // this.url = this.sanitizer.bypassSecurityTrustResourceUrl(videoURL+'?app=' + this.callerData.roomId +'&self='+localStorage.getItem('loginId') + '&selfRole=doctor&peerRole=individual&peer=' + this.callerData.callerId + '&caller=' + this.callerData.callerEasyRTC);
 
     // this.sharedService.callTrigger.subscribe(data => {
     //   if (data == false)
@@ -91,78 +91,78 @@ export class VideoComponent implements OnInit {
 
   }
     // individula details from profile id
-    getindividualDetails() {
-      this.ePrescriptionService.getindividualDetails(this.callerData.callerId).subscribe(data => {
-        this.individualDetails = data.registrationDetails;
-      },
-        err => {
-        })
-    }
+    // getindividualDetails() {
+    //   this.ePrescriptionService.getindividualDetails(this.callerData.callerId).subscribe(data => {
+    //     this.individualDetails = data.registrationDetails;
+    //   },
+    //     err => {
+    //     })
+    // }
   
     // individula details from profile id
     individualHealthRecord() {
-      this.individualId = this.callerData?this.callerData.callerId:this.consultId
-        this.ePrescriptionService.getHealthRecord(this.individualId).subscribe(data => {
-          this.individualHealth = data.result;
-          this.dob = this.individualHealth.dob;
-          console.log('patient detail',this.individualHealth);
-          this.healthRecord = this.individualHealth.healthRecord;
-          this.healthRecord = this.individualHealth.healthRecord;
-          this.imgUrlPrefix = this.sanitizer.bypassSecurityTrustResourceUrl( APIURL+"file/fileShow?fileId=" + this.individualHealth.profileImage);
-          this.getAge(this.dob);
-        },
-          err => {
-          })
+      // this.individualId = this.callerData?this.callerData.callerId:this.consultId
+      //   this.ePrescriptionService.getHealthRecord(this.individualId).subscribe(data => {
+      //     this.individualHealth = data.result;
+      //     this.dob = this.individualHealth.dob;
+      //     console.log('patient detail',this.individualHealth);
+      //     this.healthRecord = this.individualHealth.healthRecord;
+      //     this.healthRecord = this.individualHealth.healthRecord;
+      //     this.imgUrlPrefix = this.sanitizer.bypassSecurityTrustResourceUrl( APIURL+"file/fileShow?fileId=" + this.individualHealth.profileImage);
+      //     this.getAge(this.dob);
+      //   },
+      //     err => {
+      //     })
       // }
     
     }
   
     getAge(dateString) {
-      var today = new Date();
-      var birthDate = new Date(dateString);
-      this.age = today.getFullYear() - birthDate.getFullYear();
-      var m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        this.age--;
+      // var today = new Date();
+      // var birthDate = new Date(dateString);
+      // this.age = today.getFullYear() - birthDate.getFullYear();
+      // var m = today.getMonth() - birthDate.getMonth();
+      // if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      //   this.age--;
       
-      }
-      return this.age;
+      // }
+      // return this.age;
   
     }
   
     getType(name) {
-      this.filterField.healthRecordType = name;
+      // this.filterField.healthRecordType = name;
    
     }
    
   
     // hide and show details on click
     hideFilterData() {
-      if (this.hideDetail == true) {
-        this.hideDetail = !this.hideDetail;
-      }
-      else if (this.hideDetail == false) {
-        this.hideDetail = !this.hideDetail;
-      }
+      // if (this.hideDetail == true) {
+      //   this.hideDetail = !this.hideDetail;
+      // }
+      // else if (this.hideDetail == false) {
+      //   this.hideDetail = !this.hideDetail;
+      // }
     }
     // Detecting Clicks Outside the Component
 handleClick(event){
-  var clickedComponent = event.target;
-  var inside = false;
-  do {
-      if (clickedComponent === this.elementRef.nativeElement) {
-          inside = true;
-      }
-      clickedComponent = clickedComponent.parentNode;
-  } while (clickedComponent);
-  if(inside){
-      console.log('inside');
-  }else{
-      console.log('outside');
-      if (this.hideDetail == true) {
-        this.hideDetail = !this.hideDetail;
-      }
-  }
+  // var clickedComponent = event.target;
+  // var inside = false;
+  // do {
+  //     if (clickedComponent === this.elementRef.nativeElement) {
+  //         inside = true;
+  //     }
+  //     clickedComponent = clickedComponent.parentNode;
+  // } while (clickedComponent);
+  // if(inside){
+  //     console.log('inside');
+  // }else{
+  //     console.log('outside');
+  //     if (this.hideDetail == true) {
+  //       this.hideDetail = !this.hideDetail;
+  //     }
+  // }
 }
   
   }
