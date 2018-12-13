@@ -28,8 +28,8 @@ export class AppointmentsService {
     return this.httpClient.get(APIURL + 'appointment/doctorAppointmentList?doctorId=' + doctorId + '&appointmentDate=' + appointmentDate)
   }
   /*********************CANCEL APPOINTMENT LIST************************/
-  cancelAppointment(appointmentId){
-    return this.httpClient.post(APIURL + 'appointment/cancelAppointment',appointmentId)
+  changeAppointmentStatus(data){
+    return this.httpClient.put(APIURL + 'appointment/appointmentstatus',data)
   }
 /************************GET DOCTOR"S CURRENT SCHEDULE LIST******************** */
 getDoctorCurrentAppointment(doctorId){
