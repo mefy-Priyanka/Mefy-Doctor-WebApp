@@ -1,19 +1,18 @@
-
-
   <!-- <div class="new_clinic">Add New Prescription</div> -->
-  <div class="new_clinic" *ngIf="provisionalData.length ==0 && recommendeData.length ==0 && medicalData.length ==0 && specificData.length ==0 && lifestyleData.length ==0 && adviseData.length ==0">Add New Prescription</div>
-  <div class="new_clinic" *ngIf="provisionalData.length !=0 || recommendeData.length !=0 || medicalData.length !=0 || specificData.length !=0 || lifestyleData.length !=0 || adviseData.length !=0">Prescription List</div>
+  <div class="new_clinic">Prescription List</div>
   <div class="space">
-  <div class="row" id="marbtm-0" *ngIf="provisionalData.length!= 0">
+  <div class="row" id="marbtm-0">
     <p class="provisionalc2">Provisional diagnosis</p>
-    <div class="card" *ngFor="let provisional of provisionalData">
+    <div class="card">
       <div class="row">
         <div class="card_texte">
           <div class="col-md-12" id="padding-o">
             <div class="col-md-10 col-xs-10">
               <div class="consult_text">
-                <p class="serenity">{{provisional.diagnosisFor}}</p>
-                <p class="serenity2">{{provisional.diagnosisBrief}}
+                <p class="serenity">Cavities</p>
+                <p class="serenity2">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry
                 </p>
               </div>
             </div>
@@ -40,18 +39,20 @@
       </div>
     </div>
   </div>
-  <div class="row" id="marbtm-0" *ngIf="recommendeData.length != 0">
+  <div class="row" id="marbtm-0">
     <p class="provisionalc1">Test Recommended</p>
-    <div class="card" *ngFor="let recommend of recommendeData">
+    <div class="card">
       <div class="row">
         <div class="card_texte">
           <div class="col-md-12" id="padding-o">
             <div class="col-md-10 col-xs-10">
               <div class="consult_text">
-                <p class="serenity">{{recommend.categoryType}}</p>
-                <p class="serenity2">{{recommend.testName}}
+                <p class="serenity">X-Ray</p>
+                <p class="serenity2">Lorem Ipsum is simply dummy text of the printing and typesetting industry
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry
+
                 </p>
-                <p class="serenity2">{{recommend.testDescription}}</p>
+                <!-- <p class="serenity2">{{recommend.testDescription}}</p> -->
               </div>
             </div>
             <div class="col-md-2 col-xs-2" id="padding-o">
@@ -77,35 +78,26 @@
       </div>
     </div>
   </div>
-  <div class="row" id="marbtm-0" *ngIf="medicalData.length != 0">
+  <div class="row" id="marbtm-0">
     <p class="provisionalc1">Medicine</p>
-    <div class="card"  *ngFor="let medicine of medicalData let j =index">
+    <div class="card">
       <div class="row">
         <div class="card_texte">
           <div class="col-md-12" id="padding-o">
             <div class="listing_medicine">
               <div class="col-md-4 col-sm-4 col-xs-4">
-                <p class="Angleso">{{medicine.medicineName}}</p>
+                <p class="Angleso">Angleso</p>
               </div>
               <div class="col-md-4 col-sm-4 col-xs-4 ">
-                <p class="Angleso">{{medicine.dosage}}</p>
+                <p class="Angleso">200 mg</p>
               </div>
               <div class="col-md-4 col-sm-4 col-xs-4 nopaddingrt">
                 <div class="row bottom0">
                   <div class="col-md-9 col-sm-9 col-xs-8">
-                    <p class="Angleso">{{medicine.frequency}}</p>
+                    <p class="Angleso">3X</p>
                   </div>
 
                   <div class="col-md-3 col-sm-3 col-xs-3 btnalign">
-                      
-                    <!-- <svg version="1.1" id="dot2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                      viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
-                      <g>
-                        <path d="M30,16c4.411,0,8-3.589,8-8s-3.589-8-8-8s-8,3.589-8,8S25.589,16,30,16z" />
-                        <path d="M30,44c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S34.411,44,30,44z" />
-                        <path d="M30,22c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S34.411,22,30,22z" />
-                      </g>
-                    </svg> -->
                     <div class="webdropdown">
                       <!-- <button class="btn_circ" (click)= "editSchedule(details._id)"> -->
                       <button class="btn_circ" (click)="MedicineEdit(medicine._id,j)">

@@ -62,6 +62,7 @@ export class AppointmentnewComponent implements OnInit {
   dateAppointment: any;
   message: any;
   presentTime: any;
+  loader: boolean = false;
   public mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
   /**************************************************************************************************************** */
 
@@ -196,14 +197,16 @@ export class AppointmentnewComponent implements OnInit {
 
   /***************************************** BOOK APPOINTMENT & UPDATE DASHBOARD ******************************************** */
   bookAppointment() {
+    this.loader = true;
     if (this.compareDate()) {
+      this.loader = false;
       this.dateErr = 'Not allowed to create event on previous date';
 
     }
     else {
       this.errMessage = '';
-      console.log(this.patientData.individualId,this.patientData.name,this.appointmentDate ,this.slotDetails,this.appointmentType)
-      if (this.patientData.individualId != "" && this.patientData.name != " " && this.appointmentDate && this.slotDetails && this.appointmentType!="") {
+      console.log(this.patientData.individualId, this.patientData.name, this.appointmentDate, this.slotDetails, this.appointmentType)
+      if (this.patientData.individualId != "" && this.patientData.name != " " && this.appointmentDate && this.slotDetails && this.appointmentType != "") {
         this.dateErr = '';
         this.error = '';
         // this.Fdate = moment(this.selectedDate).format('DD/MM/YYYY');
@@ -236,6 +239,7 @@ export class AppointmentnewComponent implements OnInit {
         console.log('appointment detail', appointmentDetail)
         this.appointmentService.createAppointment(appointmentDetail).subscribe(result => {
           console.log('booked appointment detail', result);
+          this.loader = false;
           let response: any = {};
           response = result;
           if (response.result.error) {
@@ -278,7 +282,13 @@ export class AppointmentnewComponent implements OnInit {
 
         },
           err => {
-
+            this.loader = false;
+            let notifydata = {
+              type: 'error',
+              title: 'Appointment',
+              msg: 'Booking Failed'
+            }
+            this.sharedService.createNotification(notifydata);
           })
       }
       else {
@@ -296,6 +306,7 @@ export class AppointmentnewComponent implements OnInit {
 
   /*************************************** CREATE NEW PATIENT ********************************************** */
   addPatient() {
+    this.loader = true;
     let patientData = {
       role: 'individual',
       phoneNumber: this.individualNumber,
@@ -304,7 +315,9 @@ export class AppointmentnewComponent implements OnInit {
     console.log(patientData)
     this.appointmentService.createIndividual(patientData).subscribe(result => {
       console.log('individual created response', result);
+      this.loader = false;
       let response: any = {};
+
       response = result;
       console.log('ssss', response.result)
       this.patientData = {
@@ -321,7 +334,13 @@ export class AppointmentnewComponent implements OnInit {
       this.sharedService.createNotification(notifydata);
     },
       err => {
-
+        this.loader = false;
+        let notifydata = {
+          type: 'error',
+          title: 'Patient',
+          msg: 'Not Addedd Successfully'
+        }
+        this.sharedService.createNotification(notifydata);
       })
   }
   /******************************************** ENDS ***************************************************** */
@@ -389,7 +408,7 @@ export class AppointmentnewComponent implements OnInit {
 
   /*********************************  COMPARING PRESENT DATE WITH SELECTED DATE    ************************************ */
   compareAppointmentdate(value) {
-    console.log('compare appointment date value',value)
+    console.log('compare appointment date value', value)
     this.error = '';
     this.dateErr = '';
     let presentDate: any;
