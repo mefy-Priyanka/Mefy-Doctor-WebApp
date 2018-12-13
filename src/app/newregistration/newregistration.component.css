@@ -263,7 +263,7 @@ img.registerLogo {
     font-family: Lato;
 }
 
-#msform[_ngcontent-c1] input[_ngcontent-c1], #msform[_ngcontent-c1] textarea[_ngcontent-c1]::placeholder{
+#msform input, #msform textarea::placeholder{
     /* color: #656363 !important; */
     font-family: Roboto;
   
