@@ -23,8 +23,8 @@ export class SharedService {
   consultHide: BehaviorSubject<any> = new BehaviorSubject(false);
   appointmentList: BehaviorSubject<any> = new BehaviorSubject({});
   cancelAppointmentList: BehaviorSubject<any> = new BehaviorSubject({});
-
-
+  diagnosisType: BehaviorSubject<any> = new BehaviorSubject({});
+  suggestType: BehaviorSubject<any> = new BehaviorSubject({});
   info: any;
 
   sidenav: BehaviorSubject<any> = new BehaviorSubject(false);
@@ -127,4 +127,14 @@ export class SharedService {
   cancdelAppointmentData(param){
 this.cancelAppointmentList.next(param);
   }
+  //get Diagnosis Form
+  createDiagnosis(param) {
+    console.log('Diagnosis',param)
+    this.diagnosisType.next(param)
+  }
+    //get Suggest Form
+    createTest(param) {
+      console.log('Suggest Form',param)
+      this.suggestType.next(param)
+    }
 }

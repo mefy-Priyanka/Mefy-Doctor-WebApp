@@ -77,8 +77,18 @@ export class DiagnosisComponent implements OnInit {
     // }
 
     // this.getEprescription();
-  }
 
+  }
+  prescribeMedicine(){
+    this.sharedService.diagnosisType.subscribe(data => {
+      console.log('result', data)  
+
+    }),
+    this.sharedService.suggestType.subscribe(k => {
+      console.log('result', k)  
+
+    })
+  }
   // get prescription
   getEprescription() {
 
