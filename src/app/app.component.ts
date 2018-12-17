@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 // import { RouterModule, Routes, Router, NavigationEnd } from '@angular/router';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import{SharedService} from './mefyservice/shared.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

@@ -252,6 +252,7 @@ export class AppointmentnewComponent implements OnInit {
               this.sharedService.createNotification(notifydata);
             }
             else {
+              this.loader = false;
               let notifydata = {
                 type: 'error',
                 title: 'Appointment',
@@ -276,6 +277,7 @@ export class AppointmentnewComponent implements OnInit {
               msg: 'Booked Succesfully'
             }
             this.sharedService.createNotification(notifydata);
+            this.loader = false;
 
           }
 
@@ -293,6 +295,7 @@ export class AppointmentnewComponent implements OnInit {
       }
       else {
         // this.errMessage = 'Please Enter All The Credentials';
+        this.loader = false;
         let notifydata = {
           type: 'warning',
           title: 'Please',

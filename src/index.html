@@ -83,62 +83,14 @@
     });
   </script>
   <!-- **************************************modal box********************************* -->
-
+<!-- *********************************FIREBASE CLOUD MESSAGING SETTING*********** -->
   <head>
     <!-- omitted -->
     <link rel="manifest" href="/manifest.json">
   </head>
-<!-- *********************************FIREBASE CLOUD MESSAGING SETTING*********** -->
-<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
-  <script>
-    // Initialize Firebase
 
-    var config = {
-    apiKey: "AIzaSyDmXOAO_fii6dBbztAnymjE-0JLejSp67E",
-    authDomain: "mefyfcm.firebaseapp.com",
-    databaseURL: "https://mefyfcm.firebaseio.com",
-    projectId: "mefyfcm",
-    storageBucket: "mefyfcm.appspot.com",
-    messagingSenderId: "373942446543"
-  };
-
-    firebase.initializeApp(config);
-    // Retrieve Firebase Messaging object.
- const messaging = firebase.messaging();
-
-messaging.requestPermission().then(function() {
-   console.log('Notification permission granted.');
-   // TODO(developer): Retrieve an Instance ID token for use with FCM.
-   // Get Instance ID token. Initially this makes a network call, once retrieved
-// subsequent calls to getToken will return from cache.
-messaging.getToken().then(function(currentToken) {
-  if (currentToken) {
-    console.log(currentToken)
-  } else {
-    // Show permission request.
-    console.log('No Instance ID token available. Request permission to generate one.');
-    // Show permission UI.
-  }
-}).catch(function(err) {
-  console.log('An error occurred while retrieving token. ', err);
-});
- })
- .then(function(){
-   console.log(token)
- })
- .catch(function(err) {
-   console.log('Unable to get permission to notify.', err);
- });
- // Handle incoming messages. Called when:
-// - a message is received while the app has focus
-// - the user clicks on an app notification created by a service worker
-//   `messaging.setBackgroundMessageHandler` handler.
-messaging.onMessage(function(payload) {
-  console.log('Message received. ', payload);
-  // ...
-});
  
-  </script>
+  </script> -->
 
 </body>
 
