@@ -20,7 +20,7 @@ export class DiagnosisComponent implements OnInit {
   prescriptionId: any;
   medicineData: any;
   pathName:any;
-  currentURL='';
+  public currentURL='';
   hidePrescribeButton:boolean=false;
   showEdit : boolean =false;
   selected:any;
@@ -42,9 +42,10 @@ export class DiagnosisComponent implements OnInit {
     // console.log(this.pathName);
     // this.sharedService.setPath(this.pathName);
 
-    // this.currentURL = window.location.pathname; 
-    // console.log(this.currentURL);
-    // this.sharedService.setPath(this.currentURL);
+    /*GET CURRENT URL, send url path name to change navbar colour*/
+    this.currentURL = window.location.pathname; 
+    console.log(this.currentURL);
+    this.sharedService.setPath(this.currentURL);
 
     // // data from calling
     // this.route.queryParams.subscribe(param => {
