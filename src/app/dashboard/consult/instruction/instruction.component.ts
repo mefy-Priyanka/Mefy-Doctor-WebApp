@@ -10,17 +10,12 @@ import { SharedService } from '../../../mefyservice/shared.service';
   styleUrls: ['./instruction.component.css']
 })
 export class InstructionComponent implements OnInit {
-  editInstruction: any;
-  hideSavePlusButton: boolean = true;
-  individualPrescriptionDetail: any;
-  message: any;
-  instructionForm: FormGroup;
-  instructionFormErrors: any;
-  prescriptionId: any;
-  specificInstructionId: any;
-  showAddButton: boolean = true;//show save+
-  adviceForm: any = []
-  hideDelete: boolean = false;
+
+  public instructionForm: FormGroup;
+  public instructionFormErrors: any;
+  public loader: boolean = false
+  public submitted: boolean = false;
+
 
   constructor(private router: Router, private ePrescriptionService: DoctorPrescriptionService, private sharedService: SharedService, private socketService: SocketService, private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) {
     this.instructionFormErrors = {
@@ -35,20 +30,6 @@ export class InstructionComponent implements OnInit {
     this.instructionForm.valueChanges.subscribe(() => {
       this.onInstructionFormValuesChanged();
     });
-    this.prescriptionId = localStorage.getItem('prescriptionId');
-    // this.editInstructionForm();
-
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if (Object.keys(params).length != 0) {
-        this.specificInstructionId = params['id'];
-        console.log(this.specificInstructionId); // get url id
-        this.hideSavePlusButton = false;
-        this.hideDelete = true;
-        this.getInstructionDetailById();
-
-      }
-    });
-
 
   }
   //crete instruction form
@@ -59,7 +40,6 @@ export class InstructionComponent implements OnInit {
 
   }
   onInstructionFormValuesChanged() {
-    this.message = "";
     for (const field in this.instructionFormErrors) {
       if (!this.instructionFormErrors.hasOwnProperty(field)) {
         continue;
@@ -79,69 +59,24 @@ export class InstructionComponent implements OnInit {
   // create Advice form
   saveInstructionForm() {
     // this.submitted=true;
+    this.loader=true
     if (this.instructionForm.valid) {
-      if (this.specificInstructionId) {
-        this.editInstructionForm()
+      let data = {
+        advice: this.instructionForm.value.advice
       }
-      else {
-      this.message = ''
-      console.log(this.instructionForm.value);
-      this.hideSavePlusButton = true;
-      this.ePrescriptionService.createSpecificInstruction(this.prescriptionId, this.instructionForm.value).subscribe(result => {
-        console.log(result);
-        this.sharedService.prescriptionInfo(true);
-        this.instructionForm.reset();
-        let notifydata = {
-          type: 'success',
-          title: 'Instruction',
-          msg: 'Created Succesfully'
-        }
-        this.sharedService.createNotification(notifydata);
-        this.router.navigate(['/dashboard/consultnew/diagnosis']);
-        this.instructionForm.reset();
-
-      },
-
-
-        err => {
-        });
+      console.log(data)
+      this.sharedService.createInstructionData(data)
+      this.router.navigate(['/dashboard/consultnew/diagnosis']);
+      this.instructionForm.reset();
     }
-  }
     else {
-      this.message = "Please Enter Credentials";
-    }
-  
-  }
-
-  // adding extra Instruction
-  savePlus() {
-    if (this.instructionForm.valid) {
-      this.message = ''
-      console.log(this.instructionForm.value);
-        this.hideSavePlusButton = true;
-        this.ePrescriptionService.createSpecificInstruction(this.prescriptionId, this.instructionForm.value).subscribe(result => {
-          console.log(result);
-          this.sharedService.prescriptionInfo(true);
-          this.instructionForm.reset();
-          let notifydata = {
-            type: 'success',
-            title: 'Instruction',
-            msg: 'Created Succesfully'
-          }
-          this.sharedService.createNotification(notifydata);
-          this.instructionForm.reset();
-
-        },
-
-
-          err => {
-          });
+      let notifydata = {
+        type: 'warning',
+        title: 'Not Valid!'
       }
-    
-    else {
-      this.message = "Please Enter Credentials";
+      this.sharedService.createNotification(notifydata);
+      this.loader = false;
     }
-
 
   }
 
@@ -151,60 +86,10 @@ export class InstructionComponent implements OnInit {
     this.router.navigate(['/dashboard/consultnew/diagnosis']);
 
   }
-  // get instruction by id
-  getInstructionDetailById() {
-    // this.submitted=false;
-    this.ePrescriptionService.getSpecificInstructionById(this.specificInstructionId).subscribe(result => {
-      console.log(result);
-      this.individualPrescriptionDetail = result.result;
-      console.log(this.individualPrescriptionDetail);
-      // this.hideSavePlusButton = false;
-      console.log('detail', this.individualPrescriptionDetail);
-      this.instructionForm.controls.advice.setValue(this.individualPrescriptionDetail.advice)
-    },
-      err => {
-      })
-  }
-  //update Instruction form 
-  editInstructionForm() {
-    this.hideSavePlusButton = false;
-    let data = {
-      advice: this.instructionForm.value.advice,
-      specificInstructionId: this.specificInstructionId
-    }
-    if (Object.keys(data.advice).length != 0) {
-      this.ePrescriptionService.updateSpecificInstruction(data).subscribe(data => {
-        console.log(data);
-        this.instructionForm.reset();
-        let notifydata = {
-          type: 'success',
-          title: 'Instruction',
-          msg: '  Updated Succesfully'
-        }
-        this.sharedService.createNotification(notifydata);
-        this.instructionForm.reset();
-        this.router.navigate(['/dashboard/consultnew/diagnosis']);
-      })
 
-    }
-  }
 
-  // delete  selected specific instruction form
-  deleteSpecificForm() {
-    this.ePrescriptionService.deleteSpecific(this.prescriptionId, this.specificInstructionId).subscribe(data => {
-      console.log(data);
-      let notifydata = {
-        type: 'success',
-        title: 'Instruction',
-        msg: 'Deleted Succesfully'
-      }
-      this.sharedService.createNotification(notifydata);
-      this.router.navigate(['/dashboard/consultnew/diagnosis']);
 
-    }, err => {
 
-    })
-  }
 
 }
 

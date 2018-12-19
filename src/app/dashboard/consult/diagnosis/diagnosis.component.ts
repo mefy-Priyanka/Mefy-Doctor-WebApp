@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DoctorPrescriptionService } from '../../../meme-services/doctor-prescription.service';
+import { PrescriptionService } from '../../../mefyservice/prescription.service';
 import { SharedService } from '../../../mefyservice/shared.service';
 // import { Router } from '@angular/router';
 import { RouterLink, ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
@@ -10,13 +10,20 @@ import { RouterLink, ActivatedRoute, Router, ActivatedRouteSnapshot } from '@ang
 })
 export class DiagnosisComponent implements OnInit {
 
-  prescriptionList: any;
-  provisionalData: any = [];
-  recommendeData: any = [];
-  medicalData: any = [];
-  specificData: any = [];
-  lifestyleData: any = [];
-  adviseData: any = [];
+public diagnosisData:any=[];
+public suggestionData:any=[];
+public medicareData:any=[];
+public instructionData:any=[];
+public lifeStyleData:any=[];
+public followUpData:any=[];
+public loader:boolean=false;
+/*****OLD */
+provisionalData: any = [];
+recommendeData: any = [];
+medicalData: any = [];
+specificData: any = [];
+lifestyleData: any = [];
+adviseData: any = [];
   prescriptionId: any;
   medicineData: any;
   pathName:any;
@@ -28,7 +35,8 @@ export class DiagnosisComponent implements OnInit {
   select:any;
   callerData: any = {};
   hideVideo:any;
-  constructor(  private route: ActivatedRoute,private ePrescriptionService: DoctorPrescriptionService, private sharedService: SharedService, private router: Router) {
+  prescriptionList: any;
+  constructor(  private route: ActivatedRoute,private prescriptionService: PrescriptionService, private sharedService: SharedService, private router: Router) {
 
     // this.prescriptionId = localStorage.getItem('prescriptionId');
 
@@ -69,8 +77,40 @@ export class DiagnosisComponent implements OnInit {
     //   }
       
     // })
-  }
-
+/***************GET DIAGNOSIS DATA *****************/
+  this.sharedService.diagnosisdata.subscribe(data=>{
+      this.diagnosisData.push(data)
+      console.log('diagnosisdata at diagnosis',this.diagnosisData)
+    })
+  
+/***************GET SUGGESTION TYPE DATA *****************/
+    this.sharedService.suggestionData.subscribe(data=>{
+      this.suggestionData.push(data)
+      console.log('suggestionData at diagnosis ', this.suggestionData)
+    })
+  
+/***************GET MEDICARE DATA *****************/
+    this.sharedService.medicinedata.subscribe(data=>{
+      this.medicareData.push(data)
+      console.log('medicinedata at diagnosis',this.medicareData)
+    })
+/***************GET INSTRUCTION DATA *****************/
+     this.sharedService.instructionData.subscribe(data=>{
+       this.instructionData.push(data)
+       console.log(this.instructionData.length)
+      console.log('instructionData at diagnosis',this.instructionData)
+    })
+/***************GET LIFESTYLE DATA *****************/
+       this.sharedService.lifeStyleData.subscribe(data=>{
+         this.lifeStyleData.push(data)
+        console.log('lifeStyleData at diagnosis', this.lifeStyleData)
+      })
+/***************GET FOLLOWUPTYPE DATA *****************/
+    this.sharedService.followUpData.subscribe(data=>{
+      this.followUpData.push(data);
+      console.log('followUpData at diagnosis',this.followUpData)
+    })
+}
   ngOnInit() {
     // if (!localStorage.getItem('prescriptionId')) {
     //   this.getPrescriptionID();
@@ -79,16 +119,16 @@ export class DiagnosisComponent implements OnInit {
     // this.getEprescription();
 
   }
-  prescribeMedicine(){
-    this.sharedService.diagnosisType.subscribe(data => {
-      console.log('result', data)  
+  // prescribeMedicine(){
+  //   this.sharedService.diagnosisType.subscribe(data => {
+  //     console.log('result', data)  
 
-    }),
-    this.sharedService.suggestType.subscribe(k => {
-      console.log('result', k)  
+  //   }),
+  //   this.sharedService.suggestType.subscribe(k => {
+  //     console.log('result', k)  
 
-    })
-  }
+  //   })
+  // }
   // get prescription
   getEprescription() {
 
@@ -192,5 +232,36 @@ export class DiagnosisComponent implements OnInit {
     // else if (this.show == false) {
     //   this.show = !this.show;
     // } 
+  }
+  createPrescription(){
+    this.loader=true
+    let prescriptionData={
+      doctorId:localStorage.getItem('doctorId'),
+      individualId:'0b20ac54-cb9a-47bb-ac59-b397dc18bdf1',
+      medicine:this.medicareData,
+      diagnosis:this.diagnosisData,
+      instruction:this.instructionData,
+      recommended:this.suggestionData,
+      lifestyle:this.lifeStyleData,
+      advice:this.followUpData
+    }
+    console.log('prescriptionData',prescriptionData)
+    this.prescriptionService.createPrescription(prescriptionData).subscribe(data=>{
+      this.loader=false
+      console.log('prescription',data)
+      let notifydata = {
+        type: 'success',
+        title: 'Prescription Created Sucessfully!'
+      }
+      this.sharedService.createNotification(notifydata);
+    },err=>{
+      let notifydata = {
+        type: 'error',
+        title: 'Something Went Wrong!'
+      }
+      this.sharedService.createNotification(notifydata);
+      this.loader=false
+      console.log(err)
+    })
   }
 }

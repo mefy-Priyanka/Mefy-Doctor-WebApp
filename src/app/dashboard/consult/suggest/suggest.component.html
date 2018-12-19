@@ -22,7 +22,7 @@
         <div class="card-body">
           <p class="provisionalc212">{{tests}}</p>
           <hr class="full_width">
-          <span class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red','text-align':'center'}">{{messageTest}}</span>
+          <!-- <span class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red','text-align':'center'}">{{messageTest}}</span> -->
           <div class="allignspace text-left">
             <input type="text" name="fname" placeholder="Test Name" class="referdoc" formControlName="testName">
             <span class="errormessage" *ngIf="suggestFormErrors.testName.required">Please Provide Test Name </span>
@@ -36,8 +36,8 @@
 </div>
 <div class="text-center high" *ngIf="hideTestRecommended">
   <button class="prescribebtn" (click)="createSuggestTest()">Save</button>
-  <button class="prescribebtn" *ngIf="update" (click)="saveSuggestForm()">Save +</button>
-  <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteSuggestForm()" >Delete</button>
+  <!-- <button class="prescribebtn" *ngIf="update" (click)="saveSuggestForm()">Save +</button> -->
+  <!-- <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteSuggestForm()" >Delete</button> -->
   <button class="cancelbtn"  (click)="closeForm()">Cancel</button>
 
 </div>

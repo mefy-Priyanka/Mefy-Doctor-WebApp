@@ -13,9 +13,26 @@
                 </button>
           -->
           <div class="card-body">
-              
+               <!-- /* loader */ -->
+          <div class="loading" *ngIf="loader">
+              <div class="sk-circle">
+                <div class="sk-circle1 sk-child"></div>
+                <div class="sk-circle2 sk-child"></div>
+                <div class="sk-circle3 sk-child"></div>
+                <div class="sk-circle4 sk-child"></div>
+                <div class="sk-circle5 sk-child"></div>
+                <div class="sk-circle6 sk-child"></div>
+                <div class="sk-circle7 sk-child"></div>
+                <div class="sk-circle8 sk-child"></div>
+                <div class="sk-circle9 sk-child"></div>
+                <div class="sk-circle10 sk-child"></div>
+                <div class="sk-circle11 sk-child"></div>
+                <div class="sk-circle12 sk-child"></div>
+              </div>
+            </div>
+            <!-- /* loader */ -->
             <form [formGroup]="instructionForm" novalidate>
-              <p class="error_message2">{{message}}</p>
+              <!-- <p class="error_message2">{{message}}</p> -->
               <input type="text" name="fname" placeholder="Advice" class="validate spacem referdoc" formControlName="advice">
               <p class="errormessage" *ngIf="instructionFormErrors.advice.required">Please Enter Advice </p>
             </form>
@@ -25,8 +42,8 @@
         </div>
         <div class="text-center high" >
           <button class="prescribebtn" (click)="saveInstructionForm()" >Save</button>
-          <button class="prescribebtn" *ngIf="hideSavePlusButton" (click)="savePlus()">Save +</button>
-          <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteSpecificForm()">Delete</button>
+          <!-- <button class="prescribebtn" *ngIf="hideSavePlusButton" (click)="savePlus()">Save +</button> -->
+          <!-- <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteSpecificForm()">Delete</button> -->
           <button class="cancelbtn" (click)="closeInstructionForm()">Cancel</button>
         </div>
         <!-- <div class="row" *ngIf="showAddButton">

@@ -10,17 +10,11 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./diagnosis-form.component.css']
 })
 export class DiagnosisFormComponent implements OnInit {
-  diagnosisFormErrors: any;
-  diagnosisFormNew: FormGroup;
-  prescriptionId: any;
-  provisionalData: any;
-  diagnosisFormId: any;
-  diagnosisFor: any;
-  diagnosisBrief: any;
-  prescriptionDetail: any;
-  diagnosisArray = [];
-  hideDelete: boolean = false;
-  message = '';
+  public diagnosisFormErrors: any;
+  public diagnosisFormNew: FormGroup;
+  public loader: boolean = false
+  public submitted: boolean = false;
+
   constructor(private router: Router, private formBuilder: FormBuilder, private ePrescriptionService: DoctorPrescriptionService, private sharedService: SharedService, private activatedRoute: ActivatedRoute) {
     this.diagnosisFormErrors = {
       diagnosisFor: {}
@@ -42,7 +36,7 @@ export class DiagnosisFormComponent implements OnInit {
     });
   }
   onDiagnosisFormValuesChanged() {
-    this.message = "";
+
     for (const field in this.diagnosisFormErrors) {
       if (!this.diagnosisFormErrors.hasOwnProperty(field)) {
         continue;
@@ -62,23 +56,25 @@ export class DiagnosisFormComponent implements OnInit {
 
   //create diagnosis prescription
   saveDiagnosis() {
-    this.message = '';
-    // if (this.diagnosisFormId) {
-    // }
-    // else {
+    this.loader = true;
     if (this.diagnosisFormNew.valid) {
       let diagnosisdata = {
         diagnosisFor: this.diagnosisFormNew.value.diagnosisFor,
-        diagnosisBrief:this.diagnosisFormNew.value.diagnosisBrief
+        diagnosisBrief: this.diagnosisFormNew.value.diagnosisBrief
       }
-      console.log("diagnosisFor",this.diagnosisFormNew.value.diagnosisFor)
-      console.log("diagnosisBrief",this.diagnosisFormNew.value.diagnosisBrief)
+      console.log("diagnosis", diagnosisdata)
       this.sharedService.createDiagnosis(diagnosisdata);
+      this.router.navigate(['/dashboard/consultnew/diagnosis']);
     }
     else {
-      this.message = "Please Enter Credentials";
+      let notifydata = {
+        type: 'warning',
+        title: 'Not Valid!'
+      }
+      this.sharedService.createNotification(notifydata);
+      this.loader = false;
     }
-    // }
+
 
   }
 

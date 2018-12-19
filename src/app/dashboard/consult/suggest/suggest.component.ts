@@ -84,7 +84,11 @@ export class SuggestComponent implements OnInit {
       this.router.navigate(['/dashboard/consultnew/diagnosis']);
     }
     else {
-      this.messageTest = "Please Enter Credentials";
+      let notifydata = {
+        type: 'warning',
+        title: 'Not Valid!'
+      }
+      this.sharedService.createNotification(notifydata);
     }
   }
 

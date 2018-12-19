@@ -1,5 +1,23 @@
 <p class="provisionalc21">Prescribe Medicine</p>
 <div class="card-body">
+      <!-- /* loader */ -->
+          <div class="loading" *ngIf="loader">
+            <div class="sk-circle">
+              <div class="sk-circle1 sk-child"></div>
+              <div class="sk-circle2 sk-child"></div>
+              <div class="sk-circle3 sk-child"></div>
+              <div class="sk-circle4 sk-child"></div>
+              <div class="sk-circle5 sk-child"></div>
+              <div class="sk-circle6 sk-child"></div>
+              <div class="sk-circle7 sk-child"></div>
+              <div class="sk-circle8 sk-child"></div>
+              <div class="sk-circle9 sk-child"></div>
+              <div class="sk-circle10 sk-child"></div>
+              <div class="sk-circle11 sk-child"></div>
+              <div class="sk-circle12 sk-child"></div>
+            </div>
+          </div>
+          <!-- /* loader */ -->
   <p class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red','text-align':'center'}">{{messageMedicine}}</p>
   <span class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{saveMedicine}}</span>
  
@@ -46,7 +64,7 @@
 
 
 </div>
-<div class="text-center high" [hidden]="!closeMedicine">
+<div class="text-center high">
   <button class="prescribebtn" (click)="createMedicine()">Save</button>
   <!-- <button class="prescribebtn" *ngIf="update" (click)="saveMedicineArray()">Save +</button> -->
   <!-- <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteMedicineForm()">Delete</button> -->

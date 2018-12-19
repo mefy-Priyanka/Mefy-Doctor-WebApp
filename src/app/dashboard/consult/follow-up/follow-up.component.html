@@ -2,8 +2,26 @@
         <p class="provisionalc21">Advice followup</p>
         <div class="card cardabc custom-card vert-padding" >
           <div class="card-body">
+                  <!-- /* loader */ -->
+          <div class="loading" *ngIf="loader">
+              <div class="sk-circle">
+                <div class="sk-circle1 sk-child"></div>
+                <div class="sk-circle2 sk-child"></div>
+                <div class="sk-circle3 sk-child"></div>
+                <div class="sk-circle4 sk-child"></div>
+                <div class="sk-circle5 sk-child"></div>
+                <div class="sk-circle6 sk-child"></div>
+                <div class="sk-circle7 sk-child"></div>
+                <div class="sk-circle8 sk-child"></div>
+                <div class="sk-circle9 sk-child"></div>
+                <div class="sk-circle10 sk-child"></div>
+                <div class="sk-circle11 sk-child"></div>
+                <div class="sk-circle12 sk-child"></div>
+              </div>
+            </div>
+            <!-- /* loader */ -->
             <form [formGroup]="followForm" novalidate>
-                <p class="error_message2"[ngStyle]="{'-webkit-text-fill-color':'	red','text-align':'center'}">{{messageAdviceNew}}</p>
+                <!-- <p class="error_message2"[ngStyle]="{'-webkit-text-fill-color':'	red','text-align':'center'}">{{messageAdviceNew}}</p> -->
                 <p class="headcard">Revisit schedule</p>
             <div class="revisit_tabs">
               <div id="exTab2">
@@ -28,6 +46,7 @@
                     </p>
                       <p class="range-field ">
                         <input type="range" id="test5" min="0" max="30" (focusout)="checkTime()" (change)="setDay($event,'days')" data-show-value="true" data-popup-enabled="true" [(ngModel)]="daysTest" [ngModelOptions]="{standalone: true}"/>
+
                       </p>
                   </div>
                   <div class="tab-pane" id="2">
@@ -49,7 +68,8 @@
                 </div>
               </div>
             </div>
-              <input type="text" name="fname" placeholder="Referred to another Doctor" class="referdoc" formControlName="refferedDoctor">
+              <input type="text" placeholder="Referred to another Doctor" class="referdoc" formControlName="referredDoctor">
+              <!-- <p class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="followFormErrors.referredDoctor.required || (followForm.controls.referredDoctor.pristine && submitted)">Please Provide Reffered Doctor Name</p> -->
               <!-- <span class="reffereddoc" *ngIf="followFormErrors.refferedDoctor.required">Please Provide Reffered Doctor Name</span> -->
             </form>
 
@@ -57,7 +77,7 @@
         </div>
         <div class="text-center high">
           <button class="prescribebtn" (click)="createAdvice()">Save</button>
-          <button class="prescribebtn" *ngIf="deleteFollow" (click)="deleteFollowupForm()"  >Delete</button>
+          <!-- <button class="prescribebtn" *ngIf="deleteFollow" (click)="deleteFollowupForm()"  >Delete</button> -->
           <!-- <button class="prescribebtn" *ngIf="updateFollow"  (click)="saveFollowArray()" >Save +</button> -->
           <button class="cancelbtn" (click)="closeForm()">Cancel</button>
         </div>
