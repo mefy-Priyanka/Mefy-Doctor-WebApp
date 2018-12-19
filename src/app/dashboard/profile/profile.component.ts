@@ -188,6 +188,7 @@ export class ProfileComponent implements OnInit {
             msg: 'Updated Successfully'
           }
           this.sharedService.createNotification(notifydata);
+          this.sharedService.updatedDoctorInfo(true);
           this.router.navigate(['/dashboard/main']);
         }
 

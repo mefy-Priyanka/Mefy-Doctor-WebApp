@@ -29,6 +29,15 @@ export class SidenavComponent implements OnInit {
     this.doctorProfileId = localStorage.getItem('doctorId');  //GET DOCTORID FROM LOCALSTORAGE
     this.userId=localStorage.getItem('userId') //GET USERID FROM LOCALSTORAGE
 
+
+    // get updated info
+    this.sharedService.updatedInfo.subscribe(data => {
+      console.log('updated', data)
+      if (data == true) {
+        this.doctorProfile();
+      }
+    })
+
   }
 
   ngOnInit() {

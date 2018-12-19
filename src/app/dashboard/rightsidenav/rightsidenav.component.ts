@@ -24,7 +24,7 @@ export class RightsidenavComponent implements OnInit {
   public informationNew: any = [];
   public selectedAppointmentData: any = {};
   public cancelAppointmentId: any = {};
-  public noAppointment: boolean = false;  /* Show and hide appointment message*/
+  public noAppointment: boolean = true;  /* Show and hide appointment message*/
   public loader: boolean = true;
   public appointmentData: boolean = true;
   public elementRef;
@@ -62,8 +62,8 @@ export class RightsidenavComponent implements OnInit {
       this.loader = false;
       let result: any = {}
       result = data
+  
       if (result.result.result != null && Object.keys(result.result.result).length != 0) {
-
         var status = result.result.result.filter(function (status) {
           return status.status == 'Active';
         });
@@ -90,6 +90,8 @@ export class RightsidenavComponent implements OnInit {
         this.loader = false;
       }
     }, err => {
+      this.appointmentData = false;
+      this.noAppointment = true;
       this.loader = false;
       console.log(err)
       let notification = {
@@ -191,6 +193,7 @@ export class RightsidenavComponent implements OnInit {
     }
     this.appointmentService.changeAppointmentStatus(data).subscribe(data => {
       console.log('cancelAppointment', data)
+      this.getCurrentDateAppointmentlist();
       this.loader = false;
       let result: any = {}
       result = data;

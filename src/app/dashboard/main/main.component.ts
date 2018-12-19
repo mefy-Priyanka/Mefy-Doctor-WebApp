@@ -7,7 +7,7 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 import { APIURL } from '../../urlsConfig';
 import { DashboarddService } from '../../mefyservice/dashboardd.service';
 import { ClinicService } from '../../mefyservice/clinic.service';
-
+import { MessagingService } from '../../mefyservice/messaging.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -22,8 +22,9 @@ export class MainComponent implements OnInit {
   public noAppointment: boolean = true;  /* Show and hide appointment message*/
   public loader: boolean = true /***LOADER */
   public clinicMessage: boolean = true
+  message:any;
 
-  constructor(private sanitizer: DomSanitizer, private appointmentService: AppointmentsService, private dashboardService: DashboarddService, private sharedService: SharedService, private router: Router, private clincService: ClinicService) {
+  constructor(private sanitizer: DomSanitizer, private appointmentService: AppointmentsService, private dashboardService: DashboarddService, private sharedService: SharedService, private router: Router, private clincService: ClinicService,public messagingService: MessagingService) {
     this.doctorId = localStorage.getItem('doctorId');
 
     /*GET CURRENT URL, send url path name to change navbar colour*/
@@ -46,6 +47,13 @@ export class MainComponent implements OnInit {
     this.getDoctorDetail();
     this.getClinicByDoctorId();
     this.getCurrentDateAppointmentlist();
+    const userId = 'user001';
+    console.log('userId',userId)
+    this.messagingService.requestPermission(userId)
+    this.messagingService.receiveMessage()
+    this.message = this.messagingService.currentMessage
+    console.log('message',this.message)
+
   }
 
   /****************GET DOCTOR"S DASHBOARD DETAIL BY LOGIN DOCTORID************** */

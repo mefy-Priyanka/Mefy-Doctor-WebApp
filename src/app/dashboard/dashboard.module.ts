@@ -56,8 +56,7 @@ const routes: Routes = [
     TextMaskModule,
     BsDatepickerModule.forRoot(),
     ToastyModule.forRoot(),
-    TimepickerModule.forRoot(),
-
+    TimepickerModule.forRoot()
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [

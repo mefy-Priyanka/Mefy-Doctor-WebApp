@@ -264,7 +264,7 @@
               <tag-input formControlName="language" (onAdd)="onAddLanguage($event.langName)" onlyFromAutocomplete="true"
                 blinkIfDupe="true" placeholder="Language">
                 <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
-                  [showDropdownIfEmpty]="false" placeholder="Choose language" [autocompleteItems]="languageList">
+                  [showDropdownIfEmpty]="false" placeholder="Choose language" [autocompleteItems]="languageOfObjects">
                 </tag-input-dropdown>
               </tag-input>
             </p>
