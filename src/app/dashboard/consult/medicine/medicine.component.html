@@ -15,7 +15,6 @@
       [showDropdownIfEmpty]="false" placeholder="Choose language" [autocompleteItems]="languageList">
     </tag-input-dropdown>
   </tag-input>
-  </tag-input>
 
     <span class="errormessage" *ngIf="medicineFormErrors.medicineName.required">Please Provide Medicine Name</span>
     <input type="text" name="fname" [textMask]="{mask: mask, guide: false}" placeholder="Dosage" formControlName="dosage" class="referdoc">
