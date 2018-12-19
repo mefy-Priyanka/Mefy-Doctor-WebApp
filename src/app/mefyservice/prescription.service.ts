@@ -15,4 +15,9 @@ createPrescription(prescribeData){
   console.log('service',prescribeData)
   return this.httpClient.post(APIURL+'prescription/create',prescribeData)
 }
+/*************GET PRESCRIPTION BY INDIVIDUAL ID************************/
+getPrescriptionByIndividualId(individualId){
+  console.log('service',individualId)
+  return this.httpClient.get(APIURL+'prescription/individualprescription?individualId='+individualId)
+}
 }

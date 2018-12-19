@@ -16,6 +16,7 @@ public medicareData:any=[];
 public instructionData:any=[];
 public lifeStyleData:any=[];
 public followUpData:any=[];
+public individualPrescriptionList:any=[];
 public loader:boolean=false;
 /*****OLD */
 provisionalData: any = [];
@@ -112,6 +113,7 @@ adviseData: any = [];
     })
 }
   ngOnInit() {
+    this. getPrescriptionByIndividualId() ;
     // if (!localStorage.getItem('prescriptionId')) {
     //   this.getPrescriptionID();
     // }
@@ -129,28 +131,22 @@ adviseData: any = [];
 
   //   })
   // }
-  // get prescription
-  getEprescription() {
-
-    // if (localStorage.getItem('prescriptionId')) {
-    //   this.ePrescriptionService.getPrescription(localStorage.getItem('prescriptionId'))
-    //     .subscribe(result => {
-    //       this.prescriptionList=result.result;
-    //       console.log(this.prescriptionList)//prescription list
-    //       if(this.prescriptionList!=0)
-    //       // this.hidePrescribeButton=true
-    //       console.log('prescription list', result);
-    //       this.provisionalData = result.result.diagnosisId;
-    //       this.recommendeData = result.result.recommendedId;
-    //       this.medicalData = result.result.medicineId;
-    //       this.specificData = result.result.specificInstructionId;
-    //       this.lifestyleData = result.result.lifeStyleId;
-    //       this.adviseData = result.result.adviceId;
-    //       console.log(this.adviseData);
-    //     }, err => {
-
-    //     });
+  /*************** GET PRESCRIPTION BT INDIVIDUAL ID*******************/
+  getPrescriptionByIndividualId() {
+    this.loader=true;
+    // let individualId={
+    //   individualId:'0b20ac54-cb9a-47bb-ac59-b397dc18bdf1'
     // }
+    this.prescriptionService.getPrescriptionByIndividualId('0b20ac54-cb9a-47bb-ac59-b397dc18bdf1').subscribe(data=>{
+      let result:any={}
+      result=data
+      this.loader=false
+      this.individualPrescriptionList=result
+      console.log('individualPrescriptionList',this.individualPrescriptionList)
+    },err=>{
+      this.loader=false
+console.log(err)
+    })
   }
 
   // edit diagnosis form
@@ -184,31 +180,7 @@ adviseData: any = [];
   this.router.navigate(['dashboard/consultnew/medicare',id]);
 }
 
-  // create prescriptionid
-  getPrescriptionID() {
 
-    // let prescriptionData = {
-    //   adviceId: [],
-    //   medicineId: [],
-    //   lifeStyleId: [],
-    //   diagnosisId: [],
-    //   specificInstructionId: [],
-    //   recommendedId: [],
-    //   doctorId: localStorage.getItem('loginId'),
-    //   individualId: this.callerData.callerId
-    // }
-
-    // this.ePrescriptionService.createPrescription(prescriptionData)
-    //   .subscribe(result => {
-        
-    //     console.log('prescription id created', result);
-    //     this.prescriptionId = result.member._id;
-    //     // this.sharedService.prescriptionId(result.member._id);
-    //     localStorage.setItem('prescriptionId', this.prescriptionId)
-    //   }, err => {
-
-    //   });
-  }
 
    // hide & show on click
    followUpEdit(id, i) {
