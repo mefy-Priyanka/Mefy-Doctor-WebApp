@@ -28,6 +28,8 @@ import { ProfileService } from './mefyservice/profile.service';
 import { DashboarddService } from './mefyservice/dashboardd.service';
 import { SocketsService } from './mefyservice/sockets.service';
 import { MessagingService } from './mefyservice/messaging.service';
+import { PrescriptionService } from './mefyservice/prescription.service';
+
 
 /******************END OF NEW SERVICES************************************ */
 
@@ -147,6 +149,7 @@ const approutes: Routes = [
     AppointmentsService,
     SocketsService,
     MessagingService,
+    PrescriptionService,
     /**************/
     HttpClientModule,
     // ManageaccountComponent,

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray, FormArrayName } from '@angular/forms';
-import { DoctorPrescriptionService } from '../../../meme-services/doctor-prescription.service';
-import { CompleterService, CompleterData } from 'ng2-completer';
+import { PrescriptionService } from '../../../mefyservice/prescription.service';
 import { SharedService } from '../../../mefyservice/shared.service';
 import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
 
@@ -15,16 +14,20 @@ export class MedicineComponent implements OnInit {
   myInputVariable: any;
   @ViewChild('myOutput')
   myOutputVariable: any;
-  medicineForm: FormGroup;
-  medicineFormErrors: any;
+  public medicineForm: FormGroup;
+  public medicineFormErrors: any;
   medicineArray: any = [];
+  public allmedicineName:any=[];
+  public medicineOfObjects:any=[];
+  public selectedMedicine:any=[]
+  public submitted:boolean=false;
   frequency: any = '';
   days: any = '';
   messageMedicine: any = '';
   medicine: boolean = false;
   prescriptionId: any;
   medicineList: any;
-  public medicineService: CompleterData;
+
   closeMedicine: boolean = true;
   medicineId: any;
   medicineData: any;
@@ -37,7 +40,7 @@ export class MedicineComponent implements OnInit {
   
   public mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/]
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private ePrescriptionService: DoctorPrescriptionService, private formBuilder: FormBuilder, private completerService: CompleterService, private sharedService: SharedService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private PrescriptionService:PrescriptionService, private formBuilder: FormBuilder, private sharedService: SharedService) {
     this.medicineFormErrors = {
       medicineName: {},
       dosage: {},
@@ -51,6 +54,7 @@ export class MedicineComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.getMedicineName();
     this.medicineForm = this.createmedicineForm();
     this.medicineForm.valueChanges.subscribe(() => {
       this.onMedicineFormValuesChanged();
@@ -128,65 +132,88 @@ export class MedicineComponent implements OnInit {
     }
   }
 
+  /*****************************GET MEDICINE NAME********************/
+  getMedicineName(){
+  this.PrescriptionService.getmedicineList("medicine").subscribe(data => {
+    let value: any = {}
+    value = data
+    this.allmedicineName = value.result.result
+    console.log(this.allmedicineName)
+    for (var i = 0; i < this.allmedicineName.length; i++) {
+      var spec = {
+        mediName: this.allmedicineName[i].PrescribingInformation,
+      }
+      this.medicineOfObjects.push(spec);
+    }
+  },
+    err => {
+      console.log(err)
+    })
+}
+/***********************MEDICINE ON SELECT*********/
+onAddMedicine(evt) {
+  console.log(evt);
+  this.selectedMedicine.push(evt.value)
+}
   // create medicine presription
   createMedicine() {
-    this.messageMedicine = '';
-    this.saveMedicine = '';
-    if (this.medicineForm.valid) {
-      if (this.medicineId) {
-        // this.updateMedicineDetail();
-      }
-      else {
-        // if (this.medicineForm.valid){
-        this.ePrescriptionService.createMedicine(this.prescriptionId, this.medicineForm.value).subscribe(result => {
-          console.log(result);
-          this.medicine = true;
-          this.medicineForm.reset();
-          this.frequency = '';
-          this.days = '';
-          this.sharedService.prescriptionInfo(true)
-          let notifydata = {
-            type: 'success',
-            title: 'Medicine',
-            msg: 'Created Succesfully'
-          }
-          this.sharedService.createNotification(notifydata);
-          this.router.navigate(['/dashboard/consultnew/diagnosis']);
-        },
-          err => {
-          });
-      }
-    }
-    else {
-      this.messageMedicine = "Please Enter Credentials ";
-    }
+    // this.messageMedicine = '';
+    // this.saveMedicine = '';
+    // if (this.medicineForm.valid) {
+    //   if (this.medicineId) {
+    //     // this.updateMedicineDetail();
+    //   }
+    //   else {
+    //     // if (this.medicineForm.valid){
+    //     this.ePrescriptionService.createMedicine(this.prescriptionId, this.medicineForm.value).subscribe(result => {
+    //       console.log(result);
+    //       this.medicine = true;
+    //       this.medicineForm.reset();
+    //       this.frequency = '';
+    //       this.days = '';
+    //       this.sharedService.prescriptionInfo(true)
+    //       let notifydata = {
+    //         type: 'success',
+    //         title: 'Medicine',
+    //         msg: 'Created Succesfully'
+    //       }
+    //       this.sharedService.createNotification(notifydata);
+    //       this.router.navigate(['/dashboard/consultnew/diagnosis']);
+    //     },
+    //       err => {
+    //       });
+    //   }
+    // }
+    // else {
+    //   this.messageMedicine = "Please Enter Credentials ";
+    // }
 
   }
 
 
   // get medicine through prescription id
   getMedicine() {
-    this.ePrescriptionService.getMedicine(this.prescriptionId)
-      .subscribe(result => {
-        console.log(result);
-      }, err => {
+    // this.ePrescriptionService.getMedicine(this.prescriptionId)
+    //   .subscribe(result => {
+    //     console.log(result);
+    //   }, err => {
 
-      });
+    //   });
 
   }
 
   // get medicine list
   getMedicineList(value) {
-    this.ePrescriptionService.getMedicineList(value).subscribe(data => {
-      console.log('medicine', data);
-      this.medicineList = data;
-      console.log(this.medicineList)
-      this.medicineService = this.completerService.local(this.medicineList, 'PrescribingInformation', 'PrescribingInformation');
+    // this.ePrescriptionService.getMedicineList(value).subscribe(data => {
+    //   console.log('medicine', data);
+    //   this.medicineList = data;
+    //   console.log(this.medicineList)
+    //   this.medicineService = this.completerService.local(this.medicineList, 'PrescribingInformation', 'PrescribingInformation');
 
-    },
-      err => {
+    // },
+    //   err => {
 
-      })
+    //   })
   }
 
   // close Instruction form on close button
@@ -211,21 +238,21 @@ export class MedicineComponent implements OnInit {
 
   // get single medicine data
   medicineDetail(id) {
-    this.ePrescriptionService.getSingleMedicineDetails(id).subscribe(data => {
-      console.log('medicine', data);
-      this.medicineData = data.result;
-      console.log(this.medicineData);
-      this.medicineForm.controls.medicineName.setValue(this.medicineData.medicineName);
-      this.medicineForm.controls.dosage.setValue(this.medicineData.dosage);
-      this.frequency = this.medicineData.frequency;
-      this.days = this.medicineData.days;
-      this.medicineForm.controls.instructions.setValue(this.medicineData.instructions);
-      console.log(this.medicineForm.value)
+    // this.ePrescriptionService.getSingleMedicineDetails(id).subscribe(data => {
+    //   console.log('medicine', data);
+    //   this.medicineData = data.result;
+    //   console.log(this.medicineData);
+    //   this.medicineForm.controls.medicineName.setValue(this.medicineData.medicineName);
+    //   this.medicineForm.controls.dosage.setValue(this.medicineData.dosage);
+    //   this.frequency = this.medicineData.frequency;
+    //   this.days = this.medicineData.days;
+    //   this.medicineForm.controls.instructions.setValue(this.medicineData.instructions);
+    //   console.log(this.medicineForm.value)
 
-    },
-      err => {
+    // },
+    //   err => {
 
-      })
+    //   })
   }
 
   // medicine update

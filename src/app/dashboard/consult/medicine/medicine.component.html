@@ -2,21 +2,16 @@
 <div class="card-body">
   <p class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red','text-align':'center'}">{{messageMedicine}}</p>
   <span class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{saveMedicine}}</span>
+ 
   <form [formGroup]="medicineForm" novalidate>
-    <!-- <ng2-completer class="referdoc" placeholder="Medicine Name" formControlName="medicineName"  [datasource]="medicineService" [minSearchLength]="0"  (keyup)="getMedicineList($event.target.value)"></ng2-completer> -->
-    <!-- <tag-input formControlName="medicineName" (onAdd)="onAddMedicine($event.medName)" onlyFromAutocomplete="true"
-    blinkIfDupe="true" placeholder="Medicine">
-    <tag-input-dropdown [appendToBody]="false" [identifyBy]="'medName'" [displayBy]="'medName'"
-      [showDropdownIfEmpty]="false" placeholder="Choose Medicine" [autocompleteItems]="medicineList">
-    </tag-input-dropdown> -->
-    <tag-input formControlName="language" (onAdd)="onAddLanguage($event.langName)" onlyFromAutocomplete="true"
-    blinkIfDupe="true" placeholder="Language">
-    <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
-      [showDropdownIfEmpty]="false" placeholder="Choose language" [autocompleteItems]="languageList">
+      <p class="provisionalc21frequency">Medicine name</p>
+    <tag-input formControlName="medicineName" (onAdd)="onAddMedicine($event)" onlyFromAutocomplete="true"
+    blinkIfDupe="true" secondaryPlaceholder="Add Medicine" placeholder="Add more">
+    <tag-input-dropdown [appendToBody]="false" [identifyBy]="'mediName'" [displayBy]="'mediName'"
+      [showDropdownIfEmpty]="false" placeholder="Choose Medicine" [autocompleteItems]="medicineOfObjects">
     </tag-input-dropdown>
   </tag-input>
-
-    <span class="errormessage" *ngIf="medicineFormErrors.medicineName.required">Please Provide Medicine Name</span>
+    <span class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="medicineFormErrors.medicineName.required || (medicineForm.controls.medicineName.pristine && submitted)">Please Provide Medicine Name</span>
     <input type="text" name="fname" [textMask]="{mask: mask, guide: false}" placeholder="Dosage" formControlName="dosage" class="referdoc">
     <span class="errormessage" *ngIf="medicineFormErrors.dosage.required">Please Provide Medicine Dosage</span>
     <!-- <div class="f_range">

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocregistrationService } from '../mefyservice/docregistration.service';
 import { SharedService } from '../mefyservice/shared.service';
-import { TagInputModule } from 'ngx-chips';
 import { Router } from '@angular/router';
 declare var google;
 import * as moment from 'moment';
