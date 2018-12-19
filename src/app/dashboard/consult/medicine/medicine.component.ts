@@ -55,49 +55,49 @@ export class MedicineComponent implements OnInit {
     this.medicineForm.valueChanges.subscribe(() => {
       this.onMedicineFormValuesChanged();
     });
-    this.activatedRoute.params.subscribe((params: Params) => {
-      console.log(params)
-      if (Object.keys(params).length != 0) {
-        this.medicineId = params['id'];
-        this.update = false;
-        this.hideDelete = true;
-        this.medicineDetail(this.medicineId)
-      }
+    // this.activatedRoute.params.subscribe((params: Params) => {
+    //   console.log(params)
+    //   if (Object.keys(params).length != 0) {
+    //     this.medicineId = params['id'];
+    //     this.update = false;
+    //     this.hideDelete = true;
+    //     this.medicineDetail(this.medicineId)
+    //   }
 
-    });
+    // });
 
     // this.getMedicineList();
 
   }
 
   // save medicine and stay in same page
-  saveMedicineArray() {
-    this.messageMedicine = '';
-    this.saveMedicine = '';
-    if (this.medicineForm.valid && this.frequency != "" && this.days != "") {
-      this.ePrescriptionService.createMedicine(this.prescriptionId, this.medicineForm.value).subscribe(result => {
-        console.log(result);
-        this.reset();
-        this.medicine = true;
-        this.medicineForm.reset();
-        this.days = '';
-        this.frequency = '';
-        this.sharedService.prescriptionInfo(true)
-        let notifydata = {
-          type: 'success',
-          title: 'medicine',
-          msg: 'Created Succesfully'
-        }
-        this.sharedService.createNotification(notifydata);
-      },
-        err => {
-        });
-    }
-    else {
-      this.messageMedicine = "Please Enter Credentials";
+  // saveMedicineArray() {
+  //   this.messageMedicine = '';
+  //   this.saveMedicine = '';
+  //   if (this.medicineForm.valid && this.frequency != "" && this.days != "") {
+  //     this.ePrescriptionService.createMedicine(this.prescriptionId, this.medicineForm.value).subscribe(result => {
+  //       console.log(result);
+  //       this.reset();
+  //       this.medicine = true;
+  //       this.medicineForm.reset();
+  //       this.days = '';
+  //       this.frequency = '';
+  //       this.sharedService.prescriptionInfo(true)
+  //       let notifydata = {
+  //         type: 'success',
+  //         title: 'medicine',
+  //         msg: 'Created Succesfully'
+  //       }
+  //       this.sharedService.createNotification(notifydata);
+  //     },
+  //       err => {
+  //       });
+  //   }
+  //   else {
+  //     this.messageMedicine = "Please Enter Credentials";
 
-    }
-  }
+  //   }
+  // }
 
   createmedicineForm() {
     return this.formBuilder.group({
@@ -134,7 +134,7 @@ export class MedicineComponent implements OnInit {
     this.saveMedicine = '';
     if (this.medicineForm.valid) {
       if (this.medicineId) {
-        this.updateMedicineDetail();
+        // this.updateMedicineDetail();
       }
       else {
         // if (this.medicineForm.valid){
@@ -197,11 +197,11 @@ export class MedicineComponent implements OnInit {
   }
 
   // to set frequency range for medicine
-  setFrequency(event) {
-    this.frequency=''
-    this.frequency = event.target.value;
-    this.medicineForm.controls.frequency.setValue(this.frequency)
-  }
+  // setFrequency(event) {
+  //   this.frequency=''
+  //   this.frequency = event.target.value;
+  //   this.medicineForm.controls.frequency.setValue(this.frequency)
+  // }
 
   // to set time duration range for medicine
   setDay(event) {
@@ -229,47 +229,47 @@ export class MedicineComponent implements OnInit {
   }
 
   // medicine update
-  updateMedicineDetail() {
-    let data = {
-      medicineName: this.medicineForm.value.medicineName,
-      dosage: this.medicineForm.value.dosage,
-      days: this.medicineForm.value.days,
-      frequency: this.medicineForm.value.frequency,
-      instructions: this.medicineForm.value.instructions,
-      medicineId: this.medicineId
-    }
-    this.ePrescriptionService.updateMedicine(data).subscribe(data => {
-      console.log(data)
-      let notifydata = {
-        type: 'success',
-        title: 'Medicine',
-        msg: 'Updated Succesfully'
-      }
-      this.sharedService.createNotification(notifydata);
-      this.router.navigate(['/dashboard/consultnew/diagnosis']);
-    },
-      err => {
+  // updateMedicineDetail() {
+  //   let data = {
+  //     medicineName: this.medicineForm.value.medicineName,
+  //     dosage: this.medicineForm.value.dosage,
+  //     days: this.medicineForm.value.days,
+  //     frequency: this.medicineForm.value.frequency,
+  //     instructions: this.medicineForm.value.instructions,
+  //     medicineId: this.medicineId
+  //   }
+  //   this.ePrescriptionService.updateMedicine(data).subscribe(data => {
+  //     console.log(data)
+  //     let notifydata = {
+  //       type: 'success',
+  //       title: 'Medicine',
+  //       msg: 'Updated Succesfully'
+  //     }
+  //     this.sharedService.createNotification(notifydata);
+  //     this.router.navigate(['/dashboard/consultnew/diagnosis']);
+  //   },
+  //     err => {
 
-      })
+  //     })
 
-  }
+  // }
 
   // delete  selected medicine form
-  deleteMedicineForm() {
-    this.ePrescriptionService.deleteMedicine(this.prescriptionId, this.medicineId).subscribe(data => {
-      console.log(data);
-      let notifydata = {
-        type: 'success',
-        title: 'Medicine',
-        msg: 'Deleted Succesfully'
-      }
-      this.sharedService.createNotification(notifydata);
-      this.router.navigate(['/dashboard/consultnew/diagnosis']);
+  // deleteMedicineForm() {
+  //   this.ePrescriptionService.deleteMedicine(this.prescriptionId, this.medicineId).subscribe(data => {
+  //     console.log(data);
+  //     let notifydata = {
+  //       type: 'success',
+  //       title: 'Medicine',
+  //       msg: 'Deleted Succesfully'
+  //     }
+  //     this.sharedService.createNotification(notifydata);
+  //     this.router.navigate(['/dashboard/consultnew/diagnosis']);
 
-    }, err => {
+  //   }, err => {
 
-    })
-  }
+  //   })
+  // }
 
   reset() {
     this.myInputVariable.nativeElement.value = "";

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule ,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes, RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -53,6 +53,7 @@ const routes: Routes = [
     TextMaskModule,
     FilterPipeModule
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [ConsultComponent,VideoComponent,DiagnosisComponent, BillsComponent, DiagnosisFormComponent, MedicineComponent, SuggestComponent, InstructionComponent, LifestyleComponent, FollowUpComponent]
 })
 export class ConsultModule { }

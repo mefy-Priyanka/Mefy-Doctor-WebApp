@@ -82,13 +82,13 @@ p.serenity {
 /* .space::-webkit-scrollbar { 
     display: none;
   } */
-  .card.prescribe {
+  /* .card.prescribe {
     position: absolute;
     top: 0;
     width: 100%;
     right: 0;
     
-}
+} */
 .posrel {
     position: relative;
 }
