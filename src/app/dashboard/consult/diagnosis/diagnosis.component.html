@@ -720,8 +720,8 @@
       </div>
     </div>
   </div>
-  <div class="cancelpres">
-      <button type="btn" class=""  (click)="createPrescription()">Prescribe</button>
+  <div class="cancelpres" *ngIf="hidePrescribeButton">
+      <button type="btn" class="presbtn"  (click)="createPrescription()">Prescribe</button>
     <button type="btn" class="cancelpres">CANCEL</button>
   </div>
 </section>

@@ -18,6 +18,8 @@ public lifeStyleData:any=[];
 public followUpData:any=[];
 public individualPrescriptionList:any=[];
 public loader:boolean=false;
+public hidePrescribeButton:boolean=false;
+public currentURL='';
 /*****OLD */
 provisionalData: any = [];
 recommendeData: any = [];
@@ -28,8 +30,7 @@ adviseData: any = [];
   prescriptionId: any;
   medicineData: any;
   pathName:any;
-  public currentURL='';
-  hidePrescribeButton:boolean=false;
+
   showEdit : boolean =false;
   selected:any;
   show:boolean = false;
@@ -39,86 +40,64 @@ adviseData: any = [];
   prescriptionList: any;
   constructor(  private route: ActivatedRoute,private prescriptionService: PrescriptionService, private sharedService: SharedService, private router: Router) {
 
-    // this.prescriptionId = localStorage.getItem('prescriptionId');
-
-    // this.sharedService.prescribeInfo.subscribe(data => {
-    //   if (data == true) {
-    //     this.getEprescription();
-    //   }
-    // });
-
-    // this.pathName = (route.snapshot.url)[0].path;
-    // console.log(this.pathName);
-    // this.sharedService.setPath(this.pathName);
-
     /*GET CURRENT URL, send url path name to change navbar colour*/
     this.currentURL = window.location.pathname; 
     console.log(this.currentURL);
     this.sharedService.setPath(this.currentURL);
-
-    // // data from calling
-    // this.route.queryParams.subscribe(param => {
-      
-    //   if(Object.keys(param).length!=0){
-       
-    //     this.callerData.callerId = param['callerId'];
-    //   }
-     
-    // })
-
-
-    //clinic visit prescription
-    // this.sharedService.appointmentType.subscribe(data => {
-      
-    //   if (Object.keys(data).length != 0) {
-        
-    //     this.callerData.callerId = data.individualId;
-    //     this.hideVideo=true;
-       
-    //   }
-      
-    // })
+    
 /***************GET DIAGNOSIS DATA *****************/
   this.sharedService.diagnosisdata.subscribe(data=>{
+    if(data.length!=0 &&Object.keys(data).length!=0){
+      this.hidePrescribeButton=true;
       this.diagnosisData.push(data)
+    }
       console.log('diagnosisdata at diagnosis',this.diagnosisData)
     })
   
 /***************GET SUGGESTION TYPE DATA *****************/
     this.sharedService.suggestionData.subscribe(data=>{
+      if(data.length!=0 &&Object.keys(data).length!=0){
+        this.hidePrescribeButton=true;
       this.suggestionData.push(data)
+      }
       console.log('suggestionData at diagnosis ', this.suggestionData)
     })
   
 /***************GET MEDICARE DATA *****************/
     this.sharedService.medicinedata.subscribe(data=>{
+      if(data.length!=0 && Object.keys(data).length!=0){
+        this.hidePrescribeButton=true;
       this.medicareData.push(data)
+      }
       console.log('medicinedata at diagnosis',this.medicareData)
     })
 /***************GET INSTRUCTION DATA *****************/
      this.sharedService.instructionData.subscribe(data=>{
+      if(data.length!=0 &&Object.keys(data).length!=0){
+        this.hidePrescribeButton=true;
        this.instructionData.push(data)
-       console.log(this.instructionData.length)
+      }
       console.log('instructionData at diagnosis',this.instructionData)
     })
 /***************GET LIFESTYLE DATA *****************/
        this.sharedService.lifeStyleData.subscribe(data=>{
+        if(data.length!=0 &&Object.keys(data).length!=0){
+          this.hidePrescribeButton=true;
          this.lifeStyleData.push(data)
+        }
         console.log('lifeStyleData at diagnosis', this.lifeStyleData)
       })
 /***************GET FOLLOWUPTYPE DATA *****************/
     this.sharedService.followUpData.subscribe(data=>{
+      if(data.length!=0 &&Object.keys(data).length!=0){
+        this.hidePrescribeButton=true;
       this.followUpData.push(data);
+      }
       console.log('followUpData at diagnosis',this.followUpData)
     })
 }
   ngOnInit() {
     this. getPrescriptionByIndividualId() ;
-    // if (!localStorage.getItem('prescriptionId')) {
-    //   this.getPrescriptionID();
-    // }
-
-    // this.getEprescription();
 
   }
   // prescribeMedicine(){
@@ -207,6 +186,8 @@ console.log(err)
   }
   createPrescription(){
     this.loader=true
+    if(this.diagnosisData.length!=0|| this.lifeStyleData.length!=0|| this.followUpData.length!=0|| this.instructionData.length!=0|| this.suggestionData.length!=0 || this.medicareData.length!=1){
+      console.log(this.diagnosisData.length,this.diagnosisData)
     let prescriptionData={
       doctorId:localStorage.getItem('doctorId'),
       individualId:'0b20ac54-cb9a-47bb-ac59-b397dc18bdf1',
@@ -220,6 +201,7 @@ console.log(err)
     console.log('prescriptionData',prescriptionData)
     this.prescriptionService.createPrescription(prescriptionData).subscribe(data=>{
       this.loader=false
+      this.hidePrescribeButton=false;
       console.log('prescription',data)
       let notifydata = {
         type: 'success',
@@ -235,5 +217,14 @@ console.log(err)
       this.loader=false
       console.log(err)
     })
+  }
+  else{
+    this.loader=false;
+    let notifydata = {
+      type: 'error',
+      title: 'Something Went Wrong!'
+    }
+    this.sharedService.createNotification(notifydata);
+  }
   }
 }
