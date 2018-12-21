@@ -284,7 +284,7 @@
                  {{list.appointmentTimeTo}}</span>
             </li>
             <li class="float_right">
-                <button type="button" class="accept">
+                <button type="button" class="accept" [routerLink]="['/dashboard/consultnew/diagnosis',list?.individual.individualId]">
                     <svg version="1.1" id="acceptTick" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                       x="0px" y="0px" viewBox="0 0 55.702 55.702" style="enable-background:new 0 0 55.702 55.702;" xml:space="preserve">
                       <g>
@@ -386,7 +386,7 @@
             </button>
           </li>
           <li>
-            <button type="button" class="accept">
+            <button type="button" class="accept" >
               <svg version="1.1" id="reject" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 x="0px" y="0px" viewBox="0 0 475.2 475.2" style="enable-background:new 0 0 475.2 475.2;" xml:space="preserve">
                 <g>
