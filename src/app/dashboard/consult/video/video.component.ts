@@ -1,11 +1,11 @@
-import { Component, OnInit,ElementRef, ViewChild, Renderer2,Input } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2, Input } from '@angular/core';
 import { SharedService } from '../../../mefyservice/shared.service';
 import { DoctorPrescriptionService } from '../../../meme-services/doctor-prescription.service';
 // import { DomSanitizer } from '@angular/platform-browser';
 import { SocketService } from '../../../meme-services/socket.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-import { APIURL ,videoURL} from '../../../urlsConfig';
-
+import { APIURL, videoURL } from '../../../urlsConfig';
+import { PrescriptionService } from '../../../mefyservice/prescription.service';
 // import { SearchHealthRecordPipe } from '../../search-health-record.pipe';
 @Component({
   selector: 'app-video',
@@ -13,15 +13,15 @@ import { APIURL ,videoURL} from '../../../urlsConfig';
   styleUrls: ['./video.component.css'],
   host: {
     '(document:click)': 'handleClick($event)',
-}
+  }
 })
 export class VideoComponent implements OnInit {
-  hideVideo: boolean=false;
+  hideVideo: boolean = false;
   url: any;
-  imgUrlPrefix:any;
+  imgUrlPrefix: any;
   public elementRef;
   // @ViewChild('openDropdown') openDropdown: ElementRef;
-@Input() callerData : any;
+  @Input() callerData: any;
 
   iframeElement: any;
   individualDetails: any;
@@ -30,8 +30,8 @@ export class VideoComponent implements OnInit {
   hideDetail: boolean = false;
   dob: any;
   age: number;
-  consultId:any;
-  individualId:any;
+  consultId: any;
+  individualId: any;
   filterField = {
     healthRecordType: ''
   };
@@ -42,10 +42,18 @@ export class VideoComponent implements OnInit {
     private renderer: Renderer2,
     private sanitizer: DomSanitizer,
     private socketService: SocketService,
-    myElement: ElementRef
-  
+    myElement: ElementRef,
+    private prescriptionService: PrescriptionService
+
   ) {
     let _base = this;
+
+    this.sharedService.storeIndividualId.subscribe(data => {
+      console.log('incomingIndividualId', data)
+      this.individualId = data /*GET INDIVIDUALID*/
+    })
+
+
     // window.addEventListener('message', function (event) {
     //   switch (event.data.message) {
     //     case 'connected':
@@ -68,13 +76,14 @@ export class VideoComponent implements OnInit {
     //     this.individualHealthRecord()
     //     this.hideVideo = true;
     //   }
-   
+
     // })
   }
 
   ngOnInit() {
-    // this.individualHealthRecord();
-  
+    this.getindividualDetails();
+    this.individualHealthRecord();
+
     // this.iframeElement = document.getElementById('video-background');
     // console.log("caller",this.callerData)
 
@@ -90,81 +99,106 @@ export class VideoComponent implements OnInit {
     // })
 
   }
-    // individula details from profile id
-    // getindividualDetails() {
-    //   this.ePrescriptionService.getindividualDetails(this.callerData.callerId).subscribe(data => {
-    //     this.individualDetails = data.registrationDetails;
-    //   },
-    //     err => {
-    //     })
-    // }
-  
-    // individula details from profile id
-    individualHealthRecord() {
-      // this.individualId = this.callerData?this.callerData.callerId:this.consultId
-      //   this.ePrescriptionService.getHealthRecord(this.individualId).subscribe(data => {
-      //     this.individualHealth = data.result;
-      //     this.dob = this.individualHealth.dob;
-      //     console.log('patient detail',this.individualHealth);
-      //     this.healthRecord = this.individualHealth.healthRecord;
-      //     this.healthRecord = this.individualHealth.healthRecord;
-      //     this.imgUrlPrefix = this.sanitizer.bypassSecurityTrustResourceUrl( APIURL+"file/fileShow?fileId=" + this.individualHealth.profileImage);
-      //     this.getAge(this.dob);
-      //   },
-      //     err => {
-      //     })
-      // }
-    
-    }
-  
-    getAge(dateString) {
-      // var today = new Date();
-      // var birthDate = new Date(dateString);
-      // this.age = today.getFullYear() - birthDate.getFullYear();
-      // var m = today.getMonth() - birthDate.getMonth();
-      // if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      //   this.age--;
-      
-      // }
-      // return this.age;
-  
-    }
-  
-    getType(name) {
-      // this.filterField.healthRecordType = name;
-   
-    }
-   
-  
-    // hide and show details on click
-    hideFilterData() {
-      // if (this.hideDetail == true) {
-      //   this.hideDetail = !this.hideDetail;
-      // }
-      // else if (this.hideDetail == false) {
-      //   this.hideDetail = !this.hideDetail;
-      // }
-    }
-    // Detecting Clicks Outside the Component
-handleClick(event){
-  // var clickedComponent = event.target;
-  // var inside = false;
-  // do {
-  //     if (clickedComponent === this.elementRef.nativeElement) {
-  //         inside = true;
-  //     }
-  //     clickedComponent = clickedComponent.parentNode;
-  // } while (clickedComponent);
-  // if(inside){
-  //     console.log('inside');
-  // }else{
-  //     console.log('outside');
-  //     if (this.hideDetail == true) {
-  //       this.hideDetail = !this.hideDetail;
-  //     }
-  // }
-}
-  
+  // individula details from profile id
+  getindividualDetails() {
+    this.prescriptionService.getIndvProfile(this.individualId).subscribe(data => {
+      console.log('data', data)
+      let response:any={};
+      response=data;
+      this.individualDetails = response;
+      if(this.individualDetails.dob){
+        this.getAge(this.individualDetails.dob);
+      }
+    },
+      err => {
+        console.log(err)
+      })
   }
-  
+
+  // individula details from profile id
+  individualHealthRecord() {
+    // this.individualId = this.callerData?this.callerData.callerId:this.consultId
+    this.prescriptionService.getIndvMedicalRecords(this.individualId).subscribe(data => {
+      console.log('indv health record', data);
+      let response:any={};
+      response=data;
+      if(response.error){
+console.log('inside if')
+      }
+      else{
+        console.log('inside else',response.result)
+        
+        this.healthRecord=response.result;
+        console.log(this.healthRecord)
+// if(response.result.result.length!=0){
+//   // records present
+// }
+// else{
+//   // no records
+// }
+      }
+      // this.individualHealth = data.result;
+      // this.dob = this.individualHealth.dob;
+      // console.log('patient detail',this.individualHealth);
+      // this.healthRecord = this.individualHealth.healthRecord;
+      // this.healthRecord = this.individualHealth.healthRecord;
+      // this.imgUrlPrefix = this.sanitizer.bypassSecurityTrustResourceUrl( APIURL+"file/fileShow?fileId=" + this.individualHealth.profileImage);
+      // this.getAge(this.dob);
+    },
+      err => {
+      })
+  }
+
+
+
+      getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        this.age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          this.age--;
+
+        }
+        return this.age;
+
+      }
+
+      // getType(name) {
+      //   // this.filterField.healthRecordType = name;
+
+      // }
+
+
+  //     // hide and show details on click
+  //     hideFilterData() {
+  //       // if (this.hideDetail == true) {
+  //       //   this.hideDetail = !this.hideDetail;
+  //       // }
+  //       // else if (this.hideDetail == false) {
+  //       //   this.hideDetail = !this.hideDetail;
+  //       // }
+  //     }
+  //     // Detecting Clicks Outside the Component
+  handleClick(event) {
+    // var clickedComponent = event.target;
+    // var inside = false;
+    // do {
+    //     if (clickedComponent === this.elementRef.nativeElement) {
+    //         inside = true;
+    //     }
+    //     clickedComponent = clickedComponent.parentNode;
+    // } while (clickedComponent);
+    // if(inside){
+    //     console.log('inside');
+    // }else{
+    //     console.log('outside');
+    //     if (this.hideDetail == true) {
+    //       this.hideDetail = !this.hideDetail;
+    //     }
+    // }
+  }
+
+}
+
 
