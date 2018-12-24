@@ -3,7 +3,7 @@ import { PrescriptionService } from '../../../mefyservice/prescription.service';
 import { SharedService } from '../../../mefyservice/shared.service';
 import { AppointmentsService } from '../../../mefyservice/appointments.service';
 
-import { RouterLink, ActivatedRoute, Router, ActivatedRouteSnapshot,Params } from '@angular/router';
+import { RouterLink, ActivatedRoute, Router, ActivatedRouteSnapshot, Params } from '@angular/router';
 @Component({
   selector: 'app-diagnosis',
   templateUrl: './diagnosis.component.html',
@@ -21,10 +21,10 @@ export class DiagnosisComponent implements OnInit {
   public loader: boolean = false;
   public hidePrescribeButton: boolean = false;
   public currentURL = '';
-  public comingIndividualId:any
-  public storeIndividualId:any;
-  public individualId:any;
-  public cancelAppointmentId:any;
+  public comingIndividualId: any
+  public storeIndividualId: any;
+  public individualId: any;
+  public appointmentId: any;
   /*****OLD */
   provisionalData: any = [];
   recommendeData: any = [];
@@ -32,11 +32,12 @@ export class DiagnosisComponent implements OnInit {
   specificData: any = [];
   lifestyleData: any = [];
   adviseData: any = [];
- 
- 
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private prescriptionService: PrescriptionService, private sharedService: SharedService,private appointmentService:AppointmentsService) {
-   
+
+
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private prescriptionService: PrescriptionService, private sharedService: SharedService, private appointmentService: AppointmentsService) {
+
 
     /*GET CURRENT URL, send url path name to change navbar colour*/
     this.currentURL = window.location.pathname;
@@ -93,27 +94,37 @@ export class DiagnosisComponent implements OnInit {
       }
       console.log('followUpData at diagnosis', this.followUpData)
     })
+    /************GET INDIVIDUAL ID FROM URL*********************** */
     this.activatedRoute.params.subscribe((params: Params) => {
       if (Object.keys(params).length != 0) {
-        this.comingIndividualId=params['id']
-        console.log('this.incomingIndividualId',this.comingIndividualId)
+        this.comingIndividualId = params['individualId']
+        console.log('this.incomingIndividualId', this.comingIndividualId)
         this.sharedService.storeIndividual(this.comingIndividualId)/*STORE INDIVIDUALID*/
       }
-      
+
     });
-  
+    /************GET APPOINTMENT ID FROM URL*********************** */
+    this.activatedRoute.params.subscribe((params: Params) => {
+      if (Object.keys(params).length != 0) {
+        this.appointmentId = params['appointmentId']
+        console.log('this.appointmentId', this.appointmentId)
+        this.sharedService.storeAppointment(this.appointmentId) /*STORE APPOINTMENTID*/
+      }
+
+    });
+
   }
   ngOnInit() {
     this.getPrescriptionByIndividualId();
-    
+
   }
-  
+
   /*************** GET PRESCRIPTION BT INDIVIDUAL ID*******************/
   getPrescriptionByIndividualId() {
     this.loader = true;
-    this.sharedService.storeIndividualId.subscribe(data=>{
-      console.log('incomingIndividualId',data)
-      this.individualId=data /*GET INDIVIDUALID*/
+    this.sharedService.storeIndividualId.subscribe(data => {
+      console.log('incomingIndividualId', data)
+      this.individualId = data /*GET INDIVIDUALID*/
     })
     this.prescriptionService.getPrescriptionByIndividualId(this.individualId).subscribe(data => {
       let result: any = {}
@@ -171,7 +182,7 @@ export class DiagnosisComponent implements OnInit {
       console.log(this.diagnosisData.length, this.diagnosisData)
       let prescriptionData = {
         doctorId: localStorage.getItem('doctorId'),
-        individualId:this.individualId,
+        individualId: this.individualId,
         medicine: this.medicareData,
         diagnosis: this.diagnosisData,
         instruction: this.instructionData,
@@ -182,6 +193,7 @@ export class DiagnosisComponent implements OnInit {
       console.log('prescriptionData', prescriptionData)
       this.prescriptionService.createPrescription(prescriptionData).subscribe(data => {
         this.loader = false
+        this.changedstatus();
         this.hidePrescribeButton = false;
         console.log('prescription', data)
         let notifydata = {
@@ -208,13 +220,21 @@ export class DiagnosisComponent implements OnInit {
       this.sharedService.createNotification(notifydata);
     }
   }
-//   changedstatus(){
-//     let data = {
-//       appointmentId: this.cancelAppointmentId,
-//       status: 'Cancelled'
-//     }
-// this.appointmentService.changeAppointmentStatus('data').subscribe(data=>{
-//   console.log(data)
-// })
-//   }
+  /*************CHANGE THE STATUS OF APPOINTMENT************************/
+  changedstatus() {
+    this.sharedService.storeAppointmentId.subscribe(data => {
+      console.log('incomingAppointmentId', data)
+      this.appointmentId = data /*GET APPOINTMENTID*/
+    })
+    let data = {
+      appointmentId: this.appointmentId,
+      status: 'Completed'
+    }
+    this.appointmentService.changeAppointmentStatus(data).subscribe(data => {
+      console.log(data)
+    },
+    err=>{
+      console.log(err)
+    })
+  }
 }

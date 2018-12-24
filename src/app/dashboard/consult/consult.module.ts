@@ -25,7 +25,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'diagnosis', pathMatch: 'full' },
       { path: 'diagnosis', component: DiagnosisComponent },
-      { path: 'diagnosis/:id', component: DiagnosisComponent },
+      { path: 'diagnosis/:individualId/:appointmentId', component: DiagnosisComponent },
       { path: 'bill', component: BillsComponent },
       { path: 'diagnosisform', component: DiagnosisFormComponent },
       { path: 'diagnosisform/:id', component: DiagnosisFormComponent },

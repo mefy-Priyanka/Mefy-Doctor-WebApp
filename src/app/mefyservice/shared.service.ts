@@ -30,6 +30,8 @@ export class SharedService {
   lifeStyleData: BehaviorSubject<any> = new BehaviorSubject({});
   instructionData: BehaviorSubject<any> = new BehaviorSubject({});
   storeIndividualId: BehaviorSubject<any> = new BehaviorSubject({});
+  storeAppointmentId: BehaviorSubject<any> = new BehaviorSubject({});
+
 
 
 
@@ -165,4 +167,8 @@ export class SharedService {
   storeIndividual(param) {
     this.storeIndividualId.next(param)
   }
+    /*********STORE INDIVIDUALID  IN PRESCRIPTION FORM **************/
+    storeAppointment(param) {
+      this.storeAppointmentId.next(param)
+    }
 }
