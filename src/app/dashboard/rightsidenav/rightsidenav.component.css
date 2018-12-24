@@ -479,3 +479,33 @@ span.to {
     color: #9E9E9E;
     font-weight: 600;
 }
+button.prbtn {
+    color: #ffffff;
+    line-height: 27px;
+    background: #16b759;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: Lato;
+    border: 1px solid #16b759;
+    border-radius: 32px;
+    margin: 14px 4px 0px 0;
+    padding: 0 12px;
+}
+button.prbtn:hover {
+    background: #14a952;
+}
+button.cancelbtn {
+    color: #989393;
+    line-height: 27px;
+    background: #ffffff;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: Lato;
+    border: 1px solid #8c9292;
+    border-radius: 32px;
+    margin: 10px 10px 0px 0;
+    padding: 0 11px;
+}
+button.cancelbtn:hover {
+    background: #f4f7f5;
+}
