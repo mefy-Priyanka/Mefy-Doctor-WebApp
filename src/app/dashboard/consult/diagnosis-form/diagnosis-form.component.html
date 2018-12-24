@@ -1,39 +1,46 @@
 <p class="provisionalc21">Provisional Diagnosis</p>
-<div class="card cardabc custom-card" >
+<div class="card cardabc custom-card">
   <div class="card-body">
-     <!-- /* loader */ -->
-     <div class="loading" *ngIf="loader">
-        <div class="sk-circle">
-          <div class="sk-circle1 sk-child"></div>
-          <div class="sk-circle2 sk-child"></div>
-          <div class="sk-circle3 sk-child"></div>
-          <div class="sk-circle4 sk-child"></div>
-          <div class="sk-circle5 sk-child"></div>
-          <div class="sk-circle6 sk-child"></div>
-          <div class="sk-circle7 sk-child"></div>
-          <div class="sk-circle8 sk-child"></div>
-          <div class="sk-circle9 sk-child"></div>
-          <div class="sk-circle10 sk-child"></div>
-          <div class="sk-circle11 sk-child"></div>
-          <div class="sk-circle12 sk-child"></div>
-        </div>
+    <!-- /* loader */ -->
+    <div class="loading" *ngIf="loader">
+      <div class="sk-circle">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
       </div>
-      <!-- /* loader */ -->
-     <!-- <span [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{messageDiagnosis}}</span> -->
-     <!-- <p [ngStyle]="{'-webkit-text-fill-color':'	red', 'text-align':'center'}">{{message}}</p> -->
-      <form [formGroup]="diagnosisFormNew" novalidate>
+    </div>
+    <!-- /* loader */ -->
+    <!-- <span [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{messageDiagnosis}}</span> -->
+    <!-- <p [ngStyle]="{'-webkit-text-fill-color':'	red', 'text-align':'center'}">{{message}}</p> -->
+    <form [formGroup]="diagnosisFormNew" novalidate>
 
-      <input type="text" name="fname" placeholder="Diagnosis for" class="referdoc"  formControlName="diagnosisFor">
+      <input type="text" name="fname" placeholder="Diagnosis for" class="referdoc" formControlName="diagnosisFor">
       <span [ngStyle]="{'-webkit-text-fill-color':'	red'}" *ngIf="diagnosisFormErrors.diagnosisFor.required">Please Provide Diagnosis Type</span>
       <input type="text" name="fname" placeholder="Diagnosis brief" class="referdoc" formControlName="diagnosisBrief">
 
     </form>
 
-    
+
+  </div>
+
+
+</div>
+<div class="row">
+  <div class="plus_btn pull-right ng-star-inserted">
+    <button class="plus">+</button>
   </div>
 </div>
-<div class="text-center high" >
-    <button class="prescribebtn" (click)="saveDiagnosis()">Save</button>
-    <!-- <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteDiagnosisForm()" >Delete</button> -->
-    <button class="cancelbtn" (click)="closeForm()">Cancel</button>
-  </div>
+<div class="text-center high">
+  <button class="prescribebtn" (click)="saveDiagnosis()">Save</button>
+  <!-- <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteDiagnosisForm()" >Delete</button> -->
+  <button class="cancelbtn" (click)="closeForm()">Cancel</button>
+</div>
