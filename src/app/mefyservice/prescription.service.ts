@@ -20,4 +20,15 @@ getPrescriptionByIndividualId(individualId){
   console.log('service',individualId)
   return this.httpClient.get(APIURL+'prescription/individualprescription?individualId='+individualId)
 }
+
+
+/*************************************** GET INDIVIDUAL MEDICAL HISTORY *************************************** */
+getIndvMedicalRecords(individualId){
+return this.httpClient.get(APIURL+'individual/getMedicalHistory?individualId='+individualId)
+}
+
+/************************************** GET INDIVIDUAL PROFILE DETAIL ********************************************* */
+getIndvProfile(individualid){
+return this.httpClient.get(APIURL+'individual/'+individualid);
+}
 }
