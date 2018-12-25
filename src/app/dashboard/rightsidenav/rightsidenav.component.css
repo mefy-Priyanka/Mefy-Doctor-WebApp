@@ -482,17 +482,17 @@ span.to {
 button.prbtn {
     color: #ffffff;
     line-height: 27px;
-    background: #16b759;
+    background: #0bdb85;
     font-size: 13px;
     font-weight: 500;
     font-family: Lato;
-    border: 1px solid #16b759;
+    border: 1px solid #0bdb85;
     border-radius: 32px;
     margin: 14px 4px 0px 0;
     padding: 0 12px;
 }
 button.prbtn:hover {
-    background: #14a952;
+    background:#0dca7c;;
 }
 button.cancelbtn {
     color: #989393;

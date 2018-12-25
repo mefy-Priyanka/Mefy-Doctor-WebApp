@@ -53,6 +53,26 @@ input.referdoc:focus {
     margin: -1.5rem 0 1rem 0;
     padding-top:0 !important;
 }
+
+button.plus{
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 20px;
+    height: 30px;
+    width: 30px;
+    margin-right: 8px;
+    color: #fff;
+    background: linear-gradient(to bottom, #20de9e, #08b9b1);
+    box-shadow: 0px 1px 16px 3px rgba(109, 117, 113, 0.18);
+}
+button.plus:hover {
+    background: #08b9b1;
+}
+.topspace {
+    margin-top: 3em;
+}
 .card.cardabc.custom-card {
     width: 98%;
     margin: 0px auto;
