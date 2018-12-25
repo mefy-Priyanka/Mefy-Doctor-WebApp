@@ -36,6 +36,7 @@ export class DiagnosisComponent implements OnInit {
 
 
 
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private prescriptionService: PrescriptionService, private sharedService: SharedService, private appointmentService: AppointmentsService) {
 
 
@@ -192,8 +193,8 @@ export class DiagnosisComponent implements OnInit {
       }
       console.log('prescriptionData', prescriptionData)
       this.prescriptionService.createPrescription(prescriptionData).subscribe(data => {
-        this.loader = false
         this.changedstatus();
+        this.loader = false
         this.hidePrescribeButton = false;
         console.log('prescription', data)
         let notifydata = {
