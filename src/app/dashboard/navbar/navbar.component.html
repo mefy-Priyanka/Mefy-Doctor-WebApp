@@ -262,7 +262,7 @@
                 </svg>
                 <span class="doc_2text">Appointment</span>
               </li>
-               <!-- <li class="border_active" [routerLink]="['/dashboard/consultnew']" [ngClass]="{'border_active':whenEConsultClicked== false, 'changeColor':whenEConsultClicked== true}">
+                <li *ngIf="hideEconsult" class="border_active" [routerLink]="['/dashboard/consultnew']" [ngClass]="{'border_active':whenEConsultClicked== false, 'changeColor':whenEConsultClicked== true}">
                 <svg version="1.1" id="hand" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                   viewBox="0 0 508 508" style="enable-background:new 0 0 508 508;" xml:space="preserve">
                   <g>
@@ -310,7 +310,7 @@
                   </g>
                 </svg>
                 <span class="doc_2text">eConsult</span>
-              </li> -->
+              </li>
             </ul>
           </div>
           <div class="row nomargin0row hidden-lg hidden-md">
