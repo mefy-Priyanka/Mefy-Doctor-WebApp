@@ -199,10 +199,10 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="healthRecord.length>0">
     <div class="scrly">
-      <div class="col-md-12">
-        <div class="card padding-card">
+      <div class="col-md-12" *ngFor="let record of healthRecord">
+        <!-- <div class="card padding-card">
           <div class="march">
             <div class="row">
               <div class="novomox">
@@ -223,18 +223,18 @@
               Lorem Ipsum is simply dummy text of the printing and typesetting industry
             </p>
           </div>
-        </div>
+        </div> -->
           <!-- card1 -->
-      <!-- <div class="card padding-card" *ngIf="record.healthRecordType =='Immunization'">
+      <div class="card padding-card" *ngIf="record.healthRecordType =='Immunization'">
         <div class="march">
           <div class="row">
             <div class="novomox">
               <div class="col-md-6 col-xs-6 text-left">
                 <p class="temp">{{record.ageGroup}}</p>
-                <p class="te_nov">{{record.createdDate | date}}</p>
+                <!-- <p class="te_nov">{{record.createdDate | date}}</p> -->
               </div>
               <div class="col-md-6 col-xs-6 text-right">
-                <p class="temp">{{record.scheduleDate}}</p>
+                <!-- <p class="temp">{{record.scheduleDate}}</p> -->
                 <p class="te_nov">{{record.healthRecordType}}</p>
               </div>
             </div>
@@ -243,18 +243,18 @@
         <hr class="card_hr">
         <div class="established">
           <p>
-            {{record.vaccine}}
+            <!-- {{record.vaccine}} -->
           </p>
         </div>
-      </div> -->
+      </div>
         <!-- card2 -->
-        <!-- <div class="card padding-card" *ngIf="record.healthRecordType =='Medical History'">
+        <div class="card padding-card" *ngIf="record.healthRecordType =='medicalHistory'">
           <div class="march">
             <div class="row">
               <div class="novomox">
                 <div class="col-md-6 col-xs-6 text-left">
-                  <p class="temp">{{record.sympton}}</p>
-                  <p class="te_nov">{{record.createdDate | date}}</p>
+                  <p class="temp">{{record?.symptoms}}</p>
+                  <!-- <p class="te_nov">{{record.createdDate | date}}</p> -->
                 </div>
                 <div class="col-md-6 col-xs-6 text-right">
                   <p class="temp">{{ record?.duration.months+' months '+record?.duration.days+' days'}}</p>
@@ -269,18 +269,18 @@
               {{record.sufferingFrom}}
             </p>
           </div>
-        </div> -->
+        </div>
          <!-- card3 -->
-      <!-- <div class="card padding-card" *ngIf="record.healthRecordType =='Current Complaints'">
+      <div class="card padding-card" *ngIf="record.healthRecordType =='currentComplaint'">
         <div class="march">
           <div class="row">
             <div class="novomox">
               <div class="col-md-6 col-xs-6 text-left">
-                <p class="temp">{{record.diseaseCondition}}</p>
-                <p class="te_nov">{{record.createdDate | date}}</p>
+                <p class="temp">{{record.symptoms}}</p>
+                <!-- <p class="te_nov">{{record.createdDate | date}}</p> -->
               </div>
               <div class="col-md-6 col-xs-6 text-right">
-                <p class="temp">{{record.startDate}}</p>
+                <p class="temp">{{record.sufferingSince}}</p>
                 <p class="te_nov">{{record.healthRecordType}}</p>
               </div>
             </div>
@@ -289,10 +289,11 @@
         <hr class="card_hr">
         <div class="established">
           <p>
-            {{record.severity}}
+            <!-- {{record.severity}} -->
+          {{record.sufferingFrom}}
           </p>
         </div>
-      </div> -->
+      </div>
         <!--  card4-->
         <!-- <div class="card padding-card" *ngIf="record.healthRecordType =='Medicine Details'">
           <div class="march">
@@ -343,13 +344,13 @@
       </div>
         </div> -->
           <!-- card6 -->
-      <!-- <div class="card padding-card" *ngIf="record.healthRecordType =='Surgical History'">
+      <div class="card padding-card" *ngIf="record.healthRecordType =='Surgical'">
         <div class="march">
           <div class="row">
             <div class="novomox">
               <div class="col-md-6 col-xs-6 text-left">
                 <p class="temp">{{record.disease}}</p>
-                <p class="te_nov">{{record.createdDate | date}}</p>
+                <!-- <p class="te_nov">{{record.createdDate | date}}</p> -->
               </div>
               <div class="col-md-6 col-xs-6 text-right">
                 <p class="temp">{{record.dateOfDiagnosis}}</p>
@@ -364,7 +365,7 @@
             {{record.otherInformation}}
           </p>
         </div>
-      </div> -->
+      </div>
       </div>
     </div>
   </div>
