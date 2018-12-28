@@ -15,7 +15,8 @@ export class InstructionComponent implements OnInit {
   public instructionFormErrors: any;
   public loader: boolean = false
   public submitted: boolean = false;
-  public hideInstructionForm: boolean = true;
+  public hideCrossIcon: boolean = false;
+  public hideSave:boolean=true;
 
 
 
@@ -96,13 +97,20 @@ export class InstructionComponent implements OnInit {
   }
   /**************ADD MORE THAN ONE INSTRUCTION FORM**********************/
   AddInstructionForm() {
+    this.hideSave=true
     let control = <FormArray>this.instructionForm.controls.advice;
     control.push(
       this.formBuilder.group({
         advice: ['', Validators.required],
       })
     )
-
+    if(control.length>1 && control.length!==1){
+      this.hideCrossIcon=true;
+    }
+  
+    else{
+      this.hideCrossIcon=false;
+    }
   }
   // close Instruction form on close button
   closeInstructionForm() {
@@ -110,7 +118,17 @@ export class InstructionComponent implements OnInit {
     this.router.navigate(['/dashboard/consultnew/diagnosis']);
 
   }
-
+  /*****************DELETE INSTRUCTION FORM*************************************/
+  deleteInstructionForm(index){
+    let control = <FormArray>this.instructionForm.controls.advice;
+    control.removeAt(index)
+    if(control.length==0){
+      this.hideSave=false;
+    }
+    else{
+      this.hideSave=true; 
+    }
+  }
 
 
 }

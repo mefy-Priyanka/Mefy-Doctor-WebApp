@@ -1,6 +1,5 @@
 <p class="provisionalc21">Specific Instructions</p>
         <div class="card cardabc custom-card">
-            <div class="text-right"><i class="fa fa-remove" style="color:#0bbeae; margin-top: 11px;"></i></div>
             <!-- <button class="crossbtnmed">
                 <svg version="1.1" id="cancelbtn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                   y="0px" viewBox="0 0 212.982 212.982" style="enable-background:new 0 0 212.982 212.982;" xml:space="preserve">
@@ -34,6 +33,7 @@
     <form [formGroup]="instructionForm"  (keydown)="keyDownFunction($event)" novalidate>
       <div formArrayName="advice" *ngFor="let form of instructionForm.get('advice').controls; let i=index">
           <div [formGroupName]="i">
+              <div class="text-right" (click)="deleteInstructionForm(i)"><i  *ngIf="hideCrossIcon" class="fa fa-remove" style="color:#0bbeae; margin-top: 11px;"></i></div>
             <input type="text" name="advice" placeholder="Advice" class="validate spacem referdoc" formControlName="advice">
             <!-- <p class="errormessage" *ngIf="instructionForm.controls.advice.controls.length > 1|| (instructionForm.controls.advice.pristine && submitted)">Please
               Enter Advice </p> -->
@@ -47,7 +47,7 @@
     <button class="plus" (click)="AddInstructionForm()">+</button>
   </div>
 </div>
-<div class="text-center high">
+<div class="text-center high" *ngIf="hideSave">
   <button class="prescribebtn" (click)="saveInstructionForm()">Save</button>
   <!-- <button class="prescribebtn" *ngIf="hideSavePlusButton" (click)="savePlus()">Save +</button> -->
   <!-- <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteSpecificForm()">Delete</button> -->
