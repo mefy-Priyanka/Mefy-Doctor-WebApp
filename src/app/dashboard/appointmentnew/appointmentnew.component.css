@@ -315,6 +315,11 @@ span.clinic_slot {
 button.multislots {
     background: transparent;
     border: none;
+    border: 1px solid #0000002b;
+    margin: 2px;
+}
+button.multislots:hover {
+    background: #8472fd61;
 }
 /* p.dateselectfont {
     font-family: 'Lato',sans-serif;
@@ -382,16 +387,15 @@ hr.slot_schedule::after {
     /* color: #818078; */
     color:grey;
     padding: 0 2px;
-    background-color: #fff;
 }
 
 button.multislots:hover span {
-    color: #af6cfd;
+    color: #040404;
 }
 
 
 button.multislots:focus span {
-    color: #af6cfd;
+    color: #040404;
 }
 .err_msg {
     text-align: center;
@@ -423,7 +427,7 @@ multislots{
 } */
 .cstmpdng {
     padding-left: 8px;
-    padding-right: 5px;
+    padding-right: 14px;
 }
 @media only screen and (max-width: 1024px) and (min-width:320px){
     .cstmpdng {
@@ -560,13 +564,12 @@ span.clinic_slot.resbotm {
         overflow-y: auto;
      }
      .left_dist {
-        margin: 0 16px;
+        margin: 0 0px 0 16px;
     }
      .force-overflow
      {
          min-height: 450px;
      }
-
 
 
 

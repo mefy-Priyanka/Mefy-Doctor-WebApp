@@ -47,9 +47,9 @@ body {
 #msform fieldset {
     background: white;
     border: 0 none;
-    width: 100%;
+    width: 84% !important;
     margin-left: 19px;
-
+    margin: 0 auto;
 }
 /*Hide all except first fieldset*/
 
@@ -75,7 +75,10 @@ body {
     margin-left: 24px;
 }
 /*buttons*/
-
+input.ng2-tag-input__text-input::placeholder {
+    color: #615d5d;
+    font-family: lato;
+}
 #msform .action-button {
     width: 100px;
     background: #a465f4;
@@ -510,6 +513,9 @@ width: 100%;
     background: -webkit-linear-gradient(to right, #5977FA, #a465f4);
     background: linear-gradient(to right, #5a78fa, #a465f4);
     height: 629px;
+}
+input.ng2-tag-input__text-input::placeholder {
+    color: #444 !important;
 }
 button.spclbtn {
     position: absolute;
@@ -1034,6 +1040,45 @@ button.cance_l {
     width: 69px;
     border-radius: 50px;
 }
+footer ul li {
+    outline: none;
+}
 
 
                    
+input.ng2-tag-input__text-input.ng-pristine.ng-valid {
+    width: 65%;
+    border: 1px solid #f1ecf9;
+    border-radius: 50px;
+    padding:0 4px;
+    text-align: center;
+    height: 34px;
+    margin: 0px auto;
+    background: #eae6e6;
+    margin-top: 0px !important;
+}
+input.ng2-tag-input__text-input.ng-valid.ng-dirty.ng-touched
+{
+    width: 65%;
+    border: 1px solid #f1ecf9;
+    border-radius: 50px;
+    padding-left: 15px;
+    text-align: center;
+    height: 34px;
+    margin: 0px auto;
+    background: #eae6e6;
+}
+tag {
+    background: #c079e8 !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    padding: 0 15px !important;
+    -webkit-box-shadow: 0 2px 3px 1px #d4d1d1;
+    box-shadow: 0 2px 3px 1px #d4d1d1;
+    margin-bottom: 8px !important;
+   
+}
+input.ng2-tag-input__text-input {
+    border: 1px solid white !important;
+    box-shadow:none !important;
+}

@@ -22,6 +22,18 @@ export class SharedService {
   appointmentType: BehaviorSubject<any> = new BehaviorSubject({});
   consultHide: BehaviorSubject<any> = new BehaviorSubject(false);
   appointmentList: BehaviorSubject<any> = new BehaviorSubject({});
+  cancelAppointmentList: BehaviorSubject<any> = new BehaviorSubject({});
+  diagnosisdata: BehaviorSubject<any> = new BehaviorSubject({});
+  suggestionData: BehaviorSubject<any> = new BehaviorSubject({});
+  medicinedata: BehaviorSubject<any> = new BehaviorSubject({});
+  followUpData: BehaviorSubject<any> = new BehaviorSubject({});
+  lifeStyleData: BehaviorSubject<any> = new BehaviorSubject({});
+  instructionData: BehaviorSubject<any> = new BehaviorSubject({});
+  storeIndividualId: BehaviorSubject<any> = new BehaviorSubject({});
+  storeAppointmentId: BehaviorSubject<any> = new BehaviorSubject({});
+
+
+
 
   info: any;
 
@@ -100,7 +112,7 @@ export class SharedService {
 
   //get notification type
   createNotification(param) {
-    console.log('notification.',param)
+    console.log('notification.', param)
     this.notificationType.next(param)
   }
 
@@ -121,4 +133,42 @@ export class SharedService {
   saveAppointmentList(param) {
     this.appointmentList.next(param);
   }
+  /***** Rightside Nav Appointment data */
+  cancdelAppointmentData(param) {
+    this.cancelAppointmentList.next(param);
+  }
+  //get Diagnosis Form
+  createDiagnosis(param) {
+    console.log('Diagnosis', param)
+    this.diagnosisdata.next(param)
+  }
+  //get Suggest Form
+  createTest(param) {
+    console.log('Suggest Form', param)
+    this.suggestionData.next(param)
+  }
+  /*********STORE MEDICINE DATA FROM PRESCRIPTION FORM **************/
+  createMedicineData(param) {
+    this.medicinedata.next(param)
+  }
+  /*********STORE FOLLOWUP DATA FROM PRESCRIPTION FORM **************/
+  createFollowUpData(param) {
+    this.followUpData.next(param)
+  }
+  /*********STORE LIFESTYLE DATA FROM PRESCRIPTION FORM **************/
+  createLifeStyleData(param) {
+    this.lifeStyleData.next(param)
+  }
+  /*********STORE INSTRUCTION DATA FROM PRESCRIPTION FORM **************/
+  createInstructionData(param) {
+    this.instructionData.next(param)
+  }
+  /*********STORE INDIVIDUALID  IN PRESCRIPTION FORM **************/
+  storeIndividual(param) {
+    this.storeIndividualId.next(param)
+  }
+    /*********STORE INDIVIDUALID  IN PRESCRIPTION FORM **************/
+    storeAppointment(param) {
+      this.storeAppointmentId.next(param)
+    }
 }

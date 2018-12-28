@@ -1,4 +1,3 @@
-
 .calendar h1{
     font-size: 25px;
     text-align: center;
@@ -7,7 +6,7 @@
 section.modeforct {
     background: #fff;
     padding-bottom: 20px;
-    height: 37vh;
+    height: 64vh;
     overflow-y: scroll;
 }
 input.form-control.appoinmentdate2 {
@@ -35,6 +34,22 @@ input.form-control.appoinmentdate2 {
 a.up_arrow {
     border-bottom: 1px solid rgba(86, 94, 234, 0.14) !important;
 }
+button.btn.btn-success.dateCal {
+    background: transparent;
+    box-shadow: none;
+    right: 43px;
+    position: absolute;
+    outline: none;
+    top: -3px;
+}
+svg#calender {
+    height: 36px;
+    width: 23px;
+    fill:#8a51b8;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
 input.form-control.appoinmentdate2:focus {
     border-bottom: none;
 }
@@ -57,6 +72,9 @@ ul.list-inline.calender_health {
 }
 ul.list-inline.calender_health li {
     padding: 0;
+    display: flex;
+    flex-direction: row;
+    position: relative;
 }
 .hrmenu {
     margin-top: 20px;
@@ -117,8 +135,8 @@ span.menu {
     top: -21px;
     box-shadow: 0px 1px 16px 3px rgba(58, 216, 123, 0.31);
 }
-span.date {
-    display: block;
+.date {
+    /* display: block;
     margin-left: 15px;
     padding: 4px 10px;
     text-align: center;
@@ -128,15 +146,26 @@ span.date {
     font-weight: 400;
     font-family: Lato;
     line-height: 20px;
+    width: 25%;
     background: rgb(121, 120, 250);
     background: linear-gradient(to right, rgb(121, 120, 250),rgba(178, 109, 247, 1));
-    font-size: 11px;
+    font-size: 11px; */
+    padding: 0px 3px 0 3px;
+    text-align: left;
+    border-radius: 20px;
+    font-family: 'Roboto',sans-serif;
+    color: #58b85ac2;
+    font-weight: 500;
+    line-height: 20px;
+    margin-bottom: 0;
+    font-size: 12px;
+
 }
 span.time {
     display: block;
     font-size: 11px;
-    color: #6fbff4;
-    font-weight: 400;
+    color: #3e97d2;
+    font-weight: 600;
     font-family: 'Roboto',sans-serif;
     margin-left: -6px;
 }
@@ -149,20 +178,22 @@ section.spacesofrw {
 p.modeofconsult {
     font-size: 13px;
     color: #9aabbe;
-    font-weight: 300;
+    font-weight: 500;
     font-family: 'Roboto',sans-serif;
-    margin: 0;
+    font-style: italic;
+    margin-left: 3px;
 }
-p.doctorname {
+.doctorname {
     font-size: 12px;
     font-family: 'Roboto',sans-serif;
-    color: #8398ac;
-    font-weight: 600;
+    color: #8751b9cf;
+    font-weight: 500;
     text-align: left;
     margin-bottom: 0px;
+    margin-left: 21px;
 }
 .whomwith {
-    margin-top: 7px;
+    /* margin-top: 7px; */
     margin-left: 20px;
     margin-bottom: -11px;
 }
@@ -416,5 +447,65 @@ svg#clinic{
     width: 20px;
     fill: #5a7ffb;
 }
-
-
+p.doctoraname{
+    font-size: 12px;
+    font-family: 'Roboto',sans-serif;
+    color: #8398ac;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 0px;
+}
+.resultMsg p {
+    text-align: center;
+    font-size: 14px;
+    color: #9aabbe;
+    font-weight: 500;
+    font-family: 'Roboto',sans-serif;
+}
+.resultMsg span {
+    color: #936ff8;
+    font-weight: 600;
+}
+.bottomContent {
+    position: relative;
+}
+svg#acceptTick {
+    height: 28px;
+    width: 20px;
+    fill: rgb(58, 216, 123);
+    vertical-align: middle;
+}
+span.to {
+    color: #9E9E9E;
+    font-weight: 600;
+}
+button.prbtn {
+    color: #ffffff;
+    line-height: 27px;
+    background: #0bdb85;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: Lato;
+    border: 1px solid #0bdb85;
+    border-radius: 32px;
+    margin: 14px 4px 0px 0;
+    padding: 0 12px;
+}
+button.prbtn:hover {
+    background:#0dca7c;;
+}
+button.cancelbtn {
+    color: #989393;
+    line-height: 27px;
+    background: #ffffff;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: Lato;
+    border: 1px solid #8c9292;
+    border-radius: 32px;
+    margin: 10px 10px 0px 0;
+    padding: 0 11px;
+}
+button.cancelbtn:hover {
+    background: #f4f7f5;
+}

@@ -1,14 +1,39 @@
 <p class="provisionalc21">Prescribe Medicine</p>
 <div class="card-body">
+    <div class="text-right"><i class="fa fa-remove" style="color:#0bbeae"></i></div>
+      <!-- /* loader */ -->
+          <div class="loading" *ngIf="loader">
+            <div class="sk-circle">
+              <div class="sk-circle1 sk-child"></div>
+              <div class="sk-circle2 sk-child"></div>
+              <div class="sk-circle3 sk-child"></div>
+              <div class="sk-circle4 sk-child"></div>
+              <div class="sk-circle5 sk-child"></div>
+              <div class="sk-circle6 sk-child"></div>
+              <div class="sk-circle7 sk-child"></div>
+              <div class="sk-circle8 sk-child"></div>
+              <div class="sk-circle9 sk-child"></div>
+              <div class="sk-circle10 sk-child"></div>
+              <div class="sk-circle11 sk-child"></div>
+              <div class="sk-circle12 sk-child"></div>
+            </div>
+          </div>
+          <!-- /* loader */ -->
   <p class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red','text-align':'center'}">{{messageMedicine}}</p>
   <span class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{saveMedicine}}</span>
+ 
   <form [formGroup]="medicineForm" novalidate>
-    <ng2-completer class="referdoc" placeholder="Medicine Name" formControlName="medicineName"  [datasource]="medicineService" [minSearchLength]="0"  (keyup)="getMedicineList($event.target.value)"></ng2-completer>
-
-    <span class="errormessage" *ngIf="medicineFormErrors.medicineName.required">Please Provide Medicine Name</span>
+      <p class="provisionalc21frequency">Medicine name</p>
+    <tag-input formControlName="medicineName" (onAdd)="onAddMedicine($event)" onlyFromAutocomplete="true"
+    blinkIfDupe="true" secondaryPlaceholder="Add Medicine" placeholder="Add more">
+    <tag-input-dropdown [appendToBody]="false" [identifyBy]="'mediName'" [displayBy]="'mediName'"
+      [showDropdownIfEmpty]="false" placeholder="Choose Medicine" [autocompleteItems]="medicineOfObjects">
+    </tag-input-dropdown>
+  </tag-input>
+    <span class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="medicineFormErrors.medicineName.required || (medicineForm.controls.medicineName.pristine && submitted)">Please Provide Medicine Name</span>
     <input type="text" name="fname" [textMask]="{mask: mask, guide: false}" placeholder="Dosage" formControlName="dosage" class="referdoc">
     <span class="errormessage" *ngIf="medicineFormErrors.dosage.required">Please Provide Medicine Dosage</span>
-    <div class="f_range">
+    <!-- <div class="f_range">
       <span class="provisionalc21frequency">Frequency</span>
       <div class="day_tab">
 
@@ -20,7 +45,7 @@
         </p>
 
       </div>
-    </div>
+    </div> -->
     <span class="provisionalc21frequency">Days</span>
 
     <div class="day_tab">
@@ -40,10 +65,16 @@
 
 
 </div>
-<div class="text-center high" [hidden]="!closeMedicine">
+<div class="row">
+  <div class="plus_btn pull-right ng-star-inserted">
+    <button class="plus">+</button>
+  </div>
+</div>
+
+<div class="text-center high">
   <button class="prescribebtn" (click)="createMedicine()">Save</button>
-  <button class="prescribebtn" *ngIf="update" (click)="saveMedicineArray()">Save +</button>
-  <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteMedicineForm()">Delete</button>
+  <!-- <button class="prescribebtn" *ngIf="update" (click)="saveMedicineArray()">Save +</button> -->
+  <!-- <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteMedicineForm()">Delete</button> -->
   <!-- (click)="createMedicine()" -->
   <button class="cancelbtn" (click)="closeForm()">Cancel</button>
   <!-- (click)="closeForm('Prescribe Medicine')" -->

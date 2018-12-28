@@ -2,16 +2,16 @@
 <section class="video">
   <div class="row">
     <div class="video_play">
-      <!-- <video autoplay loop id="video-background" muted plays-inline>
+      <video autoplay loop id="video-background" muted plays-inline>
         <source src="https://player.vimeo.com/external/158148793.hd.mp4?s=8e8741dbee251d5c35a759718d4b0976fbf38b6f&profile_id=119&oauth2_token_id=57447761"
           type="video/mp4">
-      </video> -->
+      </video>
 
       <!-- <iframe src="https://www.youtube.com/embed/XGSy3_Czz8k" id="video-background">
       </iframe> -->
       <!-- src="https://call.meme.care" -->
-      <iframe   [src]="url"  id="video-background" *ngIf="!hideVideo" allow="geolocation; microphone; camera">
-      </iframe>
+      <!-- <iframe   [src]="url"  id="video-background" *ngIf="!hideVideo" allow="geolocation; microphone; camera">
+      </iframe> -->
 
       <div class="icons_music">
         <ul class="list-inline volume">
@@ -131,10 +131,10 @@
       </div>
       <div class="col-md-6 col-xs-6" id="padding-o">
         <div class="text_nav2">
-          <p class="namelocplayer">{{individualHealth?.name}}
+          <p class="namelocplayer">{{individualDetails?.name}}
           </p>
-          <p class="namelocplayer4">{{individualHealth?.gender}},{{age}}
-            <span class="video2_player">{{individualHealth?.location}}</span>
+          <p class="namelocplayer4"  *ngIf="individualDetails?.gender || individualDetails?.city">{{individualDetails?.gender?individualDetails.gender:''}},{{this.age?this.age:''}}
+            <span class="video2_player">{{individualDetails?.city?individualDetails.city:''}}</span>
           </p>
         </div>
       </div>
@@ -151,7 +151,7 @@
 
         <div class="col-md-12">
           <div class="col-md-6 col-xs-6 right0">
-            <p class="found">{{individualHealth?.healthRecord.length}} Health records found</p>
+            <p class="found">{{healthRecord.length}} Health records found</p>
           </div>
           <div class="col-md-6 col-xs-6 text-right">
             <!-- <button class="funnel_btn">
@@ -181,17 +181,17 @@
                   </g>
                 </svg>
               </button>
-              <div class="dropdown_doctor" *ngIf="hideDetail">
+              <!-- <div class="dropdown_doctor" >
                 <span class="triangle2"></span>
                 <div id="myDropdown" class="dropdown-content_video " >
-                  <a *ngFor="let li of healthType"  (click)="getType(li)" >{{li}}</a>
-                  <!-- <a>Family History</a>
+                  <a  (click)="getType(li)" >List</a>
+                  <a>Family History</a>
                   <a>Current Complaints</a>
                   <a>Medicine Details</a>
                   <a>Immunization</a>
-                  <a>Allergies</a> -->
+                  <a>Allergies</a>
                 </div>
-              </div>
+              </div> -->
             </div>
             <!-- class="dropdown-content_video" -->
           </div>
@@ -199,20 +199,20 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="healthRecord.length>0">
     <div class="scrly">
-      <div class="col-md-12"  *ngFor="let record of healthRecord | filterBy:filterField">
-        <div class="card padding-card"  *ngIf="record.healthRecordType =='Family History'">
+      <div class="col-md-12" *ngFor="let record of healthRecord">
+        <!-- <div class="card padding-card">
           <div class="march">
             <div class="row">
               <div class="novomox">
                 <div class="col-md-6 col-xs-6 text-left">
-                  <p class="temp">{{record.medicalCondition}}</p>
-                  <p class="te_nov">{{record.createdDate | date}}</p>
+                  <p class="temp">Viral Fever</p>
+                  <p class="te_nov">March 2016</p>
                 </div>
                 <div class="col-md-6 col-xs-6 text-right">
-                  <p class="temp">{{record?.duration.months+' months '+record?.duration.days+' days'}}</p>
-                  <p class="te_nov">{{record.healthRecordType}}</p>
+                  <p class="temp">3 days</p>
+                  <p class="te_nov">Novomox 500</p>
                 </div>
               </div>
             </div>
@@ -220,10 +220,10 @@
           <hr class="card_hr">
           <div class="established">
             <p>
-              {{record.notes}}
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry
             </p>
           </div>
-        </div>
+        </div> -->
           <!-- card1 -->
       <div class="card padding-card" *ngIf="record.healthRecordType =='Immunization'">
         <div class="march">
@@ -231,10 +231,10 @@
             <div class="novomox">
               <div class="col-md-6 col-xs-6 text-left">
                 <p class="temp">{{record.ageGroup}}</p>
-                <p class="te_nov">{{record.createdDate | date}}</p>
+                <!-- <p class="te_nov">{{record.createdDate | date}}</p> -->
               </div>
               <div class="col-md-6 col-xs-6 text-right">
-                <p class="temp">{{record.scheduleDate}}</p>
+                <!-- <p class="temp">{{record.scheduleDate}}</p> -->
                 <p class="te_nov">{{record.healthRecordType}}</p>
               </div>
             </div>
@@ -243,18 +243,18 @@
         <hr class="card_hr">
         <div class="established">
           <p>
-            {{record.vaccine}}
+            <!-- {{record.vaccine}} -->
           </p>
         </div>
       </div>
         <!-- card2 -->
-        <div class="card padding-card" *ngIf="record.healthRecordType =='Medical History'">
+        <div class="card padding-card" *ngIf="record.healthRecordType =='medicalHistory'">
           <div class="march">
             <div class="row">
               <div class="novomox">
                 <div class="col-md-6 col-xs-6 text-left">
-                  <p class="temp">{{record.sympton}}</p>
-                  <p class="te_nov">{{record.createdDate | date}}</p>
+                  <p class="temp">{{record?.symptoms}}</p>
+                  <!-- <p class="te_nov">{{record.createdDate | date}}</p> -->
                 </div>
                 <div class="col-md-6 col-xs-6 text-right">
                   <p class="temp">{{ record?.duration.months+' months '+record?.duration.days+' days'}}</p>
@@ -271,16 +271,16 @@
           </div>
         </div>
          <!-- card3 -->
-      <div class="card padding-card" *ngIf="record.healthRecordType =='Current Complaints'">
+      <div class="card padding-card" *ngIf="record.healthRecordType =='currentComplaint'">
         <div class="march">
           <div class="row">
             <div class="novomox">
               <div class="col-md-6 col-xs-6 text-left">
-                <p class="temp">{{record.diseaseCondition}}</p>
-                <p class="te_nov">{{record.createdDate | date}}</p>
+                <p class="temp">{{record.symptoms}}</p>
+                <!-- <p class="te_nov">{{record.createdDate | date}}</p> -->
               </div>
               <div class="col-md-6 col-xs-6 text-right">
-                <p class="temp">{{record.startDate}}</p>
+                <p class="temp">{{record.sufferingSince}}</p>
                 <p class="te_nov">{{record.healthRecordType}}</p>
               </div>
             </div>
@@ -289,12 +289,13 @@
         <hr class="card_hr">
         <div class="established">
           <p>
-            {{record.severity}}
+            <!-- {{record.severity}} -->
+          {{record.sufferingFrom}}
           </p>
         </div>
       </div>
         <!--  card4-->
-        <div class="card padding-card" *ngIf="record.healthRecordType =='Medicine Details'">
+        <!-- <div class="card padding-card" *ngIf="record.healthRecordType =='Medicine Details'">
           <div class="march">
             <div class="row">
               <div class="novomox">
@@ -315,7 +316,7 @@
               {{record.medicineName}}
             </p>
           </div>
-        </div>
+        </div> -->
          <!-- card5 -->
       <!-- <div class="card padding-card" *ngIf="record.healthRecordType ==''">
           <div class="march">
@@ -343,13 +344,13 @@
       </div>
         </div> -->
           <!-- card6 -->
-      <div class="card padding-card" *ngIf="record.healthRecordType =='Surgical History'">
+      <div class="card padding-card" *ngIf="record.healthRecordType =='Surgical'">
         <div class="march">
           <div class="row">
             <div class="novomox">
               <div class="col-md-6 col-xs-6 text-left">
                 <p class="temp">{{record.disease}}</p>
-                <p class="te_nov">{{record.createdDate | date}}</p>
+                <!-- <p class="te_nov">{{record.createdDate | date}}</p> -->
               </div>
               <div class="col-md-6 col-xs-6 text-right">
                 <p class="temp">{{record.dateOfDiagnosis}}</p>

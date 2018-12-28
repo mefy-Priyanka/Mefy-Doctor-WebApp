@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+.page-header {
+    position: relative;
+    background: linear-gradient(to right, #7645dd, #e090ec);
+    background: -webkit-linear-gradient(to right, #7645dd, #e090ec);
+    background: -moz-linear-gradient(to right, #7645dd, #e090ec);
+    background: -o-linear-gradient(to right, #7645dd, #e090ec);
+    text-align: center;
+    margin: 0;
+}
+h1.privacyPolicy {
+    font-size: 30px;
+    color: #fff;
+    margin-bottom: 2px;
+}
+.page-header-title p {
+    font-size: 14px;
+    color: #fff;
+}
+.page-privacy-policy {
+    padding: 7em 4em;
+}
+.privacy-list ul li a {
+    font-size: 14px;
+    font-weight: 500;
+    color: #8d97ad;
+    transition: all 0.3s;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+.privacy-list ul li {
+    padding: 8px 0;
+}
+.privacy-list ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.privacy-content h3 {
+    font-size: 21px;
+    font-weight: 600;
+    color: #3e4555;
+    margin-bottom: 0.7em;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+}
+.privacy-content p {
+    font-size: 14px;
+    color: #8d97ad;
+    line-height: 1.7em;
+    margin-bottom: 1.7em;
+}

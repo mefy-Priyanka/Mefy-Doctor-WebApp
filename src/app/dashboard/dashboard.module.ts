@@ -34,6 +34,7 @@ const routes: Routes = [
       { path: "profile", component: ProfileComponent },
       { path: "account", component: ManageaccountComponent },
       { path: "raisebill", component: RaiseBillComponent },
+
       {
         path: "consultnew",
         loadChildren: "./consult/consult.module#ConsultModule"
@@ -55,8 +56,7 @@ const routes: Routes = [
     TextMaskModule,
     BsDatepickerModule.forRoot(),
     ToastyModule.forRoot(),
-    TimepickerModule.forRoot(),
-
+    TimepickerModule.forRoot()
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [
@@ -71,7 +71,7 @@ const routes: Routes = [
     ManageaccountComponent,
     RaiseBillComponent,
     AppointmentnewComponent,
-    NotificationComponent
+    NotificationComponent,
   ]
 })
 export class DashboardModule { }

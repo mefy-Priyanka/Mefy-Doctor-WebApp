@@ -1,67 +1,74 @@
 <!-- login ui -->
 <div class="loginform">
   <!-- Login form -->
-<img src="../../assets/images/mefylogo.png" class="mefyLogo">
+  <img src="../../assets/images/mefylogo.png" class="mefyLogo">
   <div class="verticalform">
     <div class="FormContent">
       <!-- /* loader */ -->
-<div class="loading"  *ngIf="loader">
-    <div class="sk-circle">
-      <div class="sk-circle1 sk-child"></div>
-      <div class="sk-circle2 sk-child"></div>
-      <div class="sk-circle3 sk-child"></div>
-      <div class="sk-circle4 sk-child"></div>
-      <div class="sk-circle5 sk-child"></div>
-      <div class="sk-circle6 sk-child"></div>
-      <div class="sk-circle7 sk-child"></div>
-      <div class="sk-circle8 sk-child"></div>
-      <div class="sk-circle9 sk-child"></div>
-      <div class="sk-circle10 sk-child"></div>
-      <div class="sk-circle11 sk-child"></div>
-      <div class="sk-circle12 sk-child"></div>
-    </div>
-    </div>
-    <!-- /* loader */ -->
+      <div class="loading" *ngIf="loader">
+        <div class="sk-circle">
+          <div class="sk-circle1 sk-child"></div>
+          <div class="sk-circle2 sk-child"></div>
+          <div class="sk-circle3 sk-child"></div>
+          <div class="sk-circle4 sk-child"></div>
+          <div class="sk-circle5 sk-child"></div>
+          <div class="sk-circle6 sk-child"></div>
+          <div class="sk-circle7 sk-child"></div>
+          <div class="sk-circle8 sk-child"></div>
+          <div class="sk-circle9 sk-child"></div>
+          <div class="sk-circle10 sk-child"></div>
+          <div class="sk-circle11 sk-child"></div>
+          <div class="sk-circle12 sk-child"></div>
+        </div>
+      </div>
+      <!-- /* loader */ -->
       <div class="row nomargin">
-        <div class="col-md-12" id="noPadding">
-          <div class="col-md-6" id="noPadding">
+        <div class="col-md-12" id="noPadding1">
+          <div class="col-md-6" id="noPadding1">
             <div class="leftContent">
               <div class="leftData">
                 <div class="put">
                   <h1>MeFy</h1>
-                  <qrcode [qrdata]="scannerdata" [colorlight]="'#fff'" [colordark]="'#683d90'" [size]="172"
-                    [level]="'M'"></qrcode>
+                  <qrcode [qrdata]="scannerdata" [colorlight]="'#fff'" [colordark]="'#683d90'" [size]="172" [level]="'M'"></qrcode>
                   <p class="code">Scan your qr code</p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6" id="noPadding">
+          <div class="col-md-6" id="noPadding1">
             <!-- login screen -->
+            <h1 class="loginheading">Login</h1>
+            <p class="subtxt">Please login to your account</p>
             <div class="loginContent" *ngIf="loginShow">
-              <h1>Login</h1>
-              <p>Please login to your account</p>
+
               <form [formGroup]="loginForm">
                 <div class="form-group phoneDiv">
                   <label></label>
-                  <input type="text" class="form-control inputPhone" [textMask]="{mask: mask, guide: false}" placeholder="Phone Number" formControlName="phoneNumber">
-                  <p class="errormessage" *ngIf="loginFormErrors.phoneNumber.required || (loginForm.controls.phoneNumber.pristine && submitted)">Number can not be empty</p>
+                  <input type="text" class="form-control inputPhone" [textMask]="{mask: mask, guide: false}" minlength="8" placeholder="Enter your Phone Number"
+                    formControlName="phoneNumber">
+                  <p class="errormessage" [ngStyle]="{'font-size':'11px'}" *ngIf="loginFormErrors.phoneNumber.required || (loginForm.controls.phoneNumber.pristine && submitted)">Number can not be empty</p>
+                  <p class="errormessage" [ngStyle]="{'font-size':'11px'}" *ngIf="loginFormErrors.phoneNumber.minlength ">Please Enter Valid Phone Number
+                  </p>
                   <i class="fa fa-mobile right" aria-hidden="true"></i>
                 </div>
                 <div class="loginRegister">
-                  <button class="loginbutton" type="button" (click)="login()">Login</button>
+                  <button class="loginbutton" type="button" (click)="login()">Login
+                    <!-- <i class="fa fa-arrow-right"></i> -->
+                  </button>
                 </div>
                 <div class="noaccount">
-                  <p>Don't have an account ?</p>
-                  <a href="" class="createaccm" [routerLink]="['/register']">Create an account</a>
+                  <p>Don't have an account ?
+                    <a href="" class="createaccm" [routerLink]="['/register']">Create an account</a>
+                  </p>
+
                 </div>
               </form>
             </div>
             <!-- login screen -->
             <!-- otp screen-->
             <div class="loginContent" *ngIf="otpShow">
-              <svg version="1.1" id="otp" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                x="0px" y="0px" viewBox="0 0 489.1 489.1" style="enable-background:new 0 0 489.1 489.1;" xml:space="preserve">
+              <svg version="1.1" id="otp" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 489.1 489.1" style="enable-background:new 0 0 489.1 489.1;" xml:space="preserve">
                 <g>
                   <g>
                     <path style="fill:#884fb3;" d="M416.85,133.2h-190.1c-17.2,0-31.3,14.1-31.3,31.3v116c0,17.2,14.1,31.3,31.3,31.3h24.5v55.4
@@ -94,7 +101,9 @@ c1.7-1.7,2.7-4,2.7-6.4s-1-4.7-2.7-6.4C292.75,218.2,290.45,217.2,288.05,217.2z" /
                   <p class="errormessage" *ngIf="otpFormErrors.otp.required || (otpForm.controls.otp.pristine && submitted)">Can't be empty</p>
                 </div>
                 <div class="loginRegister">
-                  <button class="loginbutton" (click)="verifyOtp()">Submit</button>
+                  <button class="loginbutton" (click)="verifyOtp()">Submit
+                    <i class="fa fa-arrow-right"></i>
+                  </button>
                 </div>
                 <div class="noaccount">
                   <p>Don't have an account ?</p>

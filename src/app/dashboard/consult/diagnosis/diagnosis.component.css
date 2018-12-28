@@ -75,14 +75,23 @@ p.serenity {
     font-weight: 500
 }
 .space {
-    height: 53vh;
+    height: 40vh;
     overflow-y: scroll;
     padding:0 15px;
 }
 /* .space::-webkit-scrollbar { 
     display: none;
   } */
-
+  /* .card.prescribe {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    right: 0;
+    
+} */
+.posrel {
+    position: relative;
+}
 svg#dot2 {
     fill: rgba(149, 149, 149, 0.5);
     height: 15px;

@@ -2,70 +2,163 @@
   <div class="col-md-8 nopaddingleft pdng0">
     <div class="card maincontent">
       <form [formGroup]="doctorDetail">
-        <div class="row nomarginrow0">
-          <div class="col-md-10 nopadding0col1">
-            <div class="input-field col-md-12">
-              <p class="reg_no">Registration No./Uprn No.:
-              </p>
-              <div class="labeloutput">
-                <label class="location" for="location">{{doctorpdetail.registrationNumber}}</label>
-              </div>
-            </div>
+        <div class="row">
+          <div class="col-md-5">
+            <p class="reg_no">Registration No./Uprn No.:</p>
+          </div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.registrationNumber}}</span></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <p class="reg_no">Name:</p>
+          </div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.name}}</span></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <p class="reg_no">Mobile Number:</p>
+          </div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.phoneNumber}}</span></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <p class="reg_no">Gender:</p>
+          </div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.gender}}</span></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <p class="reg_no">Date of Birth:</p>
+          </div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.dob}}</span></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <p class="reg_no">City:</p>
+          </div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.city}}</span></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <p class="reg_no">Issuing Authority:</p>
+          </div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.issuingAuthority}}</span></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <p class="reg_no">Practicing Since:</p>
+          </div>
+          <div class="col-md-7"><span class="detailShow">{{doctorpdetail?.practicingSince}}</span></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <p class="reg_no">Address:</p>
+          </div>
+          <div class="col-md-5">
+            <input class="detailShow" formControlName="address" placeholder="Enter Address "/>
+         
+            <!-- <input id="first_name" id="pac-input" type="text" *ngIf="showFill" formControlName="address"> -->
+          </div>
+          <div class="col-md-2">
+            <button class="eDit" (click)="edit()">
+              <svg version="1.1" id="editsvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px" y="0px" viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;"
+                xml:space="preserve">
+                <g>
+                  <path d="M438.931,30.403c-40.4-40.5-106.1-40.5-146.5,0l-268.6,268.5c-2.1,2.1-3.4,4.8-3.8,7.7l-19.9,147.4
+                 c-0.6,4.2,0.9,8.4,3.8,11.3c2.5,2.5,6,4,9.5,4c0.6,0,1.2,0,1.8-0.1l88.8-12c7.4-1,12.6-7.8,11.6-15.2c-1-7.4-7.8-12.6-15.2-11.6
+                 l-71.2,9.6l13.9-102.8l108.2,108.2c2.5,2.5,6,4,9.5,4s7-1.4,9.5-4l268.6-268.5c19.6-19.6,30.4-45.6,30.4-73.3
+                 S458.531,49.903,438.931,30.403z M297.631,63.403l45.1,45.1l-245.1,245.1l-45.1-45.1L297.631,63.403z M160.931,416.803l-44.1-44.1
+                 l245.1-245.1l44.1,44.1L160.931,416.803z M424.831,152.403l-107.9-107.9c13.7-11.3,30.8-17.5,48.8-17.5c20.5,0,39.7,8,54.2,22.4
+                 s22.4,33.7,22.4,54.2C442.331,121.703,436.131,138.703,424.831,152.403z" />
+                </g>
+              </svg>
+            </button>
           </div>
         </div>
 
-        <div class="input-field col-md-12">
-          <p class="labelpf">Name:</p>
-          <p class="locationphone">{{doctorpdetail.name}}</p>
-        </div>
-        <div class="input-field col-md-12">
-          <p class="reg_no">Mobile Number:</p>
-        </div>
-        <div class="abellable">
-          <label class="locationphone" for="location">{{doctorpdetail.phoneNumber}}</label>
-        </div>
-        <div class="input-field col-md-12 speciaity">
-          <p class="labelpf">Gender:</p>
-          <p class="locationphone">{{doctorpdetail.gender}}</p>
-        </div>
-        <div class="input-field col-md-12 speciaity locatn">
-          <p class="labelpf">Date of Birth:</p>
-          <p class="locationphone">{{doctorpdetail.dob}}</p>
-        </div>
-        <div class="input-field col-md-12 speciaity locatn">
-          <p class="labelpf">City:</p>
-          <p class="locationphone">{{doctorpdetail.city}}</p>
-        </div>
-        <div class="input-field col-md-12 speciaity locatn">
-          <p class="labelpf">Address:
-          </p>
-          <span class="chipsdata">{{doctorpdetail.address}}</span><input formControlName="address" id="first_name" id="pac-input"
-            type="text">
-        </div>
-        <div class="input-field col-md-12 speciaity locatn">
-          <p class="labelpf">Email:
-          </p>
-          <span class="chipsdata">{{doctorpdetail.email}}</span><input id="first_name" id="pac-input" type="text"
-            formControlName="email">
-        </div>
-        <div class="row nomarginrow0">
-          <div class="col-md-6">
-            <p class="labelpf">Speciality:
-            </p>
+        <div class="row">
+          <div class="col-md-5">
+            <p class="reg_no">Email:</p>
+          </div>
+          <div class="col-md-5">
+            <!-- <span class="detailShow">{{doctorpdetail?.email}}</span> -->
+            <input class="detailShow" formControlName="email" placeholder="Enter Email "/>
+            <p class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="doctorDetailErrors.email.email">PLease enter valid email</p>
+            <p class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="doctorDetailErrors.email.maxLength">Length too long</p>
+
+       
+            <!-- <input id="first_name" id="pac-input" type="text" *ngIf="showaddr" formControlName="email"> -->
+          </div>
+          <div class="col-md-2">
+            <button class="eDit" (click)="email()">
+              <svg version="1.1" id="editsvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px" y="0px" viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;"
+                xml:space="preserve">
+                <g>
+                  <path d="M438.931,30.403c-40.4-40.5-106.1-40.5-146.5,0l-268.6,268.5c-2.1,2.1-3.4,4.8-3.8,7.7l-19.9,147.4
+                 c-0.6,4.2,0.9,8.4,3.8,11.3c2.5,2.5,6,4,9.5,4c0.6,0,1.2,0,1.8-0.1l88.8-12c7.4-1,12.6-7.8,11.6-15.2c-1-7.4-7.8-12.6-15.2-11.6
+                 l-71.2,9.6l13.9-102.8l108.2,108.2c2.5,2.5,6,4,9.5,4s7-1.4,9.5-4l268.6-268.5c19.6-19.6,30.4-45.6,30.4-73.3
+                 S458.531,49.903,438.931,30.403z M297.631,63.403l45.1,45.1l-245.1,245.1l-45.1-45.1L297.631,63.403z M160.931,416.803l-44.1-44.1
+                 l245.1-245.1l44.1,44.1L160.931,416.803z M424.831,152.403l-107.9-107.9c13.7-11.3,30.8-17.5,48.8-17.5c20.5,0,39.7,8,54.2,22.4
+                 s22.4,33.7,22.4,54.2C442.331,121.703,436.131,138.703,424.831,152.403z" />
+                </g>
+              </svg>
+            </button>
           </div>
         </div>
 
-        <div class="col-md-12 nomarginrw">
-          <div class="col-md-12 col-xs-10 nopadding0col1">
-            <ul class="list-inline chipsdata">
-              <li *ngFor="let list of doctorpdetail.speciality">
-                <p class="chipsdata">{{list}}
-                </p>
-              </li>
-            </ul>
-            <p></p>
-            <p>
-              <tag-input formControlName="speciality" (onAdd)="onaAddSpeciality($event)" onlyFromAutocomplete="true"
+        <div class="row">
+          <div class="col-md-5">
+            <p class="reg_no">Speciality:</p>
+          </div>
+          <div class="col-md-7">
+            <span class="">
+              <ul class="list-inline">
+                <li *ngFor="let list of selectedSpeciality;let i=index;" class="specialityChip">
+                  <p class="chipsdata">{{list}}
+                    <span class="closebtn" (click)="removeSpeciality(list,i)">&times;</span>
+
+                  </p>
+                </li>
+                <li><button class="aDd" (click)="addspeciality()">
+                    <svg version="1.1" id="editsvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px" viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
+                      <g>
+                        <path d="M12.5,24h25c0.552,0,1-0.448,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.448-1,1S11.948,24,12.5,24z" />
+                        <path d="M12.5,16h10c0.552,0,1-0.448,1-1s-0.448-1-1-1h-10c-0.552,0-1,0.448-1,1S11.948,16,12.5,16z" />
+                        <path d="M12.5,32h25c0.552,0,1-0.448,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.448-1,1S11.948,32,12.5,32z" />
+                        <path d="M29.5,38h-17c-0.552,0-1,0.448-1,1s0.448,1,1,1h17c0.552,0,1-0.448,1-1S30.052,38,29.5,38z" />
+                        <path d="M26.5,46h-14c-0.552,0-1,0.448-1,1s0.448,1,1,1h14c0.552,0,1-0.448,1-1S27.052,46,26.5,46z" />
+                        <path d="M48.5,34.363V14.586L33.914,0H1.5v60h44c7.168,0,13-5.832,13-13C58.5,40.866,54.224,35.723,48.5,34.363z M34.5,3.414
+		L45.086,14H34.5V3.414z M38.578,58H3.5V2h29v14h14v18.044C46.158,34.015,45.826,34,45.5,34c-7.168,0-13,5.832-13,13
+		c0,0.399,0.025,0.792,0.06,1.183c0.008,0.091,0.017,0.181,0.027,0.272c0.043,0.382,0.098,0.76,0.173,1.131
+		c0.009,0.044,0.021,0.087,0.03,0.131c0.072,0.338,0.159,0.67,0.257,0.998c0.025,0.082,0.048,0.165,0.074,0.246
+		c0.113,0.352,0.239,0.698,0.38,1.037c0.027,0.064,0.057,0.126,0.084,0.189c0.129,0.296,0.269,0.585,0.419,0.869
+		c0.036,0.068,0.07,0.137,0.107,0.205c0.175,0.317,0.363,0.626,0.564,0.927c0.046,0.069,0.094,0.135,0.141,0.203
+		c0.183,0.264,0.375,0.521,0.576,0.77c0.038,0.047,0.074,0.096,0.113,0.143c0.231,0.278,0.475,0.544,0.728,0.801
+		c0.062,0.063,0.125,0.124,0.189,0.186c0.245,0.239,0.496,0.471,0.759,0.69c0.023,0.02,0.045,0.041,0.069,0.06
+		c0.282,0.232,0.577,0.449,0.879,0.658c0.073,0.051,0.147,0.1,0.221,0.149C38.427,57.897,38.501,57.951,38.578,58z M45.5,58
+		c-6.065,0-11-4.935-11-11s4.935-11,11-11c0.312,0,0.62,0.021,0.926,0.047c0.291,0.028,0.592,0.066,0.909,0.119l0.443,0.074
+		C52.753,37.293,56.5,41.716,56.5,47C56.5,53.065,51.565,58,45.5,58z" />
+                        <path d="M51.5,46h-5v-5c0-0.552-0.448-1-1-1s-1,0.448-1,1v5h-5c-0.552,0-1,0.448-1,1s0.448,1,1,1h5v5c0,0.552,0.448,1,1,1
+		s1-0.448,1-1v-5h5c0.552,0,1-0.448,1-1S52.052,46,51.5,46z" />
+                      </g>
+                    </svg>
+                  </button></li>
+              </ul>
+            </span>
+
+            <p *ngIf="specialityShow">
+              <tag-input formControlName="speciality" (onAdd)="onaAddSpeciality($event.specialityName)" onlyFromAutocomplete="true"
                 placeholder="Speciality" blinkIfDupe="true">
                 <tag-input-dropdown [appendToBody]="false" [identifyBy]="'specialityName'" [displayBy]="'specialityName'"
                   [showDropdownIfEmpty]="false" placeholder="Choose speciality" [autocompleteItems]="specialityOfObjects">
@@ -74,75 +167,115 @@
             </p>
           </div>
         </div>
-        <div class="row nomarginrow0">
-            <div class="col-md-6">
-              <p class="labelpf">Education:
-              </p>
-            </div>
+
+
+        <div class="row">
+          <div class="col-md-5">
+            <p class="reg_no">Education:</p>
           </div>
-        <div class="col-md-12 nomarginrw">
-            <div class="col-md-12 col-xs-10 nopadding0col1">
-              <ul class="list-inline chipsdata">
-                <li *ngFor="let edulist of doctorpdetail.education">
+          <div class="col-md-7">
+            <span class="">
+              <ul class="list-inline">
+                <li *ngFor="let edulist of selectedEducation;let k=index;" class="specialityChip">
                   <p class="chipsdata">{{edulist}}
+                    <span class="closebtn" (click)="removeEducation(edulist,k)">&times;</span>
                   </p>
                 </li>
+                <li><button class="aDd" (click)="addEducation()">
+                    <svg version="1.1" id="editsvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px" viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
+                      <g>
+                        <path d="M12.5,24h25c0.552,0,1-0.448,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.448-1,1S11.948,24,12.5,24z" />
+                        <path d="M12.5,16h10c0.552,0,1-0.448,1-1s-0.448-1-1-1h-10c-0.552,0-1,0.448-1,1S11.948,16,12.5,16z" />
+                        <path d="M12.5,32h25c0.552,0,1-0.448,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.448-1,1S11.948,32,12.5,32z" />
+                        <path d="M29.5,38h-17c-0.552,0-1,0.448-1,1s0.448,1,1,1h17c0.552,0,1-0.448,1-1S30.052,38,29.5,38z" />
+                        <path d="M26.5,46h-14c-0.552,0-1,0.448-1,1s0.448,1,1,1h14c0.552,0,1-0.448,1-1S27.052,46,26.5,46z" />
+                        <path d="M48.5,34.363V14.586L33.914,0H1.5v60h44c7.168,0,13-5.832,13-13C58.5,40.866,54.224,35.723,48.5,34.363z M34.5,3.414
+  L45.086,14H34.5V3.414z M38.578,58H3.5V2h29v14h14v18.044C46.158,34.015,45.826,34,45.5,34c-7.168,0-13,5.832-13,13
+  c0,0.399,0.025,0.792,0.06,1.183c0.008,0.091,0.017,0.181,0.027,0.272c0.043,0.382,0.098,0.76,0.173,1.131
+  c0.009,0.044,0.021,0.087,0.03,0.131c0.072,0.338,0.159,0.67,0.257,0.998c0.025,0.082,0.048,0.165,0.074,0.246
+  c0.113,0.352,0.239,0.698,0.38,1.037c0.027,0.064,0.057,0.126,0.084,0.189c0.129,0.296,0.269,0.585,0.419,0.869
+  c0.036,0.068,0.07,0.137,0.107,0.205c0.175,0.317,0.363,0.626,0.564,0.927c0.046,0.069,0.094,0.135,0.141,0.203
+  c0.183,0.264,0.375,0.521,0.576,0.77c0.038,0.047,0.074,0.096,0.113,0.143c0.231,0.278,0.475,0.544,0.728,0.801
+  c0.062,0.063,0.125,0.124,0.189,0.186c0.245,0.239,0.496,0.471,0.759,0.69c0.023,0.02,0.045,0.041,0.069,0.06
+  c0.282,0.232,0.577,0.449,0.879,0.658c0.073,0.051,0.147,0.1,0.221,0.149C38.427,57.897,38.501,57.951,38.578,58z M45.5,58
+  c-6.065,0-11-4.935-11-11s4.935-11,11-11c0.312,0,0.62,0.021,0.926,0.047c0.291,0.028,0.592,0.066,0.909,0.119l0.443,0.074
+  C52.753,37.293,56.5,41.716,56.5,47C56.5,53.065,51.565,58,45.5,58z" />
+                        <path d="M51.5,46h-5v-5c0-0.552-0.448-1-1-1s-1,0.448-1,1v5h-5c-0.552,0-1,0.448-1,1s0.448,1,1,1h5v5c0,0.552,0.448,1,1,1
+  s1-0.448,1-1v-5h5c0.552,0,1-0.448,1-1S52.052,46,51.5,46z" />
+                      </g>
+                    </svg>
+                  </button></li>
               </ul>
-              <p></p>
-              <p>
-                  <tag-input formControlName="education" (onAdd)="onAddEducation($event)" onlyFromAutocomplete="true"
-                  blinkIfDupe="true" placeholder="Education">
-                  <tag-input-dropdown [appendToBody]="false" [identifyBy]="'educationName'" [displayBy]="'educationName'"
-                    [showDropdownIfEmpty]="false" placeholder="Choose education" [autocompleteItems]="educationOfObjects">
-                  </tag-input-dropdown>
-                </tag-input>
-              </p>
-            </div>
+            </span>
+
+            <p *ngIf="educationShow">
+              <tag-input formControlName="education" (onAdd)="onAddEducation($event.educationName)" onlyFromAutocomplete="true"
+                blinkIfDupe="true" placeholder="Education">
+                <tag-input-dropdown [appendToBody]="false" [identifyBy]="'educationName'" [displayBy]="'educationName'"
+                  [showDropdownIfEmpty]="false" placeholder="Choose education" [autocompleteItems]="educationOfObjects">
+                </tag-input-dropdown>
+              </tag-input>
+            </p>
           </div>
-          <div class="row nomarginrow0">
-              <div class="col-md-6">
-                <p class="labelpf">Language:
-                </p>
-              </div>
-            </div>
-          <div class="col-md-12 nomarginrw">
-              <div class="col-md-12 col-xs-10 nopadding0col1">
-                <ul class="list-inline chipsdata">
-                  <li *ngFor="let langlist of doctorpdetail.language">
-                    <p class="chipsdata">{{langlist}}
-                    </p>
-                  </li>
-                </ul>
-                <p></p>
-                <p>
-                    <tag-input  formControlName="language" (onAdd)="onAddLanguage($event)"
-                    onlyFromAutocomplete="true" blinkIfDupe="true" placeholder="Language">
-                    <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
-                      [showDropdownIfEmpty]="false" placeholder="Choose language" [autocompleteItems]="languageOfObjects">
-                    </tag-input-dropdown>
-                  </tag-input>
-                </p>
-              </div>
-            </div>
-
-
-        <div class="input-field col-md-12 speciaity authority">
-          <p class="labelpf">Issuing Authority:
-          </p>
-          <p class="locationphone">{{doctorpdetail.issuingAuthority}}</p>
         </div>
 
+        <div class="row">
+          <div class="col-md-5">
+            <p class="reg_no">Language:</p>
+          </div>
+          <div class="col-md-7">
+            <span class="">
+              <ul class="list-inline">
+                <li *ngFor="let langlist of selectedLanguage;let j=index" class="specialityChip">
+                  <p class="chipsdata">{{langlist}}
+                    <span class="closebtn" (click)="removeLanguage(langlist,j)">&times;</span>
+                  </p>
+                </li>
+                <li><button class="aDd" (click)="addLanguage()">
+                    <svg version="1.1" id="editsvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px" viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
+                      <g>
+                        <path d="M12.5,24h25c0.552,0,1-0.448,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.448-1,1S11.948,24,12.5,24z" />
+                        <path d="M12.5,16h10c0.552,0,1-0.448,1-1s-0.448-1-1-1h-10c-0.552,0-1,0.448-1,1S11.948,16,12.5,16z" />
+                        <path d="M12.5,32h25c0.552,0,1-0.448,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.448-1,1S11.948,32,12.5,32z" />
+                        <path d="M29.5,38h-17c-0.552,0-1,0.448-1,1s0.448,1,1,1h17c0.552,0,1-0.448,1-1S30.052,38,29.5,38z" />
+                        <path d="M26.5,46h-14c-0.552,0-1,0.448-1,1s0.448,1,1,1h14c0.552,0,1-0.448,1-1S27.052,46,26.5,46z" />
+                        <path d="M48.5,34.363V14.586L33.914,0H1.5v60h44c7.168,0,13-5.832,13-13C58.5,40.866,54.224,35.723,48.5,34.363z M34.5,3.414
+  L45.086,14H34.5V3.414z M38.578,58H3.5V2h29v14h14v18.044C46.158,34.015,45.826,34,45.5,34c-7.168,0-13,5.832-13,13
+  c0,0.399,0.025,0.792,0.06,1.183c0.008,0.091,0.017,0.181,0.027,0.272c0.043,0.382,0.098,0.76,0.173,1.131
+  c0.009,0.044,0.021,0.087,0.03,0.131c0.072,0.338,0.159,0.67,0.257,0.998c0.025,0.082,0.048,0.165,0.074,0.246
+  c0.113,0.352,0.239,0.698,0.38,1.037c0.027,0.064,0.057,0.126,0.084,0.189c0.129,0.296,0.269,0.585,0.419,0.869
+  c0.036,0.068,0.07,0.137,0.107,0.205c0.175,0.317,0.363,0.626,0.564,0.927c0.046,0.069,0.094,0.135,0.141,0.203
+  c0.183,0.264,0.375,0.521,0.576,0.77c0.038,0.047,0.074,0.096,0.113,0.143c0.231,0.278,0.475,0.544,0.728,0.801
+  c0.062,0.063,0.125,0.124,0.189,0.186c0.245,0.239,0.496,0.471,0.759,0.69c0.023,0.02,0.045,0.041,0.069,0.06
+  c0.282,0.232,0.577,0.449,0.879,0.658c0.073,0.051,0.147,0.1,0.221,0.149C38.427,57.897,38.501,57.951,38.578,58z M45.5,58
+  c-6.065,0-11-4.935-11-11s4.935-11,11-11c0.312,0,0.62,0.021,0.926,0.047c0.291,0.028,0.592,0.066,0.909,0.119l0.443,0.074
+  C52.753,37.293,56.5,41.716,56.5,47C56.5,53.065,51.565,58,45.5,58z" />
+                        <path d="M51.5,46h-5v-5c0-0.552-0.448-1-1-1s-1,0.448-1,1v5h-5c-0.552,0-1,0.448-1,1s0.448,1,1,1h5v5c0,0.552,0.448,1,1,1
+  s1-0.448,1-1v-5h5c0.552,0,1-0.448,1-1S52.052,46,51.5,46z" />
+                      </g>
+                    </svg>
+                  </button></li>
+              </ul>
+            </span>
 
-        <div class="input-field col-md-12 speciaity locatn">
-          <p class="labelpf">Practicing Since:
-          </p>
-          <p class="locationphone">{{doctorpdetail.practicingSince}}</p>
+            <p *ngIf="languageShow">
+              <tag-input formControlName="language" (onAdd)="onAddLanguage($event.langName)" onlyFromAutocomplete="true"
+                blinkIfDupe="true" placeholder="Language">
+                <tag-input-dropdown [appendToBody]="false" [identifyBy]="'langName'" [displayBy]="'langName'"
+                  [showDropdownIfEmpty]="false" placeholder="Choose language" [autocompleteItems]="languageOfObjects">
+                </tag-input-dropdown>
+              </tag-input>
+            </p>
+            <!-- <input id="first_name" id="pac-input" type="text" *ngIf="languageShow" formControlName="email"> -->
+          </div>
         </div>
       </form>
       <!-- </form> -->
       <p class="lastbtn">
         <button type="button" class="btn btn-default" (click)="updateDoctorProfile(doctorpdetail)">Save</button>
-        <button type="button" class="cancelbtn">Cancel</button>
+        <button type="button" class="cancelbtn" (click)="cancelForm()">Cancel</button>
       </p>
 
     </div>

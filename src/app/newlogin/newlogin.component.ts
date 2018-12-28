@@ -3,8 +3,9 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { LoginService } from '../mefyservice/login.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../mefyservice/shared.service';
-
+import {ProfileService} from '../mefyservice/profile.service';
 import io from 'socket.io-client';
+import { SocketsService } from '../mefyservice/sockets.service';
 @Component({
   selector: 'app-newlogin',
   templateUrl: './newlogin.component.html',
@@ -28,13 +29,14 @@ export class NewloginComponent implements OnInit {
   allUserList: any = []
   public scannerdata: any = "socket.id";
   public mask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
-
+// socket:any;
   public socket = io('http://ec2-13-232-207-92.ap-south-1.compute.amazonaws.com:5023');
   public splitarr: any =[];
   myarr: any;
   uid: any;
-  constructor(private formBuilder: FormBuilder, public loginService: LoginService, private router: Router,private sharedServices:SharedService) {
-    this.scanData();
+  constructor(private formBuilder: FormBuilder, public loginService: LoginService, private router: Router,private sharedServices:SharedService,
+    private SocketService:SocketsService,private profileService:ProfileService) {
+    // this.scanData();
     // this.myAngularxQrCode = this.scannerdata;
     this.loginFormErrors = {
       phoneNumber: {},
@@ -46,7 +48,7 @@ export class NewloginComponent implements OnInit {
   scanData() {
     let _base = this;
     _base.socket.on('connect', function () {
-      console.log("connect", _base.socket.id);
+      console.log("connect",_base.socket, _base.socket.id);
       _base.scannerdata = _base.socket.id;
       console.log(_base.scannerdata);
     });
@@ -59,7 +61,10 @@ export class NewloginComponent implements OnInit {
       console.log("connection closed");
     });
   }
+  
   ngOnInit() {
+// console.log('njfhjjg',this.socket);
+
     this.loginForm = this.createLoginForm()
     this.loginForm.valueChanges.subscribe(() => {
       this.onLoginFormValuesChanged();
@@ -156,7 +161,6 @@ export class NewloginComponent implements OnInit {
           }
           console.log('data',notifydata)
         this.sharedServices.createNotification(notifydata);
-          this.router.navigate(['/register'])
         }
       },
         err => {
@@ -174,6 +178,7 @@ export class NewloginComponent implements OnInit {
     }
     else {
       this.submitted = true
+      this.loader = false;
     }
   }
   /************************VERIFY OTP**************************/
@@ -189,17 +194,33 @@ export class NewloginComponent implements OnInit {
       this.loginService.verifyOtp(verficationData).subscribe(value => {
         console.log('result', value)
         let result:any={}
-        result=value
+        result=value 
+        if(result.result.message==" Otp verification failed"){
+          this.loader = false;
+    let notifydata = {
+    type: 'error',
+    title: 'Otp verification failed!'
+    }
+     this.sharedServices.createNotification(notifydata);
+        }else{
         localStorage.setItem('doctorId',result.result.result.doctorId)
         this.loader = false;
-        this.router.navigate(['/dashboard/main'])
         console.log("userid",this.splitarr)
         this.userarr=result.result.result.userId;
         this.myarr=this.userarr.split("#")[1];
         console.log('id',this.myarr)
         this.uid=this.myarr;
         console.log('y',this.uid)
-        localStorage.setItem('userId',this.uid)  
+        localStorage.setItem('userId',this.uid);
+        // this.SocketService.connect();
+        console.log('socket id',this.socket.id);
+        localStorage.setItem('socketId',this.socket.id);
+        this.profileService.updateDetail(localStorage.getItem('userId'),{socketId:this.socket.id}).subscribe(data => {
+          console.log('socket id updated',data)
+        })
+        this.router.navigate(['/dashboard/main'])
+
+        }
       },
         err => {
           this.loader = false;

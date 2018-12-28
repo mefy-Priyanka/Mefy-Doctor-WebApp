@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DoctorPrescriptionService } from '../../../meme-services/doctor-prescription.service';
+import { PrescriptionService } from '../../../mefyservice/prescription.service';
 import { SharedService } from '../../../mefyservice/shared.service';
-// import { Router } from '@angular/router';
-import { RouterLink, ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { AppointmentsService } from '../../../mefyservice/appointments.service';
+
+import { RouterLink, ActivatedRoute, Router, ActivatedRouteSnapshot, Params } from '@angular/router';
 @Component({
   selector: 'app-diagnosis',
   templateUrl: './diagnosis.component.html',
@@ -10,96 +11,132 @@ import { RouterLink, ActivatedRoute, Router, ActivatedRouteSnapshot } from '@ang
 })
 export class DiagnosisComponent implements OnInit {
 
-  prescriptionList: any;
+  public diagnosisData: any = [];
+  public suggestionData: any = [];
+  public medicareData: any = [];
+  public instructionData: any = [];
+  public lifeStyleData: any = [];
+  public followUpData: any = [];
+  public individualPrescriptionList: any = [];
+  public loader: boolean = false;
+  public hidePrescribeButton: boolean = false;
+  public currentURL = '';
+  public comingIndividualId: any
+  public storeIndividualId: any;
+  public individualId: any;
+  public appointmentId: any;
+  /*****OLD */
   provisionalData: any = [];
   recommendeData: any = [];
   medicalData: any = [];
   specificData: any = [];
   lifestyleData: any = [];
   adviseData: any = [];
-  prescriptionId: any;
-  medicineData: any;
-  pathName:any;
-  currentURL='';
-  hidePrescribeButton:boolean=false;
-  showEdit : boolean =false;
-  selected:any;
-  show:boolean = false;
-  select:any;
-  callerData: any = {};
-  hideVideo:any;
-  constructor(  private route: ActivatedRoute,private ePrescriptionService: DoctorPrescriptionService, private sharedService: SharedService, private router: Router) {
 
-    // this.prescriptionId = localStorage.getItem('prescriptionId');
 
-    this.sharedService.prescribeInfo.subscribe(data => {
-      if (data == true) {
-        this.getEprescription();
-      }
-    });
 
-    // this.pathName = (route.snapshot.url)[0].path;
-    // console.log(this.pathName);
-    // this.sharedService.setPath(this.pathName);
 
-    this.currentURL = window.location.pathname; 
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private prescriptionService: PrescriptionService, private sharedService: SharedService, private appointmentService: AppointmentsService) {
+
+
+    /*GET CURRENT URL, send url path name to change navbar colour*/
+    this.currentURL = window.location.pathname;
     console.log(this.currentURL);
     this.sharedService.setPath(this.currentURL);
 
-    // data from calling
-    this.route.queryParams.subscribe(param => {
-      
-      if(Object.keys(param).length!=0){
-       
-        this.callerData.callerId = param['callerId'];
+    /***************GET DIAGNOSIS DATA *****************/
+    this.sharedService.diagnosisdata.subscribe(data => {
+      if (data.length != 0 && Object.keys(data).length != 0) {
+        this.hidePrescribeButton = true;
+        this.diagnosisData.push(data)
       }
-     
+      console.log('diagnosisdata at diagnosis', this.diagnosisData)
     })
 
-
-    //clinic visit prescription
-    this.sharedService.appointmentType.subscribe(data => {
-      
-      if (Object.keys(data).length != 0) {
-        
-        this.callerData.callerId = data.individualId;
-        this.hideVideo=true;
-       
+    /***************GET SUGGESTION TYPE DATA *****************/
+    this.sharedService.suggestionData.subscribe(data => {
+      if (data.length != 0 && Object.keys(data).length != 0) {
+        this.hidePrescribeButton = true;
+        this.suggestionData.push(data)
       }
-      
+      console.log('suggestionData at diagnosis ', this.suggestionData)
     })
+
+    /***************GET MEDICARE DATA *****************/
+    this.sharedService.medicinedata.subscribe(data => {
+      if (data.length != 0 && Object.keys(data).length != 0) {
+        this.hidePrescribeButton = true;
+        this.medicareData.push(data)
+      }
+      console.log('medicinedata at diagnosis', this.medicareData)
+    })
+    /***************GET INSTRUCTION DATA *****************/
+    this.sharedService.instructionData.subscribe(data => {
+      if (data.length != 0 && Object.keys(data).length != 0) {
+        this.hidePrescribeButton = true;
+        this.instructionData.push(data)
+      }
+      console.log('instructionData at diagnosis', this.instructionData)
+    })
+    /***************GET LIFESTYLE DATA *****************/
+    this.sharedService.lifeStyleData.subscribe(data => {
+      if (data.length != 0 && Object.keys(data).length != 0) {
+        this.hidePrescribeButton = true;
+        this.lifeStyleData.push(data)
+      }
+      console.log('lifeStyleData at diagnosis', this.lifeStyleData)
+    })
+    /***************GET FOLLOWUPTYPE DATA *****************/
+    this.sharedService.followUpData.subscribe(data => {
+      if (data.length != 0 && Object.keys(data).length != 0) {
+        this.hidePrescribeButton = true;
+        this.followUpData.push(data);
+      }
+      console.log('followUpData at diagnosis', this.followUpData)
+    })
+    /************GET INDIVIDUAL ID FROM URL*********************** */
+    this.activatedRoute.params.subscribe((params: Params) => {
+      if (Object.keys(params).length != 0) {
+        this.comingIndividualId = params['individualId']
+        console.log('this.incomingIndividualId', this.comingIndividualId)
+        this.sharedService.storeIndividual(this.comingIndividualId)/*STORE INDIVIDUALID*/
+      }
+
+    });
+    /************GET APPOINTMENT ID FROM URL*********************** */
+    this.activatedRoute.params.subscribe((params: Params) => {
+      if (Object.keys(params).length != 0) {
+        this.appointmentId = params['appointmentId']
+        console.log('this.appointmentId', this.appointmentId)
+        this.sharedService.storeAppointment(this.appointmentId) /*STORE APPOINTMENTID*/
+      }
+
+    });
+
   }
-
   ngOnInit() {
-    if (!localStorage.getItem('prescriptionId')) {
-      this.getPrescriptionID();
-    }
+    this.getPrescriptionByIndividualId();
 
-    this.getEprescription();
   }
 
-  // get prescription
-  getEprescription() {
-
-    if (localStorage.getItem('prescriptionId')) {
-      this.ePrescriptionService.getPrescription(localStorage.getItem('prescriptionId'))
-        .subscribe(result => {
-          this.prescriptionList=result.result;
-          console.log(this.prescriptionList)//prescription list
-          if(this.prescriptionList!=0)
-          // this.hidePrescribeButton=true
-          console.log('prescription list', result);
-          this.provisionalData = result.result.diagnosisId;
-          this.recommendeData = result.result.recommendedId;
-          this.medicalData = result.result.medicineId;
-          this.specificData = result.result.specificInstructionId;
-          this.lifestyleData = result.result.lifeStyleId;
-          this.adviseData = result.result.adviceId;
-          console.log(this.adviseData);
-        }, err => {
-
-        });
-    }
+  /*************** GET PRESCRIPTION BT INDIVIDUAL ID*******************/
+  getPrescriptionByIndividualId() {
+    this.loader = true;
+    this.sharedService.storeIndividualId.subscribe(data => {
+      console.log('incomingIndividualId', data)
+      this.individualId = data /*GET INDIVIDUALID*/
+    })
+    this.prescriptionService.getPrescriptionByIndividualId(this.individualId).subscribe(data => {
+      let result: any = {}
+      result = data
+      this.loader = false
+      this.individualPrescriptionList = result
+      console.log('individualPrescriptionList', this.individualPrescriptionList)
+    }, err => {
+      this.loader = false
+      console.log(err)
+    })
   }
 
   // edit diagnosis form
@@ -107,79 +144,98 @@ export class DiagnosisComponent implements OnInit {
     this.router.navigate(['dashboard/consultnew/diagnosisform', id]);
   }
   //edit Instruction form
-  editInstructionForm(id)
-  {
-    this.router.navigate(['dashboard/consultnew/instruction',id]);
-    
+  editInstructionForm(id) {
+    this.router.navigate(['dashboard/consultnew/instruction', id]);
+
   }
   //create prescription id
 
   // edit lifeStyle form
-  editLifeStyle(id){
-    this.router.navigate(['dashboard/consultnew/lifestyle',id]);
+  editLifeStyle(id) {
+    this.router.navigate(['dashboard/consultnew/lifestyle', id]);
   }
 
-   // edit suggest form
-   editSuggest(id){
-    this.router.navigate(['dashboard/consultnew/suggest',id]);
+  // edit suggest form
+  editSuggest(id) {
+    this.router.navigate(['dashboard/consultnew/suggest', id]);
   }
 
-    // edit suggest form
-    editFollowUp(id){
-      this.router.navigate(['dashboard/consultnew/followup',id]);
-    }
- // edit medicine form
- editMedicine(id){
-  this.router.navigate(['dashboard/consultnew/medicare',id]);
-}
+  // edit suggest form
+  editFollowUp(id) {
+    this.router.navigate(['dashboard/consultnew/followup', id]);
+  }
+  // edit medicine form
+  editMedicine(id) {
+    this.router.navigate(['dashboard/consultnew/medicare', id]);
+  }
 
-  // create prescriptionid
-  getPrescriptionID() {
 
-    let prescriptionData = {
-      adviceId: [],
-      medicineId: [],
-      lifeStyleId: [],
-      diagnosisId: [],
-      specificInstructionId: [],
-      recommendedId: [],
-      doctorId: localStorage.getItem('loginId'),
-      individualId: this.callerData.callerId
-    }
 
-    this.ePrescriptionService.createPrescription(prescriptionData)
-      .subscribe(result => {
-        
-        console.log('prescription id created', result);
-        this.prescriptionId = result.member._id;
-        // this.sharedService.prescriptionId(result.member._id);
-        localStorage.setItem('prescriptionId', this.prescriptionId)
+  // hide & show on click
+  followUpEdit(id, i) {
+  }
+
+  MedicineEdit(id, j) {
+  }
+  createPrescription() {
+    this.loader = true
+    if (this.diagnosisData.length != 0 || this.lifeStyleData.length != 0 || this.followUpData.length != 0 || this.instructionData.length != 0 || this.suggestionData.length != 0 || this.medicareData.length != 1) {
+      console.log(this.diagnosisData.length, this.diagnosisData)
+      let prescriptionData = {
+        doctorId: localStorage.getItem('doctorId'),
+        individualId: this.individualId,
+        medicine: this.medicareData,
+        diagnosis: this.diagnosisData,
+        instruction: this.instructionData,
+        recommended: this.suggestionData,
+        lifestyle: this.lifeStyleData,
+        advice: this.followUpData
+      }
+      console.log('prescriptionData', prescriptionData)
+      this.prescriptionService.createPrescription(prescriptionData).subscribe(data => {
+        this.changedstatus();
+        this.loader = false
+        this.hidePrescribeButton = false;
+        console.log('prescription', data)
+        let notifydata = {
+          type: 'success',
+          title: 'Prescription Created Sucessfully!'
+        }
+        this.sharedService.createNotification(notifydata);
       }, err => {
-
-      });
+        let notifydata = {
+          type: 'error',
+          title: 'Something Went Wrong!'
+        }
+        this.sharedService.createNotification(notifydata);
+        this.loader = false
+        console.log(err)
+      })
+    }
+    else {
+      this.loader = false;
+      let notifydata = {
+        type: 'error',
+        title: 'Something Went Wrong!'
+      }
+      this.sharedService.createNotification(notifydata);
+    }
   }
-
-   // hide & show on click
-   followUpEdit(id, i) {
-    this.selected = i;
-    // this.showEdit = true;
-    if (this.showEdit == true) {
-      this.showEdit = !this.showEdit;
+  /*************CHANGE THE STATUS OF APPOINTMENT************************/
+  changedstatus() {
+    this.sharedService.storeAppointmentId.subscribe(data => {
+      console.log('incomingAppointmentId', data)
+      this.appointmentId = data /*GET APPOINTMENTID*/
+    })
+    let data = {
+      appointmentId: this.appointmentId,
+      status: 'Completed'
     }
-    else if (this.showEdit == false) {
-      this.showEdit = !this.showEdit;
-    }
-  }
-
-  MedicineEdit(id,j){
-   
-    this.select = j;
-    // this.showEdit = true;
-    if (this.show == true) {
-      this.show = !this.show;
-    }
-    else if (this.show == false) {
-      this.show = !this.show;
-    } 
+    this.appointmentService.changeAppointmentStatus(data).subscribe(data => {
+      console.log(data)
+    },
+    err=>{
+      console.log(err)
+    })
   }
 }

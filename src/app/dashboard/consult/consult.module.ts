@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule ,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes, RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipeModule } from "ngx-filter-pipe";
 import { TextMaskModule } from "angular2-text-mask";
+import { TagInputModule } from 'ngx-chips';
 
 import { VideoComponent } from './video/video.component';
 import { ConsultComponent } from './consult.component';
@@ -15,7 +16,7 @@ import { SuggestComponent } from './suggest/suggest.component';
 import { InstructionComponent } from './instruction/instruction.component';
 import { LifestyleComponent } from './lifestyle/lifestyle.component';
 import { FollowUpComponent } from './follow-up/follow-up.component';
-import { Ng2CompleterModule } from "ng2-completer";
+// import { Ng2CompleterModule } from "ng2-completer";
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'diagnosis', pathMatch: 'full' },
       { path: 'diagnosis', component: DiagnosisComponent },
+      { path: 'diagnosis/:individualId/:appointmentId', component: DiagnosisComponent },
       { path: 'bill', component: BillsComponent },
       { path: 'diagnosisform', component: DiagnosisFormComponent },
       { path: 'diagnosisform/:id', component: DiagnosisFormComponent },
@@ -47,12 +49,14 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng2CompleterModule,
+    // Ng2CompleterModule,
+    TagInputModule,
     RouterModule.forChild(routes),
     FilterPipeModule,
     TextMaskModule,
     FilterPipeModule
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [ConsultComponent,VideoComponent,DiagnosisComponent, BillsComponent, DiagnosisFormComponent, MedicineComponent, SuggestComponent, InstructionComponent, LifestyleComponent, FollowUpComponent]
 })
 export class ConsultModule { }
