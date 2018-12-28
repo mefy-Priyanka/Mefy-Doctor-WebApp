@@ -1,6 +1,7 @@
 <p class="provisionalc21">Specific Instructions</p>
-        <div class="card cardabc custom-card">
-            <!-- <button class="crossbtnmed">
+<form [formGroup]="instructionForm" (keydown)="keyDownFunction($event)" novalidate>
+  <div class="card cardabc custom-card" formArrayName="advice" *ngFor="let form of instructionForm.get('advice').controls; let i=index">
+    <!-- <button class="crossbtnmed">
                 <svg version="1.1" id="cancelbtn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                   y="0px" viewBox="0 0 212.982 212.982" style="enable-background:new 0 0 212.982 212.982;" xml:space="preserve">
                   <g id="Close">
@@ -11,37 +12,36 @@
                   </g>
                 </svg>
                 </button>-->
-  <div class="card-body">
-    <!-- /* loader */ -->
-    <div class="loading" *ngIf="loader">
-      <div class="sk-circle">
-        <div class="sk-circle1 sk-child"></div>
-        <div class="sk-circle2 sk-child"></div>
-        <div class="sk-circle3 sk-child"></div>
-        <div class="sk-circle4 sk-child"></div>
-        <div class="sk-circle5 sk-child"></div>
-        <div class="sk-circle6 sk-child"></div>
-        <div class="sk-circle7 sk-child"></div>
-        <div class="sk-circle8 sk-child"></div>
-        <div class="sk-circle9 sk-child"></div>
-        <div class="sk-circle10 sk-child"></div>
-        <div class="sk-circle11 sk-child"></div>
-        <div class="sk-circle12 sk-child"></div>
+    <div class="card-body">
+      <!-- /* loader */ -->
+      <div class="loading" *ngIf="loader">
+        <div class="sk-circle">
+          <div class="sk-circle1 sk-child"></div>
+          <div class="sk-circle2 sk-child"></div>
+          <div class="sk-circle3 sk-child"></div>
+          <div class="sk-circle4 sk-child"></div>
+          <div class="sk-circle5 sk-child"></div>
+          <div class="sk-circle6 sk-child"></div>
+          <div class="sk-circle7 sk-child"></div>
+          <div class="sk-circle8 sk-child"></div>
+          <div class="sk-circle9 sk-child"></div>
+          <div class="sk-circle10 sk-child"></div>
+          <div class="sk-circle11 sk-child"></div>
+          <div class="sk-circle12 sk-child"></div>
+        </div>
+      </div>
+      <!-- /* loader */ -->
+      <div [formGroupName]="i">
+        <div class="text-right" (click)="deleteInstructionForm(i)"><i *ngIf="hideCrossIcon" class="fa fa-remove" style="color:#0bbeae; margin-top: 11px;"></i></div>
+        <input type="text" name="advice" placeholder="Advice" class="validate spacem referdoc" formControlName="advice">
+        <!-- <p class="errormessage" *ngIf="instructionForm.controls.advice.controls.length > 1|| (instructionForm.controls.advice.pristine && submitted)">Please
+              Enter Advice </p> -->
       </div>
     </div>
-    <!-- /* loader */ -->
-    <form [formGroup]="instructionForm"  (keydown)="keyDownFunction($event)" novalidate>
-      <div formArrayName="advice" *ngFor="let form of instructionForm.get('advice').controls; let i=index">
-          <div [formGroupName]="i">
-              <div class="text-right" (click)="deleteInstructionForm(i)"><i  *ngIf="hideCrossIcon" class="fa fa-remove" style="color:#0bbeae; margin-top: 11px;"></i></div>
-            <input type="text" name="advice" placeholder="Advice" class="validate spacem referdoc" formControlName="advice">
-            <!-- <p class="errormessage" *ngIf="instructionForm.controls.advice.controls.length > 1|| (instructionForm.controls.advice.pristine && submitted)">Please
-              Enter Advice </p> -->
-            </div>
-      </div>
-    </form>
   </div>
-</div>
+</form>
+
+
 <div class="row">
   <div class="plus_btn pull-right ng-star-inserted">
     <button class="plus" (click)="AddInstructionForm()">+</button>
