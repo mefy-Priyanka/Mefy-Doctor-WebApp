@@ -13,32 +13,38 @@ export class InstructionComponent implements OnInit {
 
   public instructionForm: FormGroup;
   public instructionFormErrors: any;
+  public instructionFormArray: FormArray;
   public loader: boolean = false
   public submitted: boolean = false;
+  public hideInstructionForm: boolean = true;
+
 
 
   constructor(private router: Router, private ePrescriptionService: DoctorPrescriptionService, private sharedService: SharedService, private socketService: SocketService, private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) {
     this.instructionFormErrors = {
       advice: {}
     };
+
   }
 
   ngOnInit() {
     //form 
+
     this.instructionForm = this.createInstructionForm()
 
     this.instructionForm.valueChanges.subscribe(() => {
       this.onInstructionFormValuesChanged();
     });
-
+     this.AddInstructionForm() ;
   }
-  //crete instruction form
+
+  /******************CREATE INSDTRUCTION FORM ARRAY**********************/
   createInstructionForm() {
     return this.formBuilder.group({
-      advice: ['', Validators.required]
+      advice: this.formBuilder.array([]),
     });
-
   }
+
   onInstructionFormValuesChanged() {
     for (const field in this.instructionFormErrors) {
       if (!this.instructionFormErrors.hasOwnProperty(field)) {
@@ -58,9 +64,11 @@ export class InstructionComponent implements OnInit {
   }
   // create Advice form
   saveInstructionForm() {
-    // this.submitted=true;
-    this.loader=true
+    this.submitted = true;
+    this.loader = true
     if (this.instructionForm.valid) {
+      console.log('fff', this.instructionForm.valid)
+      this.submitted = false;
       let data = {
         advice: this.instructionForm.value.advice
       }
@@ -68,6 +76,7 @@ export class InstructionComponent implements OnInit {
       this.sharedService.createInstructionData(data)
       this.router.navigate(['/dashboard/consultnew/diagnosis']);
       this.instructionForm.reset();
+
     }
     else {
       let notifydata = {
@@ -80,14 +89,28 @@ export class InstructionComponent implements OnInit {
 
   }
 
+  /************************************************ SAVE FORM ON ENTER KEY *********************************************** */
+  keyDownFunction(event) {
+    if (event.keyCode == 13) {
+      this.saveInstructionForm();
+    }
+  }
+  /**************ADD MORE THAN ONE INSTRUCTION FORM**********************/
+  AddInstructionForm() {
+    let control = <FormArray>this.instructionForm.controls.advice;
+    control.push(
+      this.formBuilder.group({
+        advice: ['', Validators.required],
+      })
+    )
+
+  }
   // close Instruction form on close button
   closeInstructionForm() {
     this.instructionForm.reset()
     this.router.navigate(['/dashboard/consultnew/diagnosis']);
 
   }
-
-
 
 
 

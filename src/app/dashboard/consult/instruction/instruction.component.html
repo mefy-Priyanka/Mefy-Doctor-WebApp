@@ -1,6 +1,6 @@
 <p class="provisionalc21">Specific Instructions</p>
-        <div class="card cardabc custom-card">
-            <!-- <button class="crossbtnmed">
+<div class="card cardabc custom-card">
+  <!-- <button class="crossbtnmed">
                 <svg version="1.1" id="cancelbtn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                   y="0px" viewBox="0 0 212.982 212.982" style="enable-background:new 0 0 212.982 212.982;" xml:space="preserve">
                   <g id="Close">
@@ -12,46 +12,48 @@
                 </svg>
                 </button>
           -->
-          <div class="card-body">
-               <!-- /* loader */ -->
-          <div class="loading" *ngIf="loader">
-              <div class="sk-circle">
-                <div class="sk-circle1 sk-child"></div>
-                <div class="sk-circle2 sk-child"></div>
-                <div class="sk-circle3 sk-child"></div>
-                <div class="sk-circle4 sk-child"></div>
-                <div class="sk-circle5 sk-child"></div>
-                <div class="sk-circle6 sk-child"></div>
-                <div class="sk-circle7 sk-child"></div>
-                <div class="sk-circle8 sk-child"></div>
-                <div class="sk-circle9 sk-child"></div>
-                <div class="sk-circle10 sk-child"></div>
-                <div class="sk-circle11 sk-child"></div>
-                <div class="sk-circle12 sk-child"></div>
-              </div>
+  <div class="card-body">
+    <!-- /* loader */ -->
+    <div class="loading" *ngIf="loader">
+      <div class="sk-circle">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
+      </div>
+    </div>
+    <!-- /* loader */ -->
+    <form [formGroup]="instructionForm"  (keydown)="keyDownFunction($event)" novalidate>
+      <div formArrayName="advice" *ngFor="let form of instructionForm.get('advice').controls; let i=index">
+          <div [formGroupName]="i">
+            <input type="text" name="advice" placeholder="Advice" class="validate spacem referdoc" formControlName="advice">
+            <!-- <p class="errormessage" *ngIf="instructionForm.controls.advice.controls.length > 1|| (instructionForm.controls.advice.pristine && submitted)">Please
+              Enter Advice </p> -->
             </div>
-            <!-- /* loader */ -->
-            <form [formGroup]="instructionForm" novalidate>
-              <!-- <p class="error_message2">{{message}}</p> -->
-              <input type="text" name="fname" placeholder="Advice" class="validate spacem referdoc" formControlName="advice">
-              <p class="errormessage" *ngIf="instructionFormErrors.advice.required">Please Enter Advice </p>
-            </form>
-
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="plus_btn pull-right ng-star-inserted">
-            <button class="plus">+</button>
-          </div>
-        </div>
-        <div class="text-center high" >
-          <button class="prescribebtn" (click)="saveInstructionForm()" >Save</button>
-          <!-- <button class="prescribebtn" *ngIf="hideSavePlusButton" (click)="savePlus()">Save +</button> -->
-          <!-- <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteSpecificForm()">Delete</button> -->
-          <button class="cancelbtn" (click)="closeInstructionForm()">Cancel</button>
-        </div>
-        <!-- <div class="row" *ngIf="showAddButton">
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="plus_btn pull-right ng-star-inserted">
+    <button class="plus" (click)="AddInstructionForm()">+</button>
+  </div>
+</div>
+<div class="text-center high">
+  <button class="prescribebtn" (click)="saveInstructionForm()">Save</button>
+  <!-- <button class="prescribebtn" *ngIf="hideSavePlusButton" (click)="savePlus()">Save +</button> -->
+  <!-- <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteSpecificForm()">Delete</button> -->
+  <button class="cancelbtn" (click)="closeInstructionForm()">Cancel</button>
+</div>
+<!-- <div class="row" *ngIf="showAddButton">
             <div class="plus_btn pull-right" >
               <button class="plus" (click)="addButton()">+</button>
             </div>
