@@ -10,10 +10,10 @@ import { PrescriptionService } from '../../../mefyservice/prescription.service';
 @Component({
   selector: 'app-video',
   templateUrl: './video.component.html',
-  styleUrls: ['./video.component.css'],
-  host: {
-    '(document:click)': 'handleClick($event)',
-  }
+  styleUrls: ['./video.component.css']
+  // host: {
+  //   '(document:click)': 'handleClick($event)',
+  // }
 })
 export class VideoComponent implements OnInit {
   hideVideo: boolean = false;

@@ -15,11 +15,15 @@
          <div class="card-body">
             <form  >
                 <div >
-                    <div [formGroup]="lifeStyleForm" novalidate>
+                    <div [formGroup]="lifeStyleForm" (keydown)="keyDownFunction($event)" novalidate>
               <p class="error_message2">{{messageLifeStyle}}</p>
               <span>{{message}}</span>
+              <div formArrayName="advice" *ngFor="let form of lifeStyleForm.get('advice').controls; let i=index">
+                <div [formGroupName]="i">
               <input type="text" name="fname" placeholder="Advice" class="validate spacem" class="referdoc"   formControlName="advice">
-              <p class="errormessage" *ngIf="lifeStyleFormErrors.advice.required"> Please Enter Advice </p>
+              <!-- <p class="errormessage" *ngIf="lifeStyleFormErrors.advice.required"> Please Enter Advice </p> -->
+              </div>
+              </div>
            </div>
            </div>
             </form>
@@ -28,7 +32,7 @@
         </div>
         <div class="row">
           <div class="plus_btn pull-right ng-star-inserted">
-            <button class="plus">+</button>
+            <button class="plus" (click)="addLifeStyleForm()">+</button>
           </div>
         </div>
         <div class="text-center high">

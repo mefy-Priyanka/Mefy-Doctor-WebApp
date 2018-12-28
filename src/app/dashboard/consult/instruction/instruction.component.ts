@@ -13,7 +13,6 @@ export class InstructionComponent implements OnInit {
 
   public instructionForm: FormGroup;
   public instructionFormErrors: any;
-  public instructionFormArray: FormArray;
   public loader: boolean = false
   public submitted: boolean = false;
   public hideInstructionForm: boolean = true;
@@ -41,7 +40,7 @@ export class InstructionComponent implements OnInit {
   /******************CREATE INSDTRUCTION FORM ARRAY**********************/
   createInstructionForm() {
     return this.formBuilder.group({
-      advice: this.formBuilder.array([]),
+      advice: this.formBuilder.array([])
     });
   }
 

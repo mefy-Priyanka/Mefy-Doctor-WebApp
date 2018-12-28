@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators,FormArray } from '@angular/forms';
 import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
 import { DoctorPrescriptionService } from '../../../meme-services/doctor-prescription.service';
 import { SharedService } from '../../../mefyservice/shared.service';
@@ -29,11 +29,12 @@ export class LifestyleComponent implements OnInit {
     this.lifeStyleForm.valueChanges.subscribe(() => {
       this.onLifeStyleFormValuesChanged();
     });
+    this.addLifeStyleForm() ;
   }
 
   createLifeStyleForm() {
     return this.formBuilder.group({
-      advice: ['', Validators.required],
+      advice: this.formBuilder.array([])
     });
   }
 
@@ -83,7 +84,22 @@ export class LifestyleComponent implements OnInit {
       this.loader = false;
     }
   }
+  /************************************************ SAVE FORM ON ENTER KEY *********************************************** */
+  keyDownFunction(event) {
+    if (event.keyCode == 13) {
+      this.createLifeStyle();
+    }
+  }
+ /**************ADD MORE THAN ONE LIFE STYLE  FORM**********************/
+ addLifeStyleForm() {
+  let control = <FormArray>this.lifeStyleForm.controls.advice;
+  control.push(
+    this.formBuilder.group({
+      advice: ['', Validators.required],
+    })
+  )
 
+}
 
 
 
