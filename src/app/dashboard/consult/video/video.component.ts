@@ -164,40 +164,40 @@ console.log('inside if')
 
       }
 
-      // getType(name) {
-      //   // this.filterField.healthRecordType = name;
+      getType(name) {
+        this.filterField.healthRecordType = name;
 
-      // }
+      }
 
 
   //     // hide and show details on click
-  //     hideFilterData() {
-  //       // if (this.hideDetail == true) {
-  //       //   this.hideDetail = !this.hideDetail;
-  //       // }
-  //       // else if (this.hideDetail == false) {
-  //       //   this.hideDetail = !this.hideDetail;
-  //       // }
-  //     }
+      // hideFilterData() {
+      //   if (this.hideDetail == true) {
+      //     this.hideDetail = !this.hideDetail;
+      //   }
+      //   else if (this.hideDetail == false) {
+      //     this.hideDetail = !this.hideDetail;
+      //   }
+      // }
   //     // Detecting Clicks Outside the Component
-  handleClick(event) {
-    // var clickedComponent = event.target;
-    // var inside = false;
-    // do {
-    //     if (clickedComponent === this.elementRef.nativeElement) {
-    //         inside = true;
-    //     }
-    //     clickedComponent = clickedComponent.parentNode;
-    // } while (clickedComponent);
-    // if(inside){
-    //     console.log('inside');
-    // }else{
-    //     console.log('outside');
-    //     if (this.hideDetail == true) {
-    //       this.hideDetail = !this.hideDetail;
-    //     }
-    // }
-  }
+  // handleClick(event) {
+  //   var clickedComponent = event.target;
+  //   var inside = false;
+  //   do {
+  //       if (clickedComponent === this.elementRef.nativeElement) {
+  //           inside = true;
+  //       }
+  //       clickedComponent = clickedComponent.parentNode;
+  //   } while (clickedComponent);
+  //   if(inside){
+  //       console.log('inside');
+  //   }else{
+  //       console.log('outside');
+  //       if (this.hideDetail == true) {
+  //         this.hideDetail = !this.hideDetail;
+  //       }
+  //   }
+  // }
 
 }
 

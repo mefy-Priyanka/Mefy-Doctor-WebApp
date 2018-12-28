@@ -24,7 +24,7 @@ getPrescriptionByIndividualId(individualId){
 
 /*************************************** GET INDIVIDUAL MEDICAL HISTORY *************************************** */
 getIndvMedicalRecords(individualId){
-return this.httpClient.get(APIURL+'individual/getMedicalHistory?individualId='+individualId)
+return this.httpClient.get(APIURL+'individual/getHealthrecords?individualId='+individualId)
 }
 
 /************************************** GET INDIVIDUAL PROFILE DETAIL ********************************************* */

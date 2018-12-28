@@ -34,8 +34,8 @@ button.plus{
     cursor: pointer;
     border: none;
     font-size: 20px;
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     margin-right: 8px;
     color: #fff;
     background: linear-gradient(to bottom, #20de9e, #08b9b1);
@@ -172,18 +172,7 @@ button.plus:hover{
 .plus_btn {
     margin: 2em 1.5em 0 0;
 }
-button.plus {
-    border-radius: 50%;
-    outline: none;
-    cursor: pointer;
-    border: none;
-    font-size: 20px;
-    height: 40px;
-    width: 40px;
-    color: #fff;
-    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.2);
-    background: linear-gradient(to bottom, #20de9e, #08b9b1);
-}
+
 .high {
     padding-bottom: 20px;
     padding-top: 3em;

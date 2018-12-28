@@ -29,8 +29,8 @@ button.plus{
     cursor: pointer;
     border: none;
     font-size: 20px;
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     margin-right: 8px;
     color: #fff;
     background: linear-gradient(to bottom, #20de9e, #08b9b1);
