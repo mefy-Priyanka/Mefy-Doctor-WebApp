@@ -63,7 +63,7 @@ export class NewregistrationComponent implements OnInit {
   public selectedState: any
   public selectedIssueAuthority: any;
   public selectedCity: any;
-  public verficationMessage:any;
+  public verficationMessage: any;
 
 
   constructor(private formBuilder: FormBuilder, private docService: DocregistrationService, private router: Router, private sharedServices: SharedService) {
@@ -84,7 +84,7 @@ export class NewregistrationComponent implements OnInit {
       state: {},
       education: {},
       language: {}
-      
+
 
     };
     /***********STEP 3*************/
@@ -253,44 +253,44 @@ export class NewregistrationComponent implements OnInit {
     });
   }
   firststep() {
-   if (this.step1Form.valid && this.error != 'Invalid DOB') {
-    let data={
-      phoneNumber:this.step1Form.value.phoneNumber
-    }
-    this.docService.numberVerifivcation(data).subscribe(data=>{
-      console.log('numberVerfication',data)
-      let result:any={}
-      result=data
-     this. verficationMessage=result.message
-     console.log(this.verficationMessage)
-     if(this.verficationMessage==="User Already Registered!Please Login"){
-      let notifydata = {
-        type: 'warning',
-        title: 'User already Registered',
-        msg:'from this number'
+    if (this.step1Form.valid && this.error != 'Invalid DOB') {
+      let data = {
+        phoneNumber: this.step1Form.value.phoneNumber
       }
-      this.sharedServices.createNotification(notifydata);
-     }
-  else{
-    console.log(this.step1Form.value)
-    this.firstreg = false;
-    this.secondreg = true;
-    this.thirdreg = false;
-    /******* FOR STYLING ******/
-    this.activeStep1 = false;
-    this.activeStep2 = true;
-    this.activeStep3 = false;
-    this.activeStep4 = false;
-    /****************** */
-  }
-    })  
-    
+      this.docService.numberVerifivcation(data).subscribe(data => {
+        console.log('numberVerfication', data)
+        let result: any = {}
+        result = data
+        this.verficationMessage = result.message
+        console.log(this.verficationMessage)
+        if (this.verficationMessage === "User Already Registered!Please Login") {
+          let notifydata = {
+            type: 'warning',
+            title: 'User already Registered',
+            msg: 'from this number'
+          }
+          this.sharedServices.createNotification(notifydata);
+        }
+        else {
+          console.log(this.step1Form.value)
+          this.firstreg = false;
+          this.secondreg = true;
+          this.thirdreg = false;
+          /******* FOR STYLING ******/
+          this.activeStep1 = false;
+          this.activeStep2 = true;
+          this.activeStep3 = false;
+          this.activeStep4 = false;
+          /****************** */
+        }
+      })
+
     } else {
       let notifydata = {
         type: 'warning',
         title: 'Not Valid',
       }
-      console.log('not valid',this.step1Form.value)
+      console.log('not valid', this.step1Form.value)
       this.sharedServices.createNotification(notifydata);
 
       this.submitted1 = true
@@ -306,12 +306,12 @@ export class NewregistrationComponent implements OnInit {
     }
   }
 
-  secondstep() { 
+  secondstep() {
     this.selectedCity = (<HTMLInputElement>document.getElementById('pac-input')).value
     console.log('selectedCity', this.selectedCity)
     this.step2Form.controls.city.setValue(this.selectedCity);
-   
-    if (this.step2Form.valid ) {
+
+    if (this.step2Form.valid) {
       console.log(this.step2Form.value)
       this.firstreg = false;
       this.secondreg = false;
@@ -322,7 +322,7 @@ export class NewregistrationComponent implements OnInit {
       this.activeStep3 = true;
       this.activeStep4 = false
       /****************** */
-      
+
     } else {
       let notifydata = {
         type: 'warning',
@@ -368,6 +368,7 @@ export class NewregistrationComponent implements OnInit {
     if (this.comparePracticingYear(this.step3Form.value.practicingSince)) {
       if (this.step3Form.valid) {
         console.log(this.step3Form.value)
+        this.preRgistration();
         // this.submitted = false;
         this.firstreg = false;
         this.secondreg = false;
@@ -417,12 +418,12 @@ export class NewregistrationComponent implements OnInit {
     this.activeStep4 = false
     /****************** */
   }
- 
+
   /***********************LANGUAGE ON SELECT IN STEP 2*********/
   onAddLanguage(evt) {
     // console.log(evt);
     this.selectedLanguage.push(evt.value)
-    console.log('selectedLanguage',this.selectedLanguage)
+    console.log('selectedLanguage', this.selectedLanguage)
   }
   /***********************EDUCATION ON SELECT IN STEP 3*********/
   onAddEducation(evt) {
@@ -460,13 +461,13 @@ export class NewregistrationComponent implements OnInit {
   typeaheadNoselectedAuthority(event: boolean): void {
     this.noStateResult = event
   }
-   /********************GET LIST OF LANGUAGE *****************/
-   getLanguageList() {
+  /********************GET LIST OF LANGUAGE *****************/
+  getLanguageList() {
     let data = {
       language: "language"
     }
     this.docService.getLanguageList(data).subscribe(data => {
-      console.log('languagelist',data);
+      console.log('languagelist', data);
       let value: any = {}
       value = data
       this.languageList = value.result.result
@@ -657,7 +658,7 @@ export class NewregistrationComponent implements OnInit {
       }
     }
   }
-  /**********************************DOCTOR"S REGISTRATION PART 1 */
+  /**********************************DOCTOR"S REGISTRATION PART 1 *******************/
   preRgistration() {
     let preRegistrationData = {
       phoneNumber: this.step1Form.value.phoneNumber,
@@ -666,22 +667,19 @@ export class NewregistrationComponent implements OnInit {
     this.docService.preRegistrationApi(preRegistrationData).subscribe(data => {
       console.log('data', data)
       this.loader = false;
-      let result:any={}
-      result=data
-      console.log(result.message)
+      let result: any = {}
+      result = data
       console.log(result.result.message)
-      if(result.result.message=="User already registered"){
-        let notification = {
-          type: 'error',
-          title: 'Phone Number already exists',
+      if (result.result.message == 'OTP sent to registered number') {
+        let notifydata = {
+          type: 'success',
+          title: 'OTP',
+          msg: 'Sent to registered number'
         }
-        this.sharedServices.createNotification(notification);
+        console.log('data', notifydata)
+        this.sharedServices.createNotification(notifydata);
       }
-
-    else  if(result.result.message=='OTP sent to registered number'){
-        this.saveRegistrationForm();
-      }
-      else{
+      else {
         let notifydata = {
           type: 'error',
           title: 'Server Issue!',
@@ -692,11 +690,16 @@ export class NewregistrationComponent implements OnInit {
     },
       err => {
         console.log(err)
+        let notifydata = {
+          type: 'error',
+          title: 'Server Issue!',
+          msg: 'Something Went Wrong',
+        }
+        this.sharedServices.createNotification(notifydata);
       })
 
   }
 
- 
   /********************************** FINAL DOCTOR"S REGISTRATION *********/
   saveRegistrationForm() {
     console.log(this.step4Form.value)
@@ -726,19 +729,19 @@ export class NewregistrationComponent implements OnInit {
         console.log('result', value)
         let result: any = {}
         result = value
-        if(result.result.message=="  Otp verification failed"){
+        if (result.result.message == "  Otp verification failed") {
           this.loader = false;
-    let notifydata = {
-    type: 'error',
-    title: 'Otp verification failed!'
-    }
-     this.sharedServices.createNotification(notifydata);
-        }else{
-        console.log("userrrr", result.result.user.doctorId);
-        localStorage.setItem('doctorId', result.result.user.doctorId)
-        localStorage.setItem('userId', result.result.user.userId)
-        this.loader = false
-        this.router.navigate(['/dashboard/main']);
+          let notifydata = {
+            type: 'error',
+            title: 'Otp verification failed!'
+          }
+          this.sharedServices.createNotification(notifydata);
+        } else {
+          console.log("userrrr", result.result.user.doctorId);
+          localStorage.setItem('doctorId', result.result.user.doctorId)
+          localStorage.setItem('userId', result.result.user.userId)
+          this.loader = false
+          this.router.navigate(['/dashboard/main']);
         }
       },
         err => {
@@ -757,7 +760,7 @@ export class NewregistrationComponent implements OnInit {
       }
       this.sharedServices.createNotification(notifydata);
       this.loader = false;
-      this.submitted4=true
+      this.submitted4 = true
     }
   }
 

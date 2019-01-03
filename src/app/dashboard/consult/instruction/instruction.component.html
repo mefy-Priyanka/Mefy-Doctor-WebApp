@@ -52,7 +52,7 @@
     <button class="plus" (click)="AddInstructionForm()">+</button>
   </div>
 </div>
-<div class="text-center high">
+<div class="text-center high" *ngIf="hideSave">
   <button class="prescribebtn" (click)="saveInstructionForm()">Save</button>
   <!-- <button class="prescribebtn" *ngIf="hideSavePlusButton" (click)="savePlus()">Save +</button> -->
   <!-- <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteSpecificForm()">Delete</button> -->

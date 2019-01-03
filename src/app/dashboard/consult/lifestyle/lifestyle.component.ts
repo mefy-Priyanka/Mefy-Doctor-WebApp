@@ -17,8 +17,9 @@ export class LifestyleComponent implements OnInit {
   public lifeStyleForm: FormGroup;
   public submitted: boolean = false;
   public loader: boolean = false
+  public hideCrossIcon: boolean = false;
+  public hideSave:boolean=true;
   constructor(private sharedService: SharedService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private router: Router, private ePrescriptionService: DoctorPrescriptionService) {
-
     this.lifeStyleFormErrors = {
       advice: {}
     };
@@ -92,15 +93,33 @@ export class LifestyleComponent implements OnInit {
   }
  /**************ADD MORE THAN ONE LIFE STYLE  FORM**********************/
  addLifeStyleForm() {
+  this.hideSave=true
   let control = <FormArray>this.lifeStyleForm.controls.advice;
   control.push(
     this.formBuilder.group({
       advice: ['', Validators.required],
     })
   )
-
+  console.log(control.length)
+  if(control.length>1 && control.length!==1){
+    this.hideCrossIcon=true;
+  }
+  else{
+    this.hideCrossIcon=false;
+  }
 }
-
+ /*****************DELETE INSTRUCTION FORM*************************************/
+ deleteLifeStyleForm(index){
+  let control = <FormArray>this.lifeStyleForm.controls.advice;
+  control.removeAt(index)
+  if(control.length==0){
+    console.log(control.length)
+    this.hideSave=false;
+  }
+  else{
+    this.hideSave=true; 
+  }
+}
 
 
 

@@ -1,7 +1,7 @@
 <p class="provisionalc21">Lifestyle Instructions</p>
-        <div class="card cardabc custom-card">
-            <div class="text-right"><i class="fa fa-remove" id="clsicon"></i></div>
-            <!-- <button class="crossbtnmed">
+<form [formGroup]="lifeStyleForm" (keydown)="keyDownFunction($event)" novalidate>
+  <div class="card cardabc custom-card" formArrayName="advice" *ngFor="let form of lifeStyleForm.get('advice').controls; let i=index">
+    <!-- <button class="crossbtnmed">
                 <svg version="1.1" id="cancelbtn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                   y="0px" viewBox="0 0 212.982 212.982" style="enable-background:new 0 0 212.982 212.982;" xml:space="preserve">
                   <g id="Close">
@@ -12,33 +12,25 @@
                   </g>
                 </svg>
                 </button> -->
-         <div class="card-body">
-            <form  >
-                <div >
-                    <div [formGroup]="lifeStyleForm" (keydown)="keyDownFunction($event)" novalidate>
-              <p class="error_message2">{{messageLifeStyle}}</p>
-              <span>{{message}}</span>
-              <div formArrayName="advice" *ngFor="let form of lifeStyleForm.get('advice').controls; let i=index">
-                <div [formGroupName]="i">
-              <input type="text" name="fname" placeholder="Advice" class="validate spacem" class="referdoc"   formControlName="advice">
-              <!-- <p class="errormessage" *ngIf="lifeStyleFormErrors.advice.required"> Please Enter Advice </p> -->
-              </div>
-              </div>
-           </div>
-           </div>
-            </form>
-
-          </div>
+    <div class="card-body">
+      <p class="error_message2">{{messageLifeStyle}}</p>
+      <span>{{message}}</span>
+        <div [formGroupName]="i">
+          <div class="text-right" (click)="deleteLifeStyleForm(i)"><i *ngIf="hideCrossIcon" class="fa fa-remove" style="color:#0bbeae; margin-top: 11px;"></i></div>
+          <input type="text" name="fname" placeholder="Advice" class="validate spacem" class="referdoc" formControlName="advice">
+          <!-- <p class="errormessage" *ngIf="lifeStyleFormErrors.advice.required"> Please Enter Advice </p> -->
         </div>
-        <div class="row">
-          <div class="plus_btn pull-right ng-star-inserted">
-            <button class="plus" (click)="addLifeStyleForm()">+</button>
-          </div>
-        </div>
-        <div class="text-center high">
-          <button class="prescribebtn" (click)="createLifeStyle()">Save</button>
-          <!-- <button class="prescribebtn" *ngIf="hideSavePlus" (click)="savePlusInstructions()">Save +</button> -->
-          <!-- <button class="prescribebtn"*ngIf="hideDelete"  (click)="deleteLifestyleForm()">Delete</button> -->
-          <button class="cancelbtn" (click)="clearData()">Cancel</button>
-        </div>
-     
+    </div>
+  </div>
+</form>
+<div class="row">
+  <div class="plus_btn pull-right ng-star-inserted">
+    <button class="plus" (click)="addLifeStyleForm()">+</button>
+  </div>
+</div>
+<div class="text-center high" *ngIf="hideSave">
+  <button class="prescribebtn" (click)="createLifeStyle()">Save</button>
+  <!-- <button class="prescribebtn" *ngIf="hideSavePlus" (click)="savePlusInstructions()">Save +</button> -->
+  <!-- <button class="prescribebtn"*ngIf="hideDelete"  (click)="deleteLifestyleForm()">Delete</button> -->
+  <button class="cancelbtn" (click)="clearData()">Cancel</button>
+</div>
