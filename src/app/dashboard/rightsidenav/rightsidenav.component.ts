@@ -12,10 +12,10 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 @Component({
   selector: 'app-rightsidenav',
   templateUrl: './rightsidenav.component.html',
-  styleUrls: ['./rightsidenav.component.css'],
-  host: {
-    '(document:click)': 'handleClick($event)',
-  }
+  styleUrls: ['./rightsidenav.component.css']
+  // host: {
+  //   '(document:click)': 'handleClick($event)',
+  // }
 })
 export class RightsidenavComponent implements OnInit {
 

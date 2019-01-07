@@ -250,7 +250,7 @@
                         class="form-control" (typeaheadNoResults)="typeaheadNoselectedAuthority($event)">
                       <p class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="step3FormErrors.issuingAuthority.required || (step3Form.controls.issuingAuthority.pristine && submitted3)">State can't be empty</p>
                       <input type="button" name="previous" class="previous action-button" (click)="previouslast()" value="Previous" />
-                      <input type="submit" name="submit" class="submit action-button" value="Next" (click)="thirdstep()" />
+                      <input type="submit" name="submit" class="submit action-button" value="Next"  (click)="thirdstep()" />
                     </form>
                   </fieldset>
                   <!-- ****************** END OF FORM 3************ -->
@@ -292,7 +292,7 @@
 
                         </div>
                         <div class="col-md-6 col-xs-6 text-left">
-                          <input type="button" name="next" class="next action-button" (click)="preRgistration()" value="Next" />
+                          <input type="button" name="next" class="next action-button" (click)="saveRegistrationForm()" value="Next" />
                         </div>
                       </div>
                     </form>

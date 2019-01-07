@@ -8,10 +8,10 @@ import { ClinicService } from '../../mefyservice/clinic.service'
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
-  host: {
-    '(document:click)': 'handleClick($event)',
-  }
+  styleUrls: ['./navbar.component.css']
+  // host: {
+  //   '(document:click)': 'handleClick($event)',
+  // }
 })
 export class NavbarComponent implements OnInit {
   public clinicList = [];
@@ -179,24 +179,24 @@ export class NavbarComponent implements OnInit {
   }
 
   // hide search results on clicking outside
-  handleClick(event) {
-    var clickedComponent = event.target;
-    var inside = false;
-    do {
-      if (clickedComponent === this.elementRef.nativeElement) {
-        inside = true;
-      }
-      clickedComponent = clickedComponent.parentNode;
-    } while (clickedComponent);
-    if (inside) {
-      console.log('inside');
-    } else {
-      console.log('outside');
-      if (this.clinicList.length != 0) {
-        this.clinicList = [];
-      }
-    }
-  }
+//   handleClick(event) {
+//     var clickedComponent = event.target;
+//     var inside = false;
+//     do {
+//       if (clickedComponent === this.elementRef.nativeElement) {
+//         inside = true;
+//       }
+//       clickedComponent = clickedComponent.parentNode;
+//     } while (clickedComponent);
+//     if (inside) {
+//       console.log('inside');
+//     } else {
+//       console.log('outside');
+//       if (this.clinicList.length != 0) {
+//         this.clinicList = [];
+//       }
+//     }
+//   }
 }
 
 
