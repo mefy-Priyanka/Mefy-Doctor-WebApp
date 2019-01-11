@@ -51,7 +51,7 @@ export class DiagnosisComponent implements OnInit {
         this.hidePrescribeButton = true;
         this.diagnosisData.push(data)
       }
-      console.log('diagnosisdata at diagnosis', this.diagnosisData)
+      // console.log('diagnosisdata at diagnosis', this.diagnosisData)
     })
 
     /***************GET SUGGESTION TYPE DATA *****************/
@@ -122,7 +122,7 @@ export class DiagnosisComponent implements OnInit {
 
   /*************** GET PRESCRIPTION BT INDIVIDUAL ID*******************/
   getPrescriptionByIndividualId() {
-    this.loader = true;
+    this.loader = false;
     this.sharedService.storeIndividualId.subscribe(data => {
       console.log('incomingIndividualId', data)
       this.individualId = data /*GET INDIVIDUALID*/

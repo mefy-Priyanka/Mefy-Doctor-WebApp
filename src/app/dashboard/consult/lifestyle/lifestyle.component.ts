@@ -13,6 +13,9 @@ import { SharedService } from '../../../mefyservice/shared.service';
   styleUrls: ['./lifestyle.component.css']
 })
 export class LifestyleComponent implements OnInit {
+
+
+
   public lifeStyleFormErrors: any;
   public lifeStyleForm: FormGroup;
   public submitted: boolean = false;
@@ -120,7 +123,6 @@ export class LifestyleComponent implements OnInit {
     this.hideSave=true; 
   }
 }
-
 
 
 }
