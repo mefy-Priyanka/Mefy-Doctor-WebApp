@@ -258,11 +258,10 @@ span.chipsdata {
   .closebtn:hover {
     color: #000;
   }
-  .chipsdata{
-    /* margin: 0; */
-    /* border-bottom: 1px solid rgba(238, 238, 238, 1); */
-    /* margin-top: 10px; */
-  }
+  p.chipsdata {
+    line-height: 31px;
+    padding: 0 5px;
+}
   .chipsdata li{
     padding: 0;
     background: #8e51b7;
@@ -400,4 +399,5 @@ li.specialityChip {
     color: #fff;
     padding: 4px 3px 0px 7px;
     font-size: 12px;
+    margin-bottom: 4px;
 }
