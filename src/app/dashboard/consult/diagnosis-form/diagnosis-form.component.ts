@@ -10,6 +10,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./diagnosis-form.component.css']
 })
 export class DiagnosisFormComponent implements OnInit {
+  // public somearray=[];
   public diagnosisFormErrors: any;
   public diagnosisFormNew: FormGroup;
   public loader: boolean = false
@@ -28,7 +29,13 @@ export class DiagnosisFormComponent implements OnInit {
     });
 
   }
-
+  // add(){
+  //   let temp=[];
+  //   this.somearray.push(temp);
+  // }
+  // console(){
+  //   console.log(this.somearray)
+  // }
   creatediagnosisForm() {
     return this.formBuilder.group({
       diagnosisFor: ['', Validators.required],
