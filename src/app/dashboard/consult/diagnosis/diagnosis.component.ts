@@ -74,8 +74,11 @@ export class DiagnosisComponent implements OnInit {
     /***************GET INSTRUCTION DATA *****************/
     this.sharedService.instructionData.subscribe(data => {
       if (data.length != 0 && Object.keys(data).length != 0) {
+        // console.log('instruction',data)
+
+        // console.log('instruction',data.advice[0])
         this.hidePrescribeButton = true;
-        this.instructionData.push(data)
+        this.instructionData.push(data.advice[0])
       }
       console.log('instructionData at diagnosis', this.instructionData)
     })
@@ -83,13 +86,14 @@ export class DiagnosisComponent implements OnInit {
     this.sharedService.lifeStyleData.subscribe(data => {
       if (data.length != 0 && Object.keys(data).length != 0) {
         this.hidePrescribeButton = true;
-        this.lifeStyleData.push(data)
+        this.lifeStyleData.push(data.advice[0])
       }
       console.log('lifeStyleData at diagnosis', this.lifeStyleData)
     })
     /***************GET FOLLOWUPTYPE DATA *****************/
     this.sharedService.followUpData.subscribe(data => {
       if (data.length != 0 && Object.keys(data).length != 0) {
+        
         this.hidePrescribeButton = true;
         this.followUpData.push(data);
       }
@@ -127,6 +131,7 @@ export class DiagnosisComponent implements OnInit {
       console.log('incomingIndividualId', data)
       this.individualId = data /*GET INDIVIDUALID*/
     })
+    console.log('incomingIndividualId',  this.individualId)
     this.prescriptionService.getPrescriptionByIndividualId(this.individualId).subscribe(data => {
       let result: any = {}
       result = data
@@ -193,6 +198,7 @@ export class DiagnosisComponent implements OnInit {
       }
       console.log('prescriptionData', prescriptionData)
       this.prescriptionService.createPrescription(prescriptionData).subscribe(data => {
+        this.getPrescriptionByIndividualId();
         this.changedstatus();
         this.loader = false
         this.hidePrescribeButton = false;
