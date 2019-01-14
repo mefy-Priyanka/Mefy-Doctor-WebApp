@@ -94,7 +94,7 @@ export class DiagnosisFormComponent implements OnInit {
     this.router.navigate(['/dashboard/consultnew/diagnosis']);
   }
 /*****************DELETE INSTRUCTION FORM*************************************/
-deleteLifeStyleForm(index){
+deleteDiagForm(index){
   this.diaginfo = this.diagnosisFormNew.get('diaginfo') as FormArray;
   this.diaginfo.removeAt(index)
   if(this.diaginfo.length==0){

@@ -17,6 +17,8 @@ export class MedicineComponent implements OnInit {
   public medicineForm: FormGroup;
   public medicineFormErrors: any;
   medicineArray: any = [];
+  medinfo: FormArray;
+  public hideSave:boolean=true;
   public allmedicineName:any=[];
   public medicineOfObjects:any=[];
   public selectedMedicine:any=[]
@@ -39,7 +41,10 @@ export class MedicineComponent implements OnInit {
   }
   ngOnInit() {
     this.getMedicineName();
-    this.medicineForm = this.createmedicineForm();
+    this.medicineForm =this.formBuilder.group({
+      medinfo: this.formBuilder.array([ this.createmedicineForm() ])
+    });
+    //  this.createmedicineForm();
     this.medicineForm.valueChanges.subscribe(() => {
       this.onMedicineFormValuesChanged();
     });
@@ -50,11 +55,10 @@ export class MedicineComponent implements OnInit {
 
   createmedicineForm() {
     return this.formBuilder.group({
-      medicineName: ['', Validators.required],
-      dosage: ['', Validators.required],
-      // frequency: this.frequency,
+      medicineName: [''],
+      dosage: [''],
       days: this.days,
-      instructions: ['', Validators],
+      instructions: [''],
     });
   }
 
@@ -131,8 +135,26 @@ else{
 }
   }
 
- 
+  /**************ADD MORE THAN ONE MEDICINE  FORM**********************/
+  addMedicineForm() {
+    console.log("I am executing");
+    this.hideSave=true;
+   this.medinfo = this.medicineForm.get('medinfo') as FormArray;
+   this.medinfo.push(this.createmedicineForm());
+ }
+/*****************DELETE MEDICINE FORM*************************************/
+deleteMedicineForm(index){
+  this.medinfo = this.medicineForm.get('medinfo') as FormArray;
+  this.medinfo.removeAt(index)
+  if(this.medinfo.length==0){
+    console.log(this.medinfo.length)
+    this.hideSave=false;
 
+  }
+  else{
+    this.hideSave=true; 
+  }
+}
   // close Instruction form on close button
   closeForm() {
     this.medicineForm.reset()
