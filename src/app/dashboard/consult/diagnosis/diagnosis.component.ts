@@ -42,7 +42,7 @@ export class DiagnosisComponent implements OnInit {
 
     /*GET CURRENT URL, send url path name to change navbar colour*/
     this.currentURL = window.location.pathname;
-    console.log(this.currentURL);
+    // console.log(this.currentURL);
     this.sharedService.setPath(this.currentURL);
 
     /***************GET DIAGNOSIS DATA *****************/
@@ -78,17 +78,18 @@ export class DiagnosisComponent implements OnInit {
 
         // console.log('instruction',data.advice[0])
         this.hidePrescribeButton = true;
-        this.instructionData.push(data.advice[0])
-      }
-      console.log('instructionData at diagnosis', this.instructionData)
+        this.instructionData.push(data.advice)
+      } 
+      // console.log('instructionData ', data.advice)
+      console.log('instructionData at diagnosis', this.instructionData[0])
     })
     /***************GET LIFESTYLE DATA *****************/
     this.sharedService.lifeStyleData.subscribe(data => {
       if (data.length != 0 && Object.keys(data).length != 0) {
         this.hidePrescribeButton = true;
-        this.lifeStyleData.push(data.advice[0])
+        this.lifeStyleData.push(data.advice)
       }
-      console.log('lifeStyleData at diagnosis', this.lifeStyleData)
+      console.log('lifeStyleData at diagnosis', this.lifeStyleData[0])
     })
     /***************GET FOLLOWUPTYPE DATA *****************/
     this.sharedService.followUpData.subscribe(data => {
@@ -136,52 +137,14 @@ export class DiagnosisComponent implements OnInit {
       let result: any = {}
       result = data
       this.loader = false
-      this.individualPrescriptionList = result
+      this.individualPrescriptionList = result.result
       console.log('individualPrescriptionList', this.individualPrescriptionList)
     }, err => {
       this.loader = false
       console.log(err)
     })
   }
-
-  // edit diagnosis form
-  editDiagnosis(id) {
-    this.router.navigate(['dashboard/consultnew/diagnosisform', id]);
-  }
-  //edit Instruction form
-  editInstructionForm(id) {
-    this.router.navigate(['dashboard/consultnew/instruction', id]);
-
-  }
-  //create prescription id
-
-  // edit lifeStyle form
-  editLifeStyle(id) {
-    this.router.navigate(['dashboard/consultnew/lifestyle', id]);
-  }
-
-  // edit suggest form
-  editSuggest(id) {
-    this.router.navigate(['dashboard/consultnew/suggest', id]);
-  }
-
-  // edit suggest form
-  editFollowUp(id) {
-    this.router.navigate(['dashboard/consultnew/followup', id]);
-  }
-  // edit medicine form
-  editMedicine(id) {
-    this.router.navigate(['dashboard/consultnew/medicare', id]);
-  }
-
-
-
-  // hide & show on click
-  followUpEdit(id, i) {
-  }
-
-  MedicineEdit(id, j) {
-  }
+/**********************CREATE PRESCRIPTION**************************/
   createPrescription() {
     this.loader = true
     if (this.diagnosisData.length != 0 || this.lifeStyleData.length != 0 || this.followUpData.length != 0 || this.instructionData.length != 0 || this.suggestionData.length != 0 || this.medicareData.length != 1) {
@@ -191,9 +154,9 @@ export class DiagnosisComponent implements OnInit {
         individualId: this.individualId,
         medicine: this.medicareData,
         diagnosis: this.diagnosisData,
-        instruction: this.instructionData,
+        instruction: this.instructionData[0],
         recommended: this.suggestionData,
-        lifestyle: this.lifeStyleData,
+        lifestyle: this.lifeStyleData[0],
         advice: this.followUpData
       }
       console.log('prescriptionData', prescriptionData)
@@ -244,4 +207,44 @@ export class DiagnosisComponent implements OnInit {
       console.log(err)
     })
   }
+
+  // edit diagnosis form
+  editDiagnosis(id) {
+    this.router.navigate(['dashboard/consultnew/diagnosisform', id]);
+  }
+  //edit Instruction form
+  editInstructionForm(id) {
+    this.router.navigate(['dashboard/consultnew/instruction', id]);
+
+  }
+  //create prescription id
+
+  // edit lifeStyle form
+  editLifeStyle(id) {
+    this.router.navigate(['dashboard/consultnew/lifestyle', id]);
+  }
+
+  // edit suggest form
+  editSuggest(id) {
+    this.router.navigate(['dashboard/consultnew/suggest', id]);
+  }
+
+  // edit suggest form
+  editFollowUp(id) {
+    this.router.navigate(['dashboard/consultnew/followup', id]);
+  }
+  // edit medicine form
+  editMedicine(id) {
+    this.router.navigate(['dashboard/consultnew/medicare', id]);
+  }
+
+
+
+  // hide & show on click
+  followUpEdit(id, i) {
+  }
+
+  MedicineEdit(id, j) {
+  }
+  
 }
