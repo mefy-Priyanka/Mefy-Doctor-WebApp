@@ -6,6 +6,8 @@
 }
 .nopadding15col{
     padding-left: 0;
+    overflow-y: scroll;
+    height: 90vh;
 }
 @media screen and (min-width: 320px) and (max-width: 1024px) 
 {

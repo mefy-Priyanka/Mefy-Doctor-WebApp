@@ -14,7 +14,8 @@ export class DiagnosisFormComponent implements OnInit {
   public diagnosisFormNew: FormGroup;
   public loader: boolean = false
   public submitted: boolean = false;
-
+  diaginfo: FormArray;
+  public hideSave:boolean=true;
   constructor(private router: Router, private formBuilder: FormBuilder, private ePrescriptionService: DoctorPrescriptionService, private sharedService: SharedService, private activatedRoute: ActivatedRoute) {
     this.diagnosisFormErrors = {
       diagnosisFor: {}
@@ -22,17 +23,17 @@ export class DiagnosisFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.diagnosisFormNew = this.creatediagnosisForm();
+    this.diagnosisFormNew = this.formBuilder.group({
+      diaginfo: this.formBuilder.array([ this.creatediagnosisForm() ])
+    });
     this.diagnosisFormNew.valueChanges.subscribe(() => {
       this.onDiagnosisFormValuesChanged();
     });
-
   }
-
   creatediagnosisForm() {
     return this.formBuilder.group({
-      diagnosisFor: ['', Validators.required],
-      diagnosisBrief: ['', Validators],
+      diagnosisFor: [''],
+      diagnosisBrief: [''],
     });
   }
   onDiagnosisFormValuesChanged() {
@@ -56,6 +57,7 @@ export class DiagnosisFormComponent implements OnInit {
 
   //create diagnosis prescription
   saveDiagnosis() {
+    console.log(this.diagnosisFormNew)
     this.loader = true;
     if (this.diagnosisFormNew.valid) {
       let diagnosisdata = {
@@ -77,10 +79,31 @@ export class DiagnosisFormComponent implements OnInit {
 
 
   }
+ /**************ADD MORE THAN ONE DIAGNOSIS  FORM**********************/
+ addDiagnosisForm() {
+   console.log("I am executing");
+   this.hideSave=true;
+  this.diaginfo = this.diagnosisFormNew.get('diaginfo') as FormArray;
+  this.diaginfo.push(this.creatediagnosisForm());
+}
+// Delete Diagnosis form
 
   // Close Diagnosis Form
   closeForm() {
     this.diagnosisFormNew.reset();
     this.router.navigate(['/dashboard/consultnew/diagnosis']);
   }
+/*****************DELETE INSTRUCTION FORM*************************************/
+deleteDiagForm(index){
+  this.diaginfo = this.diagnosisFormNew.get('diaginfo') as FormArray;
+  this.diaginfo.removeAt(index)
+  if(this.diaginfo.length==0){
+    console.log(this.diaginfo.length)
+    this.hideSave=false;
+
+  }
+  else{
+    this.hideSave=true; 
+  }
+}
 }
