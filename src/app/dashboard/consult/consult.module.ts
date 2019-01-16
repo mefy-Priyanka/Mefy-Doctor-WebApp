@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipeModule } from "ngx-filter-pipe";
 import { TextMaskModule } from "angular2-text-mask";
 import { TagInputModule } from 'ngx-chips';
+import { TypeaheadModule } from 'ngx-bootstrap';
 
 import { VideoComponent } from './video/video.component';
 import { ConsultComponent } from './consult.component';
@@ -54,7 +55,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FilterPipeModule,
     TextMaskModule,
-    FilterPipeModule
+    FilterPipeModule,
+    TypeaheadModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [ConsultComponent,VideoComponent,DiagnosisComponent, BillsComponent, DiagnosisFormComponent, MedicineComponent, SuggestComponent, InstructionComponent, LifestyleComponent, FollowUpComponent]

@@ -1,61 +1,65 @@
 <p class="provisionalc21">Prescribe Medicine</p>
-<div class="card-body" *ngFor="let form of medicineForm.get('medinfo').controls; let i=index">
-    <div class="text-right" *ngIf="medicineForm.controls.medinfo.length !=1" (click)="deleteMedicineForm(i)"><i class="fa fa-remove" style="color:#0bbeae"></i></div>
-      <!-- /* loader */ -->
-          <div class="loading" *ngIf="loader">
-            <div class="sk-circle">
-              <div class="sk-circle1 sk-child"></div>
-              <div class="sk-circle2 sk-child"></div>
-              <div class="sk-circle3 sk-child"></div>
-              <div class="sk-circle4 sk-child"></div>
-              <div class="sk-circle5 sk-child"></div>
-              <div class="sk-circle6 sk-child"></div>
-              <div class="sk-circle7 sk-child"></div>
-              <div class="sk-circle8 sk-child"></div>
-              <div class="sk-circle9 sk-child"></div>
-              <div class="sk-circle10 sk-child"></div>
-              <div class="sk-circle11 sk-child"></div>
-              <div class="sk-circle12 sk-child"></div>
-            </div>
-          </div>
-          <!-- /* loader */ -->
-  <p class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red','text-align':'center'}">{{messageMedicine}}</p>
-  <span class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{saveMedicine}}</span>
- 
-  <form [formGroup]="medicineForm" novalidate>
-      <div formArrayName="medinfo">
-<div [formGroupName]="i">
-      <p class="provisionalc21frequency">Medicine name</p>
-    <tag-input formControlName="medicineName" (onAdd)="onAddMedicine($event)" onlyFromAutocomplete="true"
-    blinkIfDupe="true" secondaryPlaceholder="Add Medicine" placeholder="Add more">
-    <tag-input-dropdown [appendToBody]="false" [identifyBy]="'mediName'" [displayBy]="'mediName'"
-      [showDropdownIfEmpty]="false" placeholder="Choose Medicine" [autocompleteItems]="medicineOfObjects">
-    </tag-input-dropdown>
-  </tag-input>
-    <!-- <span class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="medicineFormErrors.medicineName.required || (medicineForm.controls.medicineName.pristine && submitted)">Please Provide Medicine Name</span> -->
-    <input type="text" name="fname" [textMask]="{mask: mask, guide: false}" placeholder="Dosage" formControlName="dosage" class="referdoc">
-    <!-- <span class="errormessage" *ngIf="medicineFormErrors.dosage.required">Please Provide Medicine Dosage</span> -->
-    <span class="provisionalc21frequency">Days</span>
-
-    <div class="day_tab">
-      <p>{{days}}
-        <span>days</span>
-      </p>
-
-      <p class="range-field ">
-        <input #myOutput type="range" id="test5" min="0" max="30" (change)="setDay($event)" data-show-value="true" data-popup-enabled="true" [(ngModel)]="daysTest" [ngModelOptions]="{standalone: true}"/>
-      </p>
-
+<form [formGroup]="medicineForm" novalidate>
+  <div class="card-body" formArrayName="medinfo" *ngFor="let form of medicineForm.get('medinfo').controls; let i=index">
+    <div class="text-right" *ngIf="medicineForm.controls.medinfo.length !=1" (click)="deleteMedicineForm(i)"><i class="fa fa-remove"
+        style="color:#0bbeae"></i></div>
+    <!-- /* loader */ -->
+    <div class="loading" *ngIf="loader">
+      <div class="sk-circle">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
+      </div>
     </div>
-    <p class="provisionalc21frequency">Instructions</p>
-    <textarea class="text2area" placeholder="Enter your instruction here" formControlName="instructions"></textarea>
-    <!-- <span class="errormessage" *ngIf="medicineFormErrors.instructions.required">Please Provide Instructions </span> -->
+    <!-- /* loader */ -->
+    <p class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red','text-align':'center'}">{{messageMedicine}}</p>
+    <span class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red'}">{{saveMedicine}}</span>
+
+    <div [formGroupName]="i">
+      <p class="provisionalc21frequency">Medicine name</p>
+      <!-- <tag-input formControlName="medicineName" (onAdd)="onAddMedicine($event)" onlyFromAutocomplete="true" blinkIfDupe="true"
+        secondaryPlaceholder="Add Medicine" placeholder="Add more">
+        <tag-input-dropdown [appendToBody]="false" [identifyBy]="'mediName'" [displayBy]="'mediName'"
+          [showDropdownIfEmpty]="false" placeholder="Choose Medicine" [autocompleteItems]="medicineOfObjects">
+        </tag-input-dropdown>
+      </tag-input> -->
+      <ng-template #customItemTemplate let-model="item" let-index="index">
+             <p>{{ model.PrescribingInformation }} </p>
+           </ng-template>
+        <input class="form-control" [typeaheadItemTemplate]="customItemTemplate" formControlName="medicineName" (typeaheadOnSelect)="onSelectedMedicine($event)"placeholder="Medicine" typeaheadOptionField="PrescribingInformation" [typeahead]="allmedicineName" class="form-control"
+               (typeaheadNoResults)="typeaheadNoMedicineResults($event)">
+      <!-- <span class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="medicineFormErrors.medicineName.required || (medicineForm.controls.medicineName.pristine && submitted)">Please Provide Medicine Name</span> -->
+      <input type="text" name="fname" [textMask]="{mask: mask, guide: false}" placeholder="Dosage" formControlName="dosage"
+        class="referdoc">
+      <!-- <span class="errormessage" *ngIf="medicineFormErrors.dosage.required">Please Provide Medicine Dosage</span> -->
+      <span class="provisionalc21frequency">Days</span>
+
+      <div class="day_tab">
+        <p>{{days}}
+          <span>days</span>
+        </p>
+
+        <p class="range-field ">
+          <input #myOutput type="range" id="test5" min="0" max="30" (change)="setDay($event,i)" data-show-value="true"
+            data-popup-enabled="true" [(ngModel)]="daysTest" [ngModelOptions]="{standalone: true}" />
+        </p>
+
+      </div>
+      <p class="provisionalc21frequency">Instructions</p>
+      <textarea class="text2area" placeholder="Enter your instruction here" formControlName="instructions"></textarea>
+      <!-- <span class="errormessage" *ngIf="medicineFormErrors.instructions.required">Please Provide Instructions </span> -->
+    </div>
   </div>
-</div>
-  </form>
-
-
-</div>
+</form>
 <div class="row">
   <div class="plus_btn pull-right ng-star-inserted">
     <button class="plus" (click)="addMedicineForm()">+</button>

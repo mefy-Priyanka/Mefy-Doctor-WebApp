@@ -15,15 +15,18 @@ export class MedicineComponent implements OnInit {
   @ViewChild('myOutput')
   myOutputVariable: any;
   public medicineForm: FormGroup;
+  medinfo: FormArray;
   public medicineFormErrors: any;
   medicineArray: any = [];
-  medinfo: FormArray;
-  public hideSave:boolean=true;
   public allmedicineName:any=[];
-  public medicineOfObjects:any=[];
   public selectedMedicine:any=[]
+
+  public hideSave:boolean=true;
   public loader:boolean=true
   public submitted:boolean=false;
+  public noStateResult = false;
+ 
+
   public days: any = '';
   public frequencyTest:number=0; //initally frequency range zero
   public daysTest:number=0; //initally day range zero
@@ -89,40 +92,42 @@ export class MedicineComponent implements OnInit {
     value = data
     this.allmedicineName = value.result.result
     console.log(this.allmedicineName)
-    for (var i = 0; i < this.allmedicineName.length; i++) {
-      var spec = {
-        mediName: this.allmedicineName[i].PrescribingInformation,
-      }
-      this.medicineOfObjects.push(spec);
-    }
   },
     err => {
       console.log(err)
     })
 }
+ /**************IF RESULT IS NOT FOUND THEN SHOW MESSAGE */
+ typeaheadNoMedicineResults(event: boolean): void {
+  this.noStateResult = event
+}
 /***********************MEDICINE ON SELECT*********/
-onAddMedicine(evt) {
-  console.log(evt);
+onSelectedMedicine(evt) {
+  console.log(evt.value);
   this.selectedMedicine.push(evt.value)
 }
  /**************TO SET  TIME DURATION RANGE FOR MEDICINE*********/
- setDay(event) {
+ setDay(event,i) {
   this.days = event.target.value;
   console.log(this.days);
-  this.medicineForm.controls.days.setValue(this.days)
+  // this.medicineForm.controls.days.setValue(this.days)
+  let x=(<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['days'].setValue(this.days);
+ console.log((<FormArray>this.medicineForm.controls['medinfo']).controls[0]['controls']['days']);
+ console.log(this.medicineForm.controls['medinfo'].value[0]['days'])
 }
   /************ CREATEMEDICINE PRESCRIPTION*************/
   createMedicine() {
     if(this.medicineForm.valid){
       this.loader = false;
-    let data={
-      medicineName:this.selectedMedicine,
-      dosage: this.medicineForm.value.dosage,
-      days: this.medicineForm.value.days,
-      instructions: this.medicineForm.value.instructions
-    }
-    console.log(data)
-    this.sharedService.createMedicineData(data);
+    // let data={
+    //   medicineName:this.selectedMedicine,
+    //   dosage: this.medicineForm.value.dosage,
+    //   days: this.medicineForm.value.days,
+    //   instructions: this.medicineForm.value.instructions
+    // }
+    // console.log(data)
+    console.log('medicine form',this.medicineForm.value)
+    this.sharedService.createMedicineData(this.medicineForm.value);
     this.router.navigate(['/dashboard/consultnew/diagnosis']);
   }
 else{
