@@ -36,7 +36,7 @@
                   </p>
                 </div>
               </div>
-              <div class="col-md-2 col-xs-2" id="padding-o">
+              <!-- <div class="col-md-2 col-xs-2" id="padding-o">
                 <div class="edit_icon">
                   <button class="edit" (click)="editDiagnosis(provisional._id)">
                     <svg version="1.1" id="pencil" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -52,7 +52,7 @@
                     </svg>
                   </button>
                 </div>
-              </div>
+              </div> -->
 
             </div>
           </div>
@@ -75,7 +75,7 @@
                   <!-- <p class="serenity2">{{recommend.testDescription}}</p> -->
                 </div>
               </div>
-              <div class="col-md-2 col-xs-2" id="padding-o">
+              <!-- <div class="col-md-2 col-xs-2" id="padding-o">
                 <div class="edit_icon">
                   <button class="edit" (click)="editSuggest(recommend._id)">
                     <svg version="1.1" id="pencil" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -91,7 +91,7 @@
                     </svg>
                   </button>
                 </div>
-              </div>
+              </div> -->
 
             </div>
           </div>
@@ -201,6 +201,110 @@
         </div>
       </div>
     </div>
+    <div class="row" id="marbtm-0">
+      <p class="provisionalc1">Specific Instructions</p>
+      <div class="card" *ngFor="let list of individualPrescriptionList;let i=index" >
+        <div *ngFor="let li of list.instruction; let j=index">
+        <div class="row">
+          <div class="card_texte">
+            <div class="col-md-12" id="padding-o">
+              <div class="col-md-10 col-xs-10">
+                <div class="consult_text">
+                  <p class="serenity">Advice</p>
+                  <p class="serenity2">{{li?.advice}} </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="row" id="marbtm-0">
+      <p class="provisionalc1">Lifestyle Instruction</p>
+      <div class="card">
+        <div class="row">
+          <div class="card_texte">
+            <div class="col-md-12" id="padding-o">
+              <div class="col-md-10 col-xs-10">
+                <div class="consult_text">
+                  <p class="serenity">Advice</p>
+                  <p class="serenity2">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text
+                    of the printing and typesetting industry
+
+                  </p>
+                  <!-- <p class="serenity2">{{recommend.testDescription}}</p> -->
+                </div>
+              </div>
+              <!-- <div class="col-md-2 col-xs-2" id="padding-o">
+                <div class="edit_icon">
+                  <button class="edit" (click)="editSuggest(recommend._id)">
+                    <svg version="1.1" id="pencil" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                      viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;" xml:space="preserve">
+                      <g>
+                        <path d="M438.931,30.403c-40.4-40.5-106.1-40.5-146.5,0l-268.6,268.5c-2.1,2.1-3.4,4.8-3.8,7.7l-19.9,147.4
+                       c-0.6,4.2,0.9,8.4,3.8,11.3c2.5,2.5,6,4,9.5,4c0.6,0,1.2,0,1.8-0.1l88.8-12c7.4-1,12.6-7.8,11.6-15.2c-1-7.4-7.8-12.6-15.2-11.6
+                       l-71.2,9.6l13.9-102.8l108.2,108.2c2.5,2.5,6,4,9.5,4s7-1.4,9.5-4l268.6-268.5c19.6-19.6,30.4-45.6,30.4-73.3
+                       S458.531,49.903,438.931,30.403z M297.631,63.403l45.1,45.1l-245.1,245.1l-45.1-45.1L297.631,63.403z M160.931,416.803l-44.1-44.1
+                       l245.1-245.1l44.1,44.1L160.931,416.803z M424.831,152.403l-107.9-107.9c13.7-11.3,30.8-17.5,48.8-17.5c20.5,0,39.7,8,54.2,22.4
+                       s22.4,33.7,22.4,54.2C442.331,121.703,436.131,138.703,424.831,152.403z" />
+                      </g>
+                    </svg>
+                  </button>
+                </div>
+              </div> -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="marbtm-0">
+      <p class="provisionalc1">Advice Followup</p>
+      <div class="card">
+        <div class="row">
+          <div class="card_texte">
+            <div class="col-md-12" id="padding-o">
+              <div class="col-md-10 col-xs-10">
+                <div class="consult_text">
+                  <p class="serenity">Revisit Schedule</p>
+                  <p class="serenity2">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text
+                    of the printing and typesetting industry
+
+                  </p>
+                  <!-- <p class="serenity2">{{recommend.testDescription}}</p> -->
+                </div>
+                <div class="consult_text">
+                  <p class="serenity">Refered Doctor</p>
+                  <p class="serenity2">Show "doctor name"
+
+                  </p>
+                  <!-- <p class="serenity2">{{recommend.testDescription}}</p> -->
+                </div>
+              </div>
+              <!-- <div class="col-md-2 col-xs-2" id="padding-o">
+                <div class="edit_icon">
+                  <button class="edit" (click)="editSuggest(recommend._id)">
+                    <svg version="1.1" id="pencil" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                      viewBox="0 0 469.331 469.331" style="enable-background:new 0 0 469.331 469.331;" xml:space="preserve">
+                      <g>
+                        <path d="M438.931,30.403c-40.4-40.5-106.1-40.5-146.5,0l-268.6,268.5c-2.1,2.1-3.4,4.8-3.8,7.7l-19.9,147.4
+                       c-0.6,4.2,0.9,8.4,3.8,11.3c2.5,2.5,6,4,9.5,4c0.6,0,1.2,0,1.8-0.1l88.8-12c7.4-1,12.6-7.8,11.6-15.2c-1-7.4-7.8-12.6-15.2-11.6
+                       l-71.2,9.6l13.9-102.8l108.2,108.2c2.5,2.5,6,4,9.5,4s7-1.4,9.5-4l268.6-268.5c19.6-19.6,30.4-45.6,30.4-73.3
+                       S458.531,49.903,438.931,30.403z M297.631,63.403l45.1,45.1l-245.1,245.1l-45.1-45.1L297.631,63.403z M160.931,416.803l-44.1-44.1
+                       l245.1-245.1l44.1,44.1L160.931,416.803z M424.831,152.403l-107.9-107.9c13.7-11.3,30.8-17.5,48.8-17.5c20.5,0,39.7,8,54.2,22.4
+                       s22.4,33.7,22.4,54.2C442.331,121.703,436.131,138.703,424.831,152.403z" />
+                      </g>
+                    </svg>
+                  </button>
+                </div>
+              </div> -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row" id="marbtm-0" *ngIf="specificData.length != 0">
       <p class="provisionalc2">Specific Instruction</p>
       <div class="card" *ngFor="let lists of specificData">
@@ -235,7 +339,7 @@
         </div>
       </div>
     </div>
-    <div class="row" id="marbtm-0" *ngIf="lifestyleData.length != 0">
+    <!-- <div class="row" id="marbtm-0" *ngIf="lifestyleData.length != 0">
       <p class="provisionalc2">LifeStyle Instruction</p>
       <div class="card" *ngFor="let list of lifestyleData">
         <div class="row">
@@ -268,7 +372,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- <div class="row" id="marbtm-0" *ngIf="adviseData.length != 0">
     <p class="provisionalc2">Advice Followup</p>
     <div class="card" *ngFor="let list of adviseData">
@@ -725,7 +829,7 @@
     </div>
     <div class="cancelpres" *ngIf="hidePrescribeButton">
       <button type="btn" class="presbtn" (click)="createPrescription()">Prescribe</button>
-      <button type="btn" class="cancelpres">CANCEL</button>
+      <button type="btn" class="cancelpres" [routerLink]="['/dashboard/main']">CANCEL</button>
     </div>
   </section>
 

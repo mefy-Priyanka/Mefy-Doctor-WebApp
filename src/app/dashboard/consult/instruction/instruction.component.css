@@ -42,20 +42,20 @@ font-weight: 600;
    color:white;
    border:none;
 }
-.card.cardabc{
+.card.cardall{
     border: none;
     box-shadow: 1px 1px 20px 4px #edf0fd;
     border-radius: 6px;
     padding: 20px;
-    margin: -1.5rem 0 1rem 0;
+    margin: 1rem 0 1rem 0;
     padding-top:0 !important;
 }
-.card.cardabc.custom-card {
+.card.carall.custom-card {
     width: 98%;
     margin: 0px auto;
-    margin-bottom: 25px;
+    margin-bottom: 11px;
 }
-.card.cardabc1.custom-card {
+.card.cardall1.custom-card {
     width: 98%;
     margin: 0px auto;
     margin-bottom: 25px;

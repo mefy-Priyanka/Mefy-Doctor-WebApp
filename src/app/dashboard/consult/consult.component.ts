@@ -15,12 +15,12 @@ export class ConsultComponent implements OnInit {
   pathName:any;
   constructor(  private route: ActivatedRoute,  private socketService: SocketService, private router: Router,private sharedService:SharedService) {
     // this.socketService.connect();
-    this.route.queryParams.subscribe(param => {    
-    //  console.log(param)
-      this.callerData.callerId = param['callerId'];
-      this.callerData.callerEasyRTC = param['callerEasyRTC'];
-      this.callerData.roomId = param['roomId'];
-    })
+    // this.route.queryParams.subscribe(param => {    
+    // //  console.log(param)
+    //   this.callerData.callerId = param['callerId'];
+    //   this.callerData.callerEasyRTC = param['callerEasyRTC'];
+    //   this.callerData.roomId = param['roomId'];
+    // })
 
    }
 

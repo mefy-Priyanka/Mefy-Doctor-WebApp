@@ -93,22 +93,22 @@ c1.7-1.7,2.7-4,2.7-6.4s-1-4.7-2.7-6.4C292.75,218.2,290.45,217.2,288.05,217.2z" /
                   </g>
                 </g>
               </svg>
-              <p>Please enter the OTP you received</p>
-              <form [formGroup]="otpForm">
+              <!-- <p class="text-right">Please enter the OTP you received</p> -->
+              <form [formGroup]="otpForm" class="topalignform">
                 <div class="form-group phoneDiv">
                   <!-- <label>OTP</label> -->
-                  <input type="text" class="form-control inputPhone" formControlName="otp">
+                  <input type="text" class="form-control inputPhone" formControlName="otp" placeholder="Please enter the OTP you received">
                   <p class="errormessage" *ngIf="otpFormErrors.otp.required || (otpForm.controls.otp.pristine && submitted)">Can't be empty</p>
                 </div>
                 <div class="loginRegister">
                   <button class="loginbutton" (click)="verifyOtp()">Submit
-                    <i class="fa fa-arrow-right"></i>
+                    <!-- <i class="fa fa-arrow-right"></i> -->
                   </button>
                 </div>
-                <div class="noaccount">
+                <!-- <div class="noaccount">
                   <p>Don't have an account ?</p>
                   <a href="" class="createaccm" [routerLink]="['/register']">Create an account</a>
-                </div>
+                </div> -->
               </form>
             </div>
             <!-- otp screen -->

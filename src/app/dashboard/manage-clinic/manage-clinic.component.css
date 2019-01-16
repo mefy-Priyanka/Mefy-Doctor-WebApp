@@ -408,6 +408,7 @@ p.to_time {
     position: relative;
     display: inline-block;
     float: right;
+    top: 21px;
 }
 .webdropdown-content{
     display: block;

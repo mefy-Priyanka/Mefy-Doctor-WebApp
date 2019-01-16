@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators,FormArray } from '@angular/forms';
 import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
 import { DoctorPrescriptionService } from '../../../meme-services/doctor-prescription.service';
 import { SharedService } from '../../../mefyservice/shared.service';
@@ -13,12 +13,16 @@ import { SharedService } from '../../../mefyservice/shared.service';
   styleUrls: ['./lifestyle.component.css']
 })
 export class LifestyleComponent implements OnInit {
+
+
+
   public lifeStyleFormErrors: any;
   public lifeStyleForm: FormGroup;
   public submitted: boolean = false;
   public loader: boolean = false
+  public hideCrossIcon: boolean = false;
+  public hideSave:boolean=true;
   constructor(private sharedService: SharedService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private router: Router, private ePrescriptionService: DoctorPrescriptionService) {
-
     this.lifeStyleFormErrors = {
       advice: {}
     };
@@ -29,11 +33,12 @@ export class LifestyleComponent implements OnInit {
     this.lifeStyleForm.valueChanges.subscribe(() => {
       this.onLifeStyleFormValuesChanged();
     });
+    this.addLifeStyleForm() ;
   }
 
   createLifeStyleForm() {
     return this.formBuilder.group({
-      advice: ['', Validators.required],
+      advice: this.formBuilder.array([])
     });
   }
 
@@ -83,9 +88,41 @@ export class LifestyleComponent implements OnInit {
       this.loader = false;
     }
   }
-
-
-
+  /************************************************ SAVE FORM ON ENTER KEY *********************************************** */
+  keyDownFunction(event) {
+    if (event.keyCode == 13) {
+      this.createLifeStyle();
+    }
+  }
+ /**************ADD MORE THAN ONE LIFE STYLE  FORM**********************/
+ addLifeStyleForm() {
+  this.hideSave=true
+  let control = <FormArray>this.lifeStyleForm.controls.advice;
+  control.push(
+    this.formBuilder.group({
+      advice: ['', Validators.required],
+    })
+  )
+  console.log(control.length)
+  if(control.length>1 && control.length!==1){
+    this.hideCrossIcon=true;
+  }
+  else{
+    this.hideCrossIcon=false;
+  }
+}
+ /*****************DELETE INSTRUCTION FORM*************************************/
+ deleteLifeStyleForm(index){
+  let control = <FormArray>this.lifeStyleForm.controls.advice;
+  control.removeAt(index)
+  if(control.length==0){
+    console.log(control.length)
+    this.hideSave=false;
+  }
+  else{
+    this.hideSave=true; 
+  }
+}
 
 
 }
