@@ -20,6 +20,10 @@
     height: 89vh;
     width: 34vw;
 }
+.topalignform
+{
+    margin-top: 10px;
+}
 div#noPadding {
     padding: 0;
 }
