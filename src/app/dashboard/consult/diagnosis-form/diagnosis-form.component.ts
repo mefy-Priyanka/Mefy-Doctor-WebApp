@@ -60,12 +60,12 @@ export class DiagnosisFormComponent implements OnInit {
     console.log(this.diagnosisFormNew)
     this.loader = true;
     if (this.diagnosisFormNew.valid) {
-      let diagnosisdata = {
-        diagnosisFor: this.diagnosisFormNew.value.diagnosisFor,
-        diagnosisBrief: this.diagnosisFormNew.value.diagnosisBrief
-      }
-      console.log("diagnosis", diagnosisdata)
-      this.sharedService.createDiagnosis(diagnosisdata);
+      // let diagnosisdata = {
+      //   diagnosisFor: this.diagnosisFormNew.value.diagnosisFor,
+      //   diagnosisBrief: this.diagnosisFormNew.value.diagnosisBrief
+      // }
+      console.log("diagnosis", this.diagnosisFormNew.value)
+      this.sharedService.createDiagnosis(this.diagnosisFormNew.value);
       this.router.navigate(['/dashboard/consultnew/diagnosis']);
     }
     else {
