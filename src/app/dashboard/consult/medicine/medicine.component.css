@@ -222,3 +222,25 @@ button.plus:hover{
     span.errormessage {
         color: red;
     }
+    ul.list-inline.dosage li {
+        color: #ffffffd6;
+        font-weight: 600;
+        background: #8e51b7;
+        border-radius: 50%;
+        height: 34px;
+        width: 34px;
+        line-height: 34px;
+        cursor:pointer;
+    }
+    ul.list-inline.dosage li button {
+        background: transparent;
+        outline: none;
+        border: none;
+        padding: 0;
+    }
+    ul.list-inline.dosage li:hover {
+        background: #8e51b7b8 !important;
+    }
+    ul.list-inline.dosage {
+        text-align: center;
+    }

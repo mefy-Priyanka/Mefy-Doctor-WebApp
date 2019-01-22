@@ -26,21 +26,36 @@
 
     <div [formGroupName]="i">
       <p class="provisionalc21frequency">Medicine name</p>
-      <!-- <tag-input formControlName="medicineName" (onAdd)="onAddMedicine($event)" onlyFromAutocomplete="true" blinkIfDupe="true"
-        secondaryPlaceholder="Add Medicine" placeholder="Add more">
-        <tag-input-dropdown [appendToBody]="false" [identifyBy]="'mediName'" [displayBy]="'mediName'"
-          [showDropdownIfEmpty]="false" placeholder="Choose Medicine" [autocompleteItems]="medicineOfObjects">
-        </tag-input-dropdown>
-      </tag-input> -->
       <ng-template #customItemTemplate let-model="item" let-index="index">
              <p>{{ model.PrescribingInformation }} </p>
            </ng-template>
         <input class="form-control" [typeaheadItemTemplate]="customItemTemplate" formControlName="medicineName" (typeaheadOnSelect)="onSelectedMedicine($event)"placeholder="Medicine" typeaheadOptionField="PrescribingInformation" [typeahead]="allmedicineName" class="form-control"
                (typeaheadNoResults)="typeaheadNoMedicineResults($event)">
       <!-- <span class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="medicineFormErrors.medicineName.required || (medicineForm.controls.medicineName.pristine && submitted)">Please Provide Medicine Name</span> -->
-      <input type="text" name="fname" [textMask]="{mask: mask, guide: false}" placeholder="Dosage" formControlName="dosage"
-        class="referdoc">
+      <!-- <input type="text" name="fname" [textMask]="{mask: mask, guide: false}" placeholder="Dosage" formControlName="dosage"
+        class="referdoc"> -->
+        <p class="provisionalc21frequency">Dosage(mg)</p>
+<ul class="list-inline dosage">
+  <li><button>50</button></li>
+  <li><button>100</button></li>
+  <li><button>250</button></li>
+  <li><button>500</button></li>
+</ul>
+
       <!-- <span class="errormessage" *ngIf="medicineFormErrors.dosage.required">Please Provide Medicine Dosage</span> -->
+      <div class="f_range">
+          <span class="provisionalc21frequency">Frequency</span>
+          <div class="day_tab">
+    
+            <p> {{frequency}}
+              <span>X</span>
+            </p>
+            <p class="range-field ">
+              <input  #myInput type="range" id="test5" startValue="0" min="0" max="5"(change)="setFrequency($event,i)" data-show-value="true" data-popup-enabled="true" [(ngModel)]="frequencyTest" [ngModelOptions]="{standalone: true}" />
+            </p>
+    
+          </div>
+        </div>
       <span class="provisionalc21frequency">Days</span>
 
       <div class="day_tab">
@@ -48,21 +63,24 @@
           <span>days</span>
         </p>
 
-        <p class="range-field ">
+        <!-- <p class="range-field ">
           <input #myOutput type="range" id="test5" min="0" max="30" (change)="setDay($event,i)" data-show-value="true"
             data-popup-enabled="true" [(ngModel)]="daysTest" [ngModelOptions]="{standalone: true}" />
-        </p>
-
+        </p> -->
+       <p class="range-field ">
+          <input  type="range"  [(value)]="daysTest" id="test5" step="1" value="0"min="0" max="30" (change)="setDay($event,i)" data-show-value="true"
+            data-popup-enabled="true" formControlName="days" />
+        </p> 
       </div>
       <p class="provisionalc21frequency">Instructions</p>
-      <textarea class="text2area" placeholder="Enter your instruction here" formControlName="instructions"></textarea>
+      <textarea class="text2area" placeholder="Enter your instruction here"  formControlName="instructions"></textarea>
       <!-- <span class="errormessage" *ngIf="medicineFormErrors.instructions.required">Please Provide Instructions </span> -->
     </div>
   </div>
 </form>
 <div class="row">
   <div class="plus_btn pull-right ng-star-inserted">
-    <button class="plus" (click)="addMedicineForm()">+</button>
+    <button class="plus" (click)="addMedicineForm(i)">+</button>
   </div>
 </div>
 
