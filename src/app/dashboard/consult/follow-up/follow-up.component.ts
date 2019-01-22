@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray, FormArrayName } from '@angular/forms';
 import { DoctorPrescriptionService } from '../../../meme-services/doctor-prescription.service';
 import { SharedService } from '../../../mefyservice/shared.service';
 import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
@@ -11,6 +11,9 @@ import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
 export class FollowUpComponent implements OnInit {
   public followFormErrors: any;
   public followForm: FormGroup;
+  public followinfo: FormArray;
+  public days: any = '';
+  public hideSave:boolean=true;
   public day: any;
   public week: any;
   public month: any;
@@ -24,16 +27,17 @@ export class FollowUpComponent implements OnInit {
 
     this.followFormErrors = {
       day: {},
-      week: {},
-      month: {},
-      refferedDoctor: {}
+      referredDoctor: {}
     };
 
 
   }
 
   ngOnInit() {
-    this.followForm = this.createFollowForm();
+    // this.followForm = this.createFollowForm();
+    this.followForm =this.formBuilder.group({
+      followinfo: this.formBuilder.array([ this.createFollowForm() ])
+    });
     this.followForm.valueChanges.subscribe(() => {
       this.onFollowFormValuesChanged();
     });
@@ -44,9 +48,7 @@ export class FollowUpComponent implements OnInit {
   createFollowForm() {
     return this.formBuilder.group({
       day: this.day,
-      week: this.week,
-      month: this.month,
-      referredDoctor: ['', Validators],
+      referredDoctor: [''],
     });
   }
 
@@ -68,24 +70,29 @@ export class FollowUpComponent implements OnInit {
       }
     }
   }
-
+ /**************TO SET  TIME DURATION RANGE FOR MEDICINE*********/
+ setDay(event,i) {
+  this.days = event.target.value;
+  console.log(this.days);
+  let x=(<FormArray>this.followForm.controls['followinfo']).controls[i]['controls']['day'].setValue(this.days);
+}
   // to set revisit schedule 
-  setDay(event, schedule) {
+  // setDay(event, schedule) {
 
-    if (schedule == "days") {
-      this.day = event.target.value;
-      this.followForm.controls.day.setValue(this.day)
-    }
-    else if (schedule == "Weeks") {
-      this.week = event.target.value;
-      this.followForm.controls.week.setValue(this.week);
-    }
-    else if (schedule == "Months") {
-      this.month = event.target.value;
-      this.followForm.controls.month.setValue(this.month);
-    }
-    console.log("event set day", this.day);
-  }
+  //   if (schedule == "days") {
+  //     this.day = event.target.value;
+  //     this.followForm.controls.day.setValue(this.day)
+  //   }
+  //   else if (schedule == "Weeks") {
+  //     this.week = event.target.value;
+  //     this.followForm.controls.week.setValue(this.week);
+  //   }
+  //   else if (schedule == "Months") {
+  //     this.month = event.target.value;
+  //     this.followForm.controls.month.setValue(this.month);
+  //   }
+  //   console.log("event set day", this.day);
+  // }
 
 
 
@@ -93,14 +100,12 @@ export class FollowUpComponent implements OnInit {
   createAdvice() {
     if(this.followForm.valid){
       this.loader = true;
-    let data={
-      day:this.followForm.value.day,
-      week: this.followForm.value.week,
-      month: this.followForm.value.month,
-      referredDoctor: this.followForm.value.referredDoctor
-    }
-    console.log(data)
-    this.sharedService.createFollowUpData(data);
+    // let data={
+    //   day:this.followForm.value.day,
+    //   referredDoctor: this.followForm.value.referredDoctor
+    // }
+    console.log(this.followForm.value)
+    this.sharedService.createFollowUpData(this.followForm.value);
     this.router.navigate(['/dashboard/consultnew/diagnosis']);
   }
 else{
@@ -117,5 +122,24 @@ else{
     this.followForm.reset();
     this.router.navigate(['/dashboard/consultnew/diagnosis']);
   }
-
+    /**************ADD MORE THAN ONE FOLLOW  FORM**********************/
+    addFollowForm() {
+      console.log("I am executing");
+      this.hideSave=true;
+     this.followinfo = this.followForm.get('followinfo') as FormArray;
+     this.followinfo.push(this.createFollowForm());
+   }
+   deleteFollowForm(index){
+    this.followinfo = this.followForm.get('followinfo') as FormArray;
+    this.followinfo.removeAt(index)
+    if(this.followinfo.length==0){
+      console.log(this.followinfo.length)
+      this.hideSave=false;
+  
+    }
+    else{
+      this.hideSave=true; 
+    }
+   }
+   
 }
