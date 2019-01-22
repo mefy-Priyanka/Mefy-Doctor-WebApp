@@ -38,8 +38,16 @@
         <input class="form-control" [typeaheadItemTemplate]="customItemTemplate" formControlName="medicineName" (typeaheadOnSelect)="onSelectedMedicine($event)"placeholder="Medicine" typeaheadOptionField="PrescribingInformation" [typeahead]="allmedicineName" class="form-control"
                (typeaheadNoResults)="typeaheadNoMedicineResults($event)">
       <!-- <span class="errormessage" [ngStyle]="{'font-size':'12px'}" *ngIf="medicineFormErrors.medicineName.required || (medicineForm.controls.medicineName.pristine && submitted)">Please Provide Medicine Name</span> -->
-      <input type="text" name="fname" [textMask]="{mask: mask, guide: false}" placeholder="Dosage" formControlName="dosage"
-        class="referdoc">
+      <!-- <input type="text" name="fname" [textMask]="{mask: mask, guide: false}" placeholder="Dosage" formControlName="dosage"
+        class="referdoc"> -->
+        <p class="provisionalc21frequency">Dosage(mg)</p>
+<ul class="list-inline dosage">
+  <li><button>50</button></li>
+  <li><button>100</button></li>
+  <li><button>250</button></li>
+  <li><button>500</button></li>
+</ul>
+
       <!-- <span class="errormessage" *ngIf="medicineFormErrors.dosage.required">Please Provide Medicine Dosage</span> -->
       <span class="provisionalc21frequency">Days</span>
 
