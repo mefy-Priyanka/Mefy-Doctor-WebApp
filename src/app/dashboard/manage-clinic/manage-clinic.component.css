@@ -604,9 +604,41 @@ svg#dot{
         padding-right: 0;
     }
 }
-::-webkit-scrollbar { 
+/* ::-webkit-scrollbar { 
   display: none;
-}
+} */
+.scrollcstm {
+    width: 100%;
+    height: 78vh;
+    overflow: auto;
+    float: left;
+    margin: 0 auto;
+  }
+  
+  .contentall {
+    height: auto;
+  }
+  
+
+  
+  .scroll1::-webkit-scrollbar {
+    width: 5px;
+  }
+   
+  .scroll1::-webkit-scrollbar-track {
+    background: #ddd;
+  }
+   
+  .scroll1::-webkit-scrollbar-thumb {
+    background: #666; 
+  }
+
+  
+
+
+
+
+
 .scroll {
     width: 100%;
     overflow-y: scroll;
