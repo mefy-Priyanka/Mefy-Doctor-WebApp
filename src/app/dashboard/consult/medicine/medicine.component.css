@@ -223,9 +223,12 @@ button.plus:hover{
         color: red;
     }
     ul.list-inline.dosage li {
-        color: #ffffffd6;
         font-weight: 600;
-        background: #8e51b7;
+        color: #7b7979;
+        border-radius: 50%;
+        width: 34px;
+        line-height: 34px;
+        cursor: pointer;
         border-radius: 50%;
         height: 34px;
         width: 34px;
@@ -239,7 +242,13 @@ button.plus:hover{
         padding: 0;
     }
     ul.list-inline.dosage li:hover {
-        background: #8e51b7b8 !important;
+        background: linear-gradient(to right, rgb(121, 120, 250),rgba(178, 109, 247, 1));
+        border-radius: 50%;
+        height: 30px;
+        color: #fff!important;
+        width: 30px;
+        border: none;
+        box-shadow: 0px 1px 16px 3px rgba(137, 99, 206, 0.31);
     }
     ul.list-inline.dosage {
         text-align: center;
