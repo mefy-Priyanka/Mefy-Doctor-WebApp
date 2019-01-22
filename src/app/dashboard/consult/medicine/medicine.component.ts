@@ -25,12 +25,12 @@ export class MedicineComponent implements OnInit {
   public loader:boolean=true
   public submitted:boolean=false;
   public noStateResult = false;
- 
-
   public days: any = '';
+  public frequency: any = '';
   public frequencyTest:number=0; //initally frequency range zero
   public daysTest:number=0; //initally day range zero
   public mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/]
+  
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private PrescriptionService:PrescriptionService, private formBuilder: FormBuilder, private sharedService: SharedService) {
     this.medicineFormErrors = {
@@ -60,8 +60,9 @@ export class MedicineComponent implements OnInit {
     return this.formBuilder.group({
       medicineName: [''],
       dosage: [''],
-      days: this.days,
+      days: [''],
       instructions: [''],
+      frequency:['']
     });
   }
 
@@ -110,24 +111,26 @@ onSelectedMedicine(evt) {
  setDay(event,i) {
   this.days = event.target.value;
   console.log(this.days);
-  // this.medicineForm.controls.days.setValue(this.days)
   let x=(<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['days'].setValue(this.days);
- console.log((<FormArray>this.medicineForm.controls['medinfo']).controls[0]['controls']['days']);
- console.log(this.medicineForm.controls['medinfo'].value[0]['days'])
+ console.log((<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['days']);
+
 }
+ /******************TO SET FREQUENCY RANGE FOR  MEDICINE *********************/
+ setFrequency(event,i) {
+  this.frequency=''
+  this.frequency = event.target.value;
+  let y=(<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['frequency'].setValue(this.frequency);
+  console.log((<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['frequency']);
+}
+
   /************ CREATEMEDICINE PRESCRIPTION*************/
   createMedicine() {
     if(this.medicineForm.valid){
       this.loader = false;
-    // let data={
-    //   medicineName:this.selectedMedicine,
-    //   dosage: this.medicineForm.value.dosage,
-    //   days: this.medicineForm.value.days,
-    //   instructions: this.medicineForm.value.instructions
-    // }
-    // console.log(data)
     console.log('medicine form',this.medicineForm.value)
     this.sharedService.createMedicineData(this.medicineForm.value);
+        this.medicineForm.reset();
+     this.reset();
     this.router.navigate(['/dashboard/consultnew/diagnosis']);
   }
 else{
@@ -141,11 +144,19 @@ else{
   }
 
   /**************ADD MORE THAN ONE MEDICINE  FORM**********************/
-  addMedicineForm() {
+  addMedicineForm(i) {
     console.log("I am executing");
     this.hideSave=true;
-   this.medinfo = this.medicineForm.get('medinfo') as FormArray;
-   this.medinfo.push(this.createmedicineForm());
+    this.medicineForm.reset();
+    // this.reset();
+    // this.frequency = '';
+    console.log((<FormArray>this.medicineForm.controls['medinfo']))
+  
+      this.medinfo = this.medicineForm.get('medinfo') as FormArray;
+      this.medinfo.push(this.createmedicineForm());
+      this.days = '';
+    
+  
  }
 /*****************DELETE MEDICINE FORM*************************************/
 deleteMedicineForm(index){

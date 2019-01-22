@@ -123,7 +123,7 @@
               <ul class="list-inline clinicsmayhave">
                 <li class="postminus" *ngFor="let appointments of ActiveAppointmentList?.slice(0,5)">
                   <span class="cinicsuvisit">
-                      <span>{{(appointments?.clinicName).split(' ')[0].split('')[0] + ((appointments?.clinicName).split(' ')[1] ? (appointments?.clinicName).split(' ')[1].split('')[0] : '') | uppercase}}</span>
+                      <span>{{(appointments?.clinicName)?.split(' ')[0].split('')[0] + ((appointments?.clinicName)?.split(' ')[1] ? (appointments?.clinicName)?.split(' ')[1].split('')[0] : '') | uppercase}}</span>
                   </span>
                 </li>
                 <li class="postminus"  *ngIf="(ActiveAppointmentList?.length) > 5">
