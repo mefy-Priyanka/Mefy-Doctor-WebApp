@@ -7,7 +7,8 @@
     <!-- <div class="new_clinic">Clinic List</div> -->
 
     <div class="row" id="marbtm-0">
-      <div class="scroll">
+      <div class="scrollcstm scroll1">
+          <div class="contentall">
         <div class="mtop2">
           <div class="card" *ngFor="let list of clinicList ;let k=index;">
             <div class="card_text" *ngIf="!formHide">
@@ -274,6 +275,8 @@
             <button class="plus" (click)="createClinic()">+</button>
           </div>
         </div>
+      </div>
+
       </div>
     </div>
   </div>

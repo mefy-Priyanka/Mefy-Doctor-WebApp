@@ -148,8 +148,7 @@ export class DiagnosisComponent implements OnInit {
   createPrescription() {
     this.loader = true
     if (this.diagnosisData.length != 0 || this.lifeStyleData.length != 0 || this.followUpData.length != 0 || this.instructionData.length != 0 || this.suggestionData.length != 0 || this.medicareData.length != 0) {
-      console.log(this.diagnosisData.length, this.diagnosisData)
-      debugger;
+      console.log(this.diagnosisData.length, this.diagnosisData) 
       let prescriptionData = {
         doctorId: localStorage.getItem('doctorId'),
         individualId: this.individualId,

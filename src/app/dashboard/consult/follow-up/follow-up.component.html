@@ -26,7 +26,7 @@
                 <p class="headcard">Revisit schedule</p>
             <div class="revisit_tabs">
               <div id="exTab2">
-                <div class="tabli">
+                <!-- <div class="tabli">
                   <ul class="nav nav-tabs">
 
                     <li class="active">
@@ -39,7 +39,7 @@
                       <a href="#3" data-toggle="tab">MONTH</a>
                     </li>
                   </ul>
-                </div>
+                </div> -->
                 <div class="tab-content ">
                   <div class="tab-pane active" id="1">
                     <p>{{day}}
@@ -50,22 +50,22 @@
 
                       </p>
                   </div>
-                  <div class="tab-pane" id="2">
+                  <!-- <div class="tab-pane" id="2">
                     <p>{{week}}
                       <span>Weeks</span>
                     </p>
                       <p class="range-field ">
                         <input type="range" id="test5" min="0" max="4"(focusout)="checkTime()" (change)="setDay($event,'Weeks')" data-show-value="true" data-popup-enabled="true" [(ngModel)]="weekTest" [ngModelOptions]="{standalone: true}"/>
                       </p>
-                  </div>
-                  <div class="tab-pane" id="3">
+                  </div> -->
+                  <!-- <div class="tab-pane" id="3">
                     <p>{{month}}
                       <span>Months</span>
                     </p>
                       <p class="range-field ">
                         <input type="range" id="test5" min="0" max="12" (focusout)="checkTime()" (change)="setDay($event,'Months')" data-show-value="true" data-popup-enabled="true" [(ngModel)]="monthTest" [ngModelOptions]="{standalone: true}"/>
                       </p>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
