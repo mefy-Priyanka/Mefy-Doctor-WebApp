@@ -3,6 +3,7 @@ import { FormControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule, F
 import { PrescriptionService } from '../../../mefyservice/prescription.service';
 import { SharedService } from '../../../mefyservice/shared.service';
 import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-medicine',
@@ -30,7 +31,7 @@ export class MedicineComponent implements OnInit {
   public frequencyTest:number=0; //initally frequency range zero
   public daysTest:number=0; //initally day range zero
   public mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/]
-  
+  public   dosages = ['50', '100', '250', '500'];
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private PrescriptionService:PrescriptionService, private formBuilder: FormBuilder, private sharedService: SharedService) {
     this.medicineFormErrors = {
@@ -113,7 +114,6 @@ onSelectedMedicine(evt) {
   console.log(this.days);
   let x=(<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['days'].setValue(this.days);
  console.log((<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['days']);
-
 }
  /******************TO SET FREQUENCY RANGE FOR  MEDICINE *********************/
  setFrequency(event,i) {
@@ -121,6 +121,11 @@ onSelectedMedicine(evt) {
   this.frequency = event.target.value;
   let y=(<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['frequency'].setValue(this.frequency);
   console.log((<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['frequency']);
+}
+ /******************TO SET DOSAGE  FOR  MEDICINE *********************/
+selectDosage(dosage,i){
+  console.log('dosage',dosage)
+  let x=(<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['dosage'].setValue(dosage);
 }
 
   /************ CREATEMEDICINE PRESCRIPTION*************/
@@ -145,16 +150,19 @@ else{
 
   /**************ADD MORE THAN ONE MEDICINE  FORM**********************/
   addMedicineForm(i) {
-    console.log("I am executing");
+    console.log('medicine form',this.medicineForm.value)
     this.hideSave=true;
-    this.medicineForm.reset();
+    // this.medicineForm.reset();
     // this.reset();
     // this.frequency = '';
     console.log((<FormArray>this.medicineForm.controls['medinfo']))
-  
       this.medinfo = this.medicineForm.get('medinfo') as FormArray;
+      console.log('medinfo',this.medinfo)
+          this.frequency = '';
+          this.days=''
       this.medinfo.push(this.createmedicineForm());
-      this.days = '';
+      console.log('medinfopush',this.medinfo)
+
     
   
  }
@@ -165,7 +173,6 @@ deleteMedicineForm(index){
   if(this.medinfo.length==0){
     console.log(this.medinfo.length)
     this.hideSave=false;
-
   }
   else{
     this.hideSave=true; 
@@ -175,11 +182,10 @@ deleteMedicineForm(index){
   closeForm() {
     this.medicineForm.reset()
     this.router.navigate(['/dashboard/consultnew/diagnosis']);
-
   }
   reset() {
-    this.myInputVariable.nativeElement.value = "";
-    this.myOutputVariable.nativeElement.value = "";
+    // this.myInputVariable.nativeElement.value = "";
+    // this.myOutputVariable.nativeElement.value = "";
     this.daysTest=0;
     this.frequencyTest=0;
 

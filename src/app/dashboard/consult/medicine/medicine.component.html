@@ -35,13 +35,20 @@
       <!-- <input type="text" name="fname" [textMask]="{mask: mask, guide: false}" placeholder="Dosage" formControlName="dosage"
         class="referdoc"> -->
         <p class="provisionalc21frequency">Dosage(mg)</p>
-<ul class="list-inline dosage">
+<!-- <ul class="list-inline dosage">
   <li><button>50</button></li>
   <li><button>100</button></li>
   <li><button>250</button></li>
   <li><button>500</button></li>
+</ul> -->
+ <ul class="list-inline dosage">
+<li *ngFor="let dosage of dosages"  >
+  <button (click)="selectDosage(dosage,i)" >
+    {{dosage}}
+  </button>
+  
+</li>
 </ul>
-
       <!-- <span class="errormessage" *ngIf="medicineFormErrors.dosage.required">Please Provide Medicine Dosage</span> -->
       <div class="f_range">
           <span class="provisionalc21frequency">Frequency</span>
@@ -51,13 +58,12 @@
               <span>X</span>
             </p>
             <p class="range-field ">
-              <input  #myInput type="range" id="test5" startValue="0" min="0" max="5"(change)="setFrequency($event,i)" data-show-value="true" data-popup-enabled="true" [(ngModel)]="frequencyTest" [ngModelOptions]="{standalone: true}" />
+              <input  type="range" id="test5" [(value)]="frequencyTest"  min="0" max="5"(change)="setFrequency($event,i)" data-show-value="true" data-popup-enabled="true" formControlName="frequency"/>
             </p>
-    
           </div>
         </div>
-      <span class="provisionalc21frequency">Days</span>
 
+      <span class="provisionalc21frequency">Days</span>
       <div class="day_tab">
         <p>{{days}}
           <span>days</span>

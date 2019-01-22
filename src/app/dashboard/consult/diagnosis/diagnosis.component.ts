@@ -171,6 +171,7 @@ export class DiagnosisComponent implements OnInit {
           title: 'Prescription Created Sucessfully!'
         }
         this.sharedService.createNotification(notifydata);
+        this.router.navigate(['/dashboard/main']);
       }, err => {
         let notifydata = {
           type: 'error',
