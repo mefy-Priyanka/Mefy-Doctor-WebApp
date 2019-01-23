@@ -3,7 +3,7 @@ import { FormControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule, F
 import { PrescriptionService } from '../../../mefyservice/prescription.service';
 import { SharedService } from '../../../mefyservice/shared.service';
 import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-medicine',
@@ -32,7 +32,7 @@ export class MedicineComponent implements OnInit {
   public daysTest:number=0; //initally day range zero
   public mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/]
   public   dosages = ['50', '100', '250', '500'];
-
+  
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private PrescriptionService:PrescriptionService, private formBuilder: FormBuilder, private sharedService: SharedService) {
     this.medicineFormErrors = {
       medicineName: {},
@@ -117,15 +117,17 @@ onSelectedMedicine(evt) {
 }
  /******************TO SET FREQUENCY RANGE FOR  MEDICINE *********************/
  setFrequency(event,i) {
-  this.frequency=''
+  // this.frequency=''
   this.frequency = event.target.value;
+  // console.log('ddddd',this.frequency[i])
+  // console.log('ddddd',this.frequency)
   let y=(<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['frequency'].setValue(this.frequency);
   console.log((<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['frequency']);
 }
  /******************TO SET DOSAGE  FOR  MEDICINE *********************/
 selectDosage(dosage,i){
   console.log('dosage',dosage)
-  let x=(<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['dosage'].setValue(dosage);
+  let z=(<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['dosage'].setValue(dosage);
 }
 
   /************ CREATEMEDICINE PRESCRIPTION*************/
@@ -162,9 +164,6 @@ else{
           this.days=''
       this.medinfo.push(this.createmedicineForm());
       console.log('medinfopush',this.medinfo)
-
-    
-  
  }
 /*****************DELETE MEDICINE FORM*************************************/
 deleteMedicineForm(index){

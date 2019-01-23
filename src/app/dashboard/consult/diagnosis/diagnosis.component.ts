@@ -49,18 +49,18 @@ export class DiagnosisComponent implements OnInit {
     this.sharedService.diagnosisdata.subscribe(data => {
       if (data.length != 0 && Object.keys(data).length != 0) {
         this.hidePrescribeButton = true;
-        this.diagnosisData.push(data)
+        this.diagnosisData.push(data.diaginfo)
       }
-      // console.log('diagnosisdata at diagnosis', this.diagnosisData)
+      console.log('diagnosisdata at diagnosis', this.diagnosisData[0])
     })
 
     /***************GET SUGGESTION TYPE DATA *****************/
     this.sharedService.suggestionData.subscribe(data => {
       if (data.length != 0 && Object.keys(data).length != 0) {
         this.hidePrescribeButton = true;
-        this.suggestionData.push(data)
+        this.suggestionData.push(data.suggestInfo)
       }
-      console.log('suggestionData at diagnosis ', this.suggestionData)
+      console.log('suggestionData at diagnosis ', this.suggestionData[0])
     })
 
     /***************GET MEDICARE DATA *****************/
@@ -153,9 +153,9 @@ export class DiagnosisComponent implements OnInit {
         doctorId: localStorage.getItem('doctorId'),
         individualId: this.individualId,
         medicine: this.medicareData[0],
-        diagnosis: this.diagnosisData,
+        diagnosis: this.diagnosisData[0],
         instruction: this.instructionData[0],
-        recommended: this.suggestionData,
+        recommended: this.suggestionData[0],
         lifestyle: this.lifeStyleData[0],
         advice: this.followUpData
       }

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SocketService } from '../../../meme-services/socket.service';
-import { FormControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray, FormArrayName } from '@angular/forms';
-import { DoctorPrescriptionService } from '../../../meme-services/doctor-prescription.service';
+import { FormControl, FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { SharedService } from '../../../mefyservice/shared.service';
-import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
+import {  Router, Params } from '@angular/router';
 
 @Component({
   selector: 'app-suggest',
@@ -11,24 +9,17 @@ import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
   styleUrls: ['./suggest.component.css']
 })
 export class SuggestComponent implements OnInit {
-  hideSaveButton: boolean;
-  messageTest: string;
-  submitted: boolean;
-  tests: any;
-  testTypes = ['Radiology', 'Imaging', 'Clinical', 'UltraSound', 'Laboratory'];
-  suggestForm: FormGroup;
-  recommendedForm: any = [];
-  suggestFormErrors: any;
-  prescriptionId: any;
-  testDetails: boolean = false;
-  hideTestRecommended: boolean = false; //hide test recommended form
-  hideAddbutton: boolean = false;
-  suggestId: any;
-  suggestData: any;
-  messageSuggest = '';
-  update: boolean = true;
-  hideDelete: boolean = false;
-  constructor(private router: Router, private ePrescriptionService: DoctorPrescriptionService, private sharedService: SharedService, private socketService: SocketService, private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) {
+  public suggestForm: FormGroup;
+  public suggestFormErrors: any;
+  public suggestInfo: FormArray;
+
+  public recommendedForm: any = [];
+  public tests: any;
+  public messageTest: string;
+  public hideTestRecommended: boolean = false; //hide test recommended form
+  public testTypes = ['Radiology', 'Imaging', 'Clinical', 'UltraSound', 'Laboratory'];
+
+  constructor(private router: Router, private sharedService: SharedService, private formBuilder: FormBuilder) {
     this.suggestFormErrors = {
       categoryType: {},
       testName: {},
@@ -37,7 +28,11 @@ export class SuggestComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.suggestForm = this.createSuggestForm();
+    // this.suggestForm = this.createSuggestForm();
+    /************FORM ARRAY********************* */
+    this.suggestForm =this.formBuilder.group({
+      suggestInfo: this.formBuilder.array([ this.createSuggestForm() ])
+    });
     this.suggestForm.valueChanges.subscribe(() => {
       this.onSuggestFormValuesChanged();
     });
@@ -70,17 +65,19 @@ export class SuggestComponent implements OnInit {
     });
   }
 
-  // create recommended test
+   /****************** select data from dropdown***********************/
+   testRecommend(value: string,i) {
+    this.tests = value;
+    let y=(<FormArray>this.suggestForm.controls['suggestInfo']).controls[i]['controls']['categoryType'].setValue(this.tests);
+    console.log((<FormArray>this.suggestForm.controls['suggestInfo']).controls[i]['controls']['categoryType']);
+    this.hideTestRecommended = true;
+
+  }
+  /********************************** create recommended test**************/
   createSuggestTest() {
     this.suggestForm.controls.categoryType.setValue(this.tests);
     if (this.suggestForm.valid && this.tests.length != 0 && this.tests != 'null') {
-      let recomendedtest = {
-        testName: this.suggestForm.value.testName,
-        testDescription: this.suggestForm.value.testName
-      }
-      console.log("testName", this.suggestForm.value.testName)
-      console.log("testDescription", this.suggestForm.value.testName)
-      this.sharedService.createTest(recomendedtest);
+      this.sharedService.createTest(this.suggestForm.valuendedtest);
       this.router.navigate(['/dashboard/consultnew/diagnosis']);
     }
     else {
@@ -91,15 +88,26 @@ export class SuggestComponent implements OnInit {
       this.sharedService.createNotification(notifydata);
     }
   }
+    /**************ADD MORE THAN ONE MEDICINE  FORM**********************/
+    addSuggestForm(i) {
 
-  // select data from dropdown
-  testRecommend(value: string) {
-    this.tests = value;
-    this.suggestForm.controls.categoryType.setValue(this.tests)
-    this.hideTestRecommended = true;
-    // this.hideAddbutton = true;
+        this.suggestInfo = this.suggestForm.get('suggestInfo') as FormArray;
+        console.log('suggestInfo',this.suggestInfo)  
+        this.suggestInfo.push(this.createSuggestForm());
+        console.log('suggestInfo',this.suggestInfo)
+   }
+/*****************DELETE MEDICINE FORM*************************************/
+deleteMedicineForm(index){
+  this.suggestInfo = this.suggestForm.get('suggestInfo') as FormArray;
+  this.suggestInfo.removeAt(index)
+  if(this.suggestInfo.length==0){
+    console.log(this.suggestInfo.length)
+    // this.hideSave=false;
   }
-
+  else{
+    // this.hideSave=true; 
+  }
+}
   // close suggest form on close button
   closeForm() {
     this.suggestForm.reset()

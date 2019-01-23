@@ -19,6 +19,7 @@ import { LifestyleComponent } from './lifestyle/lifestyle.component';
 import { FollowUpComponent } from './follow-up/follow-up.component';
 // import { Ng2CompleterModule } from "ng2-completer";
 
+
 const routes: Routes = [
   {
     path: '',
