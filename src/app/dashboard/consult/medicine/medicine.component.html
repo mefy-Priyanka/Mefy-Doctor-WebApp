@@ -47,8 +47,8 @@
       <div class="f_range">
         <span class="provisionalc21frequency">Frequency</span>
         <div class="day_tab">
+          <p>  {{frequency}}
 
-          <p> {{frequency}}
             <span>X</span>
           </p>
           <p class="range-field ">
@@ -56,6 +56,8 @@
               data-show-value="true" data-popup-enabled="true" formControlName="frequency" />
           </p>
         </div>
+      <!-- <ng5-slider [(value)]="frequencyTest" [options]="options" (change)="setFrequency($event,i)" formControlName="frequency"></ng5-slider> -->
+
       </div>
 
       <span class="provisionalc21frequency">Days</span>

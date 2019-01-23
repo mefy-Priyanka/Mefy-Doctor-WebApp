@@ -2,35 +2,39 @@
 <div class="content_suggest">
 
   <form [formGroup]="suggestForm" novalidate>
-    <p class="provisionalc21">Test Recommended</p>
-    <div class="card cardabc1 custom-card">
+    <div class="card-body" formArrayName="suggestInfo" *ngFor="let form of suggestForm.get('suggestInfo').controls; let i=index">
+      <div [formGroupName]="i">
+        <p class="provisionalc21">Test Recommended</p>
+        <div class="card cardabc1 custom-card">
 
-      <div class="card-body">
-       
-        <div class="radio_btn">
-          <select class="browser-default" formControlName="categoryType" (change)="testRecommend($event.target.value)">
-            <option [value]="null">Please select test category</option>
-            <option *ngFor="let test of testTypes" value={{test}}>{{test}}</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <!-- **************Test Recommended box************** -->
-    <!-- **************Test Recommended************** -->
-    <p class="provisionalc21" *ngIf="hideTestRecommended">Test Recommended</p>
-    <div *ngIf="hideTestRecommended">
-      <div class="card cardabc1 custom-card">
-        <div class="card-body">
-            <div class="text-right"><i class="fa fa-remove" id="formcloseicon"></i></div>
-          <p class="provisionalc212">{{tests}}</p>
-          <hr class="full_width">
-          <!-- <span class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red','text-align':'center'}">{{messageTest}}</span> -->
-          <div class="allignspace text-left">
-            <input type="text" name="fname" placeholder="Test Name" class="referdoc" formControlName="testName">
-            <span class="errormessage" *ngIf="suggestFormErrors.testName.required">Please Provide Test Name </span>
-            <input type="text" name="fname" placeholder="Test Description" class="referdoc" formControlName="testDescription">
+          <div class="card-body">
+
+            <div class="radio_btn">
+              <select class="browser-default" formControlName="categoryType" (change)="testRecommend($event.target.value,i)">
+                <option [value]="null">Please select test category</option>
+                <option *ngFor="let test of testTypes" value={{test}}>{{test}}</option>
+              </select>
+            </div>
           </div>
+        </div>
+        <!-- **************Test Recommended box************** -->
+        <!-- **************Test Recommended************** -->
+        <p class="provisionalc21" *ngIf="hideTestRecommended">Test Recommended</p>
+        <div *ngIf="hideTestRecommended">
+          <div class="card cardabc1 custom-card">
+            <div class="card-body">
+              <div class="text-right"><i (click)="deleteMedicineForm(i)" class="fa fa-remove" id="formcloseicon"></i></div>
+              <p class="provisionalc212">{{tests}}</p>
+              <hr class="full_width">
+              <!-- <span class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red','text-align':'center'}">{{messageTest}}</span> -->
+              <div class="allignspace text-left">
+                <input type="text" name="fname" placeholder="Test Name" class="referdoc" formControlName="testName">
+                <span class="errormessage" *ngIf="suggestFormErrors.testName.required">Please Provide Test Name </span>
+                <input type="text" name="fname" placeholder="Test Description" class="referdoc" formControlName="testDescription">
+              </div>
 
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -38,13 +42,13 @@
 </div>
 <div class="row">
   <div class="plus_btn pull-right ng-star-inserted">
-    <button class="plus">+</button>
+    <button class="plus" (click)="addSuggestForm()">+</button>
   </div>
 </div>
 <div class="text-center high" *ngIf="hideTestRecommended">
   <button class="prescribebtn" (click)="createSuggestTest()">Save</button>
   <!-- <button class="prescribebtn" *ngIf="update" (click)="saveSuggestForm()">Save +</button> -->
   <!-- <button class="prescribebtn" *ngIf="hideDelete" (click)="deleteSuggestForm()" >Delete</button> -->
-  <button class="cancelbtn"  (click)="closeForm()">Cancel</button>
+  <button class="cancelbtn" (click)="closeForm()">Cancel</button>
 
 </div>
