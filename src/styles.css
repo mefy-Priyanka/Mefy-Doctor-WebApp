@@ -5,7 +5,9 @@
 body {
     overflow-x: hidden;
 }
-
+div#myModal {
+    width: auto;
+}
 .regbackground {
     background: #a465f4;
     background: -webkit-linear-gradient(to right, #5977FA, #a465f4);

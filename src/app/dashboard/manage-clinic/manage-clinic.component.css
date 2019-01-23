@@ -472,6 +472,12 @@ button.eddtn {
 /* *****Dropdown button ****** */
 /* ********Responsive******** */
 @media only screen and (min-width: 320px) and (max-width:767px){
+    button.addnew{
+        float: initial !important;
+    }
+    .scrnres {
+        text-align: center;
+    }
     div#left_side{
         padding-left: 15px;
     }
@@ -684,7 +690,7 @@ h5.modalhead {
     margin-bottom: 7px;
 }
 span.highlightedtxt {
-    color: #3ad87b;
+    color: #717171;
 }
 .modal-content {
     border-radius: 2px;
@@ -891,7 +897,7 @@ button.btn.btn-info.btn-md.addnew:hover {
     font-size: 14px;
 } */
 form.modalform {
-    padding: 3px 3em 4em 3em;
+    padding: 3px 3em 3em 3em;
 }
 button.addcal {
     border-radius: 50%;
