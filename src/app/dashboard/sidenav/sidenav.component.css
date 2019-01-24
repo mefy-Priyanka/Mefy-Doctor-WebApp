@@ -109,6 +109,13 @@ img.logo_img2a {
    
     margin: 0 auto;
 }
+a.linkleft {
+    cursor: pointer;
+    color: #fff !important;
+}
+a.linkleft:hover {
+    text-decoration: underline !important;
+}
 img.logo_img2aa2 {
     border-radius: 50%;
     width: 80px;
