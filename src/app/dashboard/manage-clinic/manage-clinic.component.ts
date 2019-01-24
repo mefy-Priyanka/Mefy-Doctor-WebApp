@@ -25,6 +25,7 @@ export class ManageClinicComponent implements OnInit {
   /*********************************** USED VARIABLES  ********************************************* */
   clinicForm: FormGroup;
   weekForm: FormArray;
+  receptionistForm:FormGroup;
   clinicFormErrors: any;
   scheduleData: any = {};
   clinicList: any = [];
@@ -65,6 +66,7 @@ export class ManageClinicComponent implements OnInit {
   date2: any;
   jindex: any;
   timeError: any = '';
+  public selectedClinicId:any
   public mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
   public fee = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // fee validation 
   toastoptions: any;
@@ -112,6 +114,7 @@ export class ManageClinicComponent implements OnInit {
   ngOnInit() {
 
     // INITIALISE CLINIC FORM CREATION
+    this.receptionistForm=this.createReceptForm();
     this.clinicForm = this.createclinicForm();
     this.clinicForm.valueChanges.subscribe(() => {
       this.onclinicFormValuesChanged();
@@ -166,7 +169,13 @@ export class ManageClinicComponent implements OnInit {
 
   }
   /******************************************************* ENDS ****************************************************** */
-
+/*********************RECEPTIONIST FORM**********************/
+createReceptForm(){
+  return this.formBuilder.group({
+name:['', Validators.required],
+phoneNumber:['', Validators.required]
+  });
+}
   /********************************************** FORM ARRAY FOR WEEKDAYS **************************************** */
   newform() {
     return this.formBuilder.group({
@@ -336,6 +345,47 @@ export class ManageClinicComponent implements OnInit {
 
   /********************************************************* ENDS ************************************************************* */
 
+  /************************ADD RECEPTIONIST******************/
+  addReceptionist(clinicId){
+    this.selectedClinicId=clinicId.clinicId
+    console.log('clinicid', this.selectedClinicId)
+    if(this.receptionistForm.valid){
+      let data={
+        name:this.receptionistForm.value.name,
+        phoneNumber:this.receptionistForm.value.phoneNumber,
+        doctorId:this.doctorprofileId,
+        clinicId:this.selectedClinicId
+      }
+        console.log(data)
+        this.ClinicService.addRecpt(data).subscribe(value=>{
+          console.log('receptionst create',value)
+          let notifydata = {
+            type: 'sucess',
+            title: 'Clinic',
+            msg: 'Receptionist added sucessfully.'
+          }
+          this.sharedService.createNotification(notifydata);
+        },
+        err=>{
+          console.log(err)
+          let notifydata = {
+            type: 'error',
+           
+            msg: 'Something went wrong'
+          }
+          this.sharedService.createNotification(notifydata);
+
+        })
+      }
+      else{
+        let notifydata = {
+          type: 'warning',       
+          msg: 'Not Valid'
+        }
+        this.sharedService.createNotification(notifydata);
+      }
+    }
+  
   /************************************************** COMPARE END TIME WITH START TIME ****************************************** */
   comparewithEndTime(i) {
     this.jindex = i;

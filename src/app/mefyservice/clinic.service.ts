@@ -45,4 +45,8 @@ export class ClinicService {
     console.log(clinicId,date)
     return this.httpClient.get(APIURL+'clinic/getTimeSlot?clinicId='+clinicId+'&date='+date)
   }
+  /*********ADD RECEPTIONIST**** */
+  addRecpt(data){
+    return this.httpClient.post(APIURL + 'receptionist/create', data);
+  }
 }
