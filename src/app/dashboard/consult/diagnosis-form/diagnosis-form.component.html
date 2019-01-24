@@ -28,6 +28,8 @@
       <div formArrayName="diaginfo">
         <div [formGroupName]="i">
           <input type="text" name="fname" placeholder="Diagnosis for" class="referdoc" formControlName="diagnosisFor">
+          <!-- <p class="errormessage" *ngIf="diagnosisFormErrors.diagnosisFor.required || (diagnosisFormNew.controls.diagnosisFor.pristine && submitted)">Can't be empty</p> -->
+
           <!-- <span [ngStyle]="{'-webkit-text-fill-color':'	red'}" *ngIf="diagnosisFormErrors.diagnosisFor.required">Please Provide Diagnosis Type</span> -->
           <input type="text" name="fname" placeholder="Diagnosis brief" class="referdoc" formControlName="diagnosisBrief">
         </div>
@@ -41,7 +43,7 @@
 </div>
 <div class="row">
   <div class="plus_btn pull-right ng-star-inserted">
-    <button class="plus" (click)="addDiagnosisForm()">+</button>
+    <button class="plus" (click)="addDiagnosisForm()" [disabled]="diagnosisFormNew.get('diaginfo').invalid">+</button>
   </div>
 </div>
 <div class="text-center high" *ngIf="hideSave">

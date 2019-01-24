@@ -49,7 +49,7 @@
 </div> -->
 <div class="row">
   <div class="plus_btn pull-right ng-star-inserted">
-    <button class="plus" (click)="AddInstructionForm()">+</button>
+    <button class="plus" (click)="AddInstructionForm()" [disabled]="instructionForm.get('advice').invalid">+</button>
   </div>
 </div>
 <div class="text-center high" *ngIf="hideSave">
