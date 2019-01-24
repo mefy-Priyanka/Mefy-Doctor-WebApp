@@ -639,7 +639,39 @@ svg#dot{
     background: #666; 
   }
 
+  .tooltip {
+    position: relative;
+    display: inline-block;
+   opacity:1;
+   z-index: 0;
+  }
   
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 60px;
+    bottom: -34px;
+    background-color: #0b0b0b9e;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    left: 29px;
+  }
+  .tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #0b0b0b9e transparent;
+  }
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
   button.addnew {
     /* background: #0bdb85;
     line-height: 30px;
@@ -657,14 +689,14 @@ svg#dot{
     float: right;
     outline: none; */
     background: transparent;
-    line-height: 30px;
+    line-height: 12px;
     width: auto;
     color: #828683;
     font-size: 14px;
     font-weight: 400;
     font-family: 'Lato',sans-serif;
     border-radius: 20px;
-    margin-top: 1em;
+    margin-top: 10px;
     box-shadow: none;
     padding: 0 18px;
     text-transform: unset;
@@ -886,7 +918,7 @@ textarea.validate::placeholder {
     font-family: lato;
 }
 button.btn.btn-info.btn-md.addnew:hover {
-    background: #f7f7f7;
+    background: transparent;
     border: transparent;
     outline: none;
 }
@@ -965,4 +997,9 @@ button.closeButton {
     height: 30px;
     width: 42px;
     font-size: 19px;
+}
+svg#receptionist {
+    height: 28px;
+    width: 39px;
+    fill: #57b85a;
 }
