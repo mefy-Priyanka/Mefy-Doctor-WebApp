@@ -77,7 +77,7 @@ export class SuggestComponent implements OnInit {
   createSuggestTest() {
     this.suggestForm.controls.categoryType.setValue(this.tests);
     if (this.suggestForm.valid && this.tests.length != 0 && this.tests != 'null') {
-      this.sharedService.createTest(this.suggestForm.valuendedtest);
+      this.sharedService.createTest(this.suggestForm.value);
       this.router.navigate(['/dashboard/consultnew/diagnosis']);
     }
     else {
