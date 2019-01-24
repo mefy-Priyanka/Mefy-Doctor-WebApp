@@ -23,6 +23,12 @@ ul.list-inline.days {
     background: linear-gradient(to right,#6160c7,#8851b9);
     /* background: linear-gradient(to right,#3c84fd,#a76ff8); */
 }
+.clsicon {
+    cursor: pointer;
+}
+svg#Capa_clsicon {
+    width: 10px;
+}
 span.error_message {
     color: red;
 }
