@@ -23,6 +23,12 @@ ul.list-inline.days {
     background: linear-gradient(to right,#6160c7,#8851b9);
     /* background: linear-gradient(to right,#3c84fd,#a76ff8); */
 }
+.clsicon {
+    cursor: pointer;
+}
+svg#Capa_clsicon {
+    width: 10px;
+}
 span.error_message {
     color: red;
 }
@@ -639,32 +645,50 @@ svg#dot{
     background: #666; 
   }
 
+  .tooltip {
+    position: relative;
+    display: inline-block;
+   opacity:1;
+   z-index: 0;
+  }
   
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 60px;
+    bottom: -34px;
+    background-color: #0b0b0b9e;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    left: 29px;
+  }
+  .tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #0b0b0b9e transparent;
+  }
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
   button.addnew {
-    /* background: #0bdb85;
-    line-height: 30px;
-    width: auto;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 400;
-    font-family: 'Roboto',sans-serif;
-    border: 1px solid #0bdb85;
-    border-radius: 20px;
-    margin-top: 1em;
-    box-shadow: 0px 1px 16px 3px rgba(58, 216, 123, 0.31);
-    padding: 0 18px;
-    text-transform: unset;
-    float: right;
-    outline: none; */
+   
     background: transparent;
-    line-height: 30px;
+    line-height: 12px;
     width: auto;
-    color: #828683;
+    color: rgba(6, 6, 6, 0.52) !important;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 600;
     font-family: 'Lato',sans-serif;
     border-radius: 20px;
-    margin-top: 1em;
+    margin-top: 10px;
     box-shadow: none;
     padding: 0 18px;
     text-transform: unset;
@@ -886,7 +910,7 @@ textarea.validate::placeholder {
     font-family: lato;
 }
 button.btn.btn-info.btn-md.addnew:hover {
-    background: #f7f7f7;
+    background: transparent;
     border: transparent;
     outline: none;
 }
@@ -965,4 +989,9 @@ button.closeButton {
     height: 30px;
     width: 42px;
     font-size: 19px;
+}
+svg#receptionist {
+    height: 28px;
+    width: 39px;
+    fill: #57b85a;
 }

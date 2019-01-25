@@ -32,7 +32,7 @@ export class DiagnosisFormComponent implements OnInit {
   }
   creatediagnosisForm() {
     return this.formBuilder.group({
-      diagnosisFor: [''],
+      diagnosisFor: ['',Validators.required],
       diagnosisBrief: [''],
     });
   }
@@ -74,6 +74,7 @@ export class DiagnosisFormComponent implements OnInit {
         title: 'Not Valid!'
       }
       this.sharedService.createNotification(notifydata);
+      this.submitted = true;
       this.loader = false;
     }
 

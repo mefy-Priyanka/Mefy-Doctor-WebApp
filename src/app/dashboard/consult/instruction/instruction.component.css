@@ -21,6 +21,10 @@ color: #fff;
 font-family: lato;
 font-weight: 600;
 }
+button.plus:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+  }
 .cancelbtn{
     border-radius: 50px;
     background:transparent;

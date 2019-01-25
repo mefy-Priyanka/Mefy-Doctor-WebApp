@@ -106,8 +106,15 @@ img.logo_img2a {
     margin-top: 1em;
 }
 .sideimg {
-    padding: 0 9em;
+   
     margin: 0 auto;
+}
+a.linkleft {
+    cursor: pointer;
+    color: #fff !important;
+}
+a.linkleft:hover {
+    text-decoration: underline !important;
 }
 img.logo_img2aa2 {
     border-radius: 50%;
