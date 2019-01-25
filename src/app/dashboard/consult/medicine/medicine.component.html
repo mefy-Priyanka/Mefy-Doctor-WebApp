@@ -38,7 +38,7 @@
       <p class="provisionalc21frequency">Dosage(mg)</p>
       <ul class="list-inline dosage">
         <li *ngFor="let dosage of dosages">
-          <button (click)="selectDosage(dosage,i)">
+          <button (click)="selectDosage(dosage,i)" >
             {{dosage}}
           </button>
         </li>
@@ -47,7 +47,7 @@
       <div class="f_range">
         <span class="provisionalc21frequency">Frequency</span>
         <div class="day_tab">
-          <p>  {{frequency}}
+          <p>  {{frequencyarray[i]}}
 
             <span>X</span>
           </p>
@@ -62,7 +62,7 @@
 
       <span class="provisionalc21frequency">Days</span>
       <div class="day_tab">
-        <p>{{days}}
+        <p>{{dayarray[i]}}
           <span>days</span>
         </p>
 
