@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray, FormArrayName } from '@angular/forms';
 import { PrescriptionService } from '../../../mefyservice/prescription.service';
 import { SharedService } from '../../../mefyservice/shared.service';
@@ -11,10 +11,6 @@ import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
   styleUrls: ['./medicine.component.css']
 })
 export class MedicineComponent implements OnInit {
-  @ViewChild('myInput')
-  myInputVariable: any;
-  @ViewChild('myOutput')
-  myOutputVariable: any;
   public medicineForm: FormGroup;
   medinfo: FormArray;
   public medicineFormErrors: any;
@@ -61,11 +57,11 @@ export class MedicineComponent implements OnInit {
 
   createmedicineForm() {
     return this.formBuilder.group({
-      medicineName: [''],
-      dosage: [''],
-      days: [''],
+      medicineName: ['',Validators.required],
+      dosage: ['',Validators.required],
+      days: ['',Validators.required],
       instructions: [''],
-      frequency: ['']
+      frequency: ['',Validators.required]
     });
   }
 
@@ -125,13 +121,12 @@ export class MedicineComponent implements OnInit {
     this.frequency = [];
     // debugger;
 
-    console.log(this.frequency);
-    console.log(this.frequencyarray);
+    // console.log(this.frequency);
+    // console.log(this.frequencyarray);
     this.frequency[i] = event.target.value;
     this.frequencyarray[i] = event.target.value;
-    console.log(this.frequency, this.frequencyarray);
+    // console.log(this.frequency, this.frequencyarray);
     let y = (<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['frequency'].setValue(this.frequency[i]);
-    // console.log((<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['frequency']);
     console.log(this.medicineForm.controls)
     // console.log(this.frequency);
   }
@@ -162,7 +157,7 @@ export class MedicineComponent implements OnInit {
   }
 
   /**************ADD MORE THAN ONE MEDICINE  FORM**********************/
-  addMedicineForm(i) {
+  addMedicineForm() {
     console.log('medicine form', this.medicineForm.value)
     this.hideSave = true;
     // this.medicineForm.reset();
@@ -194,8 +189,6 @@ export class MedicineComponent implements OnInit {
     this.router.navigate(['/dashboard/consultnew/diagnosis']);
   }
   reset() {
-    // this.myInputVariable.nativeElement.value = "";
-    // this.myOutputVariable.nativeElement.value = "";
     this.daysTest = 0;
     this.frequencyTest = 0;
 

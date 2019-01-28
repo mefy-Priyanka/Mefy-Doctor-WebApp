@@ -23,30 +23,24 @@
         </div>
       </div>
       <!-- /* loader */ -->
-      <p class="headcard">Revisit schedule</p>
-      <!-- <div class="revisit_tabs">
-        <div id="exTab2"> -->
-          <!-- <div class=""> -->
-            <div class="followPadding" [formGroupName]="i">
-              <p class="centerDay">{{days}}
+      <div class="followPadding" [formGroupName]="i">
+      <p class="headcard">Revisit schedule</p>    
+              <p class="centerDay">{{dayarray[i]}}
                 <span>Days</span>
               </p>
               <p class="range-field ">
-                <input #myOutput type="range" id="test5" min="0" max="30" (change)="setDay($event,i)" data-show-value="true"
-                  data-popup-enabled="true" [(ngModel)]="daysTest" [ngModelOptions]="{standalone: true}" />
-              </p>
+                  <input type="range" [(value)]="daysTest" id="test5" step="1" value="0" min="0" max="30" (change)="setDay($event,i)"
+                    data-show-value="true" data-popup-enabled="true" formControlName="day" />
+                </p>
               <input type="text" placeholder="Referred to another Doctor" class="referdoc" formControlName="referredDoctor">
             </div>
-          <!-- </div> -->
-        <!-- </div>
-      </div> -->
     </div>
   
 </div>
 </form>
 <div class="row">
   <div class="plus_btn pull-right ng-star-inserted">
-    <button class="plus" (click)="addFollowForm()">+</button>
+    <button class="plus" (click)="addFollowForm()" [disabled]="followForm.get('followinfo').invalid">+</button>
   </div>
 </div>
 <div class="text-center high" *ngIf="hideSave"> 

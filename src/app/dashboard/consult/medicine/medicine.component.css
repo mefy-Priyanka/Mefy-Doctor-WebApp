@@ -253,6 +253,10 @@ button.plus:hover{
     button.selectedDose {
         background: linear-gradient(to right, rgb(121, 120, 250),rgba(178, 109, 247, 1)) !important;
     }
+    button.plus:disabled {
+        cursor: not-allowed;
+        pointer-events: all !important;
+      }
     ul.list-inline.dosage {
         text-align: center;
     }

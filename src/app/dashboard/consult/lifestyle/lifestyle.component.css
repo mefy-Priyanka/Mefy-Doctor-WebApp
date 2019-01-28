@@ -133,6 +133,10 @@ input.referdoc:focus {
 .card-body {
     padding-top: 7px;
 }
+button.plus:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+  }
 .error_message2 {
     color: red;
     text-align:center;

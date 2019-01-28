@@ -24,7 +24,7 @@
           <div class="card cardabc1 custom-card">
             <div class="card-body">
               <div class="text-right"><i (click)="deleteMedicineForm(i)" class="fa fa-remove" id="formcloseicon"></i></div>
-              <p class="provisionalc212">{{tests}}</p>
+              <p class="provisionalc212">{{tests[i]}}</p>
               <hr class="full_width">
               <!-- <span class="error_message2" [ngStyle]="{'-webkit-text-fill-color':'	red','text-align':'center'}">{{messageTest}}</span> -->
               <div class="allignspace text-left">
@@ -42,7 +42,7 @@
 </div>
 <div class="row">
   <div class="plus_btn pull-right ng-star-inserted">
-    <button class="plus" (click)="addSuggestForm()">+</button>
+    <button class="plus" (click)="addSuggestForm()" [disabled]="suggestForm.get('suggestInfo').invalid">+</button>
   </div>
 </div>
 <div class="text-center high" *ngIf="hideTestRecommended">
