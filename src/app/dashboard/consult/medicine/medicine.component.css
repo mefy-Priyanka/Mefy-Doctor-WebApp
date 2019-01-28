@@ -241,7 +241,7 @@ button.plus:hover{
         border: none;
         padding: 0;
     }
-    ul.list-inline.dosage li:hover {
+    /* ul.list-inline.dosage li:hover {
         background: linear-gradient(to right, rgb(121, 120, 250),rgba(178, 109, 247, 1));
         border-radius: 50%;
         height: 30px;
@@ -249,6 +249,9 @@ button.plus:hover{
         width: 30px;
         border: none;
         box-shadow: 0px 1px 16px 3px rgba(137, 99, 206, 0.31);
+    } */
+    button.selectedDose {
+        background: linear-gradient(to right, rgb(121, 120, 250),rgba(178, 109, 247, 1)) !important;
     }
     ul.list-inline.dosage {
         text-align: center;
