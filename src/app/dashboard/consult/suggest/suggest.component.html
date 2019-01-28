@@ -42,7 +42,7 @@
 </div>
 <div class="row">
   <div class="plus_btn pull-right ng-star-inserted">
-    <button class="plus" (click)="addSuggestForm()">+</button>
+    <button class="plus" (click)="addSuggestForm()" [disabled]="suggestForm.get('suggestInfo').invalid">+</button>
   </div>
 </div>
 <div class="text-center high" *ngIf="hideTestRecommended">

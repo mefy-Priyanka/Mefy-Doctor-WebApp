@@ -161,7 +161,10 @@ span.errormessage {
     color: red;
     font-size: 13px;
 }
-
+button.plus:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+  }
 .allignspace.text-left {
     text-align: left;
 }

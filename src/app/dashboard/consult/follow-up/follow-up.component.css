@@ -216,6 +216,10 @@ p.centerDay {
     font-weight: bold;
     font-size: 20px;
 }
+button.plus:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+  }
 @media only screen and (min-width: 320px) and (max-width:1024px){
 .revisit_tabs ul.nav.nav-tabs
 

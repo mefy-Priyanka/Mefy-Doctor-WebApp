@@ -46,7 +46,7 @@
 </form>
 <div class="row">
   <div class="plus_btn pull-right ng-star-inserted">
-    <button class="plus" (click)="addFollowForm()">+</button>
+    <button class="plus" (click)="addFollowForm()" [disabled]="followForm.get('followinfo').invalid">+</button>
   </div>
 </div>
 <div class="text-center high" *ngIf="hideSave"> 
