@@ -57,11 +57,11 @@ export class MedicineComponent implements OnInit {
 
   createmedicineForm() {
     return this.formBuilder.group({
-      medicineName: [''],
-      dosage: [''],
-      days: [''],
+      medicineName: ['',Validators.required],
+      dosage: ['',Validators.required],
+      days: ['',Validators.required],
       instructions: [''],
-      frequency: ['']
+      frequency: ['',Validators.required]
     });
   }
 
@@ -157,7 +157,7 @@ export class MedicineComponent implements OnInit {
   }
 
   /**************ADD MORE THAN ONE MEDICINE  FORM**********************/
-  addMedicineForm(i) {
+  addMedicineForm() {
     console.log('medicine form', this.medicineForm.value)
     this.hideSave = true;
     // this.medicineForm.reset();

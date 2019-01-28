@@ -17,7 +17,6 @@ export class SuggestComponent implements OnInit {
   public testArray: any = [];
   public tests: any=[];
   public messageTest: string;
-  public addFormButton:boolean=false;
   public hideTestRecommended: boolean = false; //hide test recommended form
   public testTypes = ['Radiology', 'Imaging', 'Clinical', 'UltraSound', 'Laboratory'];
 
@@ -70,23 +69,14 @@ export class SuggestComponent implements OnInit {
    /****************** select data from dropdown***********************/
    testRecommend(value: string,i) {
     this.tests = [];
-    // debugger;
-
-    console.log(this.tests);
-    console.log(this.testArray);
     this.tests[i] = value;
     this.testArray[i] =value;
-    // this.tests = value;
-    console.log(this.testArray)
-    console.log('rrtttt',this.testTypes)
-    let y=(<FormArray>this.suggestForm.controls['suggestInfo']).controls[i]['controls']['categoryType'].setValue(this.tests);
-    console.log((<FormArray>this.suggestForm.controls['suggestInfo']).controls[i]['controls']['categoryType']);
+    let y=(<FormArray>this.suggestForm.controls['suggestInfo']).controls[i]['controls']['categoryType'].setValue(this.tests[i]);
     this.hideTestRecommended = true;
 
   }
   /********************************** create recommended test**************/
   createSuggestTest() {
-    this.suggestForm.controls.categoryType.setValue(this.tests);
     if (this.suggestForm.valid && this.tests.length != 0 && this.tests != 'null') {
       this.sharedService.createTest(this.suggestForm.value);
       this.router.navigate(['/dashboard/consultnew/diagnosis']);
@@ -100,7 +90,9 @@ export class SuggestComponent implements OnInit {
     }
   }
     /**************ADD MORE THAN ONE MEDICINE  FORM**********************/
-    addSuggestForm(i) {
+    addSuggestForm() {
+      console.log('form value',this.suggestForm.value)
+      this.tests = [];
         this.suggestInfo = this.suggestForm.get('suggestInfo') as FormArray;
         console.log('suggestInfo',this.suggestInfo)  
         this.suggestInfo.push(this.createSuggestForm());

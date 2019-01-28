@@ -12,16 +12,12 @@ export class FollowUpComponent implements OnInit {
   public followFormErrors: any;
   public followForm: FormGroup;
   public followinfo: FormArray;
-  public days: any = '';
   public hideSave:boolean=true;
-  public day: any;
-  public week: any;
-  public month: any;
+  public day: any=[];
+  public dayarray:any=[]
   public loader:boolean=false
   public submitted:boolean=false;
   daysTest:number=0; //initally day range zero
-  weekTest:number=0; //initally week range zero
-  monthTest:number=0; //initally month range zero
   
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private ePrescriptionService: DoctorPrescriptionService, private sharedService: SharedService) {
 
@@ -47,7 +43,7 @@ export class FollowUpComponent implements OnInit {
 
   createFollowForm() {
     return this.formBuilder.group({
-      day: this.day,
+      day: ['',Validators.required],
       referredDoctor: [''],
     });
   }
@@ -72,38 +68,19 @@ export class FollowUpComponent implements OnInit {
   }
  /**************TO SET  TIME DURATION RANGE FOR MEDICINE*********/
  setDay(event,i) {
-  this.days = event.target.value;
-  console.log(this.days);
-  let x=(<FormArray>this.followForm.controls['followinfo']).controls[i]['controls']['day'].setValue(this.days);
+  this.day=[];
+  this.day[i] = event.target.value;
+  this.dayarray[i]=event.target.value;
+  console.log(this.day,this.dayarray);
+let x = (<FormArray>this.followForm.controls['followinfo']).controls[i]['controls']['day'].setValue(this.day[i]);
+console.log(this.followForm.value);
+
 }
-  // to set revisit schedule 
-  // setDay(event, schedule) {
-
-  //   if (schedule == "days") {
-  //     this.day = event.target.value;
-  //     this.followForm.controls.day.setValue(this.day)
-  //   }
-  //   else if (schedule == "Weeks") {
-  //     this.week = event.target.value;
-  //     this.followForm.controls.week.setValue(this.week);
-  //   }
-  //   else if (schedule == "Months") {
-  //     this.month = event.target.value;
-  //     this.followForm.controls.month.setValue(this.month);
-  //   }
-  //   console.log("event set day", this.day);
-  // }
-
-
 
   // create advice presription
   createAdvice() {
     if(this.followForm.valid){
       this.loader = true;
-    // let data={
-    //   day:this.followForm.value.day,
-    //   referredDoctor: this.followForm.value.referredDoctor
-    // }
     console.log(this.followForm.value)
     this.sharedService.createFollowUpData(this.followForm.value);
     this.router.navigate(['/dashboard/consultnew/diagnosis']);

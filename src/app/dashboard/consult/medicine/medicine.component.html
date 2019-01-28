@@ -55,10 +55,11 @@
         </div>
       </div>
 
-      <span class="provisionalc21frequency">Days</span>
+   
       <div class="day_tab">
+           <span class="provisionalc21frequency">Days</span>
         <p>{{dayarray[i]}}
-          <span>days</span>
+          <span>Days</span>
         </p>
         <p class="range-field ">
           <input type="range" [(value)]="daysTest" id="test5" step="1" value="0" min="0" max="30" (change)="setDay($event,i)"
@@ -73,7 +74,7 @@
 </form>
 <div class="row">
   <div class="plus_btn pull-right ng-star-inserted">
-    <button class="plus" (click)="addMedicineForm(i)" [disabled]="medicineForm.get('medinfo').invalid">+</button>
+    <button class="plus" (click)="addMedicineForm()" [disabled]="medicineForm.get('medinfo').invalid">+</button>
   </div>
 </div>
 
