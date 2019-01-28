@@ -990,6 +990,13 @@ button.closeButton {
     width: 42px;
     font-size: 19px;
 }
+.receptionistList p {
+    margin: 0;
+}
+p.reception {
+    font-weight: 600;
+}
+
 svg#receptionist {
     height: 28px;
     width: 39px;

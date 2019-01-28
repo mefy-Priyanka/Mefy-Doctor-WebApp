@@ -40,10 +40,8 @@
                     </div>
                     <!-- <button class -->
                     <div class="col-md-3 col-md-3 col-xs-12 scrnres">
-                      <div class="tooltip">
+                      <div class="tooltip" *ngIf="receptionDisp">
                         <button type="button" class="btn btn-info btn-md addnew" data-toggle="modal" data-target="#myModal">
-                          <!-- Add
-                        Receptionist -->
                           <svg version="1.1" id="receptionist" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                             x="0px" y="0px" viewBox="0 0 503.607 503.607" style="enable-background:new 0 0 503.607 503.607;"
                             xml:space="preserve">
@@ -88,22 +86,26 @@
                           <span class="tooltiptext">Add</span>
                         </button>
                       </div>
+                      <div class="receptionistList" *ngIf="receptionistList">
+                        <p class="reception">Receptionist</p>
+                        <p>abcd</p>
+                      </div>
 
-                    
+
                       <div class="modal fade" id="myModal" role="dialog">
                         <div class="modal-dialog modal-md">
                           <div class="modal-content">
                             <div class="clsicon text-right" data-dismiss="modal">
-                                <svg version="1.1" id="Capa_clsicon"  x="0px" y="0px"
-                                viewBox="0 0 22.88 22.88" style="enable-background:new 0 0 22.88 22.88;" xml:space="preserve">
-                             <path style="fill:#1E201D;" d="M0.324,1.909c-0.429-0.429-0.429-1.143,0-1.587c0.444-0.429,1.143-0.429,1.587,0l9.523,9.539
+                              <svg version="1.1" id="Capa_clsicon" x="0px" y="0px" viewBox="0 0 22.88 22.88" style="enable-background:new 0 0 22.88 22.88;"
+                                xml:space="preserve">
+                                <path style="fill:#1E201D;" d="M0.324,1.909c-0.429-0.429-0.429-1.143,0-1.587c0.444-0.429,1.143-0.429,1.587,0l9.523,9.539
                                l9.539-9.539c0.429-0.429,1.143-0.429,1.571,0c0.444,0.444,0.444,1.159,0,1.587l-9.523,9.524l9.523,9.539
                                c0.444,0.429,0.444,1.143,0,1.587c-0.429,0.429-1.143,0.429-1.571,0l-9.539-9.539l-9.523,9.539c-0.444,0.429-1.143,0.429-1.587,0
-                               c-0.429-0.444-0.429-1.159,0-1.587l9.523-9.539L0.324,1.909z"/>
-                             <g>
-                             </g>
-                             
-                             </svg>
+                               c-0.429-0.444-0.429-1.159,0-1.587l9.523-9.539L0.324,1.909z" />
+                                <g>
+                                </g>
+
+                              </svg>
                             </div>
                             <h5 class="modalhead"><span class="highlightedtxt">Add Receptionist</span> </h5>
                             <form [formGroup]="receptionistForm" class="modalform">

@@ -40,6 +40,8 @@ export class ManageClinicComponent implements OnInit {
   currentURL: any;
   sTime: '';
   eTime: '';
+  public receptionDisp: Boolean = true;
+  public receptionistList: Boolean = false;
   public colorday: Boolean = false;
   public submitted: boolean = false;
   public searchElementRef: ElementRef;
@@ -357,6 +359,8 @@ phoneNumber:['', Validators.required]
         clinicId:this.selectedClinicId
       }
         console.log(data)
+        this.receptionDisp=false;
+        this.receptionistList=true;
         this.ClinicService.addRecpt(data).subscribe(value=>{
           console.log('receptionst create',value)
           let notifydata = {
