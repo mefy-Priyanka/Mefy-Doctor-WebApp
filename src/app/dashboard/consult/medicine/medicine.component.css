@@ -233,6 +233,7 @@ button.plus:hover{
         height: 34px;
         width: 34px;
         line-height: 34px;
+        margin-right: 1em;
         cursor:pointer;
     }
     ul.list-inline.dosage li button {
@@ -251,7 +252,11 @@ button.plus:hover{
         box-shadow: 0px 1px 16px 3px rgba(137, 99, 206, 0.31);
     } */
     button.selectedDose {
-        background: linear-gradient(to right, rgb(121, 120, 250),rgba(178, 109, 247, 1)) !important;
+                background: linear-gradient(to right, rgb(121, 120, 250),rgba(178, 109, 247, 1)) !important;
+                color: #fff;
+                border-radius: 50%;
+                height: 40px;
+                width: 40px;
     }
     button.plus:disabled {
         cursor: not-allowed;
