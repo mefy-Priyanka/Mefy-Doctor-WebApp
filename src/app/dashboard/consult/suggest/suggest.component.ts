@@ -14,8 +14,10 @@ export class SuggestComponent implements OnInit {
   public suggestInfo: FormArray;
 
   public recommendedForm: any = [];
-  public tests: any;
+  public testArray: any = [];
+  public tests: any=[];
   public messageTest: string;
+  public addFormButton:boolean=false;
   public hideTestRecommended: boolean = false; //hide test recommended form
   public testTypes = ['Radiology', 'Imaging', 'Clinical', 'UltraSound', 'Laboratory'];
 
@@ -67,7 +69,16 @@ export class SuggestComponent implements OnInit {
 
    /****************** select data from dropdown***********************/
    testRecommend(value: string,i) {
-    this.tests = value;
+    this.tests = [];
+    // debugger;
+
+    console.log(this.tests);
+    console.log(this.testArray);
+    this.tests[i] = value;
+    this.testArray[i] =value;
+    // this.tests = value;
+    console.log(this.testArray)
+    console.log('rrtttt',this.testTypes)
     let y=(<FormArray>this.suggestForm.controls['suggestInfo']).controls[i]['controls']['categoryType'].setValue(this.tests);
     console.log((<FormArray>this.suggestForm.controls['suggestInfo']).controls[i]['controls']['categoryType']);
     this.hideTestRecommended = true;
@@ -90,7 +101,6 @@ export class SuggestComponent implements OnInit {
   }
     /**************ADD MORE THAN ONE MEDICINE  FORM**********************/
     addSuggestForm(i) {
-
         this.suggestInfo = this.suggestForm.get('suggestInfo') as FormArray;
         console.log('suggestInfo',this.suggestInfo)  
         this.suggestInfo.push(this.createSuggestForm());
