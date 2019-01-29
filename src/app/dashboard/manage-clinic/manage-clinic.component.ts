@@ -489,12 +489,6 @@ this.ClinicService.updateClinic(this.clinicData.ClinicId, this.clinicForm.value)
     this.sharedService.createNotification(notifydata);
     this.getClinicList();
     this.clinicForm.reset();
-    this.days = [];
-    this.formHide = false;
-    this.showEdit = false;
-    this.dataDisplay = true;
-    this.createSchedule = true;
-    this.clinicData.clinicId = '';
   }
 
 },
