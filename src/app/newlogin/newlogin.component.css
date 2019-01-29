@@ -161,18 +161,18 @@ qrcode {
     margin: 0 1px;
 }
 img.mefyLogo {
-    height: 50px;
+    /* height: 50px;
     width: 50px;
     position: absolute;
     top: 10px;
-    left: 2em;
+    left: 2em; */
 
 
-    /* height: 44px;
-    width: 100px;
+
+    width: 10%;
     position: absolute;
     top: 10px;
-    left: 2em; */
+    left: 2em;
 }
 ul.dropdown-menu.ng-star-inserted li a h5 {
     font-size: 14px !important;

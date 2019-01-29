@@ -36,8 +36,8 @@
 
       <p class="provisionalc21frequency">Dosage(mg)</p>
       <ul class="list-inline dosage">
-        <li *ngFor="let dosage of dosages">
-          <button (click)="selectDosage(dosage,i)" >
+        <li *ngFor="let dosage of dosages" >
+          <button (click)="selectDosage(dosage,i)"  class="selectedDose" >
             {{dosage}}
           </button>
         </li>
