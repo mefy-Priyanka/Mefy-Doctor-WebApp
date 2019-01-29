@@ -7,7 +7,7 @@ import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty
 import * as moment from 'moment'
 declare var google;
 import { TextMaskModule } from 'angular2-text-mask';
-
+declare var $: any;
 
 
 //NEW IMPORTS 
@@ -23,6 +23,7 @@ export class ManageClinicComponent implements OnInit {
   @ViewChild('close') close: ElementRef;
 
   /*********************************** USED VARIABLES  ********************************************* */
+  public verficationMessage: any;
   clinicForm: FormGroup;
   weekForm: FormArray;
   receptionistForm:FormGroup;
@@ -72,6 +73,8 @@ export class ManageClinicComponent implements OnInit {
   public mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
   public fee = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // fee validation 
   toastoptions: any;
+  receptionValue: Object;
+  
   /******************************************************************************************************************************************* */
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, public scheduleService: ScheduleService, private sharedService: SharedService,
@@ -349,6 +352,8 @@ phoneNumber:['', Validators.required]
 
   /************************ADD RECEPTIONIST******************/
   addReceptionist(clinicId){
+    this.submitted=true;
+    // $('#myModal').modal('show');
     this.selectedClinicId=clinicId.clinicId
     console.log('clinicid', this.selectedClinicId)
     if(this.receptionistForm.valid){
@@ -358,11 +363,18 @@ phoneNumber:['', Validators.required]
         doctorId:this.doctorprofileId,
         clinicId:this.selectedClinicId
       }
-        console.log(data)
+      this.phonecheck();
+        console.log('data',data)
         this.receptionDisp=false;
         this.receptionistList=true;
         this.ClinicService.addRecpt(data).subscribe(value=>{
           console.log('receptionst create',value)
+          let result: any = {}
+          result = value
+          console.log("clinicIdhiiiiiiiiiii",result.result.clinicId)
+       
+          this.updateClinicRecp(clinicId);
+          this.getClinicList();
           let notifydata = {
             type: 'sucess',
             title: 'Clinic',
@@ -388,6 +400,100 @@ phoneNumber:['', Validators.required]
         }
         this.sharedService.createNotification(notifydata);
       }
+    }
+
+    /*********************** Phone number check************** */
+    phonecheck(){
+      console.log("phone check")
+      if(this.receptionistForm.valid){
+      let data={
+        phoneNumber:this.receptionistForm.value.phoneNumber,
+      }
+      console.log("phonecheck",data)
+      this.ClinicService.phonevalid(data).subscribe(value=>{
+        console.log('Phone number valid',value)
+        let result: any = {}
+        result = value
+        this.verficationMessage = result.message
+        if (this.verficationMessage === "PhoneNumber already exists!") {
+          let notifydata = {
+            type: 'error',
+            title: 'User already Registered',
+            msg: 'from this number'
+          }
+          this.sharedService.createNotification(notifydata);
+          // $('#myModal').modal('show');
+        }
+        else{
+          let notifydata = {
+            type: 'success',       
+            msg: 'Phone Number Valid'
+          }
+          this.sharedService.createNotification(notifydata);
+          // $('#myModal').modal('hide');
+        }
+      },
+      err=>{
+        console.log(err)
+        let notifydata = {
+          type: 'error',
+         
+          msg: 'Something went wrong'
+        }
+        this.sharedService.createNotification(notifydata);
+
+      })
+      
+    }
+      else{
+        let notifydata = {
+          type: 'warning',       
+          msg: 'Not Valid'
+        }
+        this.sharedService.createNotification(notifydata);
+      }
+    }
+    // *****************************update clinic with receptionist*****************
+    updateClinicRecp(ClinicId){
+      console.log("updateclinicid",ClinicId)
+      console.log("updateclinicid",ClinicId.clinicId)
+let data={
+  clinicName:this.clinicForm.value.clinicName,
+  city:this.clinicForm.value.city,
+  address:this.clinicForm.value.address,
+  phoneNumber:this.clinicForm.value.phoneNumber,
+  fee:this.clinicForm.value.fee,
+}
+
+console.log("hi",this.clinicForm.value);
+this.ClinicService.updateClinic(this.clinicData.ClinicId, this.clinicForm.value).subscribe(data => {
+  console.log('updatedvalue result', data)
+  let response: any = {};
+  response = data;
+  if (response.message == "Clinic Time conflicts with another clinic.") {
+    let notifydata = {
+      type: 'warning',
+      title: 'Clinic',
+      msg: 'time collapsed !'
+    }
+    this.sharedService.createNotification(notifydata);
+
+  }
+  else {
+    this.updateClinicList = response.result;
+    let notifydata = {
+      type: 'success',
+      title: 'Clinic',
+      msg: 'Updated Succesfully'
+    }
+    this.sharedService.createNotification(notifydata);
+    this.getClinicList();
+    this.clinicForm.reset();
+  }
+
+},
+  err => {
+  })
     }
   
   /************************************************** COMPARE END TIME WITH START TIME ****************************************** */
@@ -503,14 +609,13 @@ phoneNumber:['', Validators.required]
 
   /************************************************* UPDATE CLINIC THROUGH CLINICID ************************************************ */
   updateClinicInfo() {
-
-    console.log('update function', this.clinicForm)
-    // this.clinicForm.controls.city.setValue(this.city);
-    // this.clinicForm.controls.doctorId.setValue(localStorage.getItem('loginId'));
-
-    // this.updatedValue = this.clinicForm.value;
-    // this.updatedValue._id = this.clinicData._id
-
+    // let data = {
+    //   phoneNumber:this.clinicForm.phoneNumber,
+    //   city: this.clinicForm.city,
+    //   address: this.clinicForm.address,
+    //   appointmentDuration:this.
+    // }
+    console.log('update function', this.clinicData.clinicId,this.clinicForm.value)
     this.ClinicService.updateClinic(this.clinicData.clinicId, this.clinicForm.value).subscribe(data => {
       console.log('updatedvalue result', data)
       let response: any = {};
@@ -597,12 +702,11 @@ phoneNumber:['', Validators.required]
   /********************************************  GET DOCTOR CLINIC LIST THROUGH DOCTORID *********************************** */
   getClinicList() {
     this.ClinicService.getCliniclist(this.doctorprofileId).subscribe(data => {
-      console.log(data)
       let response: any = {};
       response = data;
       if (!response.result.error) {
         this.clinicList = response.result.result;
-        console.log(this.clinicList);
+        console.log('all clinic list',this.clinicList);
         if (this.clinicList.length == 0) {
           this.formHide = true;
           this.cancel = false;

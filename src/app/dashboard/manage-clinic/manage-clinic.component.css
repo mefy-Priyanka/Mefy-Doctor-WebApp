@@ -996,7 +996,10 @@ button.closeButton {
 p.reception {
     font-weight: 600;
 }
-
+svg#deleteIcon {
+    height: 15px;
+    width: 19px;
+}
 svg#receptionist {
     height: 28px;
     width: 39px;
