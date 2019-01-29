@@ -49,4 +49,9 @@ export class ClinicService {
   addRecpt(data){
     return this.httpClient.post(APIURL + 'receptionist/create', data);
   }
+  /**************Phone number check******************** */
+  phonevalid(data){
+    console.log("api data",data)
+    return this.httpClient.post(APIURL + 'receptionist/checkNumber', data);
+  }
 }
