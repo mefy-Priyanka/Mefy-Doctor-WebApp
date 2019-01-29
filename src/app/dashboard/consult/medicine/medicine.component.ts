@@ -119,16 +119,11 @@ export class MedicineComponent implements OnInit {
   /******************TO SET FREQUENCY RANGE FOR  MEDICINE *********************/
   setFrequency(event, i) {
     this.frequency = [];
-    // debugger;
-
-    // console.log(this.frequency);
-    // console.log(this.frequencyarray);
     this.frequency[i] = event.target.value;
     this.frequencyarray[i] = event.target.value;
     // console.log(this.frequency, this.frequencyarray);
     let y = (<FormArray>this.medicineForm.controls['medinfo']).controls[i]['controls']['frequency'].setValue(this.frequency[i]);
     console.log(this.medicineForm.controls)
-    // console.log(this.frequency);
   }
   /******************TO SET DOSAGE  FOR  MEDICINE *********************/
   selectDosage(dosage, i) {
@@ -160,9 +155,6 @@ export class MedicineComponent implements OnInit {
   addMedicineForm() {
     console.log('medicine form', this.medicineForm.value)
     this.hideSave = true;
-    // this.medicineForm.reset();
-    // this.reset();
-    // this.frequency = '';
     console.log((<FormArray>this.medicineForm.controls['medinfo']))
     this.medinfo = this.medicineForm.get('medinfo') as FormArray;
     console.log('medinfo', this.medinfo)

@@ -239,6 +239,13 @@ export class NewloginComponent implements OnInit {
       this.submitted = true;
     }
   }
-
+ /****************** LOGIN FOR RECEPTIONIST************* */
+ loginRecept(){
+  // let data:{
+  //   phoneNumber:,
+  //   otp:,
+  //   role:
+  // }
+}
 
 }

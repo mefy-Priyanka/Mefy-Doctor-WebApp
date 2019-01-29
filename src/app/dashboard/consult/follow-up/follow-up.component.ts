@@ -44,7 +44,7 @@ export class FollowUpComponent implements OnInit {
   createFollowForm() {
     return this.formBuilder.group({
       day: ['',Validators.required],
-      referredDoctor: [''],
+      refferedDoctor: [''],
     });
   }
 

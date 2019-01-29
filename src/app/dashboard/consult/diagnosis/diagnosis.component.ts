@@ -157,7 +157,7 @@ export class DiagnosisComponent implements OnInit {
       console.log('prescriptionData', prescriptionData)
       this.prescriptionService.createPrescription(prescriptionData).subscribe(data => {
         this.getPrescriptionByIndividualId();
-        // this.changedstatus();
+        this.changedstatus();
         this.loader = false
         this.hidePrescribeButton = false;
         console.log('prescription', data)

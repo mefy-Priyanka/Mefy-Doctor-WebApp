@@ -26,4 +26,8 @@ export class LoginService {
   verifyOtp(data){
     return this.http.post(APIURL+'User/verifyotp',data)
   }
+    /******************LOGIN FOR  RECEPTIONIST****************************/
+    loginRecpt(data){
+      return this.http.post(APIURL + 'receptionist/login', data); 
+    }
 }

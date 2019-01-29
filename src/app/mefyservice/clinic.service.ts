@@ -49,4 +49,9 @@ export class ClinicService {
   addRecpt(data){
     return this.httpClient.post(APIURL + 'receptionist/create', data);
   }
+  /******************SEND OTP TO RECEPTIONIST****************************/
+  receptSendOtp(phoneNumber){
+    return this.httpClient.post(APIURL + 'receptionist/sendOtp', phoneNumber);
+  }
+
 }
