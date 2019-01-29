@@ -26,16 +26,9 @@ export class DiagnosisComponent implements OnInit {
   public individualId: any;
   public appointmentId: any;
   /*****OLD */
-  provisionalData: any = [];
-  recommendeData: any = [];
-  medicalData: any = [];
   specificData: any = [];
   lifestyleData: any = [];
   adviseData: any = [];
-
-
-
-
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private prescriptionService: PrescriptionService, private sharedService: SharedService, private appointmentService: AppointmentsService) {
 
@@ -71,34 +64,36 @@ export class DiagnosisComponent implements OnInit {
       }
       console.log('medicinedata at diagnosis', this.medicareData[0])
     })
+
     /***************GET INSTRUCTION DATA *****************/
     this.sharedService.instructionData.subscribe(data => {
       if (data.length != 0 && Object.keys(data).length != 0) {
-        // console.log('instruction',data)
-
-        // console.log('instruction',data.advice[0])
         this.hidePrescribeButton = true;
         this.instructionData.push(data.advice)
       } 
       // console.log('instructionData ', data.advice)
       console.log('instructionData at diagnosis', this.instructionData[0])
     })
-    /***************GET LIFESTYLE DATA *****************/
+    
+    /***************GET LIFE STYLE TYPE DATA *****************/
     this.sharedService.lifeStyleData.subscribe(data => {
       if (data.length != 0 && Object.keys(data).length != 0) {
         this.hidePrescribeButton = true;
-        this.lifeStyleData.push(data.advice)
+      
+        this.lifeStyleData.push(data.lifeStyleData)
       }
       console.log('lifeStyleData at diagnosis', this.lifeStyleData[0])
     })
-    /***************GET FOLLOWUPTYPE DATA *****************/
+
+    /***************GET FOLLOWUP TYPE DATA *****************/
     this.sharedService.followUpData.subscribe(data => {
       if (data.length != 0 && Object.keys(data).length != 0) {
         
         this.hidePrescribeButton = true;
-        this.followUpData.push(data);
+        console.log('followUpData',data.followinfo)
+        this.followUpData.push(data.followinfo);
       }
-      console.log('followUpData at diagnosis', this.followUpData)
+      console.log('followUpData at diagnosis', this.followUpData[0])
     })
     /************GET INDIVIDUAL ID FROM URL*********************** */
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -127,7 +122,7 @@ export class DiagnosisComponent implements OnInit {
 
   /*************** GET PRESCRIPTION BT INDIVIDUAL ID*******************/
   getPrescriptionByIndividualId() {
-    this.loader = false;
+    this.loader = true;
     this.sharedService.storeIndividualId.subscribe(data => {
       console.log('incomingIndividualId', data)
       this.individualId = data /*GET INDIVIDUALID*/
@@ -136,7 +131,7 @@ export class DiagnosisComponent implements OnInit {
     this.prescriptionService.getPrescriptionByIndividualId(this.individualId).subscribe(data => {
       let result: any = {}
       result = data
-      this.loader = false
+      this.loader = false;
       this.individualPrescriptionList = result.result
       console.log('individualPrescriptionList', this.individualPrescriptionList)
     }, err => {
@@ -157,12 +152,12 @@ export class DiagnosisComponent implements OnInit {
         instruction: this.instructionData[0],
         recommended: this.suggestionData[0],
         lifestyle: this.lifeStyleData[0],
-        advice: this.followUpData
+        advice: this.followUpData[0]
       }
       console.log('prescriptionData', prescriptionData)
       this.prescriptionService.createPrescription(prescriptionData).subscribe(data => {
         this.getPrescriptionByIndividualId();
-        this.changedstatus();
+        // this.changedstatus();
         this.loader = false
         this.hidePrescribeButton = false;
         console.log('prescription', data)

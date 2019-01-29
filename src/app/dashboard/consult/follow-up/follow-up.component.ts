@@ -81,7 +81,7 @@ console.log(this.followForm.value);
   createAdvice() {
     if(this.followForm.valid){
       this.loader = true;
-    console.log(this.followForm.value)
+    console.log('followForm',this.followForm.value)
     this.sharedService.createFollowUpData(this.followForm.value);
     this.router.navigate(['/dashboard/consultnew/diagnosis']);
   }

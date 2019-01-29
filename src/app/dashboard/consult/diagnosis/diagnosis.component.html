@@ -23,16 +23,15 @@
   <div class="space">
     <div class="row" id="marbtm-0">
       <p class="provisionalc2">Provisional diagnosis</p>
-      <div class="card">
-        <div class="row">
+      <div class="card" *ngFor="let list of individualPrescriptionList;let i=index">
+        <div class="row" *ngFor="let li of list.diagnosis; let j=index">
           <div class="card_texte">
             <div class="col-md-12" id="padding-o">
               <div class="col-md-10 col-xs-10">
                 <div class="consult_text">
-                  <p class="serenity">Cavities</p>
+                  <p class="serenity">{{li?.diagnosisFor}}</p>
                   <p class="serenity2">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing
-                    and typesetting industry
+                 {{li?.diagnosisBrief}}
                   </p>
                 </div>
               </div>
@@ -61,15 +60,14 @@
     </div>
     <div class="row" id="marbtm-0">
       <p class="provisionalc1">Test Recommended</p>
-      <div class="card">
-        <div class="row">
+      <div class="card" *ngFor="let list of individualPrescriptionList;let i=index">
+        <div class="row" *ngFor="let li of list.recommended; let j=index">
           <div class="card_texte">
             <div class="col-md-12" id="padding-o">
               <div class="col-md-10 col-xs-10">
                 <div class="consult_text">
-                  <p class="serenity">X-Ray</p>
-                  <p class="serenity2">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text
-                    of the printing and typesetting industry
+                  <p class="serenity">{{li?.testName}}</p>
+                  <p class="serenity2">{{li?.testDescription}}
 
                   </p>
                   <!-- <p class="serenity2">{{recommend.testDescription}}</p> -->
@@ -177,10 +175,9 @@
               <div class="col-md-10 col-xs-10">
                 <div class="consult_text">
                   <p class="serenity">Revisit Schedule</p>
-                  <p class="serenity2">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text
-                    of the printing and typesetting industry
+                  <!-- <p class="serenity2">{{li.}} -->
 
-                  </p>
+                  <!-- </p> -->
                   <!-- <p class="serenity2">{{recommend.testDescription}}</p> -->
                 </div>
                 <div class="consult_text">
@@ -215,7 +212,7 @@
         </div>
       </div>
     </div>
-    <div class="row" id="marbtm-0" *ngIf="specificData.length != 0">
+    <!-- <div class="row" id="marbtm-0" *ngIf="specificData.length != 0">
       <p class="provisionalc2">Specific Instruction</p>
       <div class="card" *ngFor="let lists of specificData">
         <div class="row">
@@ -248,7 +245,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- <div class="row" id="marbtm-0" *ngIf="lifestyleData.length != 0">
       <p class="provisionalc2">LifeStyle Instruction</p>
       <div class="card" *ngFor="let list of lifestyleData">
@@ -452,7 +449,6 @@
       </div>
     </div>
     <div class="btnprescribe text-center" [routerLink]="['/dashboard/consultnew/bill']">
-      <!-- <button class="btnprescrb" *ngIf="provisionalData.length!=0 ||recommendeData.length!=0 || medicalData.length!=0 || specificData.length!=0  || lifestyleData.length!=0  || adviseData.length!=0 ">Prescribe</button> -->
     </div>
   </div>
 

@@ -32,6 +32,8 @@
       <input class="form-control" [typeaheadItemTemplate]="customItemTemplate" formControlName="medicineName"
         (typeaheadOnSelect)="onSelectedMedicine($event)" placeholder="Medicine" typeaheadOptionField="PrescribingInformation"
         [typeahead]="allmedicineName" class="form-control" (typeaheadNoResults)="typeaheadNoMedicineResults($event)">
+      <!-- <span class="errormessage" *ngIf="medicineFormErrors.medicineName.required || (medinfo.controls[i].medicineName.pristine[i] && submitted)">Please Provide Medicine Dosage</span> -->
+
       <p class="provisionalc21frequency">Dosage(mg)</p>
       <ul class="list-inline dosage">
         <li *ngFor="let dosage of dosages">
