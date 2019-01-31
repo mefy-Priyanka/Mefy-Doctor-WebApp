@@ -33,11 +33,12 @@
         (typeaheadOnSelect)="onSelectedMedicine($event)" placeholder="Medicine" typeaheadOptionField="PrescribingInformation"
         [typeahead]="allmedicineName" class="form-control" (typeaheadNoResults)="typeaheadNoMedicineResults($event)">
       <!-- <span class="errormessage" *ngIf="medicineFormErrors.medicineName.required || (medinfo.controls[i].medicineName.pristine[i] && submitted)">Please Provide Medicine Dosage</span> -->
-
+      <!-- get('dosage').controls[i].get('day').value?clinicForm.get('weekDays').controls[i].get('day').value.slice(0,2).toUpperCase() -->
+      <!-- controls['medinfo']).controls[i]['controls']['dosage']  -->
       <p class="provisionalc21frequency">Dosage(mg)</p>
-      <ul class="list-inline dosage">
-        <li *ngFor="let dosage of dosages" >
-          <button (click)="selectDosage(dosage,i)"  class="selectedDose" >
+      <ul class="list-inline dosage">             
+        <li *ngFor="let dosage of dosages" >                            
+          <button (click)="selectDosage(dosage,i)" [ngClass]="{'selectedDose':medicineForm.get('medinfo').controls[i].get('dosage').value==dosage}">
             {{dosage}}
           </button>
         </li>
