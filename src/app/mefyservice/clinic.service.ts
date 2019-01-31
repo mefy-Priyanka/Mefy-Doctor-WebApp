@@ -58,4 +58,9 @@ export class ClinicService {
    receptSendOtp(phoneNumber){
     return this.httpClient.post(APIURL + 'receptionist/sendOtp', phoneNumber);
   }
+  /*************************** DOCTOR REMOVE RECPTIONIST ***********************/
+  deleteRecept(data){
+    console.log(data)
+    return this.httpClient.delete(APIURL + 'receptionist/removereceptionist', data)
+  }
 }

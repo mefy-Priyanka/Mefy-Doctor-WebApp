@@ -4,15 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ScheduleService } from '../../meme-services/schedule.service';
 import { SharedService } from '../../mefyservice/shared.service';
 import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
+import { ClinicService } from '../../mefyservice/clinic.service';
 import * as moment from 'moment'
 declare var google;
-import { TextMaskModule } from 'angular2-text-mask';
 declare var $: any;
-
-
-//NEW IMPORTS 
-import { ClinicService } from '../../mefyservice/clinic.service';
-import { IfObservable } from 'rxjs/observable/IfObservable';
 
 @Component({
   selector: 'app-manage-clinic',
@@ -26,7 +21,7 @@ export class ManageClinicComponent implements OnInit {
   public verficationMessage: any;
   clinicForm: FormGroup;
   weekForm: FormArray;
-  receptionistForm:FormGroup;
+  receptionistForm: FormGroup;
   clinicFormErrors: any;
   scheduleData: any = {};
   clinicList: any = [];
@@ -41,8 +36,8 @@ export class ManageClinicComponent implements OnInit {
   currentURL: any;
   sTime: '';
   eTime: '';
-  public receptionDisp: Boolean = true;
-  public receptionistList: Boolean = false;
+  public addRecept: Boolean=true; /* show/hide Receptionist add icon*/
+   public receptDelete:Boolean=false /*  show/hide Receptionist Delete Icon*/
   public colorday: Boolean = false;
   public submitted: boolean = false;
   public searchElementRef: ElementRef;
@@ -53,7 +48,9 @@ export class ManageClinicComponent implements OnInit {
   public createSchedule: Boolean = false; //for show plus icon
   public dataDisplay: Boolean = true; //when page load data display
   public showModal: boolean = false;
-  deleteClinincId: any;
+  public deleteClinincId: any;
+  public receptionistId:any;
+  public deleteRecept:any;
   // public formDisplay: Boolean = false;
   doctorprofileId: any;
   selected: any;
@@ -69,12 +66,13 @@ export class ManageClinicComponent implements OnInit {
   date2: any;
   jindex: any;
   timeError: any = '';
-  public selectedClinicId:any
+  public selectedClinicId: any
   public mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // Phone number validation 
   public fee = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/] // fee validation 
   toastoptions: any;
-  receptionValue: Object;
-  
+  y: any;
+  v: any[];
+
   /******************************************************************************************************************************************* */
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, public scheduleService: ScheduleService, private sharedService: SharedService,
@@ -98,7 +96,7 @@ export class ManageClinicComponent implements OnInit {
 
     this.doctorprofileId = localStorage.getItem('doctorId');     // GET DOCTORID FROM LOCALSTORAGE
 
-    
+
 
     /*GET CURRENT URL, send url path name to change navbar colour*/
     this.currentURL = window.location.pathname;
@@ -117,9 +115,8 @@ export class ManageClinicComponent implements OnInit {
   }
 
   ngOnInit() {
-
     // INITIALISE CLINIC FORM CREATION
-    this.receptionistForm=this.createReceptForm();
+    this.receptionistForm = this.createReceptForm();
     this.clinicForm = this.createclinicForm();
     this.clinicForm.valueChanges.subscribe(() => {
       this.onclinicFormValuesChanged();
@@ -164,23 +161,21 @@ export class ManageClinicComponent implements OnInit {
       clinicName: ['', Validators.required],
       phoneNumber: ['', Validators.required],
       city: ['', Validators.required],
-      // pin: ['', Validators.required],
       fee: ['', Validators.required],
       doctorId: [this.doctorprofileId],
       address: ['', Validators.required],
-      // weekDays: [this.days],
       weekDays: this.formBuilder.array([this.newform()])
     });
 
   }
   /******************************************************* ENDS ****************************************************** */
-/*********************RECEPTIONIST FORM**********************/
-createReceptForm(){
-  return this.formBuilder.group({
-name:['', Validators.required],
-phoneNumber:['', Validators.required]
-  });
-}
+  /*********************RECEPTIONIST FORM**********************/
+  createReceptForm() {
+    return this.formBuilder.group({
+      name: ['', Validators.required],
+      phoneNumber: ['', Validators.required]
+    });
+  }
   /********************************************** FORM ARRAY FOR WEEKDAYS **************************************** */
   newform() {
     return this.formBuilder.group({
@@ -349,153 +344,6 @@ phoneNumber:['', Validators.required]
   }
 
   /********************************************************* ENDS ************************************************************* */
-
-  /************************ADD RECEPTIONIST******************/
-  addReceptionist(clinicId){
-    this.submitted=true;
-    // $('#myModal').modal('show');
-    this.selectedClinicId=clinicId.clinicId
-    console.log('clinicid', this.selectedClinicId)
-    if(this.receptionistForm.valid){
-      let data={
-        name:this.receptionistForm.value.name,
-        phoneNumber:this.receptionistForm.value.phoneNumber,
-        doctorId:this.doctorprofileId,
-        clinicId:this.selectedClinicId
-      }
-      this.phonecheck();
-        console.log('data',data)
-        this.receptionDisp=false;
-        this.receptionistList=true;
-        this.ClinicService.addRecpt(data).subscribe(value=>{
-          console.log('receptionst create',value)
-          let result: any = {}
-          result = value
-          console.log("clinicIdhiiiiiiiiiii",result.result.clinicId)
-       
-          this.updateClinicRecp(clinicId);
-          this.getClinicList();
-          let notifydata = {
-            type: 'sucess',
-            title: 'Clinic',
-            msg: 'Receptionist added sucessfully.'
-          }
-          this.sharedService.createNotification(notifydata);
-        },
-        err=>{
-          console.log(err)
-          let notifydata = {
-            type: 'error',
-           
-            msg: 'Something went wrong'
-          }
-          this.sharedService.createNotification(notifydata);
-
-        })
-      }
-      else{
-        let notifydata = {
-          type: 'warning',       
-          msg: 'Not Valid'
-        }
-        this.sharedService.createNotification(notifydata);
-      }
-    }
-
-    /*********************** Phone number check************** */
-    phonecheck(){
-      console.log("phone check")
-      if(this.receptionistForm.valid){
-      let data={
-        phoneNumber:this.receptionistForm.value.phoneNumber,
-      }
-      console.log("phonecheck",data)
-      this.ClinicService.phonevalid(data).subscribe(value=>{
-        console.log('Phone number valid',value)
-        let result: any = {}
-        result = value
-        this.verficationMessage = result.message
-        if (this.verficationMessage === "PhoneNumber already exists!") {
-          let notifydata = {
-            type: 'error',
-            title: 'User already Registered',
-            msg: 'from this number'
-          }
-          this.sharedService.createNotification(notifydata);
-          // $('#myModal').modal('show');
-        }
-        else{
-          let notifydata = {
-            type: 'success',       
-            msg: 'Phone Number Valid'
-          }
-          this.sharedService.createNotification(notifydata);
-          // $('#myModal').modal('hide');
-        }
-      },
-      err=>{
-        console.log(err)
-        let notifydata = {
-          type: 'error',
-         
-          msg: 'Something went wrong'
-        }
-        this.sharedService.createNotification(notifydata);
-
-      })
-      
-    }
-      else{
-        let notifydata = {
-          type: 'warning',       
-          msg: 'Not Valid'
-        }
-        this.sharedService.createNotification(notifydata);
-      }
-    }
-    // *****************************update clinic with receptionist*****************
-    updateClinicRecp(ClinicId){
-      console.log("updateclinicid",ClinicId)
-      console.log("updateclinicid",ClinicId.clinicId)
-let data={
-  clinicName:this.clinicForm.value.clinicName,
-  city:this.clinicForm.value.city,
-  address:this.clinicForm.value.address,
-  phoneNumber:this.clinicForm.value.phoneNumber,
-  fee:this.clinicForm.value.fee,
-}
-
-console.log("hi",this.clinicForm.value);
-this.ClinicService.updateClinic(this.clinicData.ClinicId, this.clinicForm.value).subscribe(data => {
-  console.log('updatedvalue result', data)
-  let response: any = {};
-  response = data;
-  if (response.message == "Clinic Time conflicts with another clinic.") {
-    let notifydata = {
-      type: 'warning',
-      title: 'Clinic',
-      msg: 'time collapsed !'
-    }
-    this.sharedService.createNotification(notifydata);
-
-  }
-  else {
-    this.updateClinicList = response.result;
-    let notifydata = {
-      type: 'success',
-      title: 'Clinic',
-      msg: 'Updated Succesfully'
-    }
-    this.sharedService.createNotification(notifydata);
-    this.getClinicList();
-    this.clinicForm.reset();
-  }
-
-},
-  err => {
-  })
-    }
-  
   /************************************************** COMPARE END TIME WITH START TIME ****************************************** */
   comparewithEndTime(i) {
     this.jindex = i;
@@ -609,13 +457,7 @@ this.ClinicService.updateClinic(this.clinicData.ClinicId, this.clinicForm.value)
 
   /************************************************* UPDATE CLINIC THROUGH CLINICID ************************************************ */
   updateClinicInfo() {
-    // let data = {
-    //   phoneNumber:this.clinicForm.phoneNumber,
-    //   city: this.clinicForm.city,
-    //   address: this.clinicForm.address,
-    //   appointmentDuration:this.
-    // }
-    console.log('update function', this.clinicData.clinicId,this.clinicForm.value)
+    console.log('update function', this.clinicData.clinicId, this.clinicForm.value)
     this.ClinicService.updateClinic(this.clinicData.clinicId, this.clinicForm.value).subscribe(data => {
       console.log('updatedvalue result', data)
       let response: any = {};
@@ -706,17 +548,38 @@ this.ClinicService.updateClinic(this.clinicData.ClinicId, this.clinicForm.value)
       response = data;
       if (!response.result.error) {
         this.clinicList = response.result.result;
-        console.log('all clinic list',this.clinicList);
-        if (this.clinicList.length == 0) {
+        console.log('all clinic list', this.clinicList);
+        if (this.clinicList== null && Object.keys(this.clinicList).length == 0) {
           this.formHide = true;
           this.cancel = false;
           this.createSchedule = false;
+          this.addRecept=false;
+          this.receptDelete=false;
         }
         else {
           this.formHide = false;
           this.createSchedule = true;
+             
+        let x=[]
+    
+        console.log('hkkk',x)
+      
+          for (let i = 0; i < this.clinicList.length; i++) {
+            console.log(this.clinicList[i].receptionist)
+            if (this.clinicList[i].receptionist != null) {
+              // console.log('data',this.clinicList[i].receptionist)
+              x.push(this.clinicList[i].receptionist )
+              //     this.addRecept=false;
+              // this.receptDelete= true;
+            } else{       
+              // this.addRecept=true;
+              // this.receptDelete= false;
+            }
+    
+          };
         }
       }
+    
 
     },
       err => {
@@ -1036,5 +899,155 @@ this.ClinicService.updateClinic(this.clinicData.ClinicId, this.clinicForm.value)
   getday(day) {
     console.log('dat', day)
   }
- 
+  /****************STORE SELECTED CLINIC"S ID ***********************/
+  selectedClinic(clinicId) {
+    this.selectedClinicId = clinicId.clinicId
+    console.log('clinicid', this.selectedClinicId)
+  }
+  /*********************** PHONE NUMBER CHECKING, ITS EXIST OR NOT************** */
+  phoneNumberVerfication() {
+    if (this.receptionistForm.valid) {
+      let data = {
+        phoneNumber: this.receptionistForm.value.phoneNumber,
+      }
+      console.log("phonecheck", data)
+      this.ClinicService.phonevalid(data).subscribe(value => {
+        console.log('Phone number valid', value)
+        let result: any = {}
+        result = value
+        this.verficationMessage = result.message
+        if (this.verficationMessage === "PhoneNumber already exists!") {
+          let notifydata = {
+            type: 'error',
+            title: 'Receptionist already Registered',
+            msg: 'from this Number'
+          }
+          this.sharedService.createNotification(notifydata);
+          // $('#myModal').modal('show');
+        }
+        else {
+          this.addReceptionist();
+          // $('#myModal').modal('hide');
+        }
+      },
+        err => {
+          console.log(err)
+          let notifydata = {
+            type: 'error',
+            msg: 'Something went wrong'
+          }
+          this.sharedService.createNotification(notifydata);
+
+        })
+
+    }
+    else {
+      let notifydata = {
+        type: 'warning',
+        msg: 'Not Valid'
+      }
+      this.sharedService.createNotification(notifydata);
+    }
+  }
+  /************************ADD RECEPTIONIST******************/
+  addReceptionist() {
+    this.submitted = true;
+    // $('#myModal').modal('show');
+
+    if (this.receptionistForm.valid) {
+      let data = {
+        name: this.receptionistForm.value.name,
+        phoneNumber: this.receptionistForm.value.phoneNumber,
+        doctorId: this.doctorprofileId,
+        clinicId: this.selectedClinicId
+      }
+      console.log('data', data)
+      this.ClinicService.addRecpt(data).subscribe(value => {
+        console.log('receptionst create', value)
+        let result:any={}
+        result=value;
+        this.receptionistId=result.result.receptionId;
+       this.updateClinicDetail();      
+        let notifydata = {
+          type: 'sucess',
+          title: 'Clinic',
+          msg: 'Receptionist added sucessfully.'
+        }
+        this.sharedService.createNotification(notifydata);
+      },
+        err => {
+          console.log(err)
+          let notifydata = {
+            type: 'error',
+
+            msg: 'Something went wrong'
+          }
+          this.sharedService.createNotification(notifydata);
+
+        })
+    }
+    else {
+      let notifydata = {
+        type: 'warning',
+        msg: 'Not Valid'
+      }
+      this.sharedService.createNotification(notifydata);
+    }
+  }
+/**************UPDATE CLINIC WITH RECEPTIONIST DETAIL******************** */
+updateClinicDetail(){
+  let Receptdata={
+    receptionist: this.receptionistId
+  }
+  console.log('RECEPTIONIST DETAIL',Receptdata)
+  this.ClinicService.updateClinic(this.selectedClinicId,Receptdata).subscribe(result=>{
+    console.log('updated clinic',result)
+    let notifydata = {
+      type: 'sucess',
+      title: 'Clinic',
+      msg: 'Updated .'
+    }
+    this.sharedService.createNotification(notifydata);
+    this.getClinicList();
+  },err=>{
+    console.log(err)
+    let notifydata = {
+      type: 'error',
+      msg: 'Something went wrong'
+    }
+    this.sharedService.createNotification(notifydata);
+  })
+}
+/**********************STORE SELECTED RECEPTIONIST ID FOR REMOVING***************/
+  storeReceptId(list){
+    console.log('list receptionist',list)
+    this.deleteRecept=list.receptionist.receptionId
+    console.log(this.deleteRecept)
+  }
+    /*************************** DOCTOR REMOVE RECPTIONIST ***********************/
+  removeRecept(){
+   let  receptId = {
+    receptionId:this.deleteRecept
+    }
+    console.log('receptionId',receptId)
+    this.ClinicService.deleteRecept(receptId).subscribe(result=>{
+      console.log('delete ',result)
+      let notifydata = {
+        type: 'sucess',
+        title: 'Receptionist',
+        msg: 'removed .'
+      }
+      this.sharedService.createNotification(notifydata);
+      this.getClinicList();
+    },
+    err=>{
+      console.log(err)
+      let notifydata = {
+        type: 'error',
+        msg: 'Something went wrong'
+      }
+      this.sharedService.createNotification(notifydata);
+    })
+  }
+
 }
