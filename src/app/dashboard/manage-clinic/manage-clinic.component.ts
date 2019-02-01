@@ -994,11 +994,12 @@ export class ManageClinicComponent implements OnInit {
       this.sharedService.createNotification(notifydata);
     }
   }
+  
 /**************UPDATE CLINIC WITH RECEPTIONIST DETAIL******************** */
 updateClinicDetail(){
   let Receptdata={
     receptionist: this.receptionistId
-  }
+  };
   console.log('RECEPTIONIST DETAIL',Receptdata)
   this.ClinicService.updateClinic(this.selectedClinicId,Receptdata).subscribe(result=>{
     console.log('updated clinic',result)
@@ -1026,6 +1027,7 @@ updateClinicDetail(){
   }
     /*************************** DOCTOR REMOVE RECPTIONIST ***********************/
   removeRecept(){
+    debugger;
    let  receptId = {
     receptionId:this.deleteRecept
     }

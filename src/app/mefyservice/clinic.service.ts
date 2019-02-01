@@ -61,6 +61,6 @@ export class ClinicService {
   /*************************** DOCTOR REMOVE RECPTIONIST ***********************/
   deleteRecept(data){
     console.log(data)
-    return this.httpClient.delete(APIURL + 'receptionist/removereceptionist', data)
+    return this.httpClient.delete(APIURL +'receptionist/removereceptionist/'+data.receptionId)
   }
 }
